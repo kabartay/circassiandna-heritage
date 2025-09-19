@@ -339,11 +339,11 @@ body {
     background: #3498db;
 }
 
-.y-dna .haplogroup-section::before {
+.haplogroup-section.y-dna::before {
     background: #3498db;
 }
 
-.mt-dna .haplogroup-section::before {
+.haplogroup-section.mt-dna::before {
     background: #e74c3c;
 }
 
