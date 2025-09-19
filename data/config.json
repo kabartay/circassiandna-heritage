@@ -1,0 +1,71 @@
+{
+  "app": {
+    "title": "Circassian DNA Heritage Feed",
+    "subtitle": "Genetic lineage and ancestral connections",
+    "version": "1.0.0"
+  },
+  "statistics": {
+    "totalProfiles": 8,
+    "yDnaHaplogroups": 6,
+    "villages": 8,
+    "ethnicities": 3
+  },
+  "filters": {
+    "ethnicities": [
+      {
+        "key": "all",
+        "label": "All Families",
+        "active": true
+      },
+      {
+        "key": "adyghe",
+        "label": "Adyghe",
+        "active": false
+      },
+      {
+        "key": "kabardian",
+        "label": "Kabardian",
+        "active": false
+      },
+      {
+        "key": "cherkess",
+        "label": "Cherkess",
+        "active": false
+      }
+    ]
+  },
+  "sorting": {
+    "options": [
+      {
+        "value": "date-desc",
+        "label": "Date (Newest First)",
+        "default": true
+      },
+      {
+        "value": "date-asc",
+        "label": "Date (Oldest First)",
+        "default": false
+      },
+      {
+        "value": "name-asc",
+        "label": "Family Name (A-Z)",
+        "default": false
+      },
+      {
+        "value": "name-desc",
+        "label": "Family Name (Z-A)",
+        "default": false
+      }
+    ]
+  },
+  "pagination": {
+    "resultsPerPage": 4,
+    "loadMoreOnScroll": true
+  },
+  "ui": {
+    "showStatistics": true,
+    "showFilters": true,
+    "showSorting": true,
+    "animateCards": true
+  }
+}

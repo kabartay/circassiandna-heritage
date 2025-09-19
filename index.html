@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Circassian DNA Heritage Feed - Explore genetic lineage and ancestral connections of Circassian families">
+    <meta name="keywords" content="Circassian, DNA, heritage, genealogy, genetics, haplogroup, ancestry">
+    <meta name="author" content="Circassian Heritage Project">
+
+    <title>Circassian DNA Heritage Feed</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Circassian DNA Heritage Feed">
+    <meta property="og:description" content="Explore genetic lineage and ancestral connections of Circassian families">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kabartay.github.io/circassiandna-heritage/">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Circassian DNA Heritage Feed">
+    <meta name="twitter:description" content="Explore genetic lineage and ancestral connections of Circassian families">
+</head>
+<body>
+    <div class="feed-container">
+        <!-- Header Section -->
+        <header class="feed-header">
+            <h1>🏔️ Circassian DNA Heritage Feed</h1>
+            <p>Genetic lineage and ancestral connections</p>
+        </header>
+
+        <!-- Statistics Bar -->
+        <section class="stats-bar" aria-label="Heritage Statistics">
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Total Profiles</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Y-DNA Haplogroups</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Villages</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Ethnicities</div>
+            </div>
+        </section>
+
+        <!-- Filter and Sort Bar -->
+        <nav class="filter-bar" aria-label="Filter and Sort Options">
+            <div class="filter-section">
+                <!-- Filter buttons will be populated by JavaScript -->
+            </div>
+            <div class="sort-section">
+                <label for="sortSelect" class="sort-label">Sort by:</label>
+                <select id="sortSelect" class="sort-select" aria-label="Sort heritage data">
+                    <!-- Sort options will be populated by JavaScript -->
+                </select>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="feed-content" id="feedContent" aria-label="Heritage Family Profiles">
+            <!-- Heritage results will be populated by JavaScript -->
+        </main>
+
+        <!-- Loading Indicator -->
+        <div class="loading-spinner" id="loadingSpinner" aria-hidden="true">
+            <div class="spinner"></div>
+            <p>Loading more heritage profiles...</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Files - Load in correct order -->
+    <script src="./assets/js/data-loader.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+    <!-- Initialize Application -->
+    <script>
+        // Ensure DOM is ready and scripts are loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait a bit for all scripts to load
+            setTimeout(function() {
+                if (typeof HeritageApp !== 'undefined') {
+                    console.log('✅ Initializing Heritage App...');
+                    window.app = new HeritageApp();
+                    window.app.init();
+                } else {
+                    console.error('❌ HeritageApp not found, scripts may not have loaded');
+                    showFallbackError();
+                }
+            }, 100);
+        });
+
+        // Fallback error handler
+        function showFallbackError() {
+            const feedContent = document.getElementById('feedContent');
+            if (feedContent) {
+                feedContent.innerHTML = `
+                    <div style="text-align: center; padding: 60px; color: #e74c3c; background: #fdf2f2; border-radius: 8px; margin: 20px;">
+                        <h3>⚠️ Loading Issue</h3>
+                        <p>The application is having trouble loading. This might be due to:</p>
+                        <ul style="text-align: left; display: inline-block; margin: 20px 0;">
+                            <li>CORS restrictions when opening directly in browser</li>
+                            <li>Missing or incorrect file paths</li>
+                            <li>JavaScript files not loading properly</li>
+                        </ul>
+                        <p><strong>Solutions:</strong></p>
+                        <p>📟 <strong>Local development:</strong> Use <code>python -m http.server 8000</code></p>
+                        <p>🌐 <strong>GitHub Pages:</strong> Check that all files are committed and deployed</p>
+                        <button onclick="window.location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            🔄 Try Again
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Global error handler
+        window.addEventListener('error', function(e) {
+            console.error('Global error:', e);
+            if (e.message.includes('script') || e.filename) {
+                showFallbackError();
+            }
+        });
+
+        // Handle unhandled promise rejections
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('Unhandled promise rejection:', e.reason);
+        });
+    </script>
+</body>
+</html>
