@@ -130,5 +130,10 @@ dmypy.json
 .cursorignore
 .cursorindexingignore
 
+# Node
+node_modules/
+npm-debug.log
+# package-lock.json
+
 # Data
 # data

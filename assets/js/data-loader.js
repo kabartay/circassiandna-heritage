@@ -103,11 +103,11 @@ class DataLoader {
         return [
             {
                 id: "DEMO-001",
-                date: "2024-01-01",
+                date: "2020-01-01",
                 familyNameEnglish: "Demo Family",
                 familyNameCircassian: "Demo",
                 village: "Demo Village",
-                ethnicity: "Adyghe",
+                ethnicity: "Abdzakh",
                 yDnaHaplogroup: "DEMO",
                 yDnaSubclade: "DEMO",
                 yDnaTerminalSnp: "DEMO",
@@ -158,9 +158,10 @@ class DataLoader {
             filters: {
                 ethnicities: [
                     { key: "all", label: "All Families", active: true },
-                    { key: "adyghe", label: "Adyghe", active: false },
+                    { key: "abdzakh", label: "Abdzakh", active: false },
+                    { key: "abkhaz", label: "Abkhaz", active: false },
                     { key: "kabardian", label: "Kabardian", active: false },
-                    { key: "cherkess", label: "Cherkess", active: false }
+                    { key: "shapsough", label: "Shapsough", active: false }
                 ]
             },
             sorting: {

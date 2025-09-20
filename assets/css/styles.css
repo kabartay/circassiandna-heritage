@@ -449,6 +449,29 @@ body {
     background: linear-gradient(135deg, #e74c3c, #c0392b);
 }
 
+.action-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: linear-gradient(135deg, #95a5a6, #7f8c8d) !important;
+}
+
+.action-btn.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Style links to look like buttons */
+a.action-btn {
+    display: inline-block;
+    text-decoration: none;
+    line-height: 1.2;
+}
+
+a.action-btn:hover {
+    text-decoration: none;
+}
+*/
+
 /* Loading Spinner */
 .loading-spinner {
     display: none;

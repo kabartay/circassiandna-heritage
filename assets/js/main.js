@@ -152,9 +152,10 @@ class HeritageApp {
             // Default filters if config is missing
             const defaultFilters = [
                 { key: 'all', label: 'All Families', active: true },
-                { key: 'adyghe', label: 'Adyghe', active: false },
+                { key: 'abdzakh', label: 'Abdzakh', active: false },
+                { key: 'abkhaz', label: 'Abkhaz', active: false },
                 { key: 'kabardian', label: 'Kabardian', active: false },
-                { key: 'cherkess', label: 'Cherkess', active: false }
+                { key: 'shapsough', label: 'Shapsough', active: false }
             ];
             
             defaultFilters.forEach(filter => {
@@ -256,13 +257,14 @@ class HeritageApp {
         const filterButtons = document.querySelectorAll('.filter-btn');
         filterButtons.forEach(btn => {
             if ((ethnicity === 'all' && btn.textContent === 'All Families') ||
-                (ethnicity === 'adyghe' && btn.textContent === 'Adyghe') ||
+                (ethnicity === 'abdzakh' && btn.textContent === 'Abdzakh') ||
+                (ethnicity === 'abkhaz' && btn.textContent === 'Abkhaz') ||
                 (ethnicity === 'kabardian' && btn.textContent === 'Kabardian') ||
-                (ethnicity === 'cherkess' && btn.textContent === 'Cherkess')) {
+                (ethnicity === 'shapsough' && btn.textContent === 'Shapsough')) {
                 btn.classList.add('active');
             }
         });
-        
+
         this.loadResults();
     }
 
@@ -496,54 +498,117 @@ class HeritageApp {
         }
     }
 
-    // Tree analysis button functions
-    viewYDnaClassicTree(id) {
-        const family = this.dataLoader.getFamilyById(id);
-        console.log(`🌳 Y-DNA Classic Tree for ${family?.familyNameEnglish} (${id})`);
-        alert(`Opening Y-DNA Classic Tree for ${family?.familyNameEnglish}\nHaplogroup: ${family?.yDnaHaplogroup}\nSubclade: ${family?.yDnaSubclade}`);
+    /**
+     * Create heritage card HTML with individual URLs
+     */
+    createHeritageCard(data) {
+        // Helper function to create button/link based on URL availability
+        const createActionButton = (url, label, iconEmoji, cssClass = '') => {
+            if (url) {
+                // If URL exists, create a link
+                return `
+                    <a href="${url}" 
+                       target="_blank" 
+                       class="action-btn ${cssClass}"
+                       title="${label}">
+                        ${iconEmoji} ${label}
+                    </a>
+                `;
+            } else {
+                // If no URL, create disabled button
+                return `
+                    <button class="action-btn ${cssClass} disabled" 
+                            disabled
+                            title="Not available for this profile">
+                        ${iconEmoji} ${label}
+                    </button>
+                `;
+            }
+        };
+
+        // Get URLs from data, with fallback to empty object
+        const urls = data.urls || {};
+
+        return `
+            <div class="heritage-result" data-ethnicity="${data.ethnicity.toLowerCase()}" data-id="${data.id}">
+                <div class="result-header">
+                    <div class="family-info">
+                        <div class="family-avatar">
+                            ${this.getFamilyInitials(data.familyNameEnglish)}
+                        </div>
+                        <div class="family-names">
+                            <div class="family-name-english">${data.familyNameEnglish}</div>
+                            <div class="family-name-circassian">${data.familyNameCircassian}</div>
+                        </div>
+                        <div class="basic-info">
+                            <div class="info-item">
+                                <span class="info-label">Village:</span> ${data.village}
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Ethnicity:</span> ${data.ethnicity}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-id-date">
+                        <div><strong>ID:</strong> ${data.id}</div>
+                        <div><strong>Date:</strong> ${this.formatDate(data.date)}</div>
+                    </div>
+                </div>
+                
+                <div class="genetic-data">
+                    <div class="haplogroup-section y-dna">
+                        <div class="haplogroup-title y-dna-title">
+                            <span class="haplogroup-icon">👨</span>
+                            Y-DNA (Paternal Line)
+                        </div>
+                        <div class="genetic-marker">
+                            <div class="marker-label">Haplogroup</div>
+                            <div class="marker-value">${data.yDnaHaplogroup}</div>
+                        </div>
+                        <div class="genetic-marker">
+                            <div class="marker-label">Subclade</div>
+                            <div class="marker-value">${data.yDnaSubclade}</div>
+                        </div>
+                        <div class="genetic-marker">
+                            <div class="marker-label">Terminal SNP</div>
+                            <div class="marker-value">${data.yDnaTerminalSnp}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="haplogroup-section mt-dna">
+                        <div class="haplogroup-title mt-dna-title">
+                            <span class="haplogroup-icon">👩</span>
+                            mtDNA (Maternal Line)
+                        </div>
+                        <div class="genetic-marker">
+                            <div class="marker-label">Haplogroup</div>
+                            <div class="marker-value">${data.mtDnaHaplogroup}</div>
+                        </div>
+                        <div class="genetic-marker">
+                            <div class="marker-label">Subclade</div>
+                            <div class="marker-value">${data.mtDnaSubclade}</div>
+                        </div>
+                        <div class="genetic-marker">
+                            <div class="marker-label">Terminal SNP</div>
+                            <div class="marker-value">${data.mtDnaTerminalSnp}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-actions">
+                    ${createActionButton(urls.yDnaClassicTree, 'Y-DNA Classic Tree', '🌳', 'heritage')}
+                    ${createActionButton(urls.yDnaTimeTree, 'Y-DNA Time Tree', '⏳', 'heritage')}
+                    ${createActionButton(urls.yDnaGroupTree, 'Y-DNA Group Time Tree', '👥', 'heritage')}
+                    ${createActionButton(urls.fullReport, 'Full Report', '📄', 'secondary')}
+                    ${createActionButton(urls.mtDnaClassicTree, 'mtDNA Classic Tree', '🌲', '')}
+                    ${createActionButton(urls.mtDnaTimeTree, 'mtDNA Time Tree', '⌚', '')}
+                    ${createActionButton(urls.mtDnaGroupTree, 'mtDNA Group Time Tree', '👪', '')}
+                    ${createActionButton(urls.relations, 'Relations', '🔗', 'secondary')}
+                </div>
+            </div>
+        `;
     }
 
-    viewYDnaTimeTree(id) {
-        const family = this.dataLoader.getFamilyById(id);
-        console.log(`⏳ Y-DNA Time Tree for ${family?.familyNameEnglish} (${id})`);
-        alert(`Opening Y-DNA Time Tree for ${family?.familyNameEnglish}\nTemporal analysis with estimated divergence dates`);
-    }
-
-    viewYDnaGroupTimeTree(id) {
-        const family = this.dataLoader.getFamilyById(id);
-        console.log(`👥 Y-DNA Group Time Tree for ${family?.familyNameEnglish} (${id})`);
-        alert(`Opening Y-DNA Group Time Tree for ${family?.familyNameEnglish}\nTime-based analysis of related group members`);
-    }
-
-    viewMtDnaTimeTree(id) {
-        const family = this.dataLoader.getFamilyById(id);
-        console.log(`⌚ mtDNA Time Tree for ${family?.familyNameEnglish} (${id})`);
-        alert(`Opening mtDNA Time Tree for ${family?.familyNameEnglish}\nMaternal line temporal analysis`);
-    }
-
-    viewMtDnaClassicTree(id) {
-        const family = this.dataLoader.getFamilyById(id);
-        console.log(`🌲 mtDNA Classic Tree for ${family?.familyNameEnglish} (${id})`);
-        alert(`Opening mtDNA Classic Tree for ${family?.familyNameEnglish}\nHaplogroup: ${family?.mtDnaHaplogroup}\nSubclade: ${family?.mtDnaSubclade}`);
-    }
-
-    viewMtDnaGroupTimeTree(id) {
-        const family = this.dataLoader.getFamilyById(id);
-        console.log(`👪 mtDNA Group Time Tree for ${family?.familyNameEnglish} (${id})`);
-        alert(`Opening mtDNA Group Time Tree for ${family?.familyNameEnglish}\nMaternal line group analysis`);
-    }
-
-    downloadFullReport(id) {
-        const family = this.dataLoader.getFamilyById(id);
-        console.log(`📄 Download Full Report for ${family?.familyNameEnglish} (${id})`);
-        alert(`Downloading comprehensive genetic analysis report for ${family?.familyNameEnglish}\nIncluding all haplogroup data and analysis`);
-    }
-
-    viewRelations(id) {
-        const family = this.dataLoader.getFamilyById(id);
-        console.log(`🔗 View Relations for ${family?.familyNameEnglish} (${id})`);
-        alert(`Opening genetic relations analysis for ${family?.familyNameEnglish}\nShowing related families and genetic connections`);
-    }
 }
 
 // Make sure HeritageApp is available globally
