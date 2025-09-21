@@ -143,31 +143,31 @@ class DataLoader {
         ];
     }
 
-    /**
-     * Load configuration
-     */
-    async loadConfig() {
-        if (this.config) {
-            return this.config;
-        }
+    // /**
+    //  * Load configuration
+    //  */
+    // async loadConfig() {
+    //     if (this.config) {
+    //         return this.config;
+    //     }
 
-        try {
-            const response = await fetch(`${this.basePath}data/config.json`);
+    //     try {
+    //         const response = await fetch(`${this.basePath}data/config.json`);
             
-            if (response.ok) {
-                this.config = await response.json();
-                console.log('✅ Configuration loaded');
-                return this.config;
-            } else {
-                throw new Error(`HTTP ${response.status}`);
-            }
+    //         if (response.ok) {
+    //             this.config = await response.json();
+    //             console.log('✅ Configuration loaded');
+    //             return this.config;
+    //         } else {
+    //             throw new Error(`HTTP ${response.status}`);
+    //         }
             
-        } catch (error) {
-            console.warn('⚠️ Config not found, using defaults');
-            this.config = this.getDefaultConfig();
-            return this.config;
-        }
-    }
+    //     } catch (error) {
+    //         console.warn('⚠️ Config not found, using defaults');
+    //         this.config = this.getDefaultConfig();
+    //         return this.config;
+    //     }
+    // }
 
     /**
      * Default configuration
