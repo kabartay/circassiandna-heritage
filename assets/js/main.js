@@ -352,32 +352,80 @@ class HeritageApp {
     }
 
     /**
-     * Create heritage card HTML
+     * HTML escape utility for security
+     */
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text || '';
+        return div.innerHTML;
+    }
+
+    /**
+     * Create heritage card HTML - FIXED with security & URLs
      */
     createHeritageCard(data) {
+        // Escape all text data to prevent XSS
+        const safe = {
+            id: this.escapeHtml(data.id),
+            ethnicity: this.escapeHtml(data.ethnicity),
+            familyNameEnglish: this.escapeHtml(data.familyNameEnglish),
+            familyNameCircassian: this.escapeHtml(data.familyNameCircassian),
+            village: this.escapeHtml(data.village),
+            yDnaHaplogroup: this.escapeHtml(data.yDnaHaplogroup),
+            yDnaSubclade: this.escapeHtml(data.yDnaSubclade),
+            yDnaTerminalSnp: this.escapeHtml(data.yDnaTerminalSnp),
+            mtDnaHaplogroup: this.escapeHtml(data.mtDnaHaplogroup),
+            mtDnaSubclade: this.escapeHtml(data.mtDnaSubclade),
+            mtDnaTerminalSnp: this.escapeHtml(data.mtDnaTerminalSnp),
+            date: this.escapeHtml(this.formatDate(data.date))
+        };
+
+        // Helper function to create action buttons based on URL availability
+        const createActionButton = (urlKey, label, icon, cssClass = '') => {
+            const url = data.urls?.[urlKey];
+            
+            if (url) {
+                // If URL exists, create a working link
+                const safeUrl = this.escapeHtml(url);
+                return `<a href="${safeUrl}" 
+                        target="_blank" 
+                        class="action-btn ${cssClass}"
+                        title="${label}">
+                            ${icon} ${label}
+                        </a>`;
+            } else {
+                // If no URL, create disabled button
+                return `<button class="action-btn ${cssClass} disabled" 
+                                disabled
+                                title="Not available for this profile">
+                            ${icon} ${label}
+                        </button>`;
+            }
+        };
+
         return `
-            <div class="heritage-result" data-ethnicity="${data.ethnicity.toLowerCase()}" data-id="${data.id}">
+            <div class="heritage-result" data-ethnicity="${safe.ethnicity.toLowerCase()}" data-id="${safe.id}">
                 <div class="result-header">
                     <div class="family-info">
                         <div class="family-avatar">
-                            ${this.getFamilyInitials(data.familyNameEnglish)}
+                            ${this.getFamilyInitials(safe.familyNameEnglish)}
                         </div>
                         <div class="family-names">
-                            <div class="family-name-english">${data.familyNameEnglish}</div>
-                            <div class="family-name-circassian">${data.familyNameCircassian}</div>
+                            <div class="family-name-english">${safe.familyNameEnglish}</div>
+                            <div class="family-name-circassian">${safe.familyNameCircassian}</div>
                         </div>
                         <div class="basic-info">
                             <div class="info-item">
-                                <span class="info-label">Village:</span> ${data.village}
+                                <span class="info-label">Village:</span> ${safe.village}
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Ethnicity:</span> ${data.ethnicity}
+                                <span class="info-label">Ethnicity:</span> ${safe.ethnicity}
                             </div>
                         </div>
                     </div>
                     <div class="test-id-date">
-                        <div><strong>ID:</strong> ${data.id}</div>
-                        <div><strong>Date:</strong> ${this.formatDate(data.date)}</div>
+                        <div><strong>ID:</strong> ${safe.id}</div>
+                        <div><strong>Date:</strong> ${safe.date}</div>
                     </div>
                 </div>
                 
@@ -389,15 +437,15 @@ class HeritageApp {
                         </div>
                         <div class="genetic-marker">
                             <div class="marker-label">Haplogroup</div>
-                            <div class="marker-value">${data.yDnaHaplogroup}</div>
+                            <div class="marker-value">${safe.yDnaHaplogroup}</div>
                         </div>
                         <div class="genetic-marker">
                             <div class="marker-label">Subclade</div>
-                            <div class="marker-value">${data.yDnaSubclade}</div>
+                            <div class="marker-value">${safe.yDnaSubclade}</div>
                         </div>
                         <div class="genetic-marker">
                             <div class="marker-label">Terminal SNP</div>
-                            <div class="marker-value">${data.yDnaTerminalSnp}</div>
+                            <div class="marker-value">${safe.yDnaTerminalSnp}</div>
                         </div>
                     </div>
                     
@@ -408,28 +456,28 @@ class HeritageApp {
                         </div>
                         <div class="genetic-marker">
                             <div class="marker-label">Haplogroup</div>
-                            <div class="marker-value">${data.mtDnaHaplogroup}</div>
+                            <div class="marker-value">${safe.mtDnaHaplogroup}</div>
                         </div>
                         <div class="genetic-marker">
                             <div class="marker-label">Subclade</div>
-                            <div class="marker-value">${data.mtDnaSubclade}</div>
+                            <div class="marker-value">${safe.mtDnaSubclade}</div>
                         </div>
                         <div class="genetic-marker">
                             <div class="marker-label">Terminal SNP</div>
-                            <div class="marker-value">${data.mtDnaTerminalSnp}</div>
+                            <div class="marker-value">${safe.mtDnaTerminalSnp}</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="result-actions">
-                    <button class="action-btn heritage" onclick="app.viewYDnaClassicTree('${data.id}')">🌳 Y-DNA Classic Tree</button>
-                    <button class="action-btn heritage" onclick="app.viewYDnaTimeTree('${data.id}')">⏳ Y-DNA Time Tree</button>
-                    <button class="action-btn heritage" onclick="app.viewYDnaGroupTimeTree('${data.id}')">👥 Y-DNA Group Time Tree</button>
-                    <button class="action-btn secondary" onclick="app.downloadFullReport('${data.id}')">📄 Full Report</button>
-                    <button class="action-btn" onclick="app.viewMtDnaTimeTree('${data.id}')">⌚ mtDNA Time Tree</button>
-                    <button class="action-btn" onclick="app.viewMtDnaClassicTree('${data.id}')">🌲 mtDNA Classic Tree</button>
-                    <button class="action-btn" onclick="app.viewMtDnaGroupTimeTree('${data.id}')">👪 mtDNA Group Time Tree</button>
-                    <button class="action-btn secondary" onclick="app.viewRelations('${data.id}')">🔗 Relations</button>
+                    ${createActionButton('yDnaClassicTree', 'Y-DNA Classic Tree', '🌳', 'heritage')}
+                    ${createActionButton('yDnaTimeTree', 'Y-DNA Time Tree', '⏳', 'heritage')}
+                    ${createActionButton('yDnaGroupTree', 'Y-DNA Group Time Tree', '👥', 'heritage')}
+                    ${createActionButton('fullReport', 'Full Report', '📄', 'secondary')}
+                    ${createActionButton('mtDnaClassicTree', 'mtDNA Classic Tree', '🌲', '')}
+                    ${createActionButton('mtDnaTimeTree', 'mtDNA Time Tree', '⌚', '')}
+                    ${createActionButton('mtDnaGroupTree', 'mtDNA Group Time Tree', '👪', '')}
+                    ${createActionButton('relations', 'Relations', '🔗', 'secondary')}
                 </div>
             </div>
         `;
