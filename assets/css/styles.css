@@ -168,7 +168,6 @@ body {
     transform: translateY(-1px);
 }
 
-/* Replace lines 154-158 with this */
 .filter-btn.active,
 .filter-btn[aria-pressed="true"] {
     background: #e74c3c;

@@ -158,8 +158,8 @@ class HeritageApp {
             const button = document.createElement('button');
             button.className = `filter-btn ${filter.active ? 'active' : ''}`;
             button.textContent = filter.label;
-            button.setAttribute('aria-pressed', filter.active ? 'true' : 'false');  // ADD THIS
-            button.setAttribute('role', 'button');  // ADD THIS
+            button.setAttribute('aria-pressed', filter.active ? 'true' : 'false');
+            button.setAttribute('role', 'button');
             button.onclick = () => this.filterResults(filter.key);
             filterSection.appendChild(button);
         });
@@ -246,7 +246,7 @@ class HeritageApp {
         // Update active state and aria-pressed for all buttons
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.classList.remove('active');
-            btn.setAttribute('aria-pressed', 'false');  // ADD THIS
+            btn.setAttribute('aria-pressed', 'false');
         });
         
         // Find and activate the correct button
