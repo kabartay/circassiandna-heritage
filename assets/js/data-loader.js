@@ -189,7 +189,8 @@ class DataLoader {
                     { key: "abdzakh", label: "Abdzakh", active: false },
                     { key: "abkhaz", label: "Abkhaz", active: false },
                     { key: "kabardian", label: "Kabardian", active: false },
-                    { key: "shapsough", label: "Shapsough", active: false }
+                    { key: "shapsough", label: "Shapsough", active: false },
+                    { key: "ubykh", label: "Ubykh", active: false }
                 ]
             },
             sorting: {

@@ -36,6 +36,11 @@
         "key": "shapsough",
         "label": "Shapsough",
         "active": false
+      },
+      {
+        "key": "ubykh",
+        "label": "Ubykh",
+        "active": false
       }
     ]
   },
