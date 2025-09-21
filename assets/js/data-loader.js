@@ -68,6 +68,34 @@ class DataLoader {
     }
 
     /**
+     * Load configuration
+     */
+    async loadConfig() {
+        if (this.config) {
+            return this.config;
+        }
+
+        try {
+            const url = `${this.basePath}data/config.json?v=${Date.now()}`;
+            console.log('🔄 Loading config from:', url);
+
+            const response = await fetch(url);
+
+            if (response.ok) {
+                this.config = await response.json();
+                console.log('✅ Configuration loaded');
+                return this.config;
+            } else {
+                throw new Error(`HTTP ${response.status}`);
+            }
+        } catch (error) {
+            console.warn('⚠️ Config not found, using defaults');
+            this.config = this.getDefaultConfig();
+            return this.config;
+        }
+    }
+
+    /**
      * Show data loading error to user
      */
     showDataLoadError() {
