@@ -181,7 +181,7 @@ class DataLoader {
             app: {
                 title: "Circassian DNA Heritage Feed",
                 subtitle: "Genetic lineage and ancestral connections",
-                version: "1.0.0"
+                version: "1.2.0"
             },
             filters: {
                 ethnicities: [
