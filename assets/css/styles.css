@@ -151,11 +151,21 @@ body {
     transform: translateY(-1px);
 }
 
-.filter-btn.active {
+/* Replace lines 154-158 with this */
+.filter-btn.active,
+.filter-btn[aria-pressed="true"] {
     background: #e74c3c;
     color: white;
     border-color: #e74c3c;
     box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+    font-weight: bold;  /* Additional non-color indicator */
+    text-decoration: underline;  /* Another non-color indicator */
+}
+
+/* Optional: Add focus styles for keyboard users */
+.filter-btn:focus-visible {
+    outline: 3px solid #2c3e50;
+    outline-offset: 2px;
 }
 
 .filter-btn.active:hover {
