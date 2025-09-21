@@ -55,6 +55,23 @@ body {
     font-size: 1.1rem;
 }
 
+.header-title {
+  display: flex;
+  align-items: center;     /* vertical centering */
+  justify-content: center; /* horizontal centering */
+  gap: 8px;                /* space between flag and text */
+  margin: 0;               /* reset default h1 margin */
+}
+
+.flag-icon {
+  height: 1.5em;
+}
+
+.header-text {
+  line-height: 1.5em;    /* aligns text height to icon */
+}
+
+
 /* Statistics Bar */
 .stats-bar {
     background: linear-gradient(135deg, #34495e, #2c3e50);

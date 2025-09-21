@@ -101,7 +101,12 @@ class HeritageApp {
             const headerSubtitle = document.querySelector('.feed-header p');
             
             if (headerTitle) {
-                headerTitle.textContent = `🏔️ ${this.config.app.title}`;
+                headerTitle.innerHTML = `
+                    <img src="assets/img/circassian-flag.png"
+                        alt="Circassian Flag" 
+                        style="height: 1.25em; vertical-align: middle; margin-right: 8px;">
+                    ${this.config.app.title}
+                `;
             }
             if (headerSubtitle) {
                 headerSubtitle.textContent = this.config.app.subtitle;
