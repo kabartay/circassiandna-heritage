@@ -155,7 +155,8 @@ class HeritageApp {
                 { key: 'abdzakh', label: 'Abdzakh', active: false },
                 { key: 'abkhaz', label: 'Abkhaz', active: false },
                 { key: 'kabardian', label: 'Kabardian', active: false },
-                { key: 'shapsough', label: 'Shapsough', active: false }
+                { key: 'shapsough', label: 'Shapsough', active: false },
+                { key: 'ubykh', label: 'Ubykh', active: false }
             ];
             
             defaultFilters.forEach(filter => {
@@ -260,7 +261,8 @@ class HeritageApp {
                 (ethnicity === 'abdzakh' && btn.textContent === 'Abdzakh') ||
                 (ethnicity === 'abkhaz' && btn.textContent === 'Abkhaz') ||
                 (ethnicity === 'kabardian' && btn.textContent === 'Kabardian') ||
-                (ethnicity === 'shapsough' && btn.textContent === 'Shapsough')) {
+                (ethnicity === 'shapsough' && btn.textContent === 'Shapsough') ||
+                (ethnicity === 'ubykh' && btn.textContent === 'Ubykh')) {
                 btn.classList.add('active');
             }
         });
