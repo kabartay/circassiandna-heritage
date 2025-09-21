@@ -55,13 +55,9 @@ class DataLoader {
         } catch (error) {
             console.error('❌ Failed to load data:', error.message);
             
-            // Option 1: Show error state (recommended)
+            // Show error state in UI
             this.heritageData = [];
             this.showDataLoadError();
-            
-            // Option 2: Use minimal demo data ONLY for development
-            // Uncomment ONLY if you need a demo fallback
-            // this.heritageData = this.getMinimalDemoData();
             
             return this.heritageData;
         }
