@@ -140,35 +140,24 @@ class HeritageApp {
 
         filterSection.innerHTML = '';
         
-        if (this.config?.filters?.ethnicities) {
-            this.config.filters.ethnicities.forEach(filter => {
-                const button = document.createElement('button');
-                button.className = `filter-btn ${filter.active ? 'active' : ''}`;
-                button.textContent = filter.label;
-                button.onclick = () => this.filterResults(filter.key);
-                filterSection.appendChild(button);
-            });
-        } else {
-            // Default filters if config is missing
-            const defaultFilters = [
-                { key: 'all', label: 'All Families', active: true },
-                { key: 'abdzakh', label: 'Abdzakh', active: false },
-                { key: 'abkhaz', label: 'Abkhaz', active: false },
-                { key: 'kabardian', label: 'Kabardian', active: false },
-                { key: 'shapsough', label: 'Shapsough', active: false },
-                { key: 'ubykh', label: 'Ubykh', active: false }
-            ];
-            
-            defaultFilters.forEach(filter => {
-                const button = document.createElement('button');
-                button.className = `filter-btn ${filter.active ? 'active' : ''}`;
-                button.textContent = filter.label;
-                button.onclick = () => this.filterResults(filter.key);
-                filterSection.appendChild(button);
-            });
-        }
-        
-        console.log('🔧 Filters initialized');
+        const filters = this.config?.filters?.ethnicities || [
+            { key: 'all', label: 'All Families', active: true },
+            { key: 'abdzakh', label: 'Abdzakh', active: false },
+            { key: 'abkhaz', label: 'Abkhaz', active: false },
+            { key: 'kabardian', label: 'Kabardian', active: false },
+            { key: 'shapsough', label: 'Shapsough', active: false },
+            { key: 'ubykh', label: 'Ubykh', active: false }
+        ];
+
+        filters.forEach(filter => {
+            const button = document.createElement('button');
+            button.className = `filter-btn ${filter.active ? 'active' : ''}`;
+            button.textContent = filter.label;
+            button.setAttribute('aria-pressed', filter.active ? 'true' : 'false');  // ADD THIS
+            button.setAttribute('role', 'button');  // ADD THIS
+            button.onclick = () => this.filterResults(filter.key);
+            filterSection.appendChild(button);
+        });
     }
 
     /**
@@ -249,9 +238,10 @@ class HeritageApp {
         this.currentFilter = ethnicity;
         this.displayedResults = 0;
         
-        // Update active filter button
+        // Update active state and aria-pressed for all buttons
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');  // ADD THIS
         });
         
         // Find and activate the correct button
@@ -264,9 +254,10 @@ class HeritageApp {
                 (ethnicity === 'shapsough' && btn.textContent === 'Shapsough') ||
                 (ethnicity === 'ubykh' && btn.textContent === 'Ubykh')) {
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');  // ADD THIS
             }
         });
-
+        
         this.loadResults();
     }
 
