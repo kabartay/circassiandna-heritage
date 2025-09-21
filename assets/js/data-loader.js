@@ -55,13 +55,9 @@ class DataLoader {
         } catch (error) {
             console.error('❌ Failed to load data:', error.message);
             
-            // Option 1: Show error state (recommended)
+            // Show error state in UI
             this.heritageData = [];
             this.showDataLoadError();
-            
-            // Option 2: Use minimal demo data ONLY for development
-            // Uncomment ONLY if you need a demo fallback
-            // this.heritageData = this.getMinimalDemoData();
             
             return this.heritageData;
         }
@@ -145,32 +141,6 @@ class DataLoader {
             }
             // That's it! No more data here!
         ];
-    }
-
-    /**
-     * Load configuration
-     */
-    async loadConfig() {
-        if (this.config) {
-            return this.config;
-        }
-
-        try {
-            const response = await fetch(`${this.basePath}data/config.json`);
-            
-            if (response.ok) {
-                this.config = await response.json();
-                console.log('✅ Configuration loaded');
-                return this.config;
-            } else {
-                throw new Error(`HTTP ${response.status}`);
-            }
-            
-        } catch (error) {
-            console.warn('⚠️ Config not found, using defaults');
-            this.config = this.getDefaultConfig();
-            return this.config;
-        }
     }
 
     /**
