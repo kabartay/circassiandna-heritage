@@ -1,7 +1,7 @@
 /**
  * Circassian DNA Heritage Feed Styles
  * Complete stylesheet for repository structure
- * Improved readability with better contrast
+ * Balanced version - not too dark, not too light
  * Based on Circassian DNA Project color codes
  */
 
@@ -11,25 +11,22 @@
     --male-color: #477571;      /* Dark teal for male/Y-DNA */
     --female-color: #849a9a;    /* Light gray-green for female/mtDNA */
     
-    /* Backgrounds (light to dark) */
-    --bg-white: #ffffff;        /* Pure white for cards */
-    --bg-lightest: #f0f2f2;     /* Almost white for subtle backgrounds */
-    --bg-light: #e0f3f3;        /* Very light teal for sections */
+    /* Backgrounds */
+    --bg-white: #ffffff;
+    --bg-light: #f0f2f2;
+    --bg-medium: #e0f3f3;
+    --bg-card: #fafbfb;
+    --bg-dark: #687b7b;
     
-    /* Text colors (dark for readability) */
-    --text-primary: #151919;    /* Very dark for main text */
-    --text-secondary: #477571;  /* Teal for secondary text */
-    --text-muted: #646e6e;      /* Dark gray for muted text */
+    /* Text colors */
+    --text-primary: #151919;
+    --text-secondary: #646e6e;
+    --text-muted: #a0b0b0;
     
-    /* Borders and dividers */
-    --border-light: #d2d7d7;    /* Light gray for borders */
-    --border-medium: #b4bdbd;   /* Medium for hover states */
-    --border-dark: #687b7b;     /* Darker for emphasis */
-    
-    /* Utility colors */
-    --success-green: #28a745;   /* For active states */
-    --hover-bg: #e0f3f3;        /* Light teal for hovers */
-    --shadow-color: rgba(21, 25, 25, 0.1);
+    /* Borders */
+    --border-light: #d2d7d7;
+    --border-medium: #b4bdbd;
+    --border-dark: #687b7b;
 }
 
 /* Reset and Base Styles */
@@ -46,7 +43,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);  /* Subtle gray gradient */
+    background: linear-gradient(135deg, var(--male-color) 0%, var(--female-color) 50%, var(--bg-dark) 100%);
     min-height: 100vh;
     padding: 20px;
     line-height: 1.6;
@@ -57,69 +54,68 @@ body {
 .feed-container {
     max-width: 900px;
     margin: 0 auto;
-    background: var(--bg-white);
+    background: var(--bg-light);
     border-radius: 15px;
-    box-shadow: 0 10px 30px var(--shadow-color);
+    box-shadow: 0 15px 35px rgba(21, 25, 25, 0.2);
     overflow: hidden;
-    position: relative;
 }
 
-/* Header Section */
+/* Header Section - darker for contrast */
 .feed-header {
     background: linear-gradient(135deg, var(--text-primary) 0%, var(--male-color) 100%);
     color: white;
     padding: 30px;
     text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .feed-header h1 {
     font-size: 2rem;
     margin-bottom: 10px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
+    font-weight: 300;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .feed-header p {
-    opacity: 0.95;
-    font-size: 1rem;
-    color: var(--bg-lightest);
+    opacity: 0.9;
+    font-size: 1.05rem;
+    color: var(--bg-medium);
 }
 
-/* Statistics Bar */
+/* Statistics Bar - more prominent */
 .stats-bar {
-    background: var(--bg-white);
-    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--male-color), var(--bg-dark));
+    color: white;
     padding: 20px;
     display: flex;
     justify-content: space-around;
     text-align: center;
-    border-bottom: 2px solid var(--border-light);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .stat-item {
     flex: 1;
-    min-width: 80px;
 }
 
 .stat-number {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
     margin-bottom: 5px;
-    color: var(--male-color);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .stat-label {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    font-size: 0.8rem;
+    opacity: 0.85;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 /* Filter and Sort Bar */
 .filter-bar {
-    background: var(--bg-white);
-    padding: 20px;
-    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-card);
+    padding: 18px 20px;
+    border-bottom: 2px solid var(--border-light);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -146,64 +142,60 @@ body {
 }
 
 .sort-select {
-    background: var(--bg-white);
-    border: 2px solid var(--border-light);
-    padding: 8px 15px;
+    background: white;
+    border: 2px solid var(--border-medium);
+    padding: 8px 14px;
     border-radius: 20px;
     font-size: 0.85rem;
     cursor: pointer;
-    min-width: 180px;
     color: var(--text-primary);
     transition: all 0.2s ease;
 }
 
-.sort-select:focus {
+.sort-select:hover {
     border-color: var(--male-color);
-    box-shadow: 0 0 0 3px rgba(71, 117, 113, 0.1);
+    background: var(--bg-medium);
 }
 
-.sort-select:hover {
-    border-color: var(--border-medium);
+.sort-select:focus {
+    border-color: var(--male-color);
+    box-shadow: 0 0 0 3px rgba(71, 117, 113, 0.15);
 }
 
 .filter-btn {
-    background: var(--bg-white);
-    border: 2px solid var(--border-light);
+    background: white;
+    border: 2px solid var(--border-medium);
     padding: 8px 16px;
     border-radius: 20px;
     font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
 .filter-btn:hover {
-    background: var(--hover-bg);
+    background: var(--bg-medium);
     border-color: var(--male-color);
+    color: var(--text-primary);
     transform: translateY(-1px);
 }
 
-/* Active filter with better visibility */
 .filter-btn.active,
 .filter-btn[aria-pressed="true"] {
     background: var(--male-color);
     color: white;
     border-color: var(--male-color);
-    box-shadow: 0 2px 8px rgba(71, 117, 113, 0.3);
+    box-shadow: 0 3px 10px rgba(71, 117, 113, 0.3);
     font-weight: 600;
 }
 
-.filter-btn.active:hover {
-    background: var(--text-secondary);
-}
-
-/* Feed Content */
+/* Feed Content - subtle background */
 .feed-content {
     height: 70vh;
     overflow-y: auto;
     padding: 20px;
-    background: var(--bg-lightest);
+    background: var(--bg-light);
 }
 
 .feed-content::-webkit-scrollbar {
@@ -211,33 +203,45 @@ body {
 }
 
 .feed-content::-webkit-scrollbar-track {
-    background: var(--bg-lightest);
+    background: var(--border-light);
     border-radius: 10px;
 }
 
 .feed-content::-webkit-scrollbar-thumb {
-    background: var(--border-medium);
+    background: var(--female-color);
     border-radius: 10px;
 }
 
 .feed-content::-webkit-scrollbar-thumb:hover {
-    background: var(--border-dark);
+    background: var(--bg-dark);
 }
 
-/* Heritage Result Cards */
+/* Heritage Result Cards - more depth */
 .heritage-result {
     background: var(--bg-white);
-    border: 1px solid var(--border-light);
+    border: 1px solid var(--border-medium);
     border-radius: 12px;
     margin-bottom: 20px;
     padding: 25px;
-    box-shadow: 0 2px 8px var(--shadow-color);
+    box-shadow: 0 3px 12px rgba(21, 25, 25, 0.08);
     transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.heritage-result::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--male-color), var(--female-color));
 }
 
 .heritage-result:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px var(--shadow-color);
+    box-shadow: 0 6px 20px rgba(71, 117, 113, 0.15);
     border-color: var(--male-color);
 }
 
@@ -248,11 +252,10 @@ body {
     align-items: flex-start;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 2px solid var(--bg-lightest);
-    gap: 20px;
+    border-bottom: 2px solid var(--bg-light);
 }
 
-/* Family avatar with clear gender distinction */
+/* Family avatar - prominent with shadows */
 .family-avatar {
     width: 60px;
     height: 60px;
@@ -264,21 +267,20 @@ body {
     font-weight: bold;
     font-size: 1.4rem;
     margin-bottom: 12px;
-    border: 3px solid var(--bg-white);
-    box-shadow: 0 3px 10px var(--shadow-color);
+    border: 3px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .family-avatar.male {
-    background: var(--male-color);
+    background: linear-gradient(135deg, var(--male-color), var(--bg-dark));
 }
 
 .family-avatar.female {
-    background: var(--female-color);
+    background: linear-gradient(135deg, var(--female-color), var(--text-muted));
 }
 
-/* Default neutral color */
 .family-avatar {
-    background: var(--text-muted);
+    background: linear-gradient(135deg, var(--bg-dark), var(--text-secondary));
 }
 
 .family-name-english {
@@ -289,12 +291,12 @@ body {
 }
 
 .family-name-circassian {
-    color: var(--text-secondary);
-    font-size: 1.1rem;
+    color: var(--male-color);
+    font-size: 1.05rem;
     font-style: italic;
     margin-bottom: 10px;
     padding: 6px 12px;
-    background: var(--bg-lightest);
+    background: var(--bg-medium);
     border-radius: 6px;
     border-left: 3px solid var(--male-color);
 }
@@ -302,30 +304,30 @@ body {
 .basic-info {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
 }
 
 .info-item {
-    background: var(--bg-lightest);
+    background: var(--bg-light);
     padding: 6px 12px;
     border-radius: 16px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-light);
 }
 
 .info-label {
     font-weight: 600;
     color: var(--text-primary);
-    margin-right: 4px;
 }
 
 .test-id-date {
     text-align: right;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     font-size: 0.85rem;
 }
 
-/* Genetic Data Section */
+/* Genetic Data Section - clearer separation */
 .genetic-data {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -334,25 +336,28 @@ body {
 }
 
 .haplogroup-section {
-    background: var(--bg-lightest);
+    background: var(--bg-card);
     padding: 18px;
     border-radius: 10px;
     border: 1px solid var(--border-light);
+    position: relative;
 }
 
 .haplogroup-section.y-dna {
     border-top: 3px solid var(--male-color);
+    background: linear-gradient(180deg, var(--bg-medium) 0%, var(--bg-card) 10%);
 }
 
 .haplogroup-section.mt-dna {
     border-top: 3px solid var(--female-color);
+    background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-card) 10%);
 }
 
 .haplogroup-title {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 600;
 }
 
@@ -372,9 +377,10 @@ body {
 .genetic-marker {
     margin-bottom: 10px;
     padding: 10px;
-    background: var(--bg-white);
+    background: white;
     border-radius: 6px;
-    border-left: 3px solid var(--border-light);
+    border-left: 3px solid;
+    transition: all 0.2s ease;
 }
 
 .y-dna .genetic-marker {
@@ -383,6 +389,11 @@ body {
 
 .mt-dna .genetic-marker {
     border-left-color: var(--female-color);
+}
+
+.genetic-marker:hover {
+    transform: translateX(2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .marker-label {
@@ -399,10 +410,9 @@ body {
     color: var(--text-primary);
     font-weight: 500;
     font-family: 'Courier New', monospace;
-    word-break: break-all;
 }
 
-/* Action Buttons */
+/* Action Buttons - better contrast */
 .result-actions {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -413,7 +423,7 @@ body {
 }
 
 .action-btn {
-    background: var(--text-muted);
+    background: linear-gradient(135deg, var(--bg-dark), var(--text-secondary));
     color: white;
     border: none;
     padding: 8px 10px;
@@ -426,27 +436,25 @@ body {
     white-space: nowrap;
 }
 
-/* Clear gender-based button colors */
 .action-btn.y-dna-btn {
-    background: var(--male-color);
+    background: linear-gradient(135deg, var(--male-color), var(--bg-dark));
 }
 
 .action-btn.mt-dna-btn {
-    background: var(--female-color);
+    background: linear-gradient(135deg, var(--female-color), var(--text-muted));
 }
 
 .action-btn.secondary {
-    background: var(--text-muted);
+    background: linear-gradient(135deg, var(--text-secondary), var(--text-muted));
 }
 
 .action-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 2px 8px var(--shadow-color);
-    opacity: 0.9;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .action-btn.disabled {
-    opacity: 0.3;
+    opacity: 0.35;
     cursor: not-allowed;
     background: var(--border-medium) !important;
 }
@@ -462,6 +470,7 @@ a.action-btn {
     display: none;
     text-align: center;
     padding: 40px;
+    color: var(--text-secondary);
 }
 
 .spinner {
@@ -479,7 +488,7 @@ a.action-btn {
     100% { transform: rotate(360deg); }
 }
 
-/* Responsive Design (simplified) */
+/* Responsive */
 @media (max-width: 768px) {
     .genetic-data {
         grid-template-columns: 1fr;
@@ -498,12 +507,5 @@ a.action-btn {
 @media (max-width: 480px) {
     .result-actions {
         grid-template-columns: 1fr;
-    }
-}
-
-/* High contrast and accessibility */
-@media (prefers-contrast: high) {
-    * {
-        border-width: 2px !important;
     }
 }
