@@ -1,6 +1,7 @@
 /**
  * Circassian DNA Heritage Feed Styles
  * Complete stylesheet for repository structure
+ * Improved readability with better contrast
  * Based on Circassian DNA Project color codes
  */
 
@@ -10,23 +11,25 @@
     --male-color: #477571;      /* Dark teal for male/Y-DNA */
     --female-color: #849a9a;    /* Light gray-green for female/mtDNA */
     
-    /* Light variations */
-    --lightest: #f0f2f2;        /* Almost white */
-    --very-light: #e0f3f3;      /* Very light teal */
-    --light-gray: #d2d7d7;      /* Light gray */
-    --medium-light: #b4bdbd;    /* Medium light gray */
+    /* Backgrounds (light to dark) */
+    --bg-white: #ffffff;        /* Pure white for cards */
+    --bg-lightest: #f0f2f2;     /* Almost white for subtle backgrounds */
+    --bg-light: #e0f3f3;        /* Very light teal for sections */
     
-    /* Dark variations */
-    --medium-gray: #a0b0b0;     /* Medium gray */
-    --dark-gray: #687b7b;       /* Darker gray-green */
-    --darker-gray: #646e6e;     /* Dark gray */
-    --darkest: #151919;         /* Very dark */
+    /* Text colors (dark for readability) */
+    --text-primary: #151919;    /* Very dark for main text */
+    --text-secondary: #477571;  /* Teal for secondary text */
+    --text-muted: #646e6e;      /* Dark gray for muted text */
     
-    /* Derived colors */
-    --male-light: #e0f3f3;      /* Using very light teal */
-    --female-light: #f0f2f2;    /* Using almost white */
-    --male-dark: #151919;       /* Using very dark */
-    --female-dark: #687b7b;     /* Using darker gray-green */
+    /* Borders and dividers */
+    --border-light: #d2d7d7;    /* Light gray for borders */
+    --border-medium: #b4bdbd;   /* Medium for hover states */
+    --border-dark: #687b7b;     /* Darker for emphasis */
+    
+    /* Utility colors */
+    --success-green: #28a745;   /* For active states */
+    --hover-bg: #e0f3f3;        /* Light teal for hovers */
+    --shadow-color: rgba(21, 25, 25, 0.1);
 }
 
 /* Reset and Base Styles */
@@ -43,54 +46,54 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, var(--male-color) 0%, var(--female-color) 100%);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);  /* Subtle gray gradient */
     min-height: 100vh;
     padding: 20px;
     line-height: 1.6;
-    color: var(--darkest);
+    color: var(--text-primary);
 }
 
 /* Main Container */
 .feed-container {
     max-width: 900px;
     margin: 0 auto;
-    background: white;
+    background: var(--bg-white);
     border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(21, 25, 25, 0.1);
+    box-shadow: 0 10px 30px var(--shadow-color);
     overflow: hidden;
     position: relative;
 }
 
 /* Header Section */
 .feed-header {
-    background: linear-gradient(135deg, var(--darkest) 0%, var(--male-color) 100%);
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--male-color) 100%);
     color: white;
-    padding: 25px;
+    padding: 30px;
     text-align: center;
 }
 
 .feed-header h1 {
     font-size: 2rem;
     margin-bottom: 10px;
-    font-weight: 300;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: 400;
+    letter-spacing: 0.5px;
 }
 
 .feed-header p {
-    opacity: 0.9;
-    font-size: 1.1rem;
-    color: var(--very-light);
+    opacity: 0.95;
+    font-size: 1rem;
+    color: var(--bg-lightest);
 }
 
 /* Statistics Bar */
 .stats-bar {
-    background: linear-gradient(135deg, var(--male-color), var(--dark-gray));
-    color: white;
-    padding: 15px 20px;
+    background: var(--bg-white);
+    color: var(--text-primary);
+    padding: 20px;
     display: flex;
     justify-content: space-around;
     text-align: center;
-    border-bottom: 1px solid var(--male-light);
+    border-bottom: 2px solid var(--border-light);
 }
 
 .stat-item {
@@ -99,23 +102,24 @@ body {
 }
 
 .stat-number {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 5px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: var(--male-color);
 }
 
 .stat-label {
-    font-size: 0.8rem;
-    opacity: 0.9;
-    color: var(--very-light);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* Filter and Sort Bar */
 .filter-bar {
-    background: var(--lightest);
-    padding: 15px 20px;
-    border-bottom: 1px solid var(--light-gray);
+    background: var(--bg-white);
+    padding: 20px;
+    border-bottom: 1px solid var(--border-light);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -138,68 +142,60 @@ body {
 .sort-label {
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--darkest);
-    white-space: nowrap;
+    color: var(--text-primary);
 }
 
 .sort-select {
-    background: white;
-    border: 1px solid var(--medium-light);
-    padding: 8px 12px;
+    background: var(--bg-white);
+    border: 2px solid var(--border-light);
+    padding: 8px 15px;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     cursor: pointer;
-    outline: none;
     min-width: 180px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    color: var(--darker-gray);
+    color: var(--text-primary);
+    transition: all 0.2s ease;
 }
 
 .sort-select:focus {
     border-color: var(--male-color);
-    box-shadow: 0 0 0 2px var(--male-light);
+    box-shadow: 0 0 0 3px rgba(71, 117, 113, 0.1);
 }
 
 .sort-select:hover {
-    border-color: var(--medium-gray);
+    border-color: var(--border-medium);
 }
 
 .filter-btn {
-    background: white;
-    border: 1px solid var(--medium-light);
-    padding: 8px 15px;
+    background: var(--bg-white);
+    border: 2px solid var(--border-light);
+    padding: 8px 16px;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s ease;
-    position: relative;
-    color: var(--darker-gray);
+    color: var(--text-primary);
+    font-weight: 500;
 }
 
 .filter-btn:hover {
-    background: var(--very-light);
-    transform: translateY(-1px);
+    background: var(--hover-bg);
     border-color: var(--male-color);
+    transform: translateY(-1px);
 }
 
-/* Active filter buttons with accessibility improvements */
+/* Active filter with better visibility */
 .filter-btn.active,
 .filter-btn[aria-pressed="true"] {
     background: var(--male-color);
     color: white;
     border-color: var(--male-color);
     box-shadow: 0 2px 8px rgba(71, 117, 113, 0.3);
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.filter-btn:focus-visible {
-    outline: 3px solid var(--male-color);
-    outline-offset: 2px;
+    font-weight: 600;
 }
 
 .filter-btn.active:hover {
-    background: var(--dark-gray);
+    background: var(--text-secondary);
 }
 
 /* Feed Content */
@@ -207,60 +203,42 @@ body {
     height: 70vh;
     overflow-y: auto;
     padding: 20px;
-    scroll-behavior: smooth;
-    background: var(--lightest);
+    background: var(--bg-lightest);
 }
 
 .feed-content::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
 }
 
 .feed-content::-webkit-scrollbar-track {
-    background: var(--light-gray);
+    background: var(--bg-lightest);
     border-radius: 10px;
 }
 
 .feed-content::-webkit-scrollbar-thumb {
-    background: var(--medium-gray);
+    background: var(--border-medium);
     border-radius: 10px;
-    transition: background 0.2s ease;
 }
 
 .feed-content::-webkit-scrollbar-thumb:hover {
-    background: var(--dark-gray);
+    background: var(--border-dark);
 }
 
 /* Heritage Result Cards */
 .heritage-result {
-    background: white;
-    border: 1px solid var(--light-gray);
+    background: var(--bg-white);
+    border: 1px solid var(--border-light);
     border-radius: 12px;
     margin-bottom: 20px;
     padding: 25px;
-    box-shadow: 0 2px 10px rgba(21, 25, 25, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.heritage-result::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(135deg, var(--male-color), var(--female-color));
+    box-shadow: 0 2px 8px var(--shadow-color);
+    transition: all 0.2s ease;
 }
 
 .heritage-result:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(71, 117, 113, 0.15);
-}
-
-.heritage-result:focus-within {
-    outline: 2px solid var(--male-color);
-    outline-offset: 2px;
+    box-shadow: 0 4px 16px var(--shadow-color);
+    border-color: var(--male-color);
 }
 
 /* Result Header */
@@ -270,15 +248,11 @@ body {
     align-items: flex-start;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 2px solid var(--very-light);
+    border-bottom: 2px solid var(--bg-lightest);
     gap: 20px;
 }
 
-.family-info {
-    flex: 1;
-}
-
-/* Family avatar - gender-based colors */
+/* Family avatar with clear gender distinction */
 .family-avatar {
     width: 60px;
     height: 60px;
@@ -289,79 +263,66 @@ body {
     color: white;
     font-weight: bold;
     font-size: 1.4rem;
-    margin-bottom: 10px;
-    border: 3px solid white;
-    position: relative;
-    background: linear-gradient(135deg, var(--dark-gray), var(--darker-gray));
-    box-shadow: 0 4px 15px rgba(104, 123, 123, 0.3);
+    margin-bottom: 12px;
+    border: 3px solid var(--bg-white);
+    box-shadow: 0 3px 10px var(--shadow-color);
 }
 
 .family-avatar.male {
-    background: linear-gradient(135deg, var(--male-color), var(--dark-gray));
-    box-shadow: 0 4px 15px rgba(71, 117, 113, 0.3);
+    background: var(--male-color);
 }
 
 .family-avatar.female {
-    background: linear-gradient(135deg, var(--female-color), var(--medium-gray));
-    box-shadow: 0 4px 15px rgba(132, 154, 154, 0.3);
+    background: var(--female-color);
 }
 
-.family-names {
-    margin-bottom: 10px;
+/* Default neutral color */
+.family-avatar {
+    background: var(--text-muted);
 }
 
 .family-name-english {
-    color: var(--darkest);
+    color: var(--text-primary);
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 5px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .family-name-circassian {
-    color: var(--darker-gray);
+    color: var(--text-secondary);
     font-size: 1.1rem;
     font-style: italic;
-    margin-bottom: 8px;
-    padding: 5px 10px;
-    background: linear-gradient(135deg, var(--very-light), var(--lightest));
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    background: var(--bg-lightest);
     border-radius: 6px;
-    border-left: 4px solid var(--male-color);
-    direction: ltr;
-    unicode-bidi: embed;
+    border-left: 3px solid var(--male-color);
 }
 
 .basic-info {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: 12px;
 }
 
 .info-item {
-    background: var(--lightest);
-    padding: 8px 12px;
-    border-radius: 20px;
+    background: var(--bg-lightest);
+    padding: 6px 12px;
+    border-radius: 16px;
     font-size: 0.9rem;
-    color: var(--darker-gray);
-    border: 1px solid var(--light-gray);
-    transition: all 0.2s ease;
-}
-
-.info-item:hover {
-    background: var(--very-light);
-    border-color: var(--medium-gray);
+    color: var(--text-muted);
 }
 
 .info-label {
     font-weight: 600;
-    color: var(--darkest);
+    color: var(--text-primary);
+    margin-right: 4px;
 }
 
 .test-id-date {
     text-align: right;
-    color: var(--dark-gray);
-    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
 }
 
 /* Genetic Data Section */
@@ -373,46 +334,26 @@ body {
 }
 
 .haplogroup-section {
-    background: linear-gradient(135deg, var(--lightest), var(--very-light));
-    padding: 20px;
+    background: var(--bg-lightest);
+    padding: 18px;
     border-radius: 10px;
-    border: 1px solid var(--light-gray);
-    position: relative;
-    overflow: hidden;
-}
-
-.haplogroup-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-}
-
-.haplogroup-section.y-dna::before {
-    background: var(--male-color);
-}
-
-.haplogroup-section.mt-dna::before {
-    background: var(--female-color);
+    border: 1px solid var(--border-light);
 }
 
 .haplogroup-section.y-dna {
-    border-left: 4px solid var(--male-color);
+    border-top: 3px solid var(--male-color);
 }
 
 .haplogroup-section.mt-dna {
-    border-left: 4px solid var(--female-color);
+    border-top: 3px solid var(--female-color);
 }
 
 .haplogroup-title {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: var(--darkest);
 }
 
 .y-dna-title {
@@ -426,36 +367,27 @@ body {
 .haplogroup-icon {
     margin-right: 8px;
     font-size: 1.2rem;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 .genetic-marker {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     padding: 10px;
-    background: white;
+    background: var(--bg-white);
     border-radius: 6px;
-    transition: all 0.2s ease;
+    border-left: 3px solid var(--border-light);
 }
 
 .y-dna .genetic-marker {
-    border-left: 4px solid var(--male-color);
-    background: var(--male-light);
+    border-left-color: var(--male-color);
 }
 
 .mt-dna .genetic-marker {
-    border-left: 4px solid var(--female-color);
-    background: var(--female-light);
-}
-
-.genetic-marker:hover {
-    background: white;
-    transform: translateX(2px);
-    box-shadow: 0 2px 8px rgba(21, 25, 25, 0.1);
+    border-left-color: var(--female-color);
 }
 
 .marker-label {
-    font-size: 0.8rem;
-    color: var(--dark-gray);
+    font-size: 0.75rem;
+    color: var(--text-muted);
     text-transform: uppercase;
     font-weight: 600;
     margin-bottom: 3px;
@@ -463,12 +395,11 @@ body {
 }
 
 .marker-value {
-    font-size: 1rem;
-    color: var(--darkest);
+    font-size: 0.95rem;
+    color: var(--text-primary);
     font-weight: 500;
     font-family: 'Courier New', monospace;
     word-break: break-all;
-    line-height: 1.3;
 }
 
 /* Action Buttons */
@@ -478,103 +409,69 @@ body {
     gap: 8px;
     margin-top: 20px;
     padding-top: 15px;
-    border-top: 1px solid var(--light-gray);
+    border-top: 1px solid var(--border-light);
 }
 
 .action-btn {
-    background: linear-gradient(135deg, var(--dark-gray), var(--darker-gray));
+    background: var(--text-muted);
     color: white;
     border: none;
     padding: 8px 10px;
-    border-radius: 18px;
-    font-size: 0.75rem;
+    border-radius: 16px;
+    font-size: 0.72rem;
     cursor: pointer;
     transition: all 0.2s ease;
     font-weight: 500;
     text-align: center;
     white-space: nowrap;
-    position: relative;
-    overflow: hidden;
 }
 
-/* Y-DNA buttons with male color */
+/* Clear gender-based button colors */
 .action-btn.y-dna-btn {
-    background: linear-gradient(135deg, var(--male-color), var(--dark-gray));
+    background: var(--male-color);
 }
 
-.action-btn.y-dna-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(71, 117, 113, 0.4);
-    background: linear-gradient(135deg, var(--dark-gray), var(--male-color));
-}
-
-/* mtDNA buttons with female color */
 .action-btn.mt-dna-btn {
-    background: linear-gradient(135deg, var(--female-color), var(--medium-gray));
+    background: var(--female-color);
 }
 
-.action-btn.mt-dna-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(132, 154, 154, 0.4);
-    background: linear-gradient(135deg, var(--medium-gray), var(--female-color));
+.action-btn.secondary {
+    background: var(--text-muted);
 }
 
 .action-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(21, 25, 25, 0.2);
-}
-
-.action-btn:active {
-    transform: scale(0.98);
-}
-
-.action-btn.secondary {
-    background: linear-gradient(135deg, var(--medium-gray), var(--dark-gray));
-}
-
-.action-btn.heritage {
-    background: linear-gradient(135deg, var(--male-color), var(--female-color));
+    box-shadow: 0 2px 8px var(--shadow-color);
+    opacity: 0.9;
 }
 
 .action-btn.disabled {
-    opacity: 0.4;
+    opacity: 0.3;
     cursor: not-allowed;
-    background: linear-gradient(135deg, var(--medium-light), var(--light-gray)) !important;
-    pointer-events: none;
-    color: var(--medium-gray);
+    background: var(--border-medium) !important;
 }
 
-.action-btn.disabled:hover {
-    transform: none;
-    box-shadow: none;
-}
-
-/* Style links to look like buttons */
 a.action-btn {
     display: inline-block;
     text-decoration: none;
     line-height: 1.2;
 }
 
-a.action-btn:hover {
-    text-decoration: none;
-}
-
 /* Loading Spinner */
 .loading-spinner {
     display: none;
     text-align: center;
-    padding: 20px;
+    padding: 40px;
 }
 
 .spinner {
-    border: 3px solid var(--light-gray);
+    border: 3px solid var(--border-light);
     border-top: 3px solid var(--male-color);
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     animation: spin 1s linear infinite;
-    margin: 0 auto 10px;
+    margin: 0 auto 15px;
 }
 
 @keyframes spin {
@@ -582,208 +479,31 @@ a.action-btn:hover {
     100% { transform: rotate(360deg); }
 }
 
-/* Error States */
-.error-message {
-    text-align: center;
-    padding: 40px;
-    color: var(--darkest);
-    background: var(--very-light);
-    border-radius: 8px;
-    border: 1px solid var(--medium-gray);
-}
-
-.error-message h3 {
-    margin-bottom: 10px;
-    color: var(--darkest);
-}
-
-.error-message button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: var(--male-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-    font-weight: 500;
-}
-
-.error-message button:hover {
-    background: var(--dark-gray);
-}
-
-/* Responsive Design */
+/* Responsive Design (simplified) */
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .feed-container {
-        margin: 0;
-        border-radius: 0;
-        height: 100vh;
-    }
-    
-    .feed-header h1 {
-        font-size: 1.5rem;
-    }
-    
-    .stats-bar {
-        flex-wrap: wrap;
-        gap: 10px;
-        padding: 10px;
-    }
-    
-    .stat-item {
-        min-width: 120px;
-    }
-    
     .genetic-data {
         grid-template-columns: 1fr;
     }
     
-    .result-header {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .test-id-date {
-        text-align: left;
-        margin-top: 10px;
-    }
-    
-    .basic-info {
-        justify-content: center;
-    }
-    
     .result-actions {
         grid-template-columns: repeat(2, 1fr);
-        gap: 6px;
-    }
-    
-    .action-btn {
-        font-size: 0.7rem;
-        padding: 6px 8px;
     }
     
     .filter-bar {
         flex-direction: column;
-        align-items: stretch;
         gap: 15px;
-    }
-    
-    .filter-section {
-        justify-content: center;
-    }
-    
-    .sort-section {
-        justify-content: space-between;
-    }
-    
-    .sort-select {
-        min-width: 150px;
     }
 }
 
 @media (max-width: 480px) {
-    .feed-header {
-        padding: 15px;
-    }
-    
-    .feed-header h1 {
-        font-size: 1.3rem;
-    }
-    
-    .heritage-result {
-        padding: 15px;
-        margin-bottom: 15px;
-    }
-    
-    .family-avatar {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-    }
-    
-    .family-name-english {
-        font-size: 1.1rem;
-    }
-    
-    .family-name-circassian {
-        font-size: 1rem;
-    }
-    
     .result-actions {
         grid-template-columns: 1fr;
-        gap: 8px;
-    }
-    
-    .action-btn {
-        padding: 10px;
-        font-size: 0.8rem;
     }
 }
 
-/* Print Styles */
-@media print {
-    body {
-        background: white;
-        padding: 0;
-    }
-    
-    .feed-container {
-        box-shadow: none;
-        border-radius: 0;
-    }
-    
-    .filter-bar,
-    .loading-spinner,
-    .result-actions {
-        display: none;
-    }
-    
-    .heritage-result {
-        break-inside: avoid;
-        page-break-inside: avoid;
-        border: 1px solid var(--medium-gray);
-        margin-bottom: 20px;
-    }
-}
-
-/* High contrast mode support */
+/* High contrast and accessibility */
 @media (prefers-contrast: high) {
-    .heritage-result {
-        border: 2px solid var(--darkest);
-    }
-    
-    .action-btn {
-        border: 1px solid var(--darkest);
-    }
-    
-    .filter-btn {
-        border: 2px solid var(--darker-gray);
-    }
-    
-    .genetic-marker {
-        border-left-width: 6px;
-    }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    .heritage-result,
-    .action-btn,
-    .filter-btn,
-    .genetic-marker {
-        transition: none;
-    }
-    
-    .spinner {
-        animation: none;
-    }
-    
-    .feed-content {
-        scroll-behavior: auto;
+    * {
+        border-width: 2px !important;
     }
 }
