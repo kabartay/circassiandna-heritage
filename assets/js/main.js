@@ -9,7 +9,7 @@ class HeritageApp {
         this.currentFilter = 'all';
         this.currentSort = 'date-desc';
         this.displayedResults = 0;
-        this.resultsPerPage = 4;
+        this.resultsPerPage = 8;
         this.config = null;
         this.isLoading = false;
         
@@ -326,6 +326,9 @@ class HeritageApp {
             this.displayedResults += resultsToShow.length;
             
             console.log(`✅ Added ${resultsToShow.length} results (total: ${this.displayedResults})`);
+
+            // Auto-load more if no scrollbar
+            setTimeout(() => this.checkIfNeedsMore(), 50);
             
         } catch (error) {
             console.error('❌ Error loading results:', error);
@@ -348,6 +351,23 @@ class HeritageApp {
     }
 
     /**
+     * Check if we need to load more (no scrollbar scenario)
+     */
+    async checkIfNeedsMore() {
+        const feedContent = document.getElementById('feedContent');
+        const processedData = this.dataLoader.getProcessedData(this.currentFilter, this.currentSort);
+        
+        // If content doesn't fill the container and we have more data, load it
+        if (feedContent.scrollHeight <= feedContent.clientHeight && 
+            this.displayedResults < processedData.length) {
+            console.log('📦 Auto-loading more - no scroll needed');
+            await this.loadResults();
+            // Check again recursively
+            setTimeout(() => this.checkIfNeedsMore(), 100);
+        }
+    }
+
+    /**
      * HTML escape utility for security
      */
     escapeHtml(text) {
@@ -357,7 +377,8 @@ class HeritageApp {
     }
 
     /**
-     * Create heritage card HTML - FIXED with security & URLs
+     * Create heritage card HTML - Collapsible Version
+     * Replace the createHeritageCard method in your HeritageApp class
      */
     createHeritageCard(data) {
         // Escape all text data to prevent XSS
@@ -381,18 +402,18 @@ class HeritageApp {
             const url = data.urls?.[urlKey];
             
             if (url) {
-                // If URL exists, create a working link
                 const safeUrl = this.escapeHtml(url);
                 return `<a href="${safeUrl}" 
                         target="_blank" 
                         class="action-btn ${cssClass}"
+                        onclick="event.stopPropagation()"
                         title="${label}">
                             ${icon} ${label}
                         </a>`;
             } else {
-                // If no URL, create disabled button
                 return `<button class="action-btn ${cssClass} disabled" 
                                 disabled
+                                onclick="event.stopPropagation()"
                                 title="Not available for this profile">
                             ${icon} ${label}
                         </button>`;
@@ -400,80 +421,121 @@ class HeritageApp {
         };
 
         return `
-            <div class="heritage-result" data-ethnicity="${safe.ethnicity.toLowerCase()}" data-id="${safe.id}">
-                <div class="result-header">
-                    <div class="family-info">
-                        <div class="family-avatar">
-                            ${this.getFamilyInitials(safe.familyNameEnglish)}
-                        </div>
-                        <div class="family-names">
-                            <div class="family-name-english">${safe.familyNameEnglish}</div>
-                            <div class="family-name-circassian">${safe.familyNameCircassian}</div>
-                        </div>
-                        <div class="basic-info">
-                            <div class="info-item">
-                                <span class="info-label">Village:</span> ${safe.village}
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">Ethnicity:</span> ${safe.ethnicity}
-                            </div>
-                        </div>
+            <div class="heritage-result" 
+                data-ethnicity="${safe.ethnicity.toLowerCase()}" 
+                data-id="${safe.id}"
+                onclick="this.classList.toggle('expanded')">
+                
+                <!-- COLLAPSED VIEW - Summary Line -->
+                <div class="result-summary">
+                    <div class="summary-avatar">
+                        ${this.getFamilyInitials(safe.familyNameEnglish)}
                     </div>
-                    <div class="test-id-date">
-                        <div><strong>ID:</strong> ${safe.id}</div>
-                        <div><strong>Date:</strong> ${safe.date}</div>
+                    <div class="summary-content">
+                        <span class="summary-name">${safe.familyNameEnglish}</span>
+                        <div class="summary-info">
+                            <div class="summary-item">
+                                <span class="summary-label">Village:</span>
+                                <span class="summary-value">${safe.village || 'N/A'}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Ethnicity:</span>
+                                <span class="summary-value">${safe.ethnicity}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Y-DNA:</span>
+                                <span class="summary-value">${safe.yDnaHaplogroup}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">mtDNA:</span>
+                                <span class="summary-value">${safe.mtDnaHaplogroup || 'N/A'}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Date:</span>
+                                <span class="summary-value">${data.date}</span>
+                            </div>
+                        </div>
+                        ${this.isNewEntry(data.date) ? '<img src="assets/img/new-badge.png" alt="NEW" class="new-badge">' : ''}
                     </div>
+                    <div class="expand-icon">▼</div>
                 </div>
                 
-                <div class="genetic-data">
-                    <div class="haplogroup-section y-dna">
-                        <div class="haplogroup-title y-dna-title">
-                            <span class="haplogroup-icon">👨</span>
-                            Y-DNA (Paternal Line)
+                <!-- EXPANDED VIEW - Full Details -->
+                <div class="result-details">
+                    <div class="result-header">
+                        <div class="family-info">
+                            <div class="family-avatar ${data.gender === 'male' ? 'male' : data.gender === 'female' ? 'female' : ''}">
+                                ${this.getFamilyInitials(safe.familyNameEnglish)}
+                            </div>
+                            <div class="family-names">
+                                <div class="family-name-english">${safe.familyNameEnglish}</div>
+                                <div class="family-name-circassian">${safe.familyNameCircassian}</div>
+                            </div>
+                            <div class="basic-info">
+                                <div class="info-item">
+                                    <span class="info-label">Village:</span> ${safe.village}
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Ethnicity:</span> ${safe.ethnicity}
+                                </div>
+                            </div>
                         </div>
-                        <div class="genetic-marker">
-                            <div class="marker-label">Haplogroup</div>
-                            <div class="marker-value">${safe.yDnaHaplogroup}</div>
-                        </div>
-                        <div class="genetic-marker">
-                            <div class="marker-label">Subclade</div>
-                            <div class="marker-value">${safe.yDnaSubclade}</div>
-                        </div>
-                        <div class="genetic-marker">
-                            <div class="marker-label">Terminal SNP</div>
-                            <div class="marker-value">${safe.yDnaTerminalSnp}</div>
+                        <div class="test-id-date">
+                            <div><strong>ID:</strong> ${safe.id}</div>
+                            <div><strong>Date:</strong> ${safe.date}</div>
                         </div>
                     </div>
                     
-                    <div class="haplogroup-section mt-dna">
-                        <div class="haplogroup-title mt-dna-title">
-                            <span class="haplogroup-icon">👩</span>
-                            mtDNA (Maternal Line)
+                    <div class="genetic-data">
+                        <div class="haplogroup-section y-dna">
+                            <div class="haplogroup-title y-dna-title">
+                                <span class="haplogroup-icon">👨</span>
+                                Y-DNA (Paternal Line)
+                            </div>
+                            <div class="genetic-marker">
+                                <div class="marker-label">Haplogroup</div>
+                                <div class="marker-value">${safe.yDnaHaplogroup}</div>
+                            </div>
+                            <div class="genetic-marker">
+                                <div class="marker-label">Subclade</div>
+                                <div class="marker-value">${safe.yDnaSubclade}</div>
+                            </div>
+                            <div class="genetic-marker">
+                                <div class="marker-label">Terminal SNP</div>
+                                <div class="marker-value">${safe.yDnaTerminalSnp}</div>
+                            </div>
                         </div>
-                        <div class="genetic-marker">
-                            <div class="marker-label">Haplogroup</div>
-                            <div class="marker-value">${safe.mtDnaHaplogroup}</div>
-                        </div>
-                        <div class="genetic-marker">
-                            <div class="marker-label">Subclade</div>
-                            <div class="marker-value">${safe.mtDnaSubclade}</div>
-                        </div>
-                        <div class="genetic-marker">
-                            <div class="marker-label">Terminal SNP</div>
-                            <div class="marker-value">${safe.mtDnaTerminalSnp}</div>
+                        
+                        <div class="haplogroup-section mt-dna">
+                            <div class="haplogroup-title mt-dna-title">
+                                <span class="haplogroup-icon">👩</span>
+                                mtDNA (Maternal Line)
+                            </div>
+                            <div class="genetic-marker">
+                                <div class="marker-label">Haplogroup</div>
+                                <div class="marker-value">${safe.mtDnaHaplogroup}</div>
+                            </div>
+                            <div class="genetic-marker">
+                                <div class="marker-label">Subclade</div>
+                                <div class="marker-value">${safe.mtDnaSubclade}</div>
+                            </div>
+                            <div class="genetic-marker">
+                                <div class="marker-label">Terminal SNP</div>
+                                <div class="marker-value">${safe.mtDnaTerminalSnp}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="result-actions">
-                    ${createActionButton('yDnaClassicTree', 'Y-DNA Classic Tree', '🌳', 'heritage')}
-                    ${createActionButton('yDnaTimeTree', 'Y-DNA Time Tree', '⏳', 'heritage')}
-                    ${createActionButton('yDnaGroupTree', 'Y-DNA Group Time Tree', '👥', 'heritage')}
-                    ${createActionButton('fullReport', 'Full Report', '📄', 'secondary')}
-                    ${createActionButton('mtDnaClassicTree', 'mtDNA Classic Tree', '🌲', '')}
-                    ${createActionButton('mtDnaTimeTree', 'mtDNA Time Tree', '⌚', '')}
-                    ${createActionButton('mtDnaGroupTree', 'mtDNA Group Time Tree', '👪', '')}
-                    ${createActionButton('relations', 'Relations', '🔗', 'secondary')}
+                    
+                    <div class="result-actions">
+                        ${createActionButton('yDnaClassicTree', 'Y-DNA Classic Tree', '🌳', 'y-dna-btn')}
+                        ${createActionButton('yDnaTimeTree', 'Y-DNA Time Tree', '⏳', 'y-dna-btn')}
+                        ${createActionButton('yDnaGroupTree', 'Y-DNA Group Time Tree', '👥', 'y-dna-btn')}
+                        ${createActionButton('fullReport', 'Full Report', '📄', 'secondary')}
+                        ${createActionButton('mtDnaClassicTree', 'mtDNA Classic Tree', '🌲', 'mt-dna-btn')}
+                        ${createActionButton('mtDnaTimeTree', 'mtDNA Time Tree', '⌚', 'mt-dna-btn')}
+                        ${createActionButton('mtDnaGroupTree', 'mtDNA Group Time Tree', '👪', 'mt-dna-btn')}
+                        ${createActionButton('relations', 'Relations', '🔗', 'secondary')}
+                    </div>
                 </div>
             </div>
         `;
@@ -496,6 +558,18 @@ class HeritageApp {
             });
         } catch (error) {
             return dateString || 'Unknown';
+        }
+    }
+
+    isNewEntry(dateString) {
+        try {
+            const entryDate = new Date(dateString);
+            const today = new Date();
+            const diffTime = today - entryDate;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays <= 7;
+        } catch (error) {
+            return false;
         }
     }
 

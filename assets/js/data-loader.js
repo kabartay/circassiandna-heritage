@@ -38,7 +38,7 @@ class DataLoader {
         try {
             console.log('🔄 Loading data from:', `${this.basePath}data/heritage-data.json`);
             
-            const response = await fetch(`${this.basePath}data/heritage-data.json`);
+            const response = await fetch(`${this.basePath}data/heritage-data.json?v=${Date.now()}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
