@@ -3,6 +3,7 @@
     {
       "id": "510582",
       "date": "2018-01-01",
+      "gender": "male",
       "familyNameEnglish": "Berzegov",
       "familyNameCircassian": "Бэрзэдж",
       "village": "Бжъэдыгъухьабл",
@@ -27,6 +28,7 @@
     {
       "id": "239748",
       "date": "2019-01-01",
+      "gender": "male",
       "familyNameEnglish": "Kadkoy",
       "familyNameCircassian": "Къэдыкъуей",
       "village": null,
@@ -51,6 +53,7 @@
     {
       "id": "BP67546",
       "date": "2024-09-01",
+      "gender": "male",
       "familyNameEnglish": "Abregov",
       "familyNameCircassian": "Абрэдж",
       "village": "Хьатыгъужъыкъуай",
@@ -75,6 +78,7 @@
     {
       "id": "BP67530",
       "date": "2025-01-01",
+      "gender": "male",
       "familyNameEnglish": "Adjiev",
       "familyNameCircassian": "Аджиев",
       "village": "Хьэжы хьэблэ",
@@ -99,6 +103,7 @@
     {
       "id": "BP67433",
       "date": "2025-01-01",
+      "gender": "male",
       "familyNameEnglish": "Berzegov",
       "familyNameCircassian": "Бэрзэдж",
       "village": null,
@@ -123,6 +128,7 @@
     {
       "id": "BP76044",
       "date": "2025-01-01",
+      "gender": "male",
       "familyNameEnglish": "Zeushev",
       "familyNameCircassian": "Зеушэ",
       "village": "Тамбий хьэблэ",
@@ -147,6 +153,7 @@
     {
       "id": "MI70431",
       "date": "2025-01-01",
+      "gender": "male",
       "familyNameEnglish": "Shebzukhov",
       "familyNameCircassian": "Шыбзыхъуэ",
       "village": "Къундетей",
@@ -171,6 +178,7 @@
     {
       "id": "BP67510",
       "date": "2025-01-01",
+      "gender": "male",
       "familyNameEnglish": "Djarimov",
       "familyNameCircassian": "Джэрым",
       "village": "Хьэкурынэхьабл",
@@ -195,6 +203,7 @@
     {
       "id": "BP67444",
       "date": "2025-01-01",
+      "gender": "male",
       "familyNameEnglish": "Tsanba",
       "familyNameCircassian": "Цанба",
       "village": "Цандрыԥшь",
@@ -219,6 +228,7 @@
     {
       "id": "BP69853",
       "date": "2025-01-01",
+      "gender": "male",
       "familyNameEnglish": "Zhilov",
       "familyNameCircassian": "Жылэ",
       "village": "Къуэжыкъуей",
@@ -243,6 +253,7 @@
     {
       "id": "BP69892",
       "date": "2025-01-01",
+      "gender": "male",
       "familyNameEnglish": "Kazanchev",
       "familyNameCircassian": "Къэзанш",
       "village": "Къуэшрыкъуей",
@@ -261,6 +272,31 @@
         "mtDnaTimeTree": null,
         "mtDnaGroupTree": null,
         "fullReport": "https://circassiandna.com/r1a1-fgc4547/",
+        "relations": null
+      }
+    },
+    {
+      "id": "MK88888",
+      "date": "2025-10-02",
+      "gender": "female",
+      "familyNameEnglish": "Kabardova",
+      "familyNameCircassian": "Къэбардэ",
+      "village": "Ислъэмей",
+      "ethnicity": "Kabardian",
+      "yDnaHaplogroup": null,
+      "yDnaSubclade": null,
+      "yDnaTerminalSnp": null,
+      "mtDnaHaplogroup": null,
+      "mtDnaSubclade": null,
+      "mtDnaTerminalSnp": null,
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
         "relations": null
       }
     }
