@@ -157,7 +157,7 @@ class DataLoader {
                 ethnicities: [
                     { key: "all", label: "All Families", active: true },
                     { key: "abdzakh", label: "Abdzakh", active: false },
-                    { key: "abkhaz", label: "Abkhaz", active: false },
+                    { key: "abkhazian", label: "Abkhazian", active: false },
                     { key: "kabardian", label: "Kabardian", active: false },
                     { key: "shapsough", label: "Shapsough", active: false },
                     { key: "ubykh", label: "Ubykh", active: false }
