@@ -14,12 +14,13 @@
     /* Backgrounds - Updated to light brown theme */
     --bg-white: #ffffff;
     --bg-light: #f0f2f2;
+    --bg-light-light: #d8dedf;
     --bg-medium: #e0f3f3;
     --bg-card: #fafbfb;
     --bg-dark: #687b7b;
     --bg-brown: #DCD3C3;        /* Light brown from website */
     --bg-brown-light: #EAE4D8;  /* Lighter brown */
-    
+
     /* Text colors */
     --text-primary: #151919;
     --text-secondary: #646e6e;
@@ -535,5 +536,5 @@ a.action-btn {
     height: 70vh;
     overflow-y: auto;
     padding: 20px;
-    background: #d8dedf /* var(--bg-brown-light); */
+    background: var(--bg-light-light);
 }
