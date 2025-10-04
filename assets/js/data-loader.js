@@ -189,9 +189,13 @@ class DataLoader {
             return [...this.heritageData];
         }
 
-        return this.heritageData.filter(family => 
-            family.ethnicity && family.ethnicity.toLowerCase() === ethnicity.toLowerCase()
-        );
+        return this.heritageData.filter(family => {
+            if (!family.ethnicity) return false;
+            const familyEth = family.ethnicity.toLowerCase();
+            const filterEth = ethnicity.toLowerCase();
+            // Match if ethnicity starts with the filter key
+            return familyEth === filterEth || familyEth.startsWith(filterEth);
+        });
     }
 
     /**
