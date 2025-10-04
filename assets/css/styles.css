@@ -53,15 +53,6 @@ body {
 }
 
 /* Statistics Bar - more prominent */
-/* .stats-bar {
-    background: linear-gradient(20deg, var(--male-color), var(--bg-dark));
-    color: white;
-    padding: 12px 20px;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-} */
 
 .stats-bar {
     background: var(--male-color);
