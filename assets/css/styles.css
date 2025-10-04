@@ -43,9 +43,10 @@
     outline-offset: 2px;
 }
 
+/* Body - Brown background */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, var(--male-color) 0%, var(--female-color) 50%, var(--bg-dark) 100%);
+    background: var(--bg-brown);  /* Light brown #DCD3C3 */
     min-height: 100vh;
     padding: 20px;
     line-height: 1.6;
@@ -476,16 +477,6 @@ a.action-btn {
     .result-actions {
         grid-template-columns: 1fr;
     }
-}
-
-/* Body - Brown background */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--bg-brown);  /* Light brown #DCD3C3 */
-    min-height: 100vh;
-    padding: 20px;
-    line-height: 1.6;
-    color: var(--text-primary);
 }
 
 /* Main Container */
