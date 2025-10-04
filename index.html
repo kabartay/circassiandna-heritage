@@ -90,20 +90,17 @@
     <script src="./assets/js/main.js"></script>
 
     <!-- Initialize Application -->
-    <script>
+    <script defer>
         // Ensure DOM is ready and scripts are loaded
         document.addEventListener('DOMContentLoaded', function() {
-            // Wait a bit for all scripts to load
-            setTimeout(function() {
-                if (typeof HeritageApp !== 'undefined') {
-                    console.log('✅ Initializing Heritage App...');
-                    window.app = new HeritageApp();
-                    window.app.init();
-                } else {
-                    console.error('❌ HeritageApp not found, scripts may not have loaded');
-                    showFallbackError();
-                }
-            }, 100);
+            if (typeof HeritageApp !== 'undefined') {
+                console.log('✅ Initializing Heritage App...');
+                window.app = new HeritageApp();
+                window.app.init();
+            } else {
+                console.error('❌ HeritageApp not found, scripts may not have loaded');
+                showFallbackError();
+            }
         });
 
         // Fallback error handler
