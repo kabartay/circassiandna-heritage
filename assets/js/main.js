@@ -259,7 +259,7 @@ class HeritageApp {
                 (ethnicity === 'shapsough' && btn.textContent === 'Shapsough') ||
                 (ethnicity === 'ubykh' && btn.textContent === 'Ubykh')) {
                 btn.classList.add('active');
-                btn.setAttribute('aria-pressed', 'true');  // ADD THIS
+                btn.setAttribute('aria-pressed', 'true');
             }
         });
         
