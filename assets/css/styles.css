@@ -250,10 +250,6 @@ body {
     background: var(--female-color);  /* Solid purple */
 }
 
-.family-avatar {
-    background: linear-gradient(135deg, var(--bg-dark), var(--text-secondary));
-}
-
 .family-name-english {
     color: var(--text-primary);
     font-size: 1.3rem;
