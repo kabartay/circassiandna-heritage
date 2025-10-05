@@ -155,7 +155,7 @@
 }
 
 .new-badge {
-    height: 2.8em;  /* Matches text line height 1.2em x 2 */
+    height: 2.8em;  /* Matches text line height 1.2em x 2.333 */
     width: auto;
     margin-left: 30px;
     flex-shrink: 0;
