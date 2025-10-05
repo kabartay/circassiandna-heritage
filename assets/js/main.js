@@ -90,6 +90,14 @@ class HeritageApp {
     }
 
     /**
+     * Safely set text content on an element.
+     * Always use for dynamic text (prevents XSS).
+     */
+    setSafeText(el, text) {
+        if (el) el.textContent = text || '';
+    }
+
+    /**
      * Update page title and header
      */
     updateTitle() {
@@ -113,7 +121,7 @@ class HeritageApp {
             }
 
             if (headerSubtitle) {
-                headerSubtitle.textContent = this.config.app.subtitle || '';
+                this.setSafeText(headerSubtitle, this.config.app.subtitle);
             }
             
             document.title = this.config.app.title || 'Circassian DNA Heritage Feed';
