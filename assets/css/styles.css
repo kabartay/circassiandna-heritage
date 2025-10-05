@@ -579,3 +579,35 @@ a.action-btn {
 .spinner-container p {
     color: #7f8c8d;
 }
+
+.retry-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #ffc107;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #000;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.1s ease; /* smooth hover + slight click effect */
+}
+
+.retry-btn:hover {
+  background: #ffb300;
+  transform: translateY(-1px); /* subtle lift on hover */
+}
+
+.retry-btn:active {
+  transform: translateY(0); /* reset on click */
+}
+
+/* Optional: dark theme support */
+@media (prefers-color-scheme: dark) {
+  .retry-btn {
+    background: #ffca28;
+    color: #000;
+  }
+  .retry-btn:hover {
+    background: #ffb300;
+  }
+}

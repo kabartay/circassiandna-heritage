@@ -116,7 +116,7 @@ class DataLoader {
                     <p>1. Ensure <code>data/heritage-data.json</code> exists</p>
                     <p>2. For local testing, use: <code>python -m http.server 8000</code></p>
                     <p>3. Check the browser console for specific errors</p>
-                    <button onclick="window.location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #ffc107; border: none; border-radius: 5px; cursor: pointer;">
+                    <button id="retryDataLoadBtn" class="retry-btn">
                         🔄 Retry
                     </button>
                 </div>
