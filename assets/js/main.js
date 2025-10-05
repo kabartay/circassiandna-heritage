@@ -302,6 +302,7 @@ class HeritageApp {
 
         try {
             this.isLoading = true;
+            this.showLoadingSpinner(); // show spinner at the start
             console.log(`📥 Loading results (filter: ${this.currentFilter}, sort: ${this.currentSort})`);
 
             const feedContent = document.getElementById('feedContent');
@@ -321,6 +322,14 @@ class HeritageApp {
             // Check if we have any data
             if (processedData.length === 0 && this.displayedResults === 0) {
                 this.showEmptyState();
+                this.showEmptyState(); // show only once
+                return;
+            }
+
+            // Check if all results are already loaded
+            if (this.displayedResults >= processedData.length) {
+                this.hideLoadingSpinner();
+                console.log("All profiles loaded.");
                 return;
             }
 
@@ -331,11 +340,12 @@ class HeritageApp {
             );
 
             if (resultsToShow.length === 0) {
-                console.log('📭 No more results to show');
+                console.log('No more results to show');
+                this.hideLoadingSpinner(); // hide spinner when done
                 return;
             }
 
-            // ✅ Efficient and safe DOM append
+            // Efficient and safe DOM append
             const fragment = document.createDocumentFragment();
 
             resultsToShow.forEach(data => {
@@ -349,7 +359,14 @@ class HeritageApp {
             feedContent.appendChild(fragment);
 
             this.displayedResults += resultsToShow.length;
-            console.log(`✅ Added ${resultsToShow.length} results (total: ${this.displayedResults})`);
+
+            // If all loaded, hide spinner
+            if (this.displayedResults >= processedData.length) {
+                this.hideLoadingSpinner();
+                console.log("All profiles loaded.");
+            }
+
+            console.log(`Added ${resultsToShow.length} results (total: ${this.displayedResults})`);
 
             // Auto-load more if no scrollbar
             setTimeout(() => this.checkIfNeedsMore(), 50);
@@ -360,6 +377,22 @@ class HeritageApp {
         } finally {
             this.isLoading = false;
         }
+    }
+
+    showLoadingSpinner() {
+    const spinner = document.getElementById('loadingSpinner');
+    if (spinner) {
+        spinner.style.display = 'block';
+        spinner.setAttribute('aria-hidden', 'false');
+    }
+    }
+
+    hideLoadingSpinner() {
+    const spinner = document.getElementById('loadingSpinner');
+    if (spinner) {
+        spinner.style.display = 'none';
+        spinner.setAttribute('aria-hidden', 'true');
+    }
     }
 
     /**
