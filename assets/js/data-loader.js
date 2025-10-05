@@ -274,7 +274,8 @@ class DataLoader {
         return this.heritageData.filter(family => {
             const searchFields = [
                 family.familyNameEnglish,
-                family.familyNameCircassian,
+                family.familyNameRussian,
+                family.familyNameNative,
                 family.id,
                 family.village,
                 family.ethnicity
