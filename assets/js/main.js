@@ -105,7 +105,7 @@ class HeritageApp {
                 const img = document.createElement('img');
                 img.src = "assets/img/circassian-flag.png";
                 img.alt = "Circassian Flag";
-                img.classList.add('header-flag'); // ✅ use CSS class for styling
+                img.classList.add('header-flag'); // Apply CSS class for styling
                 headerTitle.appendChild(img);
 
                 // Append the title safely as text
