@@ -232,16 +232,27 @@ class DataLoader {
         switch (sortType) {
             case 'date-desc':
                 return sortedData.sort((a, b) => {
-                    const da = parseDate(a.date);
-                    const db = parseDate(b.date);
-                    // 🧠 Treat future dates as today's date to avoid jumping to top
+                    const today = new Date();
+                    const da = new Date(a.date || '1970-01-01');
+                    const db = new Date(b.date || '1970-01-01');
+
+                    // 🧠 Warn about future dates
+                    if (da > today) console.warn(`⚠️ Future date detected: ${a.date} (ID: ${a.id || 'unknown'})`);
+                    if (db > today) console.warn(`⚠️ Future date detected: ${b.date} (ID: ${b.id || 'unknown'})`);
+
+                    // Treat future dates as today
                     return (db > today ? today : db) - (da > today ? today : da);
                 });
 
             case 'date-asc':
                 return sortedData.sort((a, b) => {
-                    const da = parseDate(a.date);
-                    const db = parseDate(b.date);
+                    const today = new Date();
+                    const da = new Date(a.date || '1970-01-01');
+                    const db = new Date(b.date || '1970-01-01');
+
+                    if (da > today) console.warn(`⚠️ Future date detected: ${a.date} (ID: ${a.id || 'unknown'})`);
+                    if (db > today) console.warn(`⚠️ Future date detected: ${b.date} (ID: ${b.id || 'unknown'})`);
+
                     return (da > today ? today : da) - (db > today ? today : db);
                 });
 
