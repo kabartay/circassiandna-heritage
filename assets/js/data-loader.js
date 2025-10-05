@@ -19,7 +19,7 @@ class DataLoader {
     getBasePath() {
         const hostname = window.location.hostname;
         
-        if (hostname.includes('github.io')) {
+        if (hostname.endsWith('.github.io')) {
             // Dynamically get repo name from URL path
             const pathParts = window.location.pathname.split('/').filter(Boolean);
             return pathParts.length > 0 ? `/${pathParts[0]}/` : '/';
