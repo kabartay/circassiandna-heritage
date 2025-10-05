@@ -40,7 +40,9 @@ class DataLoader {
         try {
             console.log('🔄 Loading data from:', `${this.basePath}data/heritage-data.json`);
             
-            const response = await fetch(`${this.basePath}data/heritage-data.json?v=${Date.now()}`);
+            // Use metadata version for cache busting instead of Date.now()
+            const version = this.config?.metadata?.dataVersion || '1.3.0';
+            const response = await fetch(`${this.basePath}data/heritage-data.json?v=${version}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
