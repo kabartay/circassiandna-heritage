@@ -399,10 +399,13 @@
     pointer-events: none;
 }
 
-/* Force wider container */
+/* Feed Container - centered and responsive */
 .feed-container {
-    max-width: 1200px !important;
-    width: 100% !important;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto; /* centers it */
+    padding: 0 16px; /* adds breathing room on small screens */
+    box-sizing: border-box;
 }
 
 /* Responsive */
