@@ -627,6 +627,10 @@ class HeritageApp {
         try {
             const entryDate = new Date(dateString);
             const today = new Date();
+
+            if (isNaN(entryDate)) return false; // invalid date
+            if (entryDate > today) return false; // ignore future dates
+
             const diffTime = today - entryDate;
             const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
             return diffDays <= 7;
