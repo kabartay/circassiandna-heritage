@@ -96,20 +96,27 @@ class HeritageApp {
         if (this.config?.app) {
             const headerTitle = document.querySelector('.feed-header h1');
             const headerSubtitle = document.querySelector('.feed-header p');
-            
+
             if (headerTitle) {
-                headerTitle.innerHTML = `
-                    <img src="assets/img/circassian-flag.png"
-                        alt="Circassian Flag" 
-                        style="height: 1.25em; vertical-align: middle; margin-right: 8px;">
-                    ${this.config.app.title}
-                `;
+                // Clear existing content
+                headerTitle.textContent = '';
+
+                // Create and append the flag image
+                const img = document.createElement('img');
+                img.src = "assets/img/circassian-flag.png";
+                img.alt = "Circassian Flag";
+                img.classList.add('header-flag'); // ✅ use CSS class for styling
+                headerTitle.appendChild(img);
+
+                // Append the title safely as text
+                headerTitle.appendChild(document.createTextNode(this.config.app.title));
             }
+
             if (headerSubtitle) {
-                headerSubtitle.textContent = this.config.app.subtitle;
+                headerSubtitle.textContent = this.config.app.subtitle || '';
             }
             
-            document.title = this.config.app.title;
+            document.title = this.config.app.title || 'Circassian DNA Heritage Feed';
         }
     }
 

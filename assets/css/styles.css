@@ -259,6 +259,14 @@ body {
     border-bottom: 2px solid var(--bg-light);
 }
 
+.header-flag {
+  height: 1.25em;
+  vertical-align: middle;
+  margin-right: 8px;
+  width: auto;
+}
+
+
 /* Family avatar - solid colors matching gender */
 .family-avatar {
     width: 60px;
@@ -572,14 +580,6 @@ a.action-btn {
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
-}
-
-/* Feed content - lighter brown */
-.feed-content {
-    height: 70vh;
-    overflow-y: auto;
-    padding: 20px;
-    background: var(--bg-light-light);
 }
 
 /* Loading States */
