@@ -155,11 +155,16 @@ class HeritageApp {
             const button = document.createElement('button');
             button.className = `filter-btn ${filter.active ? 'active' : ''}`;
             button.textContent = filter.label;
+            button.dataset.ethnicity = filter.key; // Add data attribute
             button.setAttribute('aria-pressed', filter.active ? 'true' : 'false');
             button.setAttribute('role', 'button');
-            button.onclick = () => this.filterResults(filter.key);
+
+            // Attach event listener instead of inline onclick
+            button.addEventListener('click', () => this.filterResults(filter.key));
+
             filterSection.appendChild(button);
         });
+
     }
 
     /**
@@ -253,32 +258,20 @@ class HeritageApp {
      */
     filterResults(ethnicity) {
         console.log('🔍 Filtering by:', ethnicity);
-        
+
         this.currentFilter = ethnicity;
         this.displayedResults = 0;
-        
-        // Update active state and aria-pressed for all buttons
+
+        // Update button states based on data-ethnicity
         document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active');
-            btn.setAttribute('aria-pressed', 'false');
+            const isActive = btn.dataset.ethnicity === ethnicity;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-pressed', isActive.toString());
         });
-        
-        // Find and activate the correct button
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        filterButtons.forEach(btn => {
-            if ((ethnicity === 'all' && btn.textContent === 'All Families') ||
-                (ethnicity === 'abdzakh' && btn.textContent === 'Abdzakh') ||
-                (ethnicity === 'abkhazian' && btn.textContent === 'Abkhazian') ||
-                (ethnicity === 'kabardian' && btn.textContent === 'Kabardian') ||
-                (ethnicity === 'shapsough' && btn.textContent === 'Shapsough') ||
-                (ethnicity === 'ubykh' && btn.textContent === 'Ubykh')) {
-                btn.classList.add('active');
-                btn.setAttribute('aria-pressed', 'true');
-            }
-        });
-        
+
         this.loadResults();
     }
+
 
     /**
      * Sort results
