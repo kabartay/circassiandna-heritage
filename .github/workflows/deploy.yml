@@ -27,10 +27,14 @@ jobs:
         npm install -g html-validate
         html-validate index.html --config .github/html-validate-config.json || echo "HTML validation completed with warnings"
 
-    - name: Check Links
+    - name: Check Links (if README exists)
       run: |
-        npm install -g markdown-link-check
-        markdown-link-check README.md --config .github/link-check-config.json || echo "Link check completed with warnings"
+        if [ -f README.md ]; then
+          npm install -g markdown-link-check
+          markdown-link-check README.md --config .github/link-check-config.json || echo "Link check completed with warnings"
+        else
+          echo "README.md not found — skipping link check."
+        fi
 
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/feat/basis'
