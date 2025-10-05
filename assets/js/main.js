@@ -384,7 +384,7 @@ class HeritageApp {
         // Escape all text data to prevent XSS
         const safe = {
             id: this.escapeHtml(data.id),
-            ethnicity: this.escapeHtml(data.ethnicity_sub), // Use subethcnicity for display
+            ethnicity: this.escapeHtml(data.ethnicity_sub), // Use sub-ethnicity for display
             familyNameEnglish: this.escapeHtml(data.familyNameEnglish),
             familyNameRussian: this.escapeHtml(data.familyNameRussian),
             familyNameNative: this.escapeHtml(data.familyNameNative),
