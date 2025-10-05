@@ -513,7 +513,7 @@ class HeritageApp {
                             </div>
                             <div class="summary-item">
                                 <span class="summary-label">Date:</span>
-                                <span class="summary-value">${data.date}</span>
+                                <span class="summary-value">${this.formatDate(safe.date)}</span>
                             </div>
                         </div>
                         ${this.isNewEntry(data.date) ? '<img src="assets/img/new-badge.png" alt="NEW" class="new-badge">' : ''}
