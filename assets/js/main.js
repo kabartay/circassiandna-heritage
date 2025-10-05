@@ -321,6 +321,7 @@ class HeritageApp {
 
             // Attach event listeners to all action buttons after rendering
             setTimeout(() => {
+                // Stop bubbling from buttons (both enabled and disabled)
                 document.querySelectorAll('.action-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => e.stopPropagation());
                 });
@@ -432,13 +433,14 @@ class HeritageApp {
                         ${icon} ${label}
                     </button>
                 `;
+            }
         };
 
         return `
             <div class="heritage-result" 
                 data-ethnicity="${data.ethnicity_sub ? data.ethnicity_sub.toLowerCase() : ''}" 
-                data-id="${safe.id}"
-                
+                data-id="${safe.id}">
+
                 <!-- COLLAPSED VIEW - Summary Line -->
                 <div class="result-summary">
                     <div class="summary-avatar">
