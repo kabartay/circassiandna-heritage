@@ -3,6 +3,7 @@
     "gh-pages": "^6.3.0"
   },
   "scripts": {
+    "build": "echo \"No build needed - static site\"",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   }
