@@ -309,7 +309,6 @@ class HeritageApp {
             
             // Get the next batch of results
             const resultsToShow = processedData.slice(this.displayedResults, this.displayedResults + this.resultsPerPage);
-            
             if (resultsToShow.length === 0) {
                 console.log('📭 No more results to show');
                 return;
@@ -325,10 +324,17 @@ class HeritageApp {
                 document.querySelectorAll('.action-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => e.stopPropagation());
                 });
+
+                // Toggle expansion for each heritage card
+                document.querySelectorAll('.heritage-result').forEach(card => {
+                    card.addEventListener('click', () => {
+                        card.classList.toggle('expanded');
+                    });
+                });
+
             }, 0);
             
             this.displayedResults += resultsToShow.length;
-            
             console.log(`✅ Added ${resultsToShow.length} results (total: ${this.displayedResults})`);
 
             // Auto-load more if no scrollbar
@@ -432,7 +438,6 @@ class HeritageApp {
             <div class="heritage-result" 
                 data-ethnicity="${data.ethnicity_sub ? data.ethnicity_sub.toLowerCase() : ''}" 
                 data-id="${safe.id}"
-                onclick="this.classList.toggle('expanded')">
                 
                 <!-- COLLAPSED VIEW - Summary Line -->
                 <div class="result-summary">
