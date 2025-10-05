@@ -1,0 +1,13 @@
+# GitHub Copilot Reviews Configuration
+# This file controls how Copilot reviews your pull requests.
+# It ensures Copilot provides helpful suggestions without blocking merges.
+
+pull_requests:
+  auto_review: true           # Automatically run Copilot review on every PR
+  blocking: false             # Do NOT block merging if Copilot finds issues
+  comment_suggestions: true   # Add inline comments with suggestions
+  require_approval: false     # No need for Copilot "approval" to merge
+  summary: true               # Include a summary comment with findings
+  labels: ["copilot-review"]  # Add a label for Copilot-reviewed PRs
+  reviewers:
+    - github-actions[bot]     # Reviewer shown as Copilot bot
