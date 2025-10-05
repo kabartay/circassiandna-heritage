@@ -121,6 +121,15 @@ class DataLoader {
                     </button>
                 </div>
             `;
+
+            // Attach event listener programmatically
+            const retryBtn = document.getElementById('retryDataLoadBtn');
+            if (retryBtn) {
+                retryBtn.addEventListener('click', () => {
+                    window.location.reload();
+                });
+            }
+
         }
     }
 
