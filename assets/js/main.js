@@ -414,7 +414,7 @@ class HeritageApp {
                         href="${safeUrl}" 
                         target="_blank" 
                         class="action-btn ${cssClass}"
-                        title="${label}">
+                        title="${this.escapeHtml(label)}">
                             ${icon} ${label}
                         </a>`;
             } else {
