@@ -76,7 +76,8 @@ class DataLoader {
         }
 
         try {
-            const url = `${this.basePath}data/config.json?v=${Date.now()}`;
+            const version = '1.3.0'; // Use a static version for cache busting
+            const url = `${this.basePath}data/config.json?v=${version}`;
             console.log('🔄 Loading config from:', url);
 
             const response = await fetch(url);
