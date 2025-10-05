@@ -155,7 +155,6 @@ class DataLoader {
                 mtDnaSubclade: "DEMO",
                 mtDnaTerminalSnp: "DEMO"
             }
-            // That's it! No more data here!
         ];
     }
 

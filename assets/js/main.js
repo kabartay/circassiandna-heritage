@@ -105,7 +105,7 @@ class HeritageApp {
                 const img = document.createElement('img');
                 img.src = "assets/img/circassian-flag.png";
                 img.alt = "Circassian Flag";
-                img.classList.add('header-flag'); // ✅ use CSS class for styling
+                img.classList.add('header-flag'); // Apply CSS class for styling
                 headerTitle.appendChild(img);
 
                 // Append the title safely as text
@@ -321,8 +321,8 @@ class HeritageApp {
 
             // Check if we have any data
             if (processedData.length === 0 && this.displayedResults === 0) {
-                this.showEmptyState();
                 this.showEmptyState(); // show only once
+                
                 return;
             }
 
