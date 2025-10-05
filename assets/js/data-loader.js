@@ -215,24 +215,47 @@ class DataLoader {
     }
 
     /**
-     * Sort data
+     * Sort data with protection against invalid or future dates
      */
     sortData(data, sortType = 'date-desc') {
-        if (!Array.isArray(data)) {
-            return [];
-        }
+        if (!Array.isArray(data)) return [];
+
+        const today = new Date();
+
+        // Helper to safely parse date
+        const parseDate = (d) => {
+            const date = new Date(d);
+            return isNaN(date) ? new Date('1970-01-01') : date;
+        };
 
         const sortedData = [...data];
 
         switch (sortType) {
             case 'date-desc':
-                return sortedData.sort((a, b) => new Date(b.date || '1970-01-01') - new Date(a.date || '1970-01-01'));
+                return sortedData.sort((a, b) => {
+                    const da = parseDate(a.date);
+                    const db = parseDate(b.date);
+                    // 🧠 Treat future dates as today's date to avoid jumping to top
+                    return (db > today ? today : db) - (da > today ? today : da);
+                });
+
             case 'date-asc':
-                return sortedData.sort((a, b) => new Date(a.date || '1970-01-01') - new Date(b.date || '1970-01-01'));
+                return sortedData.sort((a, b) => {
+                    const da = parseDate(a.date);
+                    const db = parseDate(b.date);
+                    return (da > today ? today : da) - (db > today ? today : db);
+                });
+
             case 'name-asc':
-                return sortedData.sort((a, b) => (a.familyNameEnglish || '').localeCompare(b.familyNameEnglish || ''));
+                return sortedData.sort((a, b) => 
+                    (a.familyNameEnglish || '').localeCompare(b.familyNameEnglish || '')
+                );
+
             case 'name-desc':
-                return sortedData.sort((a, b) => (b.familyNameEnglish || '').localeCompare(a.familyNameEnglish || ''));
+                return sortedData.sort((a, b) => 
+                    (b.familyNameEnglish || '').localeCompare(a.familyNameEnglish || '')
+                );
+
             default:
                 return sortedData;
         }
