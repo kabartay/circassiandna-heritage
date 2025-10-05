@@ -30,6 +30,17 @@
     --border-light: #d2d7d7;
     --border-medium: #b4bdbd;
     --border-dark: #687b7b;
+
+    /* Brand / accents */
+    --brand-header: #154341;
+    --accent-info: #3498db;
+    --accent-danger: #e74c3c;
+    --accent-danger-hover: #c0392b;
+    --accent-warning: #ffc107;
+    --accent-warning-hover: #ffb300;
+
+    /* Hover for male primary to avoid blue fallback */
+    --male-color-hover: #3b5f5b; /* a tad darker than #477571 */
 }
 
 /* Reset and Base Styles */
@@ -643,3 +654,5 @@ a.action-btn {
     background: #ffb300;
   }
 }
+
+

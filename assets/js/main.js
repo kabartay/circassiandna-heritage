@@ -299,49 +299,61 @@ class HeritageApp {
             console.log('⏳ Already loading, skipping...');
             return;
         }
-        
+
         try {
             this.isLoading = true;
             console.log(`📥 Loading results (filter: ${this.currentFilter}, sort: ${this.currentSort})`);
-            
+
             const feedContent = document.getElementById('feedContent');
             if (!feedContent) {
                 throw new Error('Feed content element not found');
             }
-            
+
             // Clear content if starting fresh
             if (this.displayedResults === 0) {
-                feedContent.innerHTML = '';
+                feedContent.textContent = ''; // safer than innerHTML = ''
                 feedContent.scrollTop = 0;
             }
-            
+
             // Get processed data
             const processedData = this.dataLoader.getProcessedData(this.currentFilter, this.currentSort);
-            
+
             // Check if we have any data
             if (processedData.length === 0 && this.displayedResults === 0) {
                 this.showEmptyState();
                 return;
             }
-            
+
             // Get the next batch of results
-            const resultsToShow = processedData.slice(this.displayedResults, this.displayedResults + this.resultsPerPage);
+            const resultsToShow = processedData.slice(
+                this.displayedResults,
+                this.displayedResults + this.resultsPerPage
+            );
+
             if (resultsToShow.length === 0) {
                 console.log('📭 No more results to show');
                 return;
             }
-            
-            // Add results to the feed
+
+            // ✅ Efficient and safe DOM append
+            const fragment = document.createDocumentFragment();
+
             resultsToShow.forEach(data => {
-                feedContent.innerHTML += this.createHeritageCard(data);
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = this.createHeritageCard(data).trim();
+                while (tempDiv.firstChild) {
+                    fragment.appendChild(tempDiv.firstChild);
+                }
             });
-            
+
+            feedContent.appendChild(fragment);
+
             this.displayedResults += resultsToShow.length;
             console.log(`✅ Added ${resultsToShow.length} results (total: ${this.displayedResults})`);
 
             // Auto-load more if no scrollbar
             setTimeout(() => this.checkIfNeedsMore(), 50);
-            
+
         } catch (error) {
             console.error('❌ Error loading results:', error);
             this.showError('Error loading heritage data');
@@ -592,55 +604,66 @@ class HeritageApp {
 
     showEmptyState() {
         const feedContent = document.getElementById('feedContent');
+        if (!feedContent) return;
+
         const filterName = this.currentFilter === 'all' ? 'families' : this.currentFilter;
-        
-        feedContent.innerHTML = `
-            <div style="text-align: center; padding: 60px; color: #7f8c8d;">
-                <div style="font-size: 4rem; margin-bottom: 20px;">🔍</div>
-                <h3>No ${filterName} found</h3>
-                <p>Try adjusting your filters or check back later for new data.</p>
-                <button id="showAllFamiliesBtn" 
-                    style="margin-top: 20px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                    Show All Families
-                </button>
-            </div>
+
+        // Clear content safely
+        feedContent.textContent = '';
+
+        // Create wrapper
+        const container = document.createElement('div');
+        container.classList.add('empty-state');
+
+        // Add inner content
+        container.innerHTML = `
+            <div class="empty-icon">🔍</div>
+            <h3>No ${this.escapeHtml(filterName)} found</h3>
+            <p>Try adjusting your filters or check back later for new data.</p>
+            <button id="showAllFamiliesBtn" class="primary-btn">
+                Show All Families
+            </button>
         `;
 
-        // ✅ Attach event listener programmatically
+        // Append to feed
+        feedContent.appendChild(container);
+
+        // Attach event
         const showAllBtn = document.getElementById('showAllFamiliesBtn');
         if (showAllBtn) {
-            showAllBtn.addEventListener('click', () => {
-                this.filterResults('all');
-            });
+            showAllBtn.addEventListener('click', () => this.filterResults('all'));
         }
     }
 
     showError(message) {
         console.error('💥 Error:', message);
         const feedContent = document.getElementById('feedContent');
-        if (feedContent && this.displayedResults === 0) {
-            feedContent.innerHTML = `
-                <div style="text-align: center; padding: 40px; color: #e74c3c; background: #fdf2f2; border-radius: 8px; margin: 20px;">
-                    <h3>⚠️ ${message}</h3>
-                    <p>The application encountered an error but will try to continue with available data.</p>
-                    <button id="retryBtn" 
-                        style="margin-top: 20px; padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                        🔄 Retry
-                    </button>
-                </div>
-            `;
+        if (!feedContent || this.displayedResults > 0) return;
 
-            // Attach event listener programmatically
-            const retryBtn = document.getElementById('retryBtn');
-            if (retryBtn) {
-                retryBtn.addEventListener('click', () => {
-                    if (window.app && typeof window.app.init === 'function') {
-                        window.app.init();
-                    } else {
-                        console.warn('⚠️ App instance not found');
-                    }
-                });
-            }
+        feedContent.textContent = '';
+
+        const container = document.createElement('div');
+        container.classList.add('error-state');
+
+        container.innerHTML = `
+            <h3>⚠️ ${this.escapeHtml(message)}</h3>
+            <p>The application encountered an error but will try to continue with available data.</p>
+            <button id="retryBtn" class="danger-btn">
+                🔄 Retry
+            </button>
+        `;
+
+        feedContent.appendChild(container);
+
+        const retryBtn = document.getElementById('retryBtn');
+        if (retryBtn) {
+            retryBtn.addEventListener('click', () => {
+                if (window.app && typeof window.app.init === 'function') {
+                    window.app.init();
+                } else {
+                    console.warn('⚠️ App instance not found');
+                }
+            });
         }
     }
 
