@@ -259,7 +259,18 @@ body {
     margin-bottom: 5px;
 }
 
-.family-name-circassian {
+.family-name-native {
+    color: var(--male-color);
+    font-size: 1.05rem;
+    font-style: italic;
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    background: var(--bg-medium);
+    border-radius: 6px;
+    border-left: 3px solid var(--male-color);
+}
+
+.family-name-russian {
     color: var(--male-color);
     font-size: 1.05rem;
     font-style: italic;

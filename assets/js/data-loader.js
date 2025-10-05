@@ -128,10 +128,11 @@ class DataLoader {
             {
                 id: "DEMO-001",
                 date: "2020-01-01",
-                familyNameEnglish: "Demo Family",
-                familyNameCircassian: "Demo",
-                village: "Demo Village",
-                ethnicity: "Abdzakh",
+                familyNameEnglish: "DEMO Family",
+                familyNameNative: "DEMO Фамилия",
+                familyNameRussian: "DEMO Фамилия",
+                village: "DEMO Village",
+                ethnicity_sub: "Abdzakh",
                 yDnaHaplogroup: "DEMO",
                 yDnaSubclade: "DEMO",
                 yDnaTerminalSnp: "DEMO",
@@ -151,7 +152,7 @@ class DataLoader {
             app: {
                 title: "Circassian DNA Heritage Feed",
                 subtitle: "Genetic lineage and ancestral connections",
-                version: "1.2.0"
+                version: "1.3.0"
             },
             filters: {
                 ethnicities: [
@@ -190,8 +191,8 @@ class DataLoader {
         }
 
         return this.heritageData.filter(family => {
-            if (!family.ethnicity) return false;
-            const familyEth = family.ethnicity.toLowerCase();
+            if (!family.ethnicity_sub) return false;
+            const familyEth = family.ethnicity_sub.toLowerCase();
             const filterEth = ethnicity.toLowerCase();
             // Match if ethnicity starts with the filter key
             return familyEth === filterEth || familyEth.startsWith(filterEth);
@@ -250,7 +251,7 @@ class DataLoader {
 
         const yDnaHaplogroups = [...new Set(this.heritageData.map(f => f.yDnaHaplogroup).filter(Boolean))].length;
         const villages = [...new Set(this.heritageData.map(f => f.village).filter(Boolean))].length;
-        const ethnicities = [...new Set(this.heritageData.map(f => f.ethnicity).filter(Boolean))].length;
+        const ethnicities = [...new Set(this.heritageData.map(f => f.ethnicity_sub).filter(Boolean))].length;
 
         return {
             totalProfiles: this.heritageData.length,
