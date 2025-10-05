@@ -319,6 +319,13 @@ class HeritageApp {
             resultsToShow.forEach(data => {
                 feedContent.innerHTML += this.createHeritageCard(data);
             });
+
+            // Attach event listeners to all action buttons after rendering
+            setTimeout(() => {
+                document.querySelectorAll('.action-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => e.stopPropagation());
+                });
+            }, 0);
             
             this.displayedResults += resultsToShow.length;
             
@@ -401,10 +408,11 @@ class HeritageApp {
             
             if (url) {
                 const safeUrl = this.escapeHtml(url);
-                return `<a href="${safeUrl}" 
+                const buttonId = `btn-${urlKey}-${safe.id}`;
+                return `<a id="${buttonId}" 
+                        href="${safeUrl}" 
                         target="_blank" 
                         class="action-btn ${cssClass}"
-                        onclick="event.stopPropagation()"
                         title="${label}">
                             ${icon} ${label}
                         </a>`;
