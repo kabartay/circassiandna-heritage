@@ -185,7 +185,6 @@ body {
     border-radius: 20px;
     font-size: 0.85rem;
     cursor: pointer;
-    transition: all 0.2s ease;
     color: var(--text-secondary);
     font-weight: 500;
     transition: background 0.3s ease;
