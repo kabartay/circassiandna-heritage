@@ -19,7 +19,9 @@ class DataLoader {
         const hostname = window.location.hostname;
         
         if (hostname.includes('github.io')) {
-            return '/circassiandna-heritage/';
+            // Dynamically get repo name from URL path
+            const pathParts = window.location.pathname.split('/').filter(Boolean);
+            return pathParts.length > 0 ? `/${pathParts[0]}/` : '/';
         } else if (hostname === 'localhost' || hostname === '127.0.0.1') {
             return './';
         } else {
