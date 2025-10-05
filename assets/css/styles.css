@@ -63,11 +63,12 @@ body {
     padding: 20px;
     line-height: 1.6;
     color: var(--text-primary);
+    color-scheme: light dark;
 }
 
 /* Statistics Bar - Prominent Header */
 .stats-bar {
-    background: var(--male-color);
+    background: var(--male-color-hover);
     color: #fff;
     padding: 12px 20px;
     display: grid;
@@ -78,6 +79,7 @@ body {
     transition: background 0.3s ease;
     align-items: center;
     gap: 10px; /* optional spacing between columns */
+    transition: background 0.3s ease;
 }
 
 .stat-item {
@@ -126,9 +128,9 @@ body {
     }
 }
 
-/* Filter and Sort Bar */
+/* Filter bar - white background for contrast */
 .filter-bar {
-    background: var(--bg-card);
+    background: var(--bg-white);
     padding: 18px 20px;
     border-bottom: 2px solid var(--border-light);
     display: flex;
@@ -187,6 +189,7 @@ body {
     transition: all 0.2s ease;
     color: var(--text-secondary);
     font-weight: 500;
+    transition: background 0.3s ease;
 }
 
 .filter-btn:hover {
@@ -497,28 +500,35 @@ a.action-btn {
     line-height: 1.2;
 }
 
-/* Loading Spinner */
-.loading-spinner {
-    display: none;
-    text-align: center;
-    padding: 40px;
-    color: var(--text-secondary);
+/* Unified Spinner */
+.spinner-container {
+  text-align: center;
+  padding: 60px;
+  color: var(--text-secondary);
 }
 
 .spinner {
-    border: 3px solid var(--border-light);
-    border-top: 3px solid var(--male-color);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 15px;
+  border: 4px solid var(--border-light);
+  border-top: 4px solid var(--male-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+.loading-spinner {
+  display: none;
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -554,7 +564,7 @@ a.action-btn {
 
 /* Header Section - solid dark teal */
 .feed-header {
-    background: #154341;
+    background: var(--brand-header);
     color: white;
     padding: 40px 30px;
     text-align: center;
@@ -581,62 +591,28 @@ a.action-btn {
     color: var(--bg-medium);
 }
 
-/* Filter bar - white background for contrast */
-.filter-bar {
-    background: var(--bg-white);
-    padding: 18px 20px;
-    border-bottom: 2px solid var(--border-light);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-/* Loading States */
-.spinner-container {
-    text-align: center;
-    padding: 60px;
-    color: #7f8c8d;
-}
-
-.spinner-container .spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #e74c3c;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 20px;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 .spinner-container h3 {
     margin-bottom: 10px;
 }
 
 .spinner-container p {
-    color: #7f8c8d;
+    color: var(--text-secondary);
 }
 
 .retry-btn {
   margin-top: 20px;
   padding: 10px 20px;
-  background: #ffc107;
+  background: var(--accent-warning);
   border: none;
   border-radius: 5px;
   cursor: pointer;
   color: #000;
   font-weight: 500;
-  transition: background 0.2s ease, transform 0.1s ease; /* smooth hover + slight click effect */
+  transition: background 0.3s ease, transform 0.1s ease; /* smooth hover + slight click effect */
 }
 
 .retry-btn:hover {
-  background: #ffb300;
+  background: var(--accent-warning-hover);
   transform: translateY(-1px); /* subtle lift on hover */
 }
 
@@ -647,12 +623,29 @@ a.action-btn {
 /* Optional: dark theme support */
 @media (prefers-color-scheme: dark) {
   .retry-btn {
-    background: #ffca28;
+    background: var(--accent-warning);
     color: #000;
   }
   .retry-btn:hover {
-    background: #ffb300;
+    background: var(--accent-warning-hover);
   }
 }
 
 
+.primary-btn {
+  background: var(--accent-info);
+  color: #fff;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.05);
+}
+
+.danger-btn {
+  background: var(--accent-danger);
+  color: #fff;
+}
+
+.danger-btn:hover {
+  background: var(--accent-danger-hover);
+}
