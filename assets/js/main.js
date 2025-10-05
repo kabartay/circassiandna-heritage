@@ -417,13 +417,15 @@ class HeritageApp {
                             ${icon} ${label}
                         </a>`;
             } else {
-                return `<button class="action-btn ${cssClass} disabled" 
-                                disabled
-                                onclick="event.stopPropagation()"
-                                title="Not available for this profile">
-                            ${icon} ${label}
-                        </button>`;
-            }
+                const buttonIdD = `disabled-btn-${urlKey}-${safe.id}`;
+                return `
+                    <button id="${buttonIdD}" 
+                        class="action-btn ${cssClass} disabled" 
+                        disabled
+                        title="Not available for this profile">
+                        ${icon} ${label}
+                    </button>
+                `;
         };
 
         return `
