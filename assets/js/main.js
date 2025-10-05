@@ -581,11 +581,20 @@ class HeritageApp {
                 <div style="font-size: 4rem; margin-bottom: 20px;">🔍</div>
                 <h3>No ${filterName} found</h3>
                 <p>Try adjusting your filters or check back later for new data.</p>
-                <button onclick="app.filterResults('all')" style="margin-top: 20px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                <button id="showAllFamiliesBtn" 
+                    style="margin-top: 20px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
                     Show All Families
                 </button>
             </div>
         `;
+
+        // ✅ Attach event listener programmatically
+        const showAllBtn = document.getElementById('showAllFamiliesBtn');
+        if (showAllBtn) {
+            showAllBtn.addEventListener('click', () => {
+                this.filterResults('all');
+            });
+        }
     }
 
     showError(message) {
