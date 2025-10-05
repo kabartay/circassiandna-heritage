@@ -312,7 +312,7 @@ class HeritageApp {
 
             // Clear content if starting fresh
             if (this.displayedResults === 0) {
-                feedContent.textContent = ''; // safer than innerHTML = ''
+                feedContent.textContent = ''; // Clear content (textContent and innerHTML are equally safe here)
                 feedContent.scrollTop = 0;
             }
 
