@@ -118,14 +118,14 @@ class HeritageApp {
      */
     updateStatistics() {
         const stats = this.dataLoader.calculateStatistics();
-        const statItems = document.querySelectorAll('.stat-item .stat-number');
-        
-        if (statItems.length >= 4) {
-            statItems[0].textContent = stats.totalProfiles || 0;
-            statItems[1].textContent = stats.yDnaHaplogroups || 0;
-            statItems[2].textContent = stats.villages || 0;
-            statItems[3].textContent = stats.ethnicities || 0;
-        }
+
+        // Dynamically update elements based on data-stat attributes
+        Object.entries(stats).forEach(([key, value]) => {
+            const el = document.querySelector(`.stat-number[data-stat="${key}"]`);
+            if (el) {
+                el.textContent = value || 0;
+            }
+        });
         
         console.log('📊 Statistics updated:', stats);
     }
