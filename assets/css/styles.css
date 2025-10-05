@@ -79,7 +79,6 @@ body {
     transition: background 0.3s ease;
     align-items: center;
     gap: 10px; /* optional spacing between columns */
-    transition: background 0.3s ease;
 }
 
 .stat-item {
