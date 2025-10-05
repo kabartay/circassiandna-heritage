@@ -641,9 +641,20 @@ class HeritageApp {
                 <div style="text-align: center; padding: 60px; color: #e74c3c;">
                     <h3>💥 Critical Error</h3>
                     <p>The application failed to initialize. Please check the console for details.</p>
-                    <button onclick="window.location.reload()">🔄 Reload Page</button>
+                    <button id="reloadPageBtn" 
+                        style="margin-top: 20px; padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        🔄 Reload Page
+                    </button>
                 </div>
             `;
+
+            // Attach event listener programmatically
+            const reloadBtn = document.getElementById('reloadPageBtn');
+            if (reloadBtn) {
+                reloadBtn.addEventListener('click', () => {
+                    window.location.reload();
+                });
+            }
         }
     }
 
