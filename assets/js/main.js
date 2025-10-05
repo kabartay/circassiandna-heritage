@@ -384,9 +384,10 @@ class HeritageApp {
         // Escape all text data to prevent XSS
         const safe = {
             id: this.escapeHtml(data.id),
-            ethnicity: this.escapeHtml(data.ethnicity),
+            ethnicity: this.escapeHtml(data.ethnicity_sub), // Use subethcnicity for display
             familyNameEnglish: this.escapeHtml(data.familyNameEnglish),
-            familyNameCircassian: this.escapeHtml(data.familyNameCircassian),
+            familyNameRussian: this.escapeHtml(data.familyNameRussian),
+            familyNameNative: this.escapeHtml(data.familyNameNative),
             village: this.escapeHtml(data.village),
             yDnaHaplogroup: this.escapeHtml(data.yDnaHaplogroup),
             yDnaSubclade: this.escapeHtml(data.yDnaSubclade),
@@ -422,7 +423,7 @@ class HeritageApp {
 
         return `
             <div class="heritage-result" 
-                data-ethnicity="${safe.ethnicity.toLowerCase()}" 
+                data-ethnicity="${data.ethnicity_sub ? data.ethnicity_sub.toLowerCase() : ''}" 
                 data-id="${safe.id}"
                 onclick="this.classList.toggle('expanded')">
                 
@@ -469,7 +470,8 @@ class HeritageApp {
                             </div>
                             <div class="family-names">
                                 <div class="family-name-english">${safe.familyNameEnglish}</div>
-                                <div class="family-name-circassian">${safe.familyNameCircassian}</div>
+                                <div class="family-name-russian">${safe.familyNameRussian}</div>
+                                <div class="family-name-native">${safe.familyNameNative}</div>
                             </div>
                             <div class="basic-info">
                                 <div class="info-item">
