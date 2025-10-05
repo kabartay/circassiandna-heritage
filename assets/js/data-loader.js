@@ -155,7 +155,6 @@ class DataLoader {
                 mtDnaSubclade: "DEMO",
                 mtDnaTerminalSnp: "DEMO"
             }
-            // Only include minimal demo items here for development purposes. Do not add the full dataset.
         ];
     }
 
