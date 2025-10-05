@@ -213,8 +213,25 @@ class HeritageApp {
             feedContent.addEventListener('scroll', (e) => {
                 this.handleScroll(e);
             });
+
+            // ✅ Event delegation for clicks (cards + action buttons)
+            feedContent.addEventListener('click', (e) => {
+                const card = e.target.closest('.heritage-result');
+                const isButton = e.target.closest('.action-btn');
+
+                // Stop clicks on buttons from toggling cards
+                if (isButton) {
+                    e.stopPropagation();
+                    return;
+                }
+
+                // Toggle card expansion
+                if (card) {
+                    card.classList.toggle('expanded');
+                }
+            });
         }
-        
+
         console.log('👂 Event listeners setup complete');
     }
 
@@ -318,22 +335,6 @@ class HeritageApp {
             resultsToShow.forEach(data => {
                 feedContent.innerHTML += this.createHeritageCard(data);
             });
-
-            // Attach event listeners to all action buttons after rendering
-            setTimeout(() => {
-                // Stop bubbling from buttons (both enabled and disabled)
-                document.querySelectorAll('.action-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => e.stopPropagation());
-                });
-
-                // Toggle expansion for each heritage card
-                document.querySelectorAll('.heritage-result').forEach(card => {
-                    card.addEventListener('click', () => {
-                        card.classList.toggle('expanded');
-                    });
-                });
-
-            }, 0);
             
             this.displayedResults += resultsToShow.length;
             console.log(`✅ Added ${resultsToShow.length} results (total: ${this.displayedResults})`);
