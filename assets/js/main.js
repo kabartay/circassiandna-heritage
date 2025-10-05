@@ -254,7 +254,7 @@ class HeritageApp {
         filterButtons.forEach(btn => {
             if ((ethnicity === 'all' && btn.textContent === 'All Families') ||
                 (ethnicity === 'abdzakh' && btn.textContent === 'Abdzakh') ||
-                (ethnicity === 'abkhazian' && btn.textContent === 'Abkhaz') ||
+                (ethnicity === 'abkhazian' && btn.textContent === 'Abkhazian') ||
                 (ethnicity === 'kabardian' && btn.textContent === 'Kabardian') ||
                 (ethnicity === 'shapsough' && btn.textContent === 'Shapsough') ||
                 (ethnicity === 'ubykh' && btn.textContent === 'Ubykh')) {
