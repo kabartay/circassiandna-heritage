@@ -316,14 +316,6 @@
     font-size: 1.1rem;
 }
 
-.haplogroup-section {
-    background: linear-gradient(135deg, #f8f9fa, #ecf0f1);
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #d1d9e6;
-    position: relative;
-}
-
 .genetic-marker {
     margin-bottom: 10px;
     padding: 8px;
