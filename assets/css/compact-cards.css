@@ -93,7 +93,7 @@
 .summary-name {
     font-weight: 600;
     font-size: 0.95rem;
-    flex: 0 0 15%;  /* Name takes 15% */
+    flex: 0 0 14%;  /* Name takes 14% */
 }
 
 .summary-info {
@@ -106,7 +106,7 @@
     display: flex;
     gap: 12px;
     white-space: nowrap;
-    margin-left: 1%;  /* Small gap to reach 16% total */
+    margin-left: 1%;  /* Small gap to reach 15% total */
 }
 
 .summary-label {
@@ -128,8 +128,8 @@
 }
 
 .summary-item:nth-child(2) .summary-value {
-    min-width: 9ch;  /* Ethnicity: 9 characters */
-    max-width: 9ch;
+    min-width: 8ch;  /* Ethnicity: 8 characters */
+    max-width: 8ch;
 }
 
 .summary-item:nth-child(3) .summary-value {
