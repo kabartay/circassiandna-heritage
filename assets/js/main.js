@@ -613,11 +613,24 @@ class HeritageApp {
                 <div style="text-align: center; padding: 40px; color: #e74c3c; background: #fdf2f2; border-radius: 8px; margin: 20px;">
                     <h3>⚠️ ${message}</h3>
                     <p>The application encountered an error but will try to continue with available data.</p>
-                    <button onclick="app.init()" style="margin-top: 20px; padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    <button id="retryBtn" 
+                        style="margin-top: 20px; padding: 10px 20px; background: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;">
                         🔄 Retry
                     </button>
                 </div>
             `;
+
+            // Attach event listener programmatically
+            const retryBtn = document.getElementById('retryBtn');
+            if (retryBtn) {
+                retryBtn.addEventListener('click', () => {
+                    if (window.app && typeof window.app.init === 'function') {
+                        window.app.init();
+                    } else {
+                        console.warn('⚠️ App instance not found');
+                    }
+                });
+            }
         }
     }
 
