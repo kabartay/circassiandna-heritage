@@ -321,8 +321,8 @@ class HeritageApp {
 
             // Check if we have any data
             if (processedData.length === 0 && this.displayedResults === 0) {
-                this.showEmptyState();
                 this.showEmptyState(); // show only once
+                
                 return;
             }
 
