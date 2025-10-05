@@ -8,7 +8,8 @@ class DataLoader {
         this.heritageData = null;
         this.config = null;
         this.basePath = this.getBasePath();
-        
+        this.defaultVersion = '1.3.0';
+
         console.log('📁 DataLoader initialized with base path:', this.basePath);
     }
 
@@ -41,8 +42,7 @@ class DataLoader {
             console.log('🔄 Loading data from:', `${this.basePath}data/heritage-data.json`);
             
             // Use metadata version for cache busting instead of Date.now()
-            const defaultVersion = this.getDefaultConfig().app.version;
-            const version = this.config?.app?.version || defaultVersion;
+            const version = this.config?.app?.version || this.defaultVersion;
             const response = await fetch(`${this.basePath}data/heritage-data.json?v=${version}`);
             
             if (!response.ok) {
