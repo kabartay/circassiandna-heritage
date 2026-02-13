@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages (GCP Data)
 
 on:
   push:
-    branches: [ main, feat/basis ]
+    branches: [ main, feat/basis, feat/gcp-storage ]
 
 permissions:
   contents: write
@@ -51,8 +51,16 @@ jobs:
           echo "README.md not found — skipping link check."
         fi
 
+    - name: Verify Data Files
+      run: |
+        echo "Checking if data files exist..."
+        ls -lh data/
+        echo "Preview of heritage-data.json:"
+        head -5 data/heritage-data.json
+        echo "✅ Data files verified"
+
     - name: Deploy to GitHub Pages
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/feat/basis'
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/feat/basis' || github.ref == 'refs/heads/feat/gcp-storage'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
