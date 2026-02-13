@@ -1,3 +1,13 @@
+# Sensitive DNA heritage data (stored in GCP)
+data/heritage-data.json
+data/config.json
+
+# GCP service account keys
+gcp-key.json
+*.json
+!package.json
+!data/.gitkeep
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
