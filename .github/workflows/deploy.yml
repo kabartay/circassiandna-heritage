@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages (GCP Data)
 
 on:
   push:
-    branches: [ main, feat/basis ]
+    branches: [ main, feat/basis, feat/gcp-storage ]
 
 permissions:
   contents: write
