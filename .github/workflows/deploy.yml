@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (GCP Data)
 
 on:
   push:
@@ -21,6 +21,21 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18'
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+    - name: Setup Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
+
+    - name: Fetch Heritage Data from GCP
+      run: |
+        mkdir -p data
+        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/heritage-data.json data/heritage-data.json
+        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/config.json data/config.json
+        echo "✅ Data files fetched from GCP bucket"
 
     - name: Validate HTML
       run: |
