@@ -64,15 +64,16 @@ jobs:
         echo "Creating deployment directory..."
         mkdir -p _deploy
         
-        # Copy all files except .git and .github
-        rsync -av --exclude='.git' --exclude='.github' --exclude='_deploy' --exclude='scripts' --exclude='*.md' --exclude='LICENSE' ./ _deploy/
+        # Copy website files
+        cp -r index.html assets _deploy/
         
-        # Ensure data directory is included
+        # Copy data files from GCP
         mkdir -p _deploy/data
         cp data/heritage-data.json _deploy/data/
         cp data/config.json _deploy/data/
         
         echo "Deployment directory prepared:"
+        find _deploy -type f
         ls -lh _deploy/data/
         echo "✅ Ready to deploy"
 
