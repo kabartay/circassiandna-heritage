@@ -59,10 +59,28 @@ jobs:
         head -5 data/heritage-data.json
         echo "✅ Data files verified"
 
+    - name: Prepare Deployment Directory
+      run: |
+        echo "Creating deployment directory..."
+        mkdir -p _deploy
+        
+        # Copy all files except .git and .github
+        rsync -av --exclude='.git' --exclude='.github' --exclude='_deploy' --exclude='scripts' --exclude='*.md' --exclude='LICENSE' ./ _deploy/
+        
+        # Ensure data directory is included
+        mkdir -p _deploy/data
+        cp data/heritage-data.json _deploy/data/
+        cp data/config.json _deploy/data/
+        
+        echo "Deployment directory prepared:"
+        ls -lh _deploy/data/
+        echo "✅ Ready to deploy"
+
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/feat/basis' || github.ref == 'refs/heads/feat/gcp-storage'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: .
-        exclude_assets: '.github,docs/CONTRIBUTING.md'
+        publish_dir: _deploy
+        force_orphan: false
+        keep_files: false
