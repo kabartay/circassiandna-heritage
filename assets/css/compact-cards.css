@@ -73,11 +73,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.summary-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.summary-avatar-initials {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
     font-weight: bold;
     font-size: 0.9rem;
     background: linear-gradient(135deg, #95a5a6, #7f8c8d);
-    flex-shrink: 0;
 }
 
 .summary-content {
@@ -123,28 +140,28 @@
 
 /* Fixed widths for alignment */
 .summary-item:nth-child(1) .summary-value {
-    min-width: 17ch;  /* Village: 17 characters */
-    max-width: 17ch;
+    min-width: 16ch;  /* Village: 16 characters */
+    max-width: 16ch;
 }
 
 .summary-item:nth-child(2) .summary-value {
-    min-width: 8ch;  /* Ethnicity: 8 characters */
-    max-width: 8ch;
+    min-width: 9ch;  /* Ethnicity: 8.8 characters */
+    max-width: 9ch;
 }
 
 .summary-item:nth-child(3) .summary-value {
-    min-width: 5ch;   /* Y-DNA: 5 characters */
-    max-width: 5ch;
+    min-width: 4.5ch;   /* Y-DNA: 4.5 characters */
+    max-width: 4.5ch;
 }
 
 .summary-item:nth-child(4) .summary-value {
-    min-width: 5ch;   /* mtDNA: 5 characters */
-    max-width: 5ch;
+    min-width: 4.5ch;   /* mtDNA: 4.5 characters */
+    max-width: 4.5ch;
 }
 
 .summary-item:nth-child(5) .summary-value {
-    min-width: 10ch;  /* Date: YYYY-MM-DD */
-    max-width: 10ch;
+    min-width: 13ch;  /* Date: "Jun 25, 2024" */
+    max-width: 13ch;
 }
 
 .expand-icon {
