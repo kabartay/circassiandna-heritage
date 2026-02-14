@@ -7,7 +7,9 @@ class HeritageApp {
     constructor() {
         this.dataLoader = new DataLoader();
         this.currentFilter = 'all';
+        this.currentFilters = { ethnicity: 'all', village: 'all', state: 'all', yClade: 'all', mtClade: 'all' };
         this.currentSort = 'date-desc';
+        this.currentSearch = '';
         this.displayedResults = 0;
         this.resultsPerPage = 8;
         this.config = null;
@@ -155,29 +157,11 @@ class HeritageApp {
         // Initialize custom Ethnicity dropdown with flags
         this.initializeEthnicityDropdown(filterData.ethnicities);
         
-        // Initialize Village filter
-        this.initializeFilterDropdown('villageFilter', [
-            { value: 'all', label: 'All Villages' },
-            ...filterData.villages.map(v => ({ value: v, label: v }))
-        ]);
+        // Initialize custom Location dropdown with two-column layout
+        this.initializeLocationDropdown(filterData.states, filterData.villages);
         
-        // Initialize State filter
-        this.initializeFilterDropdown('stateFilter', [
-            { value: 'all', label: 'All States' },
-            ...filterData.states.map(s => ({ value: s, label: s }))
-        ]);
-        
-        // Initialize Y-DNA Clade filter
-        this.initializeFilterDropdown('yCladeFilter', [
-            { value: 'all', label: 'All Y Clades' },
-            ...filterData.yClades.map(c => ({ value: c, label: c }))
-        ]);
-        
-        // Initialize mtDNA Clade filter
-        this.initializeFilterDropdown('mtCladeFilter', [
-            { value: 'all', label: 'All mt Clades' },
-            ...filterData.mtClades.map(c => ({ value: c, label: c }))
-        ]);
+        // Initialize custom Clade dropdown with two-column layout
+        this.initializeCladeDropdown(filterData.yClades, filterData.mtClades);
         
         console.log('✅ Filter dropdowns initialized');
     }
@@ -195,23 +179,40 @@ class HeritageApp {
             return;
         }
         
-        // Store current selection
-        this.currentEthnicity = 'all';
+        // Store current selections as array for multi-select
+        this.selectedEthnicities = [];
         
-        // Build options HTML
-        let optionsHTML = '<div class="custom-option" data-value="all"><span class="option-text">All Ethnicities</span></div>';
+        // Build options HTML with checkboxes
+        let optionsHTML = '<div class="custom-option reset-option" data-value="all"><span class="option-text">Reset All</span></div>';
         
+        let currentMainValue = null;
         ethnicities.forEach(eth => {
             const flagHTML = eth.flag ? 
                 `<img src="assets/img/${eth.flag}" alt="${eth.label}" class="option-flag">` : 
                 '';
-            const textClass = eth.isMain ? 'main' : 'sub';
-            optionsHTML += `
-                <div class="custom-option" data-value="${eth.value}">
-                    ${flagHTML}
-                    <span class="option-text ${textClass}">${eth.label}</span>
-                </div>
-            `;
+            
+            if (eth.isMain) {
+                currentMainValue = eth.value;
+                const isChecked = this.selectedEthnicities?.includes(eth.value) ? 'checked' : '';
+                // Main ethnicity with checkbox and expand icon
+                optionsHTML += `
+                    <div class="custom-option main-option" data-value="${eth.value}" data-type="main">
+                        <input type="checkbox" class="ethnicity-checkbox" data-ethnicity="${eth.value}" data-type="main" ${isChecked}>
+                        ${flagHTML}
+                        <span class="option-text">${eth.label}</span>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                `;
+            } else {
+                const isChecked = this.selectedEthnicities?.includes(eth.value) ? 'checked' : '';
+                // Sub-ethnicity with checkbox (hidden by default)
+                optionsHTML += `
+                    <div class="custom-option sub-option" data-value="${eth.value}" data-parent="${currentMainValue}" data-type="sub">
+                        <input type="checkbox" class="ethnicity-checkbox" data-ethnicity="${eth.value}" data-type="sub" ${isChecked}>
+                        <span class="option-text">${eth.label}</span>
+                    </div>
+                `;
+            }
         });
         
         customOptions.innerHTML = optionsHTML;
@@ -223,29 +224,102 @@ class HeritageApp {
             customOptions.classList.toggle('active');
         });
         
-        // Handle option selection
-        customOptions.querySelectorAll('.custom-option').forEach(option => {
-            option.addEventListener('click', (e) => {
+        // Handle reset option
+        const resetOption = customOptions.querySelector('.reset-option');
+        if (resetOption) {
+            resetOption.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const value = option.dataset.value;
-                const text = option.textContent.trim();
+                this.selectedEthnicities = [];
+                selectedText.textContent = 'All Ethnicities';
                 
-                // Update selected value
-                this.currentEthnicity = value;
-                selectedText.textContent = text;
-                
-                // Update visual state
-                customOptions.querySelectorAll('.custom-option').forEach(opt => {
-                    opt.classList.remove('selected');
+                // Uncheck all checkboxes and collapse groups
+                customOptions.querySelectorAll('.ethnicity-checkbox').forEach(cb => {
+                    cb.checked = false;
                 });
-                option.classList.add('selected');
+                customOptions.querySelectorAll('.main-option.expanded').forEach(mainOpt => {
+                    mainOpt.classList.remove('expanded');
+                });
+                customOptions.querySelectorAll('.sub-option.visible').forEach(subOpt => {
+                    subOpt.classList.remove('visible');
+                });
                 
-                // Close dropdown
-                customSelect.classList.remove('active');
-                customOptions.classList.remove('active');
+                this.applyFilters();
+            });
+        }
+        
+        // Handle checkbox clicks
+        customOptions.querySelectorAll('.ethnicity-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const ethnicity = checkbox.dataset.ethnicity;
+                
+                if (checkbox.checked) {
+                    if (!this.selectedEthnicities.includes(ethnicity)) {
+                        this.selectedEthnicities.push(ethnicity);
+                    }
+                } else {
+                    this.selectedEthnicities = this.selectedEthnicities.filter(e => e !== ethnicity);
+                }
+                
+                // Update display text
+                this.updateEthnicityDisplayText();
                 
                 // Apply filters
                 this.applyFilters();
+            });
+        });
+        
+        // Handle main ethnicity expand/collapse and clicks
+        customOptions.querySelectorAll('.main-option').forEach(mainOption => {
+            // Add click handler specifically to expand icon
+            const expandIcon = mainOption.querySelector('.expand-icon');
+            if (expandIcon) {
+                expandIcon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const mainValue = mainOption.dataset.value;
+                    
+                    // Toggle expansion
+                    mainOption.classList.toggle('expanded');
+                    
+                    // Show/hide sub-options
+                    const subOptions = customOptions.querySelectorAll(`.sub-option[data-parent="${mainValue}"]`);
+                    subOptions.forEach(sub => {
+                        sub.classList.toggle('visible');
+                    });
+                });
+            }
+            
+            // Handle clicks on the rest of the option (checkbox behavior)
+            mainOption.addEventListener('click', (e) => {
+                // Don't handle if clicking checkbox or expand icon
+                if (e.target.classList.contains('ethnicity-checkbox') || 
+                    e.target.classList.contains('expand-icon')) return;
+                
+                e.stopPropagation();
+                
+                // Toggle the checkbox
+                const checkbox = mainOption.querySelector('.ethnicity-checkbox');
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('click', { bubbles: true }));
+                }
+            });
+        });
+        
+        // Handle sub-ethnicity clicks
+        customOptions.querySelectorAll('.sub-option').forEach(subOption => {
+            subOption.addEventListener('click', (e) => {
+                // Don't handle if clicking checkbox
+                if (e.target.classList.contains('ethnicity-checkbox')) return;
+                
+                e.stopPropagation();
+                
+                // Toggle the checkbox
+                const checkbox = subOption.querySelector('.ethnicity-checkbox');
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('click', { bubbles: true }));
+                }
             });
         });
         
@@ -254,6 +328,356 @@ class HeritageApp {
             customSelect.classList.remove('active');
             customOptions.classList.remove('active');
         });
+    }
+    
+    /**
+     * Update ethnicity display text based on selections
+     */
+    updateEthnicityDisplayText() {
+        const customSelect = document.getElementById('ethnicitySelect');
+        const selectedText = customSelect?.querySelector('.selected-text');
+        if (!selectedText) return;
+        
+        if (this.selectedEthnicities.length === 0) {
+            selectedText.textContent = 'All Ethnicities';
+        } else if (this.selectedEthnicities.length === 1) {
+            // Find the label for the selected ethnicity
+            const customOptions = document.getElementById('ethnicityOptions');
+            const option = customOptions?.querySelector(`[data-ethnicity="${this.selectedEthnicities[0]}"]`);
+            const label = option?.parentElement.querySelector('.option-text')?.textContent.trim() || this.selectedEthnicities[0];
+            selectedText.textContent = label;
+        } else {
+            selectedText.textContent = `${this.selectedEthnicities.length} ethnicities`;
+        }
+    }
+    
+    /**
+     * Initialize custom clade dropdown with two-column layout
+     */
+    initializeCladeDropdown(yClades, mtClades) {
+        const customSelect = document.getElementById('cladeSelect');
+        const customOptions = document.getElementById('cladeOptions');
+        const selectedText = customSelect?.querySelector('.selected-text');
+        
+        if (!customSelect || !customOptions || !selectedText) {
+            console.warn('⚠️ Custom clade dropdown elements not found');
+            return;
+        }
+        
+        // Store current selections (can select one from each column)
+        this.currentYClade = 'all';
+        this.currentMtClade = 'all';
+        
+        // Build two-column options HTML with checkboxes
+        let optionsHTML = '<div class="clade-option reset-option" data-value="all"><span class="option-text">Reset All</span></div>';
+        optionsHTML += '<div class="clade-columns">';
+        
+        // Y-DNA column
+        optionsHTML += '<div class="clade-column">';
+        optionsHTML += '<div class="clade-column-header">Y-DNA</div>';
+        yClades.forEach(clade => {
+            optionsHTML += `<div class="clade-option" data-value="y:${clade}" data-type="y">
+                <input type="checkbox" class="clade-checkbox" data-clade="${clade}" data-type="y">
+                <span>${clade}</span>
+            </div>`;
+        });
+        optionsHTML += '</div>';
+        
+        // mtDNA column
+        optionsHTML += '<div class="clade-column">';
+        optionsHTML += '<div class="clade-column-header">mtDNA</div>';
+        mtClades.forEach(clade => {
+            optionsHTML += `<div class="clade-option" data-value="mt:${clade}" data-type="mt">
+                <input type="checkbox" class="clade-checkbox" data-clade="${clade}" data-type="mt">
+                <span>${clade}</span>
+            </div>`;
+        });
+        optionsHTML += '</div>';
+        
+        optionsHTML += '</div>';
+        customOptions.innerHTML = optionsHTML;
+        
+        // Toggle dropdown
+        customSelect.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSelect.classList.toggle('active');
+            customOptions.classList.toggle('active');
+        });
+        
+        // Handle reset option
+        const resetOption = customOptions.querySelector('.reset-option');
+        if (resetOption) {
+            resetOption.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.currentYClade = 'all';
+                this.currentMtClade = 'all';
+                selectedText.textContent = 'All Clades';
+                
+                // Uncheck all checkboxes
+                customOptions.querySelectorAll('.clade-checkbox').forEach(cb => {
+                    cb.checked = false;
+                });
+                
+                this.applyFilters();
+            });
+        }
+        
+        // Handle checkbox clicks
+        customOptions.querySelectorAll('.clade-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const type = checkbox.dataset.type;
+                const clade = checkbox.dataset.clade;
+                
+                if (type === 'y') {
+                    // Uncheck other Y-DNA checkboxes
+                    customOptions.querySelectorAll('.clade-checkbox[data-type="y"]').forEach(cb => {
+                        if (cb !== checkbox) cb.checked = false;
+                    });
+                    this.currentYClade = checkbox.checked ? clade : 'all';
+                } else if (type === 'mt') {
+                    // Uncheck other mtDNA checkboxes
+                    customOptions.querySelectorAll('.clade-checkbox[data-type="mt"]').forEach(cb => {
+                        if (cb !== checkbox) cb.checked = false;
+                    });
+                    this.currentMtClade = checkbox.checked ? clade : 'all';
+                }
+                
+                // Update display text
+                this.updateCladeDisplayText(selectedText);
+                
+                // Apply filters
+                this.applyFilters();
+            });
+        });
+        
+        // Handle clicks on the option div (toggle the checkbox)
+        customOptions.querySelectorAll('.clade-option:not(.reset-option)').forEach(option => {
+            option.addEventListener('click', (e) => {
+                if (e.target.classList.contains('clade-checkbox')) return; // Already handled
+                e.stopPropagation();
+                const checkbox = option.querySelector('.clade-checkbox');
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('click'));
+                }
+            });
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            customSelect.classList.remove('active');
+            customOptions.classList.remove('active');
+        });
+    }
+    
+    /**
+     * Update clade display text based on selections
+     */
+    updateCladeDisplayText(selectedText) {
+        const parts = [];
+        if (this.currentYClade && this.currentYClade !== 'all') {
+            parts.push(this.currentYClade);
+        }
+        if (this.currentMtClade && this.currentMtClade !== 'all') {
+            parts.push(this.currentMtClade);
+        }
+        
+        if (parts.length === 0) {
+            selectedText.textContent = 'All Clades';
+        } else {
+            selectedText.textContent = parts.join(', ');
+        }
+    }
+    
+    /**
+     * Initialize custom location dropdown with two-column layout
+     */
+    initializeLocationDropdown(states, allVillages) {
+        const customSelect = document.getElementById('locationSelect');
+        const customOptions = document.getElementById('locationOptions');
+        const selectedText = customSelect?.querySelector('.selected-text');
+        
+        if (!customSelect || !customOptions || !selectedText) {
+            console.warn('⚠️ Custom location dropdown elements not found');
+            return;
+        }
+        
+        // Store current selections as arrays for multi-select
+        this.selectedStates = [];
+        this.selectedVillages = [];
+        this.allStates = states;
+        this.allVillages = allVillages;
+        
+        // Get village-to-state mapping from data
+        this.villageToStateMap = {};
+        this.dataLoader.heritageData.forEach(family => {
+            const village = family.location?.village?.main?.native || 
+                          family.location?.village?.main?.russian || 
+                          family.location?.village?.main?.english;
+            const state = family.location?.state?.main?.native || 
+                        family.location?.state?.main?.russian || 
+                        family.location?.state?.main?.english;
+            if (village && state) {
+                this.villageToStateMap[village] = state;
+            }
+        });
+        
+        // Initial render with all villages
+        this.renderLocationOptions(customOptions, states, allVillages);
+        
+        // Toggle dropdown
+        customSelect.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSelect.classList.toggle('active');
+            customOptions.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            customSelect.classList.remove('active');
+            customOptions.classList.remove('active');
+        });
+    }
+    
+    /**
+     * Render location dropdown options with checkboxes
+     */
+    renderLocationOptions(customOptions, states, villages) {
+        // Build two-column options HTML with checkboxes
+        let optionsHTML = '<div class="location-option reset-option" data-value="all"><span class="option-text">Reset All</span></div>';
+        optionsHTML += '<div class="location-columns">';
+        
+        // State column
+        optionsHTML += '<div class="location-column">';
+        optionsHTML += '<div class="location-column-header">State</div>';
+        states.forEach(state => {
+            const isChecked = this.selectedStates?.includes(state) ? 'checked' : '';
+            optionsHTML += `<div class="location-option" data-value="state:${state}" data-type="state">
+                <input type="checkbox" class="location-checkbox" data-location="${state}" data-type="state" ${isChecked}>
+                <span>${state}</span>
+            </div>`;
+        });
+        optionsHTML += '</div>';
+        
+        // Village column
+        optionsHTML += '<div class="location-column">';
+        optionsHTML += '<div class="location-column-header">Village</div>';
+        villages.forEach(village => {
+            const isChecked = this.selectedVillages?.includes(village) ? 'checked' : '';
+            optionsHTML += `<div class="location-option" data-value="village:${village}" data-type="village">
+                <input type="checkbox" class="location-checkbox" data-location="${village}" data-type="village" ${isChecked}>
+                <span>${village}</span>
+            </div>`;
+        });
+        optionsHTML += '</div>';
+        
+        optionsHTML += '</div>';
+        customOptions.innerHTML = optionsHTML;
+        
+        // Handle reset option
+        const resetOption = customOptions.querySelector('.reset-option');
+        if (resetOption) {
+            resetOption.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.selectedStates = [];
+                this.selectedVillages = [];
+                const customSelect = document.getElementById('locationSelect');
+                const selectedText = customSelect?.querySelector('.selected-text');
+                if (selectedText) selectedText.textContent = 'All Locations';
+                
+                // Uncheck all checkboxes
+                customOptions.querySelectorAll('.location-checkbox').forEach(cb => {
+                    cb.checked = false;
+                });
+                
+                // Re-render with all villages
+                this.renderLocationOptions(customOptions, this.allStates, this.allVillages);
+                
+                this.applyFilters();
+            });
+        }
+        
+        // Handle checkbox clicks
+        customOptions.querySelectorAll('.location-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const type = checkbox.dataset.type;
+                const location = checkbox.dataset.location;
+                
+                if (type === 'state') {
+                    if (checkbox.checked) {
+                        if (!this.selectedStates.includes(location)) {
+                            this.selectedStates.push(location);
+                        }
+                    } else {
+                        this.selectedStates = this.selectedStates.filter(s => s !== location);
+                    }
+                    
+                    // Update village list based on selected states
+                    if (this.selectedStates.length > 0) {
+                        const filteredVillages = this.allVillages.filter(village => 
+                            this.selectedStates.includes(this.villageToStateMap[village])
+                        );
+                        this.renderLocationOptions(customOptions, this.allStates, filteredVillages);
+                    } else {
+                        this.renderLocationOptions(customOptions, this.allStates, this.allVillages);
+                    }
+                } else if (type === 'village') {
+                    if (checkbox.checked) {
+                        if (!this.selectedVillages.includes(location)) {
+                            this.selectedVillages.push(location);
+                        }
+                    } else {
+                        this.selectedVillages = this.selectedVillages.filter(v => v !== location);
+                    }
+                }
+                
+                // Update display text
+                this.updateLocationDisplayText();
+                
+                // Apply filters
+                this.applyFilters();
+            });
+        });
+        
+        // Handle clicks on the option div (toggle the checkbox)
+        customOptions.querySelectorAll('.location-option:not(.reset-option)').forEach(option => {
+            option.addEventListener('click', (e) => {
+                if (e.target.classList.contains('location-checkbox')) return; // Already handled
+                e.stopPropagation();
+                const checkbox = option.querySelector('.location-checkbox');
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('click', { bubbles: true }));
+                }
+            });
+        });
+    }
+    
+    /**
+     * Update location display text based on selections
+     */
+    updateLocationDisplayText() {
+        const customSelect = document.getElementById('locationSelect');
+        const selectedText = customSelect?.querySelector('.selected-text');
+        if (!selectedText) return;
+        
+        const parts = [];
+        if (this.selectedStates.length > 0) {
+            parts.push(...this.selectedStates);
+        }
+        if (this.selectedVillages.length > 0) {
+            parts.push(...this.selectedVillages);
+        }
+        
+        if (parts.length === 0) {
+            selectedText.textContent = 'All Locations';
+        } else if (parts.length <= 2) {
+            selectedText.textContent = parts.join(', ');
+        } else {
+            selectedText.textContent = `${parts.length} locations`;
+        }
     }
     
     /**
@@ -315,6 +739,40 @@ class HeritageApp {
      * Setup event listeners
      */
     setupEventListeners() {
+        // Search input event
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearch');
+        
+        if (searchInput) {
+            let searchTimeout;
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.trim();
+                
+                // Show/hide clear button
+                if (clearSearchBtn) {
+                    clearSearchBtn.style.display = query ? 'flex' : 'none';
+                }
+                
+                // Debounce search
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    this.currentSearch = query;
+                    this.displayedResults = 0;
+                    this.loadResults();
+                }, 300);
+            });
+        }
+        
+        if (clearSearchBtn) {
+            clearSearchBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                clearSearchBtn.style.display = 'none';
+                this.currentSearch = '';
+                this.displayedResults = 0;
+                this.loadResults();
+            });
+        }
+        
         // Sort dropdown change event
         const sortSelect = document.getElementById('sortSelect');
         if (sortSelect) {
@@ -368,16 +826,16 @@ class HeritageApp {
      * Apply all filters from dropdowns
      */
     applyFilters() {
-        const ethnicity = this.currentEthnicity || 'all';
-        const village = document.getElementById('villageFilter')?.value || 'all';
-        const state = document.getElementById('stateFilter')?.value || 'all';
-        const yClade = document.getElementById('yCladeFilter')?.value || 'all';
-        const mtClade = document.getElementById('mtCladeFilter')?.value || 'all';
+        const ethnicities = this.selectedEthnicities?.length > 0 ? this.selectedEthnicities : ['all'];
+        const villages = this.selectedVillages?.length > 0 ? this.selectedVillages : ['all'];
+        const states = this.selectedStates?.length > 0 ? this.selectedStates : ['all'];
+        const yClade = this.currentYClade || 'all';
+        const mtClade = this.currentMtClade || 'all';
         
-        console.log('🔍 Applying filters:', { ethnicity, village, state, yClade, mtClade });
+        console.log('🔍 Applying filters:', { ethnicities, villages, states, yClade, mtClade });
         
         // Store current filters
-        this.currentFilters = { ethnicity, village, state, yClade, mtClade };
+        this.currentFilters = { ethnicities, villages, states, yClade, mtClade };
         this.displayedResults = 0;
         
         this.loadResults();
@@ -443,7 +901,16 @@ class HeritageApp {
             }
 
             // Get processed data with current filters and sort
-            const processedData = this.dataLoader.getProcessedData(filters, this.currentSort);
+            let processedData = this.dataLoader.getProcessedData(filters, this.currentSort);
+            
+            // Apply search filter if search query exists
+            if (this.currentSearch) {
+                const searchResults = this.dataLoader.searchFamilies(this.currentSearch);
+                // Combine search with filters - only show results that match both
+                processedData = processedData.filter(family => 
+                    searchResults.some(sr => sr.id === family.id)
+                );
+            }
 
             // Check if we have any data
             if (processedData.length === 0 && this.displayedResults === 0) {
@@ -577,10 +1044,23 @@ class HeritageApp {
             return null;
         };
 
+        // Get ethnicity flag
+        const ethnicityMain = (data.ethnicity?.main?.english || '').toLowerCase();
+        const flagMap = {
+            'abazin': 'abazin-flag.png',
+            'abkhazian': 'abkhazian-flag.png',
+            'circassian': 'circassian-flag.png',
+            'karachay': 'karachay-flag.jpg',
+            'balkar': 'balkaria-flag.png',
+            'ossetian': 'ossetia-flag.png'
+        };
+        const ethnicityFlag = flagMap[ethnicityMain] || null;
+        
         // Escape all text data to prevent XSS
         const safe = {
             id: this.escapeHtml(data.id),
-            ethnicity: this.escapeHtml(data.ethnicity?.main?.sub?.english || data.ethnicity_sub || 'Unknown'),
+            ethnicity: this.escapeHtml(data.ethnicity?.main?.sub?.english || data.ethnicity?.main?.english || data.ethnicity_sub || 'Unknown'),
+            ethnicityFlag: ethnicityFlag ? `assets/img/${ethnicityFlag}` : null,
             familyNameEnglish: this.escapeHtml(data.familyName?.main?.english || data.familyName?.english || data.familyNameEnglish),
             familyNameRussian: this.escapeHtml(data.familyName?.main?.russian || data.familyName?.russian || data.familyNameRussian),
             familyNameNative: this.escapeHtml(data.familyName?.main?.native || data.familyName?.native || data.familyNameNative),
@@ -623,13 +1103,16 @@ class HeritageApp {
 
         return `
             <div class="heritage-result" 
-                data-ethnicity="${(data.ethnicity?.main?.sub?.english || data.ethnicity_sub || '').toLowerCase()}" 
+                data-ethnicity="${(data.ethnicity?.main?.sub?.english || data.ethnicity?.main?.english || data.ethnicity_sub || '').toLowerCase()}" 
                 data-id="${safe.id}">
 
                 <!-- COLLAPSED VIEW - Summary Line -->
                 <div class="result-summary">
-                    <div class="summary-avatar">
-                        ${this.getFamilyInitials(safe.familyNameEnglish)}
+                    <div class="summary-avatar ${data.gender === 'male' ? 'male' : data.gender === 'female' ? 'female' : ''}">
+                        ${safe.ethnicityFlag ? 
+                            `<img src="${safe.ethnicityFlag}" alt="${safe.ethnicity} flag">` : 
+                            `<div class="summary-avatar-initials">${this.getFamilyInitials(safe.familyNameEnglish)}</div>`
+                        }
                     </div>
                     <div class="summary-content">
                         <span class="summary-name">${safe.familyNameEnglish}</span>
@@ -644,11 +1127,11 @@ class HeritageApp {
                             </div>
                             <div class="summary-item">
                                 <span class="summary-label">Y-DNA:</span>
-                                <span class="summary-value">${data.gender === 'female' ? '' : safe.yDnaHaplogroup}</span>
+                                <span class="summary-value">${data.gender === 'female' ? '—' : (safe.yDnaHaplogroup || '—')}</span>
                             </div>
                             <div class="summary-item">
                                 <span class="summary-label">mtDNA:</span>
-                                <span class="summary-value">${safe.mtDnaHaplogroup || 'N/A'}</span>
+                                <span class="summary-value">${safe.mtDnaHaplogroup || '—'}</span>
                             </div>
                             <div class="summary-item">
                                 <span class="summary-label">Date:</span>
@@ -665,7 +1148,10 @@ class HeritageApp {
                     <div class="result-header">
                         <div class="family-info">
                             <div class="family-avatar ${data.gender === 'male' ? 'male' : data.gender === 'female' ? 'female' : ''}">
-                                ${this.getFamilyInitials(safe.familyNameEnglish)}
+                                ${safe.ethnicityFlag ? 
+                                    `<img src="${safe.ethnicityFlag}" alt="${safe.ethnicity} flag">` : 
+                                    `<div class="family-avatar-initials">${this.getFamilyInitials(safe.familyNameEnglish)}</div>`
+                                }
                             </div>
                             <div class="family-names">
                                 <div class="family-name-english">${safe.familyNameEnglish}</div>
@@ -814,17 +1300,52 @@ class HeritageApp {
         const showAllBtn = document.getElementById('showAllFamiliesBtn');
         if (showAllBtn) {
             showAllBtn.addEventListener('click', () => {
+                // Clear search
+                const searchInput = document.getElementById('searchInput');
+                const clearSearchBtn = document.getElementById('clearSearch');
+                if (searchInput) {
+                    searchInput.value = '';
+                    this.currentSearch = '';
+                }
+                if (clearSearchBtn) {
+                    clearSearchBtn.style.display = 'none';
+                }
+                
                 // Reset custom ethnicity dropdown
-                this.currentEthnicity = 'all';
+                this.selectedEthnicities = [];
                 const selectedText = document.querySelector('#ethnicitySelect .selected-text');
                 if (selectedText) selectedText.textContent = 'All Ethnicities';
+                // Uncheck all ethnicity checkboxes
+                const ethnicityOptions = document.getElementById('ethnicityOptions');
+                if (ethnicityOptions) {
+                    ethnicityOptions.querySelectorAll('.ethnicity-checkbox').forEach(cb => {
+                        cb.checked = false;
+                    });
+                }
                 
-                // Reset standard dropdowns to "all"
-                const dropdowns = ['villageFilter', 'stateFilter', 'yCladeFilter', 'mtCladeFilter'];
-                dropdowns.forEach(id => {
-                    const dropdown = document.getElementById(id);
-                    if (dropdown) dropdown.value = 'all';
-                });
+                // Reset custom clade dropdown
+                this.currentYClade = 'all';
+                this.currentMtClade = 'all';
+                const cladeSelectedText = document.querySelector('#cladeSelect .selected-text');
+                if (cladeSelectedText) cladeSelectedText.textContent = 'All Clades';
+                // Uncheck all clade checkboxes
+                const cladeOptions = document.getElementById('cladeOptions');
+                if (cladeOptions) {
+                    cladeOptions.querySelectorAll('.clade-checkbox').forEach(cb => {
+                        cb.checked = false;
+                    });
+                }
+                
+                // Reset custom location dropdown
+                this.selectedStates = [];
+                this.selectedVillages = [];
+                const locationSelectedText = document.querySelector('#locationSelect .selected-text');
+                if (locationSelectedText) locationSelectedText.textContent = 'All Locations';
+                // Re-render location options with all villages
+                const locationOptions = document.getElementById('locationOptions');
+                if (locationOptions && this.allStates && this.allVillages) {
+                    this.renderLocationOptions(locationOptions, this.allStates, this.allVillages);
+                }
                 
                 // Apply filters (all set to "all")
                 this.applyFilters();
