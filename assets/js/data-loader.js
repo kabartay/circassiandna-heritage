@@ -143,17 +143,75 @@ class DataLoader {
             {
                 id: "DEMO-001",
                 date: "2020-01-01",
-                familyNameEnglish: "DEMO Family",
-                familyNameNative: "DEMO Фамилия",
-                familyNameRussian: "DEMO Фамилия",
-                village: "DEMO Village",
-                ethnicity_sub: "Abdzakh",
-                yDnaHaplogroup: "DEMO",
-                yDnaSubclade: "DEMO",
-                yDnaTerminalSnp: "DEMO",
-                mtDnaHaplogroup: "DEMO",
-                mtDnaSubclade: "DEMO",
-                mtDnaTerminalSnp: "DEMO"
+                gender: "male",
+                familyName: {
+                    native: "DEMO Фамилия",
+                    english: "DEMO Family",
+                    russian: "DEMO Фамилия"
+                },
+                ethnicity: {
+                    main: {
+                        native: "Адыгэ",
+                        english: "Circassian",
+                        russian: "Черкес",
+                        sub: {
+                            native: "Абдзах",
+                            english: "Abdzakh",
+                            russian: "Абадзехи"
+                        }
+                    },
+                    pre: {
+                        native: null,
+                        english: null,
+                        russian: null,
+                        sub: { native: null, english: null, russian: null }
+                    }
+                },
+                location: {
+                    coordinates: {
+                        main: { latitude: null, longitude: null },
+                        pre: { latitude: null, longitude: null }
+                    },
+                    village: {
+                        main: { native: "DEMO Village", russian: null, english: null },
+                        pre: { native: null, russian: null, english: null }
+                    },
+                    region: {
+                        main: { native: null, russian: null, english: null },
+                        pre: { native: null, russian: null, english: null }
+                    },
+                    state: {
+                        main: { native: null, russian: null, english: null },
+                        pre: { native: null, russian: null, english: null }
+                    }
+                },
+                yDnaHaplogroup: {
+                    root: "R",
+                    clade: "DEMO",
+                    subclade: "DEMO",
+                    terminalSnp: "DEMO",
+                    SnpList: null
+                },
+                mtDnaHaplogroup: {
+                    root: null,
+                    clade: "DEMO",
+                    subclade: "DEMO",
+                    terminalSnp: "DEMO",
+                    SnpList: null
+                },
+                urls: {
+                    yDnaClassicTree: null,
+                    yDnaTimeTree: null,
+                    yDnaGroupTree: null,
+                    mtDnaClassicTree: null,
+                    mtDnaTimeTree: null,
+                    mtDnaGroupTree: null,
+                    fullReport: null,
+                    relations: null
+                },
+                metadata: {
+                    lab: "FamilyTreeDNA"
+                }
             }
         ];
     }
@@ -205,14 +263,183 @@ class DataLoader {
         }
 
         return this.heritageData.filter(family => {
-            if (!family.ethnicity_sub) return false;
-            const familyEth = family.ethnicity_sub.toLowerCase();
+            // Check both main ethnicity and sub-ethnicity
+            const mainEthnicity = family.ethnicity?.main?.english;
+            const subEthnicity = family.ethnicity?.main?.sub?.english;
+            const oldEthnicity = family.ethnicity_sub; // backward compatibility
+            
             const filterEth = ethnicity.toLowerCase();
-            // Match if ethnicity starts with the filter key
-            return familyEth === filterEth || familyEth.startsWith(filterEth);
+            
+            // Check main ethnicity (e.g., "Abkhazian")
+            if (mainEthnicity && mainEthnicity.toLowerCase() === filterEth) {
+                return true;
+            }
+            
+            // Check sub-ethnicity (e.g., "Kabardian", "Shapsough")
+            if (subEthnicity && subEthnicity.toLowerCase() === filterEth) {
+                return true;
+            }
+            
+            // Check old format for backward compatibility
+            if (oldEthnicity && oldEthnicity.toLowerCase() === filterEth) {
+                return true;
+            }
+            
+            return false;
         });
     }
-
+    
+    /**
+     * Multi-filter data by ethnicity, village, state, and clade
+     */
+    getMultiFilteredData(filters = {}) {
+        if (!this.heritageData) {
+            return [];
+        }
+        
+        return this.heritageData.filter(family => {
+            // Ethnicity filter
+            if (filters.ethnicity && filters.ethnicity !== 'all') {
+                const mainEthnicity = family.ethnicity?.main?.english;
+                const subEthnicity = family.ethnicity?.main?.sub?.english;
+                const filterEth = filters.ethnicity.toLowerCase();
+                
+                const ethMatch = 
+                    (mainEthnicity && mainEthnicity.toLowerCase() === filterEth) ||
+                    (subEthnicity && subEthnicity.toLowerCase() === filterEth);
+                
+                if (!ethMatch) return false;
+            }
+            
+            // Village filter
+            if (filters.village && filters.village !== 'all') {
+                const villageNative = family.location?.village?.main?.native;
+                const villageRussian = family.location?.village?.main?.russian;
+                const villageEnglish = family.location?.village?.main?.english;
+                
+                const villageMatch = 
+                    villageNative === filters.village ||
+                    villageRussian === filters.village ||
+                    villageEnglish === filters.village;
+                
+                if (!villageMatch) return false;
+            }
+            
+            // State filter
+            if (filters.state && filters.state !== 'all') {
+                const stateNative = family.location?.state?.main?.native;
+                const stateRussian = family.location?.state?.main?.russian;
+                const stateEnglish = family.location?.state?.main?.english;
+                
+                const stateMatch = 
+                    stateNative === filters.state ||
+                    stateRussian === filters.state ||
+                    stateEnglish === filters.state;
+                
+                if (!stateMatch) return false;
+            }
+            
+            // Clade filter (Y-DNA haplogroup)
+            if (filters.clade && filters.clade !== 'all') {
+                const hg = family.yDnaHaplogroup;
+                const clade = typeof hg === 'object' ? hg.clade : hg;
+                
+                if (clade !== filters.clade) return false;
+            }
+            
+            return true;
+        });
+    }    
+    /**
+     * Multi-filter data by ethnicity, village, state, and clade
+     */
+    getMultiFilteredData(filters = {}) {
+        if (!this.heritageData) {
+            return [];
+        }
+        
+        return this.heritageData.filter(family => {
+            // Ethnicity filter (hierarchical)
+            if (filters.ethnicity && filters.ethnicity !== 'all') {
+                const mainEthnicity = family.ethnicity?.main?.english;
+                const subEthnicity = family.ethnicity?.main?.sub?.english;
+                const filterEth = filters.ethnicity.toLowerCase();
+                
+                // Check if filter matches main ethnicity
+                const mainMatch = mainEthnicity && mainEthnicity.toLowerCase() === filterEth;
+                
+                // Check if filter matches sub ethnicity
+                const subMatch = subEthnicity && subEthnicity.toLowerCase() === filterEth;
+                
+                // If filtering by main ethnicity, show all its sub-ethnicities
+                // If filtering by sub ethnicity, show only that specific sub
+                if (mainMatch) {
+                    // User selected main ethnicity - show this family
+                    return true;
+                } else if (subMatch) {
+                    // User selected sub ethnicity - show this family
+                    return true;
+                } else {
+                    // No match
+                    return false;
+                }
+            }
+            
+            // Village filter
+            if (filters.village && filters.village !== 'all') {
+                const villageNative = family.location?.village?.main?.native;
+                const villageRussian = family.location?.village?.main?.russian;
+                const villageEnglish = family.location?.village?.main?.english;
+                
+                const villageMatch = 
+                    villageNative === filters.village ||
+                    villageRussian === filters.village ||
+                    villageEnglish === filters.village;
+                
+                if (!villageMatch) return false;
+            }
+            
+            // State filter
+            if (filters.state && filters.state !== 'all') {
+                const stateNative = family.location?.state?.main?.native;
+                const stateRussian = family.location?.state?.main?.russian;
+                const stateEnglish = family.location?.state?.main?.english;
+                
+                const stateMatch = 
+                    stateNative === filters.state ||
+                    stateRussian === filters.state ||
+                    stateEnglish === filters.state;
+                
+                if (!stateMatch) return false;
+            }
+            
+            // Legacy Clade filter (backward compatibility)
+            if (filters.clade && filters.clade !== 'all') {
+                const hg = family.yDnaHaplogroup;
+                const clade = typeof hg === 'object' ? hg.clade : hg;
+                
+                if (clade !== filters.clade) return false;
+            }
+            
+            // Y-DNA Clade filter
+            if (filters.yClade && filters.yClade !== 'all') {
+                const yHg = family.yDnaHaplogroup;
+                const yClade = typeof yHg === 'object' ? yHg.clade : yHg;
+                
+                if (yClade !== filters.yClade) return false;
+            }
+            
+            // mtDNA Clade filter
+            if (filters.mtClade && filters.mtClade !== 'all') {
+                const mtHg = family.mtDnaHaplogroup;
+                const mtClade = typeof mtHg === 'object' ? mtHg.clade : mtHg;
+                
+                if (mtClade !== filters.mtClade) return false;
+            }
+            
+            return true;
+        });
+    }
     /**
      * Sort data with protection against invalid or future dates
      */
@@ -257,14 +484,18 @@ class DataLoader {
                 });
 
             case 'name-asc':
-                return sortedData.sort((a, b) => 
-                    (a.familyNameEnglish || '').localeCompare(b.familyNameEnglish || '')
-                );
+                return sortedData.sort((a, b) => {
+                    const nameA = a.familyName?.main?.english || a.familyName?.english || a.familyNameEnglish || '';
+                    const nameB = b.familyName?.main?.english || b.familyName?.english || b.familyNameEnglish || '';
+                    return nameA.localeCompare(nameB);
+                });
 
             case 'name-desc':
-                return sortedData.sort((a, b) => 
-                    (b.familyNameEnglish || '').localeCompare(a.familyNameEnglish || '')
-                );
+                return sortedData.sort((a, b) => {
+                    const nameA = a.familyName?.main?.english || a.familyName?.english || a.familyNameEnglish || '';
+                    const nameB = b.familyName?.main?.english || b.familyName?.english || b.familyNameEnglish || '';
+                    return nameB.localeCompare(nameA);
+                });
 
             default:
                 return sortedData;
@@ -273,9 +504,25 @@ class DataLoader {
 
     /**
      * Get processed data with filtering and sorting
+     * @param {Object|string} filters - Filter object {ethnicity, village, state, clade} or legacy ethnicity string
+     * @param {string} sortType - Sort type
      */
-    getProcessedData(ethnicity = 'all', sortType = 'date-desc') {
-        const filtered = this.getFilteredData(ethnicity);
+    getProcessedData(filters = 'all', sortType = 'date-desc') {
+        // Handle legacy single ethnicity filter
+        if (typeof filters === 'string') {
+            filters = { ethnicity: filters };
+        }
+        
+        const filtered = this.getMultiFilteredData(filters);
+        return this.sortData(filtered, sortType);
+    }
+    getProcessedData(filters = 'all', sortType = 'date-desc') {
+        // Handle legacy single ethnicity filter
+        if (typeof filters === 'string') {
+            filters = { ethnicity: filters };
+        }
+        
+        const filtered = this.getMultiFilteredData(filters);
         return this.sortData(filtered, sortType);
     }
 
@@ -288,6 +535,102 @@ class DataLoader {
         }
         return this.heritageData.find(family => family.id === id) || null;
     }
+    
+    /**
+     * Get unique filter options from data
+     */
+    getFilterOptions() {
+        if (!this.heritageData) {
+            return { ethnicities: [], villages: [], states: [], yClades: [], mtClades: [] };
+        }
+        
+        const ethnicityMap = new Map(); // main -> Set of subs
+        const villages = new Set();
+        const states = new Set();
+        const yClades = new Set();
+        const mtClades = new Set();
+        
+        this.heritageData.forEach(family => {
+            // Ethnicity - build hierarchy
+            const mainEth = family.ethnicity?.main?.english;
+            const subEth = family.ethnicity?.main?.sub?.english;
+            
+            if (mainEth) {
+                if (!ethnicityMap.has(mainEth)) {
+                    ethnicityMap.set(mainEth, new Set());
+                }
+                if (subEth) {
+                    ethnicityMap.get(mainEth).add(subEth);
+                }
+            }
+            
+            // Village (prefer native, fallback to russian, then english)
+            const village = family.location?.village?.main?.native || 
+                          family.location?.village?.main?.russian || 
+                          family.location?.village?.main?.english;
+            if (village) villages.add(village);
+            
+            // State (prefer native, fallback to russian, then english)
+            const state = family.location?.state?.main?.native || 
+                        family.location?.state?.main?.russian || 
+                        family.location?.state?.main?.english;
+            if (state) states.add(state);
+            
+            // Y-DNA Clade
+            const yHg = family.yDnaHaplogroup;
+            const yClade = typeof yHg === 'object' ? yHg.clade : yHg;
+            if (yClade) yClades.add(yClade);
+            
+            // mtDNA Clade
+            const mtHg = family.mtDnaHaplogroup;
+            const mtClade = typeof mtHg === 'object' ? mtHg.clade : mtHg;
+            if (mtClade) mtClades.add(mtClade);
+        });
+        
+        // Build flat list with hierarchy info
+        const ethnicities = [];
+        const sortedMains = Array.from(ethnicityMap.keys()).sort();
+        
+        // Map ethnicity names to flag files
+        const flagMap = {
+            'abazin': 'abazin-flag.png',
+            'abkhazian': 'abkhazian-flag.png',
+            'circassian': 'circassian-flag.png',
+            'karachay': 'karachay-flag.jpg',
+            'balkar': 'balkaria-flag.png',
+            'ossetian': 'ossetia-flag.png'
+        };
+        
+        sortedMains.forEach(main => {
+            // Add main ethnicity with flag file
+            const flagFile = flagMap[main.toLowerCase()] || null;
+            ethnicities.push({ 
+                value: main.toLowerCase(), 
+                label: main, 
+                isMain: true,
+                flag: flagFile
+            });
+            
+            // Add sub-ethnicities (indented with bullet)
+            const subs = Array.from(ethnicityMap.get(main)).sort();
+            subs.forEach(sub => {
+                ethnicities.push({ 
+                    value: sub.toLowerCase(), 
+                    label: `  • ${sub}`, // Bullet point + space
+                    isMain: false,
+                    parent: main.toLowerCase()
+                });
+            });
+        });
+        
+        return {
+            ethnicities: ethnicities,
+            villages: Array.from(villages).sort(),
+            states: Array.from(states).sort(),
+            yClades: Array.from(yClades).sort(),
+            mtClades: Array.from(mtClades).sort()
+        };
+    }
 
     /**
      * Calculate statistics
@@ -297,9 +640,22 @@ class DataLoader {
             return { totalProfiles: 0, yDnaHaplogroups: 0, villages: 0, ethnicities: 0 };
         }
 
-        const yDnaHaplogroups = [...new Set(this.heritageData.map(f => f.yDnaHaplogroup).filter(Boolean))].length;
-        const villages = [...new Set(this.heritageData.map(f => f.village).filter(Boolean))].length;
-        const ethnicities = [...new Set(this.heritageData.map(f => f.ethnicity_sub).filter(Boolean))].length;
+        const yDnaHaplogroups = [...new Set(
+            this.heritageData.map(f => {
+                const hg = f.yDnaHaplogroup;
+                if (typeof hg === 'string') return hg;
+                if (typeof hg === 'object' && hg) return hg.clade || null;
+                return null;
+            }).filter(Boolean)
+        )].length;
+        
+        const villages = [...new Set(
+            this.heritageData.map(f => f.location?.village?.main?.native || f.village).filter(Boolean)
+        )].length;
+        
+        const ethnicities = [...new Set(
+            this.heritageData.map(f => f.ethnicity?.main?.sub?.english || f.ethnicity_sub).filter(Boolean)
+        )].length;
 
         return {
             totalProfiles: this.heritageData.length,
@@ -321,12 +677,12 @@ class DataLoader {
         
         return this.heritageData.filter(family => {
             const searchFields = [
-                family.familyNameEnglish,
-                family.familyNameRussian,
-                family.familyNameNative,
+                family.familyName?.main?.english || family.familyName?.english || family.familyNameEnglish,
+                family.familyName?.main?.russian || family.familyName?.russian || family.familyNameRussian,
+                family.familyName?.main?.native || family.familyName?.native || family.familyNameNative,
                 family.id,
-                family.village,
-                family.ethnicity
+                family.location?.village?.main?.native || family.village,
+                family.ethnicity?.main?.english || family.ethnicity
             ];
 
             return searchFields.some(field => 

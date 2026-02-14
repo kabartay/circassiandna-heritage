@@ -146,40 +146,136 @@ class HeritageApp {
     }
 
     /**
-     * Initialize filter buttons
+     * Initialize filter dropdowns
      */
     initializeFilters() {
-        const filterSection = document.querySelector('.filter-section');
-        if (!filterSection) {
-            console.warn('⚠️ Filter section not found');
+        // Get filter statistics from data
+        const filterData = this.dataLoader.getFilterOptions();
+        
+        // Initialize custom Ethnicity dropdown with flags
+        this.initializeEthnicityDropdown(filterData.ethnicities);
+        
+        // Initialize Village filter
+        this.initializeFilterDropdown('villageFilter', [
+            { value: 'all', label: 'All Villages' },
+            ...filterData.villages.map(v => ({ value: v, label: v }))
+        ]);
+        
+        // Initialize State filter
+        this.initializeFilterDropdown('stateFilter', [
+            { value: 'all', label: 'All States' },
+            ...filterData.states.map(s => ({ value: s, label: s }))
+        ]);
+        
+        // Initialize Y-DNA Clade filter
+        this.initializeFilterDropdown('yCladeFilter', [
+            { value: 'all', label: 'All Y Clades' },
+            ...filterData.yClades.map(c => ({ value: c, label: c }))
+        ]);
+        
+        // Initialize mtDNA Clade filter
+        this.initializeFilterDropdown('mtCladeFilter', [
+            { value: 'all', label: 'All mt Clades' },
+            ...filterData.mtClades.map(c => ({ value: c, label: c }))
+        ]);
+        
+        console.log('✅ Filter dropdowns initialized');
+    }
+    
+    /**
+     * Initialize custom ethnicity dropdown with flag images
+     */
+    initializeEthnicityDropdown(ethnicities) {
+        const customSelect = document.getElementById('ethnicitySelect');
+        const customOptions = document.getElementById('ethnicityOptions');
+        const selectedText = customSelect?.querySelector('.selected-text');
+        
+        if (!customSelect || !customOptions || !selectedText) {
+            console.warn('⚠️ Custom ethnicity dropdown elements not found');
             return;
         }
-
-        filterSection.innerHTML = '';
         
-        const filters = this.config?.filters?.ethnicities || [
-            { key: 'all', label: 'All Families', active: true },
-            { key: 'abdzakh', label: 'Abdzakh', active: false },
-            { key: 'abkhazian', label: 'Abkhazian', active: false },
-            { key: 'kabardian', label: 'Kabardian', active: false },
-            { key: 'shapsough', label: 'Shapsough', active: false },
-            { key: 'ubykh', label: 'Ubykh', active: false }
-        ];
-
-        filters.forEach(filter => {
-            const button = document.createElement('button');
-            button.className = `filter-btn ${filter.active ? 'active' : ''}`;
-            button.textContent = filter.label;
-            button.dataset.ethnicity = filter.key; // Add data attribute
-            button.setAttribute('aria-pressed', filter.active ? 'true' : 'false');
-            button.setAttribute('role', 'button');
-
-            // Attach event listener instead of inline onclick
-            button.addEventListener('click', () => this.filterResults(filter.key));
-
-            filterSection.appendChild(button);
+        // Store current selection
+        this.currentEthnicity = 'all';
+        
+        // Build options HTML
+        let optionsHTML = '<div class="custom-option" data-value="all"><span class="option-text">All Ethnicities</span></div>';
+        
+        ethnicities.forEach(eth => {
+            const flagHTML = eth.flag ? 
+                `<img src="assets/img/${eth.flag}" alt="${eth.label}" class="option-flag">` : 
+                '';
+            const textClass = eth.isMain ? 'main' : 'sub';
+            optionsHTML += `
+                <div class="custom-option" data-value="${eth.value}">
+                    ${flagHTML}
+                    <span class="option-text ${textClass}">${eth.label}</span>
+                </div>
+            `;
         });
-
+        
+        customOptions.innerHTML = optionsHTML;
+        
+        // Toggle dropdown
+        customSelect.addEventListener('click', (e) => {
+            e.stopPropagation();
+            customSelect.classList.toggle('active');
+            customOptions.classList.toggle('active');
+        });
+        
+        // Handle option selection
+        customOptions.querySelectorAll('.custom-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const value = option.dataset.value;
+                const text = option.textContent.trim();
+                
+                // Update selected value
+                this.currentEthnicity = value;
+                selectedText.textContent = text;
+                
+                // Update visual state
+                customOptions.querySelectorAll('.custom-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                option.classList.add('selected');
+                
+                // Close dropdown
+                customSelect.classList.remove('active');
+                customOptions.classList.remove('active');
+                
+                // Apply filters
+                this.applyFilters();
+            });
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            customSelect.classList.remove('active');
+            customOptions.classList.remove('active');
+        });
+    }
+    
+    /**
+     * Initialize a single filter dropdown
+     */
+    initializeFilterDropdown(selectId, options) {
+        const select = document.getElementById(selectId);
+        if (!select) {
+            console.warn(`⚠️ ${selectId} not found`);
+            return;
+        }
+        
+        select.innerHTML = '';
+        options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option.value;
+            optionElement.textContent = option.label;
+            select.appendChild(optionElement);
+        });
+        
+        // Add event listener
+        select.addEventListener('change', () => this.applyFilters());
     }
 
     /**
@@ -269,7 +365,26 @@ class HeritageApp {
     }
 
     /**
-     * Filter results by ethnicity
+     * Apply all filters from dropdowns
+     */
+    applyFilters() {
+        const ethnicity = this.currentEthnicity || 'all';
+        const village = document.getElementById('villageFilter')?.value || 'all';
+        const state = document.getElementById('stateFilter')?.value || 'all';
+        const yClade = document.getElementById('yCladeFilter')?.value || 'all';
+        const mtClade = document.getElementById('mtCladeFilter')?.value || 'all';
+        
+        console.log('🔍 Applying filters:', { ethnicity, village, state, yClade, mtClade });
+        
+        // Store current filters
+        this.currentFilters = { ethnicity, village, state, yClade, mtClade };
+        this.displayedResults = 0;
+        
+        this.loadResults();
+    }
+    
+    /**
+     * Legacy filter method for backward compatibility
      */
     filterResults(ethnicity) {
         console.log('🔍 Filtering by:', ethnicity);
@@ -311,7 +426,10 @@ class HeritageApp {
         try {
             this.isLoading = true;
             this.showLoadingSpinner(); // show spinner at the start
-            console.log(`📥 Loading results (filter: ${this.currentFilter}, sort: ${this.currentSort})`);
+            
+            // Get filters (use new multi-filter or legacy single filter)
+            const filters = this.currentFilters || { ethnicity: this.currentFilter || 'all' };
+            console.log(`📥 Loading results with filters:`, filters);
 
             const feedContent = document.getElementById('feedContent');
             if (!feedContent) {
@@ -324,8 +442,8 @@ class HeritageApp {
                 feedContent.scrollTop = 0;
             }
 
-            // Get processed data
-            const processedData = this.dataLoader.getProcessedData(this.currentFilter, this.currentSort);
+            // Get processed data with current filters and sort
+            const processedData = this.dataLoader.getProcessedData(filters, this.currentSort);
 
             // Check if we have any data
             if (processedData.length === 0 && this.displayedResults === 0) {
@@ -407,7 +525,8 @@ class HeritageApp {
      * Load more results (infinite scroll)
      */
     async loadMoreResults() {
-        const processedData = this.dataLoader.getProcessedData(this.currentFilter, this.currentSort);
+        const filters = this.currentFilters || { ethnicity: this.currentFilter || 'all' };
+        const processedData = this.dataLoader.getProcessedData(filters, this.currentSort);
         
         if (this.displayedResults < processedData.length && !this.isLoading) {
             console.log('📜 Loading more results...');
@@ -420,7 +539,8 @@ class HeritageApp {
      */
     async checkIfNeedsMore() {
         const feedContent = document.getElementById('feedContent');
-        const processedData = this.dataLoader.getProcessedData(this.currentFilter, this.currentSort);
+        const filters = this.currentFilters || { ethnicity: this.currentFilter || 'all' };
+        const processedData = this.dataLoader.getProcessedData(filters, this.currentSort);
         
         // If content doesn't fill the container and we have more data, load it
         if (feedContent.scrollHeight <= feedContent.clientHeight && 
@@ -446,20 +566,31 @@ class HeritageApp {
      * Replace the createHeritageCard method in your HeritageApp class
      */
     createHeritageCard(data) {
+        // Helper to extract haplogroup value (handles both old string format and new object format)
+        const getHaplogroupValue = (hg, field) => {
+            if (!hg) return null;
+            if (typeof hg === 'string') return hg;
+            if (typeof hg === 'object') {
+                const value = hg[field];
+                return value || null;
+            }
+            return null;
+        };
+
         // Escape all text data to prevent XSS
         const safe = {
             id: this.escapeHtml(data.id),
-            ethnicity: this.escapeHtml(data.ethnicity_sub), // Use sub-ethnicity for display
-            familyNameEnglish: this.escapeHtml(data.familyNameEnglish),
-            familyNameRussian: this.escapeHtml(data.familyNameRussian),
-            familyNameNative: this.escapeHtml(data.familyNameNative),
-            village: this.escapeHtml(data.village),
-            yDnaHaplogroup: this.escapeHtml(data.yDnaHaplogroup),
-            yDnaSubclade: this.escapeHtml(data.yDnaSubclade),
-            yDnaTerminalSnp: this.escapeHtml(data.yDnaTerminalSnp),
-            mtDnaHaplogroup: this.escapeHtml(data.mtDnaHaplogroup),
-            mtDnaSubclade: this.escapeHtml(data.mtDnaSubclade),
-            mtDnaTerminalSnp: this.escapeHtml(data.mtDnaTerminalSnp),
+            ethnicity: this.escapeHtml(data.ethnicity?.main?.sub?.english || data.ethnicity_sub || 'Unknown'),
+            familyNameEnglish: this.escapeHtml(data.familyName?.main?.english || data.familyName?.english || data.familyNameEnglish),
+            familyNameRussian: this.escapeHtml(data.familyName?.main?.russian || data.familyName?.russian || data.familyNameRussian),
+            familyNameNative: this.escapeHtml(data.familyName?.main?.native || data.familyName?.native || data.familyNameNative),
+            village: this.escapeHtml(data.location?.village?.main?.native || data.village),
+            yDnaHaplogroup: this.escapeHtml(getHaplogroupValue(data.yDnaHaplogroup, 'clade')),
+            yDnaSubclade: this.escapeHtml(getHaplogroupValue(data.yDnaHaplogroup, 'subclade')),
+            yDnaTerminalSnp: this.escapeHtml(getHaplogroupValue(data.yDnaHaplogroup, 'terminalSnp')),
+            mtDnaHaplogroup: this.escapeHtml(getHaplogroupValue(data.mtDnaHaplogroup, 'clade')),
+            mtDnaSubclade: this.escapeHtml(getHaplogroupValue(data.mtDnaHaplogroup, 'subclade')),
+            mtDnaTerminalSnp: this.escapeHtml(getHaplogroupValue(data.mtDnaHaplogroup, 'terminalSnp')),
             date: this.escapeHtml(this.formatDate(data.date))
         };
 
@@ -492,7 +623,7 @@ class HeritageApp {
 
         return `
             <div class="heritage-result" 
-                data-ethnicity="${data.ethnicity_sub ? data.ethnicity_sub.toLowerCase() : ''}" 
+                data-ethnicity="${(data.ethnicity?.main?.sub?.english || data.ethnicity_sub || '').toLowerCase()}" 
                 data-id="${safe.id}">
 
                 <!-- COLLAPSED VIEW - Summary Line -->
@@ -513,7 +644,7 @@ class HeritageApp {
                             </div>
                             <div class="summary-item">
                                 <span class="summary-label">Y-DNA:</span>
-                                <span class="summary-value">${safe.yDnaHaplogroup}</span>
+                                <span class="summary-value">${data.gender === 'female' ? '' : safe.yDnaHaplogroup}</span>
                             </div>
                             <div class="summary-item">
                                 <span class="summary-label">mtDNA:</span>
@@ -564,15 +695,15 @@ class HeritageApp {
                             </div>
                             <div class="genetic-marker">
                                 <div class="marker-label">Haplogroup</div>
-                                <div class="marker-value">${safe.yDnaHaplogroup}</div>
+                                <div class="marker-value">${data.gender === 'female' ? '' : safe.yDnaHaplogroup}</div>
                             </div>
                             <div class="genetic-marker">
                                 <div class="marker-label">Subclade</div>
-                                <div class="marker-value">${safe.yDnaSubclade}</div>
+                                <div class="marker-value">${data.gender === 'female' ? '' : safe.yDnaSubclade}</div>
                             </div>
                             <div class="genetic-marker">
                                 <div class="marker-label">Terminal SNP</div>
-                                <div class="marker-value">${safe.yDnaTerminalSnp}</div>
+                                <div class="marker-value">${data.gender === 'female' ? '' : safe.yDnaTerminalSnp}</div>
                             </div>
                         </div>
                         
@@ -597,13 +728,19 @@ class HeritageApp {
                     </div>
                     
                     <div class="result-actions">
-                        ${createActionButton('yDnaClassicTree', 'Y-DNA Classic Tree', '🌳', 'y-dna-btn')}
-                        ${createActionButton('yDnaTimeTree', 'Y-DNA Time Tree', '⏳', 'y-dna-btn')}
-                        ${createActionButton('yDnaGroupTree', 'Y-DNA Group Time Tree', '👥', 'y-dna-btn')}
+                        ${data.gender === 'female' ? `
+                        <button class="action-btn y-dna-btn disabled tree-classic" disabled title="Not available for females">🌳 Y-DNA Classic Tree</button>
+                        <button class="action-btn y-dna-btn disabled tree-time" disabled title="Not available for females">🌳 Y-DNA Time Tree</button>
+                        <button class="action-btn y-dna-btn disabled tree-group" disabled title="Not available for females">🌳 Y-DNA Group Time Tree</button>
+                        ` : `
+                        ${createActionButton('yDnaClassicTree', 'Y-DNA Classic Tree', '🌳', 'y-dna-btn tree-classic')}
+                        ${createActionButton('yDnaTimeTree', 'Y-DNA Time Tree', '🌳', 'y-dna-btn tree-time tree-time')}
+                        ${createActionButton('yDnaGroupTree', 'Y-DNA Group Time Tree', '🌳', 'y-dna-btn tree-group')}
+                        `}
                         ${createActionButton('fullReport', 'Full Report', '📄', 'secondary')}
-                        ${createActionButton('mtDnaClassicTree', 'mtDNA Classic Tree', '🌲', 'mt-dna-btn')}
-                        ${createActionButton('mtDnaTimeTree', 'mtDNA Time Tree', '⌚', 'mt-dna-btn')}
-                        ${createActionButton('mtDnaGroupTree', 'mtDNA Group Time Tree', '👪', 'mt-dna-btn')}
+                        ${createActionButton('mtDnaClassicTree', 'mtDNA Classic Tree', '🌲', 'mt-dna-btn tree-classic')}
+                        ${createActionButton('mtDnaTimeTree', 'mtDNA Time Tree', '🌲', 'mt-dna-btn tree-time')}
+                        ${createActionButton('mtDnaGroupTree', 'mtDNA Group Time Tree', '🌲', 'mt-dna-btn tree-group')}
                         ${createActionButton('relations', 'Relations', '🔗', 'secondary')}
                     </div>
                 </div>
@@ -673,10 +810,25 @@ class HeritageApp {
         // Append to feed
         feedContent.appendChild(container);
 
-        // Attach event
+        // Attach event - reset all filters to "all"
         const showAllBtn = document.getElementById('showAllFamiliesBtn');
         if (showAllBtn) {
-            showAllBtn.addEventListener('click', () => this.filterResults('all'));
+            showAllBtn.addEventListener('click', () => {
+                // Reset custom ethnicity dropdown
+                this.currentEthnicity = 'all';
+                const selectedText = document.querySelector('#ethnicitySelect .selected-text');
+                if (selectedText) selectedText.textContent = 'All Ethnicities';
+                
+                // Reset standard dropdowns to "all"
+                const dropdowns = ['villageFilter', 'stateFilter', 'yCladeFilter', 'mtCladeFilter'];
+                dropdowns.forEach(id => {
+                    const dropdown = document.getElementById(id);
+                    if (dropdown) dropdown.value = 'all';
+                });
+                
+                // Apply filters (all set to "all")
+                this.applyFilters();
+            });
         }
     }
 

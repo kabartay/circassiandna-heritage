@@ -62,8 +62,28 @@
 
         <!-- Filter and Sort Bar -->
         <nav class="filter-bar" aria-label="Filter and Sort Options">
-            <div class="filter-section">
-                <!-- Filter buttons will be populated by JavaScript -->
+            <div class="filter-dropdowns">
+                <div class="custom-dropdown" id="ethnicityDropdown">
+                    <div class="custom-select" id="ethnicitySelect">
+                        <span class="selected-text">All Ethnicities</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="custom-options" id="ethnicityOptions">
+                        <!-- Options populated by JavaScript -->
+                    </div>
+                </div>
+                <select id="villageFilter" class="filter-select" aria-label="Filter by village">
+                    <!-- Options populated by JavaScript -->
+                </select>
+                <select id="stateFilter" class="filter-select" aria-label="Filter by state">
+                    <!-- Options populated by JavaScript -->
+                </select>
+                <select id="yCladeFilter" class="filter-select" aria-label="Filter by Y-DNA clade">
+                    <!-- Options populated by JavaScript -->
+                </select>
+                <select id="mtCladeFilter" class="filter-select" aria-label="Filter by mtDNA clade">
+                    <!-- Options populated by JavaScript -->
+                </select>
             </div>
             <div class="sort-section">
                 <label for="sortSelect" class="sort-label">Sort by:</label>
