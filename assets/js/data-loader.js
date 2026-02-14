@@ -373,14 +373,8 @@ class DataLoader {
                 
                 // If filtering by main ethnicity, show all its sub-ethnicities
                 // If filtering by sub ethnicity, show only that specific sub
-                if (mainMatch) {
-                    // User selected main ethnicity - show this family
-                    return true;
-                } else if (subMatch) {
-                    // User selected sub ethnicity - show this family
-                    return true;
-                } else {
-                    // No match
+                if (!mainMatch && !subMatch) {
+                    // No ethnicity match - exclude this family
                     return false;
                 }
             }
