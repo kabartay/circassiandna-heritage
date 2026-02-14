@@ -1,10 +1,15 @@
 {
-  "devDependencies": {
-    "gh-pages": "^6.3.0"
-  },
+  "name": "circassiandna-heritage",
+  "version": "1.0.0",
+  "description": "Circassian DNA Heritage Feed",
   "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000",
     "build": "echo \"No build needed - static site\"",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
