@@ -51,6 +51,10 @@
                 <span class="stat-number" data-stat="yDnaHaplogroups">0</span>
             </div>
             <div class="stat-item">
+                <span class="stat-label">mtDNA Haplogroups</span>
+                <span class="stat-number" data-stat="mtDnaHaplogroups">0</span>
+            </div>
+            <div class="stat-item">
                 <span class="stat-label">Villages</span>
                 <span class="stat-number" data-stat="villages">0</span>
             </div>
@@ -62,34 +66,53 @@
 
         <!-- Filter and Sort Bar -->
         <nav class="filter-bar" aria-label="Filter and Sort Options">
-            <div class="filter-dropdowns">
-                <div class="custom-dropdown" id="ethnicityDropdown">
-                    <div class="custom-select" id="ethnicitySelect">
-                        <span class="selected-text">All Ethnicities</span>
-                        <span class="dropdown-arrow">▼</span>
+            <div class="filter-row">
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <input type="text" 
+                           id="searchInput" 
+                           class="search-input" 
+                           placeholder="Search by name, village, etc..."
+                           aria-label="Search families">
+                    <button id="clearSearch" class="clear-search-btn" aria-label="Clear search" style="display: none;">✕</button>
+                </div>
+                
+                <div class="filter-dropdowns">
+                    <div class="custom-dropdown" id="ethnicityDropdown">
+                        <div class="custom-select" id="ethnicitySelect">
+                            <span class="selected-text">All Ethnicities</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </div>
+                        <div class="custom-options" id="ethnicityOptions">
+                            <!-- Options populated by JavaScript -->
+                        </div>
                     </div>
-                    <div class="custom-options" id="ethnicityOptions">
-                        <!-- Options populated by JavaScript -->
+                    <div class="custom-dropdown" id="locationDropdown">
+                        <div class="custom-select" id="locationSelect">
+                            <span class="selected-text">All Locations</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </div>
+                        <div class="custom-options location-options" id="locationOptions">
+                            <!-- Options populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="custom-dropdown" id="cladeDropdown">
+                        <div class="custom-select" id="cladeSelect">
+                            <span class="selected-text">All Clades</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </div>
+                        <div class="custom-options clade-options" id="cladeOptions">
+                            <!-- Options populated by JavaScript -->
+                        </div>
                     </div>
                 </div>
-                <select id="villageFilter" class="filter-select" aria-label="Filter by village">
-                    <!-- Options populated by JavaScript -->
-                </select>
-                <select id="stateFilter" class="filter-select" aria-label="Filter by state">
-                    <!-- Options populated by JavaScript -->
-                </select>
-                <select id="yCladeFilter" class="filter-select" aria-label="Filter by Y-DNA clade">
-                    <!-- Options populated by JavaScript -->
-                </select>
-                <select id="mtCladeFilter" class="filter-select" aria-label="Filter by mtDNA clade">
-                    <!-- Options populated by JavaScript -->
-                </select>
-            </div>
-            <div class="sort-section">
-                <label for="sortSelect" class="sort-label">Sort by:</label>
-                <select id="sortSelect" class="sort-select" aria-label="Sort heritage data">
-                    <!-- Sort options will be populated by JavaScript -->
-                </select>
+                
+                <div class="sort-section">
+                    <span class="sort-label">Sort by:</span>
+                    <select id="sortSelect" class="sort-select" aria-label="Sort heritage data">
+                        <!-- Sort options will be populated by JavaScript -->
+                    </select>
+                </div>
             </div>
         </nav>
 
@@ -102,8 +125,12 @@
     </div>
 
     <!-- JavaScript Files - Load in correct order -->
-    <script src="./assets/js/data-loader.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script>
+        // Cache busting for JS files
+        const jsVersion = Date.now();
+        document.write(`<script src="./assets/js/data-loader.js?v=${jsVersion}"><\/script>`);
+        document.write(`<script src="./assets/js/main.js?v=${jsVersion}"><\/script>`);
+    </script>
 
     <!-- Initialize Application -->
     <script defer>

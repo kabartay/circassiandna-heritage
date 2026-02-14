@@ -8,7 +8,7 @@ class DataLoader {
         this.heritageData = null;
         this.config = null;
         this.basePath = this.getBasePath();
-        this.defaultVersion = '1.3.0';
+        this.cacheVersion = Date.now(); // Use timestamp for cache busting
 
         console.log('📁 DataLoader initialized with base path:', this.basePath);
     }
@@ -41,9 +41,8 @@ class DataLoader {
         try {
             console.log('🔄 Loading data from:', `${this.basePath}data/heritage-data.json`);
             
-            // Use metadata version for cache busting instead of Date.now()
-            const version = this.config?.app?.version || this.defaultVersion;
-            const response = await fetch(`${this.basePath}data/heritage-data.json?v=${version}`);
+            // Use timestamp for cache busting
+            const response = await fetch(`${this.basePath}data/heritage-data.json?v=${this.cacheVersion}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -77,8 +76,7 @@ class DataLoader {
         }
 
         try {
-            const version = '1.3.0'; // Use a static version for cache busting
-            const url = `${this.basePath}data/config.json?v=${version}`;
+            const url = `${this.basePath}data/config.json?v=${this.cacheVersion}`;
             console.log('🔄 Loading config from:', url);
 
             const response = await fetch(url);
@@ -224,7 +222,7 @@ class DataLoader {
             app: {
                 title: "Circassian DNA Heritage Feed",
                 subtitle: "Genetic lineage and ancestral connections",
-                version: "1.3.0"
+                version: "2.0.0"
             },
             filters: {
                 ethnicities: [
@@ -359,27 +357,67 @@ class DataLoader {
         }
         
         return this.heritageData.filter(family => {
-            // Ethnicity filter (hierarchical)
+            // Ethnicity filter (hierarchical, supports arrays for multi-select)
+            if (filters.ethnicities && filters.ethnicities.length > 0 && !filters.ethnicities.includes('all')) {
+                const mainEthnicity = family.ethnicity?.main?.english;
+                const subEthnicity = family.ethnicity?.main?.sub?.english;
+                
+                // Check if any selected ethnicity matches
+                const hasMatch = filters.ethnicities.some(filterEth => {
+                    const filterEthLower = filterEth.toLowerCase();
+                    const mainMatch = mainEthnicity && mainEthnicity.toLowerCase() === filterEthLower;
+                    const subMatch = subEthnicity && subEthnicity.toLowerCase() === filterEthLower;
+                    return mainMatch || subMatch;
+                });
+                
+                if (!hasMatch) {
+                    return false;
+                }
+            }
+            
+            // Legacy single ethnicity filter (backward compatibility)
             if (filters.ethnicity && filters.ethnicity !== 'all') {
                 const mainEthnicity = family.ethnicity?.main?.english;
                 const subEthnicity = family.ethnicity?.main?.sub?.english;
                 const filterEth = filters.ethnicity.toLowerCase();
                 
-                // Check if filter matches main ethnicity
                 const mainMatch = mainEthnicity && mainEthnicity.toLowerCase() === filterEth;
-                
-                // Check if filter matches sub ethnicity
                 const subMatch = subEthnicity && subEthnicity.toLowerCase() === filterEth;
                 
-                // If filtering by main ethnicity, show all its sub-ethnicities
-                // If filtering by sub ethnicity, show only that specific sub
                 if (!mainMatch && !subMatch) {
-                    // No ethnicity match - exclude this family
                     return false;
                 }
             }
             
-            // Village filter
+            // Village filter (supports arrays for multi-select)
+            if (filters.villages && filters.villages.length > 0 && !filters.villages.includes('all')) {
+                const villageNative = family.location?.village?.main?.native;
+                const villageRussian = family.location?.village?.main?.russian;
+                const villageEnglish = family.location?.village?.main?.english;
+                
+                const villageMatch = 
+                    filters.villages.includes(villageNative) ||
+                    filters.villages.includes(villageRussian) ||
+                    filters.villages.includes(villageEnglish);
+                
+                if (!villageMatch) return false;
+            }
+            
+            // State filter (supports arrays for multi-select)
+            if (filters.states && filters.states.length > 0 && !filters.states.includes('all')) {
+                const stateNative = family.location?.state?.main?.native;
+                const stateRussian = family.location?.state?.main?.russian;
+                const stateEnglish = family.location?.state?.main?.english;
+                
+                const stateMatch = 
+                    filters.states.includes(stateNative) ||
+                    filters.states.includes(stateRussian) ||
+                    filters.states.includes(stateEnglish);
+                
+                if (!stateMatch) return false;
+            }
+            
+            // Legacy single village filter (backward compatibility)
             if (filters.village && filters.village !== 'all') {
                 const villageNative = family.location?.village?.main?.native;
                 const villageRussian = family.location?.village?.main?.russian;
@@ -393,7 +431,7 @@ class DataLoader {
                 if (!villageMatch) return false;
             }
             
-            // State filter
+            // Legacy single state filter (backward compatibility)
             if (filters.state && filters.state !== 'all') {
                 const stateNative = family.location?.state?.main?.native;
                 const stateRussian = family.location?.state?.main?.russian;
@@ -605,12 +643,12 @@ class DataLoader {
                 flag: flagFile
             });
             
-            // Add sub-ethnicities (indented with bullet)
+            // Add sub-ethnicities
             const subs = Array.from(ethnicityMap.get(main)).sort();
             subs.forEach(sub => {
                 ethnicities.push({ 
                     value: sub.toLowerCase(), 
-                    label: `  • ${sub}`, // Bullet point + space
+                    label: sub,
                     isMain: false,
                     parent: main.toLowerCase()
                 });
@@ -647,6 +685,15 @@ class DataLoader {
             this.heritageData.map(f => f.location?.village?.main?.native || f.village).filter(Boolean)
         )].length;
         
+        const mtDnaHaplogroups = [...new Set(
+            this.heritageData.map(f => {
+                const hg = f.mtDnaHaplogroup;
+                if (typeof hg === 'string') return hg;
+                if (typeof hg === 'object' && hg) return hg.clade || null;
+                return null;
+            }).filter(Boolean)
+        )].length;
+        
         const ethnicities = [...new Set(
             this.heritageData.map(f => f.ethnicity?.main?.sub?.english || f.ethnicity_sub).filter(Boolean)
         )].length;
@@ -654,6 +701,7 @@ class DataLoader {
         return {
             totalProfiles: this.heritageData.length,
             yDnaHaplogroups,
+            mtDnaHaplogroups,
             villages,
             ethnicities
         };
@@ -671,12 +719,39 @@ class DataLoader {
         
         return this.heritageData.filter(family => {
             const searchFields = [
-                family.familyName?.main?.english || family.familyName?.english || family.familyNameEnglish,
-                family.familyName?.main?.russian || family.familyName?.russian || family.familyNameRussian,
-                family.familyName?.main?.native || family.familyName?.native || family.familyNameNative,
+                // Family name (all languages)
+                family.familyName?.main?.english,
+                family.familyName?.main?.russian,
+                family.familyName?.main?.native,
+                family.familyName?.english,
+                family.familyName?.russian,
+                family.familyName?.native,
+                family.familyNameEnglish,
+                family.familyNameRussian,
+                family.familyNameNative,
+                // ID
                 family.id,
-                family.location?.village?.main?.native || family.village,
-                family.ethnicity?.main?.english || family.ethnicity
+                // Village (all languages)
+                family.location?.village?.main?.native,
+                family.location?.village?.main?.russian,
+                family.location?.village?.main?.english,
+                family.village,
+                // State (all languages)
+                family.location?.state?.main?.native,
+                family.location?.state?.main?.russian,
+                family.location?.state?.main?.english,
+                // Region (all languages)
+                family.location?.region?.main?.native,
+                family.location?.region?.main?.russian,
+                family.location?.region?.main?.english,
+                // Ethnicity (all languages)
+                family.ethnicity?.main?.english,
+                family.ethnicity?.main?.russian,
+                family.ethnicity?.main?.native,
+                family.ethnicity?.main?.sub?.english,
+                family.ethnicity?.main?.sub?.russian,
+                family.ethnicity?.main?.sub?.native,
+                family.ethnicity
             ];
 
             return searchFields.some(field => 

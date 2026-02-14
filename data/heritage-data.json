@@ -17,82 +17,82 @@
         }
       },
       "ethnicity": {
-          "main": {
-              "native": "Адыгэ",
-              "english": "Circassian",
-              "russian": "Черкес",
-              "sub": {
-                  "native": "Убых",
-                  "english": "Ubykh",
-                  "russian": "Убых"
-              }
-          },
-          "pre": {
-              "native": null,
-              "english": null,
-              "russian": null,
-              "sub": {
-                  "native": null,
-                  "english": null,
-                  "russian": null
-              }
+        "main": {
+          "native": "Адыгэ",
+          "english": "Circassian",
+          "russian": "Черкес",
+          "sub": {
+            "native": "Убых",
+            "english": "Ubykh",
+            "russian": "Убых"
           }
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null,
+          "sub": {
+            "native": null,
+            "english": null,
+            "russian": null
+          }
+        }
       },
       "location": {
         "coordinates": {
-            "main": {
-                "coordinates": {
-                    "latitude": null,
-                    "longitude": null
-                }
-            },
-            "pre": {
-                "coordinates": {
-                    "latitude": null,
-                    "longitude": null
-                }
+          "main": {
+            "coordinates": {
+              "latitude": null,
+              "longitude": null
             }
+          },
+          "pre": {
+            "coordinates": {
+              "latitude": null,
+              "longitude": null
+            }
+          }
         },
         "village": {
-            "main": {
-                "native": "Бжъэдыгъухьабл",
-                "russian": null,
-                "english": null
-            },
-            "pre": {
-                "native": null,
-                "russian": null,
-                "english": null
-            }
+          "main": {
+            "native": "Бжъэдыгъухьабл",
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
         },
         "region": {
-            "main": {
-                "native": null,
-                "russian": null,
-                "english": null
-            },
-            "pre": {
-                "native": null,
-                "russian": null,
-                "english": null
-            }
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
         },
         "state": {
-            "main": {
-                "native": null,
-                "russian": null,
-                "english": "Adygea"
-            },
-            "pre": {
-                "native": null,
-                "russian": null,
-                "english": null
-            }
+          "main": {
+            "native": null,
+            "russian": "Адыгея",
+            "english": "Adygea"
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
         }
       },
       "yDnaHaplogroup": {
         "root": "R",
-        "clade": "R1a",
+        "clade": "R1a1",
         "subclade": "R-Z93",
         "terminalSnp": "R-BY63726",
         "SnpList": null
@@ -115,7 +115,7 @@
         "relations": null
       },
       "metadata": {
-        "lab": "FamilyTreeDNA"      
+        "lab": "FamilyTreeDNA"
       }
     },
     {
@@ -206,7 +206,7 @@
       },
       "yDnaHaplogroup": {
         "root": "R",
-        "clade": "R1a",
+        "clade": "R1a1",
         "subclade": "R-Z93",
         "terminalSnp": "R-BY63726",
         "SnpList": null
@@ -308,7 +308,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Адыгея",
             "english": "Adygea"
           },
           "pre": {
@@ -422,7 +422,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Кабардино-Балкария",
             "english": "Kabardino-Balkaria"
           },
           "pre": {
@@ -536,7 +536,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Кабардино-Балкария",
             "english": "Kabardino-Balkaria"
           },
           "pre": {
@@ -548,7 +548,7 @@
       },
       "yDnaHaplogroup": {
         "root": "J",
-        "clade": "J2a",
+        "clade": "J2a1",
         "subclade": "J-P81",
         "terminalSnp": "J-P81",
         "SnpList": null
@@ -650,7 +650,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Кабардино-Балкария",
             "english": "Kabardino-Balkaria"
           },
           "pre": {
@@ -662,7 +662,7 @@
       },
       "yDnaHaplogroup": {
         "root": "J",
-        "clade": "J2a",
+        "clade": "J2a1",
         "subclade": "J-P81",
         "terminalSnp": "J-FTA53550",
         "SnpList": null
@@ -764,7 +764,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Кабардино-Балкария",
             "english": "Kabardino-Balkaria"
           },
           "pre": {
@@ -776,7 +776,7 @@
       },
       "yDnaHaplogroup": {
         "root": "J",
-        "clade": "J2a",
+        "clade": "J2a1",
         "subclade": "J-P81",
         "terminalSnp": "J-FTA52766",
         "SnpList": null
@@ -878,7 +878,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Адыгея",
             "english": "Adygea"
           },
           "pre": {
@@ -890,7 +890,7 @@
       },
       "yDnaHaplogroup": {
         "root": "R",
-        "clade": "R1a",
+        "clade": "R1a1",
         "subclade": "R-Z93",
         "terminalSnp": "R-YP5233",
         "SnpList": null
@@ -992,7 +992,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Абхазия",
             "english": "Abkhazia"
           },
           "pre": {
@@ -1004,7 +1004,7 @@
       },
       "yDnaHaplogroup": {
         "root": "R",
-        "clade": "R1a",
+        "clade": "R1a1",
         "subclade": "R-Z93",
         "terminalSnp": "R-FTA50500",
         "SnpList": null
@@ -1118,7 +1118,7 @@
       },
       "yDnaHaplogroup": {
         "root": "R",
-        "clade": "R1a",
+        "clade": "R1a1",
         "subclade": "R-Z93",
         "terminalSnp": "R-FT198355",
         "SnpList": null
@@ -1220,7 +1220,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Кабардино-Балкария",
             "english": "Kabardino-Balkaria"
           },
           "pre": {
@@ -1232,7 +1232,7 @@
       },
       "yDnaHaplogroup": {
         "root": "R",
-        "clade": "R1a",
+        "clade": "R1a1",
         "subclade": "R-Z93",
         "terminalSnp": "R-FT198880",
         "SnpList": null
@@ -1334,7 +1334,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Карачаево-Черкесия",
             "english": "Karachay-Cherkessia"
           },
           "pre": {
@@ -1346,7 +1346,7 @@
       },
       "yDnaHaplogroup": {
         "root": "J",
-        "clade": "J1a",
+        "clade": "J1a2",
         "subclade": "J-P58",
         "terminalSnp": "J-ZS2138",
         "SnpList": null
@@ -1562,7 +1562,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Карачаево-Черкесия",
             "english": "Karachay-Cherkessia"
           },
           "pre": {
@@ -1676,7 +1676,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Карачаево-Черкесия",
             "english": "Karachay-Cherkessia"
           },
           "pre": {
@@ -1790,7 +1790,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Карачаево-Черкесия",
             "english": "Karachay-Cherkessia"
           },
           "pre": {
@@ -1904,7 +1904,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Кабардино-Балкария",
             "english": "Kabardino-Balkaria"
           },
           "pre": {
@@ -2018,7 +2018,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Кабардино-Балкария",
             "english": "Kabardino-Balkaria"
           },
           "pre": {
@@ -2132,7 +2132,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Кабардино-Балкария",
             "english": "Kabardino-Balkaria"
           },
           "pre": {
@@ -2246,7 +2246,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Кабардино-Балкария",
             "english": "Kabardino-Balkaria"
           },
           "pre": {
@@ -2360,7 +2360,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Кабардино-Балкария",
             "english": "Kabardino-Balkaria"
           },
           "pre": {
@@ -2474,7 +2474,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Северная Осетия",
             "english": "North Ossetia"
           },
           "pre": {
@@ -2588,7 +2588,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Северная Осетия",
             "english": "North Ossetia"
           },
           "pre": {
@@ -2600,7 +2600,7 @@
       },
       "yDnaHaplogroup": {
         "root": "R",
-        "clade": "R1b",
+        "clade": "R1b1",
         "subclade": "R-Z2103",
         "terminalSnp": null,
         "SnpList": null
@@ -2702,7 +2702,7 @@
         "state": {
           "main": {
             "native": null,
-            "russian": null,
+            "russian": "Южная Осетия",
             "english": "South Ossetia"
           },
           "pre": {
@@ -2714,7 +2714,7 @@
       },
       "yDnaHaplogroup": {
         "root": "J",
-        "clade": "J2a",
+        "clade": "J2a1",
         "subclade": "J-SK1313",
         "terminalSnp": null,
         "SnpList": null
