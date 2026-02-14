@@ -139,10 +139,149 @@ body {
     flex-wrap: wrap;
 }
 
-.filter-section {
+.filter-dropdowns {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     flex-wrap: wrap;
+    align-items: center;
+    flex: 1;
+}
+
+.filter-select {
+    background: white;
+    border: 2px solid var(--border-medium);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    min-width: 160px;
+}
+
+/* Custom dropdown for ethnicity filter with flags */
+.custom-dropdown {
+    position: relative;
+    min-width: 180px;
+}
+
+.custom-select {
+    background: white;
+    border: 2px solid var(--border-medium);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.custom-select:hover {
+    border-color: var(--male-color);
+    background: var(--bg-medium);
+}
+
+.custom-select.active {
+    border-color: var(--male-color);
+    box-shadow: 0 0 0 3px rgba(71, 117, 113, 0.15);
+}
+
+.dropdown-arrow {
+    margin-left: 8px;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+}
+
+.custom-select.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.custom-options {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid var(--border-medium);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-height: 350px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+}
+
+.custom-options.active {
+    display: block;
+}
+
+.custom-option {
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+}
+
+.custom-option:hover {
+    background: var(--bg-light);
+}
+
+.custom-option.selected {
+    background: var(--male-color-hover);
+    color: white;
+}
+
+.option-flag {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.option-text {
+    flex: 1;
+}
+
+.option-text.main {
+    font-weight: 600;
+}
+
+.option-text.sub {
+    padding-left: 30px;
+    font-weight: 400;
+}
+
+/* Specific widths for each filter */
+#stateFilter {
+    min-width: 96px; /* 40% less than 160px */
+}
+
+#yCladeFilter {
+    min-width: 96px; /* 40% less than 160px */
+}
+
+#mtCladeFilter {
+    min-width: 96px; /* 40% less than 160px */
+}
+
+.filter-select:hover {
+    border-color: var(--male-color);
+    background: var(--bg-medium);
+}
+
+.filter-select:focus {
+    border-color: var(--male-color);
+    box-shadow: 0 0 0 3px rgba(71, 117, 113, 0.15);
+    outline: none;
 }
 
 .sort-section {
@@ -176,6 +315,13 @@ body {
 .sort-select:focus {
     border-color: var(--male-color);
     box-shadow: 0 0 0 3px rgba(71, 117, 113, 0.15);
+}
+
+/* Legacy filter buttons - keep for backward compatibility */
+.filter-section {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .filter-btn {
@@ -476,6 +622,34 @@ body {
     background: var(--female-color);  /* Solid purple */
 }
 
+/* Tree button color variations for Y-DNA (males) */
+.action-btn.y-dna-btn.tree-classic {
+    background: var(--male-color) !important;  /* Keep original dark teal */
+}
+
+.action-btn.y-dna-btn.tree-time {
+    background: #20B2AA !important;  /* Light sea green */
+}
+
+.action-btn.y-dna-btn.tree-group {
+    background: #90EE90 !important;  /* Light green */
+    color: #2c3e50 !important;  /* Darker text for contrast */
+}
+
+/* Tree button color variations for mtDNA (females) */
+.action-btn.mt-dna-btn.tree-classic {
+    background: var(--female-color) !important;  /* Keep original purple */
+}
+
+.action-btn.mt-dna-btn.tree-time {
+    background: #87CEEB !important;  /* Light sea blue */
+}
+
+.action-btn.mt-dna-btn.tree-group {
+    background: #ADD8E6 !important;  /* Light blue */
+    color: #2c3e50 !important;  /* Darker text for contrast */
+}
+
 .action-btn.secondary {
     background: var(--text-secondary);  /* Solid gray */
 }
@@ -583,6 +757,14 @@ a.action-btn {
     gap: 10px;
 }
 
+.feed-header .flag-icon {
+    height: 30px;
+    width: auto;
+    max-width: 45px;
+    object-fit: contain;
+    display: block;
+}
+
 .feed-header p {
     opacity: 0.9;
     font-size: 1.05rem;
@@ -646,4 +828,37 @@ a.action-btn {
 
 .danger-btn:hover {
   background: var(--accent-danger-hover);
+}
+
+/* Responsive design for filter dropdowns */
+@media (max-width: 1024px) {
+    .filter-dropdowns {
+        flex-wrap: wrap;
+    }
+    
+    .filter-select {
+        min-width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-dropdowns {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .filter-select {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .sort-section {
+        width: 100%;
+        justify-content: space-between;
+    }
 }
