@@ -1,0 +1,302 @@
+/* Mobile-only styles - does not affect desktop */
+
+/* Tablets and below (768px) */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        overflow-x: hidden;
+    }
+    
+    .feed-container {
+        overflow-x: hidden;
+    }
+    
+    .feed-header {
+        padding: 25px 15px;
+    }
+    
+    .feed-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .feed-header h1 .header-text {
+        font-size: 0;
+    }
+    
+    .feed-header h1 .header-text::before {
+        content: 'Circassian DNA';
+        font-size: 1.5rem;
+    }
+    
+    .feed-header .flag-icon {
+        height: 24px;
+        max-width: 36px;
+    }
+    
+    .feed-header p {
+        font-size: 0.9rem;
+    }
+    
+    .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 8px;
+        padding: 12px 10px;
+    }
+    
+    /* Hide Villages stat on mobile */
+    .stat-item:nth-child(4) {
+        display: none;
+    }
+    
+    /* Reorder stats: Profiles, Ethnicities, Y-DNA, mtDNA */
+    .stat-item:nth-child(1) { order: 1; }
+    .stat-item:nth-child(5) { order: 2; }
+    .stat-item:nth-child(2) { order: 3; }
+    .stat-item:nth-child(3) { order: 4; }
+    
+    .stat-number {
+        font-size: 1.3rem;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    .tab-navigation {
+        gap: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .tab-btn {
+        padding: 14px 12px;
+        min-width: 60px;
+    }
+    
+    .tab-label {
+        display: none;
+    }
+    
+    .tab-icon {
+        font-size: 1.4rem;
+    }
+    
+    .filter-bar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px;
+    }
+    
+    .search-container {
+        max-width: none;
+        width: 100%;
+    }
+    
+    .filter-dropdowns {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .filter-select {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .sort-section {
+        width: 100%;
+    }
+    
+    .map-view {
+        height: 400px;
+    }
+    
+    .map-tabs {
+        gap: 6px;
+        padding: 10px;
+        justify-content: center;
+    }
+    
+    .map-tab-btn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    
+    .stats-container,
+    .about-container {
+        padding: 20px 10px;
+        overflow-x: hidden;
+    }
+    
+    .charts-grid {
+        grid-template-columns: 1fr;
+        overflow: hidden;
+    }
+    
+    .chart-card {
+        padding: 12px;
+        overflow: hidden;
+    }
+    
+    .chart-container {
+        max-width: 100%;
+        width: 100%;
+        overflow: hidden;
+        transform: scale(0.90);
+        transform-origin: center top;
+        margin-bottom: -20px;
+    }
+    
+    .chart-container canvas {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* Mobile card improvements */
+    .heritage-result {
+        padding: 12px 15px;
+        margin-bottom: 8px;
+    }
+    
+    .summary-avatar {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .summary-name {
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+    
+    .summary-info {
+        flex-wrap: wrap;
+        gap: 8px 12px;
+    }
+    
+    .summary-item {
+        gap: 6px;
+    }
+    
+    .summary-label {
+        font-size: 0.75rem;
+    }
+    
+    .summary-value {
+        font-size: 0.8rem;
+    }
+    
+    .expand-icon {
+        font-size: 1.1rem;
+    }
+    
+    /* Expanded card on mobile */
+    .heritage-result.expanded {
+        padding: 15px;
+    }
+    
+    .genetic-data {
+        gap: 12px;
+    }
+    
+    .haplogroup-section {
+        padding: 10px;
+    }
+}
+
+/* Small phones (480px and below) */
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+    }
+    
+    .feed-header {
+        padding: 20px 10px;
+    }
+    
+    .feed-header h1 {
+        font-size: 1.25rem;
+    }
+    
+    .feed-header .flag-icon {
+        height: 20px;
+        max-width: 30px;
+    }
+    
+    .stats-bar {
+        gap: 8px 5px;
+        padding: 10px 8px;
+    }
+    
+    .stat-number {
+        font-size: 1.1rem;
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    .tab-btn {
+        padding: 12px 8px;
+        min-width: 55px;
+    }
+    
+    .tab-icon {
+        font-size: 1.3rem;
+    }
+    
+    .filter-bar {
+        padding: 12px;
+    }
+    
+    .map-view {
+        height: 300px;
+    }
+    
+    .map-tab-btn {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+    }
+    
+    .heritage-result {
+        padding: 10px 12px;
+    }
+    
+    .summary-avatar {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .summary-name {
+        font-size: 0.9rem;
+    }
+    
+    .summary-info {
+        gap: 6px 10px;
+    }
+    
+    .summary-label {
+        font-size: 0.7rem;
+    }
+    
+    .summary-value {
+        font-size: 0.75rem;
+    }
+    
+    .result-actions {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .heritage-result.expanded {
+        padding: 12px;
+    }
+    
+    .chart-card {
+        padding: 12px;
+    }
+    
+    .stats-container,
+    .about-container {
+        padding: 15px 10px;
+    }
+}
