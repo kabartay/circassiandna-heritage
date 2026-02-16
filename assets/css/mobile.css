@@ -19,15 +19,6 @@
         font-size: 1.5rem;
     }
     
-    .feed-header h1 .header-text {
-        font-size: 0;
-    }
-    
-    .feed-header h1 .header-text::before {
-        content: 'Circassian DNA';
-        font-size: 1.5rem;
-    }
-    
     .feed-header .flag-icon {
         height: 24px;
         max-width: 36px;
@@ -90,20 +81,31 @@
     .search-container {
         max-width: none;
         width: 100%;
+        order: 1;
+    }
+    
+    .search-input {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 10px 40px 10px 15px;
     }
     
     .filter-dropdowns {
         flex-direction: column;
         width: 100%;
+        gap: 10px;
+        order: 2;
     }
     
     .filter-select {
         min-width: auto;
         width: 100%;
+        font-size: 0.9rem;
     }
     
     .sort-section {
         width: 100%;
+        order: 3;
     }
     
     .map-view {
@@ -156,25 +158,63 @@
     .heritage-result {
         padding: 12px 15px;
         margin-bottom: 8px;
+        grid-template-columns: 40px 1fr 30px;
+        min-height: 140px;
     }
     
     .summary-avatar {
         width: 36px;
         height: 36px;
+        align-self: flex-start;
+        margin-top: 4px;
+    }
+    
+    .summary-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-start;
     }
     
     .summary-name {
         font-size: 0.95rem;
         font-weight: 600;
+        width: 100%;
+        margin-bottom: 2px;
     }
     
     .summary-info {
+        display: flex;
+        flex-direction: row;
         flex-wrap: wrap;
-        gap: 8px 12px;
+        gap: 4px;
+        width: 100%;
+        font-size: 0.8rem;
     }
     
+    /* Village and Ethnicity as full width */
     .summary-item {
+        display: flex;
         gap: 6px;
+    }
+    
+    /* Village and Ethnicity take full width */
+    .summary-item:nth-child(1),  /* Village */
+    .summary-item:nth-child(2) { /* Ethnicity */
+        width: 100%;
+        flex: 0 0 100%;
+    }
+    
+    /* Y-DNA and mtDNA on same line - use calc to account for gap */
+    .summary-item:nth-child(3),  /* Y-DNA */
+    .summary-item:nth-child(4) { /* mtDNA */
+        width: calc(50% - 2px);
+        flex: 0 0 calc(50% - 2px);
+    }
+    
+    /* Hide date on mobile */
+    .summary-item:nth-child(5) {
+        display: none !important;
     }
     
     .summary-label {
@@ -187,6 +227,8 @@
     
     .expand-icon {
         font-size: 1.1rem;
+        align-self: flex-start;
+        margin-top: 4px;
     }
     
     /* Expanded card on mobile */

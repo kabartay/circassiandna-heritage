@@ -136,7 +136,7 @@ class HeritageApp {
                 this.setSafeText(headerSubtitle, this.config.app.subtitle);
             }
             
-            document.title = this.config.app.title || 'Circassian DNA Heritage Feed';
+            document.title = this.config.app.title || 'Circassian DNA';
         }
     }
 
