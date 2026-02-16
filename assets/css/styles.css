@@ -55,6 +55,15 @@
     outline-offset: 2px;
 }
 
+/* Title display control */
+.desktop-title {
+    display: inline;
+}
+
+.mobile-title {
+    display: none;
+}
+
 /* Body - Brown background */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
