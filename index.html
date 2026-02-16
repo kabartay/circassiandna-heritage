@@ -13,6 +13,17 @@
     <link rel="stylesheet" href="./assets/css/styles.css">
     <link rel="stylesheet" href="./assets/css/compact-cards.css">
 
+    <!-- Leaflet.js for Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+
+    <!-- Chart.js for Statistics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 
@@ -64,8 +75,28 @@
             </div>
         </section>
 
+        <!-- Tab Navigation -->
+        <nav class="tab-navigation" aria-label="Main Navigation">
+            <button class="tab-btn active" data-tab="feed">
+                <span class="tab-icon">🔎</span>
+                <span class="tab-label">Feed</span>
+            </button>
+            <button class="tab-btn" data-tab="maps">
+                <span class="tab-icon">🌍</span>
+                <span class="tab-label">Maps</span>
+            </button>
+            <button class="tab-btn" data-tab="statistics">
+                <span class="tab-icon">📊</span>
+                <span class="tab-label">Statistics</span>
+            </button>
+            <button class="tab-btn" data-tab="about">
+                <span class="tab-icon">ℹ️</span>
+                <span class="tab-label">About</span>
+            </button>
+        </nav>
+
         <!-- Filter and Sort Bar -->
-        <nav class="filter-bar" aria-label="Filter and Sort Options">
+        <nav class="filter-bar tab-content" data-content="feed" aria-label="Filter and Sort Options">
             <div class="filter-row">
                 <!-- Search Bar -->
                 <div class="search-container">
@@ -116,10 +147,131 @@
             </div>
         </nav>
 
-        <!-- Main Content Area -->
-        <main class="feed-content" id="feedContent" aria-label="Heritage Family Profiles">
+        <!-- Feed Content Area -->
+        <main class="feed-content tab-content active" data-content="feed" id="feedContent" aria-label="Heritage Family Profiles">
             <!-- Heritage results will be populated by JavaScript -->
         </main>
+
+        <!-- Maps Content Area -->
+        <div class="tab-content" data-content="maps" id="mapsContent">
+            <!-- Map Sub-Navigation -->
+            <nav class="map-tabs" aria-label="Map Types">
+                <button class="map-tab-btn active" data-map="village">Village Map</button>
+                <button class="map-tab-btn" data-map="migration">Migration Paths</button>
+                <button class="map-tab-btn" data-map="dna">DNA Distribution</button>
+                <button class="map-tab-btn" data-map="territories">Historical Territories</button>
+            </nav>
+
+            <!-- Map Containers -->
+            <div class="map-container active" data-map-content="village">
+                <div id="villageMap" class="map-view"></div>
+                <div class="map-legend" id="villageLegend"></div>
+            </div>
+
+            <div class="map-container" data-map-content="migration">
+                <div id="migrationMap" class="map-view"></div>
+                <div class="map-legend" id="migrationLegend"></div>
+            </div>
+
+            <div class="map-container" data-map-content="dna">
+                <div id="dnaMap" class="map-view"></div>
+                <div class="map-controls">
+                    <label>
+                        <input type="radio" name="dnaType" value="ydna" checked> Y-DNA
+                    </label>
+                    <label>
+                        <input type="radio" name="dnaType" value="mtdna"> mtDNA
+                    </label>
+                </div>
+                <div class="map-legend" id="dnaLegend"></div>
+            </div>
+
+            <div class="map-container" data-map-content="territories">
+                <div id="territoriesMap" class="map-view"></div>
+                <div class="map-legend" id="territoriesLegend"></div>
+            </div>
+        </div>
+
+        <!-- Statistics Content Area -->
+        <div class="tab-content" data-content="statistics" id="statisticsContent">
+            <div class="stats-container">
+                <h2>Haplogroup Distribution Analysis</h2>
+                
+                <!-- Charts Grid -->
+                <div class="charts-grid">
+                    <!-- Y-DNA Pie Chart -->
+                    <div class="chart-card">
+                        <h3>Y-DNA Haplogroups</h3>
+                        <canvas id="yDnaChart"></canvas>
+                        <div id="yDnaStats" class="chart-stats"></div>
+                    </div>
+                    
+                    <!-- mtDNA Pie Chart -->
+                    <div class="chart-card">
+                        <h3>mtDNA Haplogroups</h3>
+                        <canvas id="mtDnaChart"></canvas>
+                        <div id="mtDnaStats" class="chart-stats"></div>
+                    </div>
+                    
+                    <!-- Y-DNA Subclade Pie Chart -->
+                    <div class="chart-card">
+                        <h3>Y-DNA Subclade Distribution</h3>
+                        <canvas id="ySubcladeChart"></canvas>
+                    </div>
+                    
+                    <!-- mtDNA Subclade Pie Chart -->
+                    <div class="chart-card">
+                        <h3>mtDNA Subclade Distribution</h3>
+                        <canvas id="mtSubcladeChart"></canvas>
+                    </div>
+                    
+                    <!-- Ethnicity Distribution -->
+                    <div class="chart-card">
+                        <h3>Ethnicity Distribution</h3>
+                        <canvas id="ethnicityChart"></canvas>
+                    </div>
+                    
+                    <!-- Village Distribution -->
+                    <div class="chart-card">
+                        <h3>Top 10 Villages</h3>
+                        <canvas id="villageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Content Area -->
+        <div class="tab-content" data-content="about" id="aboutContent">
+            <div class="about-container">
+                <h2>About Circassian DNA Heritage</h2>
+                <p>This project documents the genetic lineage and ancestral connections of Circassian families.</p>
+                
+                <div class="support-section">
+                    <h3>Support This Project</h3>
+                    <p>Your support helps maintain and expand the Circassian DNA Heritage database. You can contribute through:</p>
+                    
+                    <div class="support-options">
+                        <!-- Patreon -->
+                        <a href="https://patreon.com/kabartay" target="_blank" rel="noopener noreferrer" class="support-link">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Patreon_logo.svg" alt="Patreon" class="support-logo">
+                            <span>Support on Patreon</span>
+                        </a>
+                        
+                        <!-- Buy Me a Coffee -->
+                        <a href="https://buymeacoffee.com/kabartay" target="_blank" rel="noopener noreferrer" class="support-link">
+                            <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" class="support-logo">
+                            <span>Buy Me a Coffee</span>
+                        </a>
+                        
+                        <!-- FamilyTreeDNA -->
+                        <a href="https://www.familytreedna.com/group-general-fund-contribution.aspx?g=UbykhSochi" target="_blank" rel="noopener noreferrer" class="support-link">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/9/93/FamilyTreeDNA_%28logo%29.png" alt="FamilyTreeDNA" class="support-logo">
+                            <span>Donate to Circassian DNA Project</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Loading Indicator: moved to main.js-->
     </div>
@@ -130,6 +282,8 @@
         const jsVersion = Date.now();
         document.write(`<script src="./assets/js/data-loader.js?v=${jsVersion}"><\/script>`);
         document.write(`<script src="./assets/js/main.js?v=${jsVersion}"><\/script>`);
+        document.write(`<script src="./assets/js/maps.js?v=${jsVersion}"><\/script>`);
+        document.write(`<script src="./assets/js/statistics.js?v=${jsVersion}"><\/script>`);
     </script>
 
     <!-- Initialize Application -->
