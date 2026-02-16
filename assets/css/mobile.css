@@ -234,14 +234,155 @@
     /* Expanded card on mobile */
     .heritage-result.expanded {
         padding: 15px;
+        min-height: auto;
+        max-height: none;
     }
     
+    /* Reorganize expanded card layout for mobile */
+    .result-header {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    
+    .family-info {
+        display: grid;
+        grid-template-columns: 60px 1fr;
+        grid-template-rows: auto auto auto auto auto;
+        gap: 4px;
+        align-items: start;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+    
+    .family-avatar {
+        grid-row: 1;
+        grid-column: 1;
+        width: 50px;
+        height: 50px;
+        align-self: start;
+        justify-self: start;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .family-names {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding-top: 4px;
+        padding-left: 0;
+        max-width: 100%;
+    }
+    
+    .family-name-english {
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+    
+    .family-name-other {
+        font-size: 0.75rem;
+        opacity: 0.8;
+        line-height: 1.2;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .family-name-russian,
+    .family-name-native {
+        font-size: 0.75rem;
+    }
+    
+    .family-name-russian:not(:empty)::after {
+        content: " ";
+        margin: 0 2px;
+    }
+    
+    .basic-info {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        font-size: 0.9rem;
+        padding-left: 0;
+        margin-top: 18px;
+        margin-bottom: 0;
+        margin-left: 0;
+        align-items: flex-start;
+    }
+    
+    .info-item {
+        display: flex;
+        gap: 6px;
+        align-self: flex-start;
+        width: auto;
+        justify-content: flex-start;
+        margin-left: 0;
+        margin-right: auto;
+    }
+    
+    .info-label {
+        font-weight: 600;
+    }
+    
+    .test-id-date {
+        grid-column: 1 / 3;
+        grid-row: 3;
+        display: flex;
+        gap: 15px;
+        font-size: 0.85rem;
+        padding-top: 2px;
+        margin-top: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Compact genetic data sections */
     .genetic-data {
-        gap: 12px;
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
     }
     
     .haplogroup-section {
-        padding: 10px;
+        padding: 8px 10px;
+    }
+    
+    .haplogroup-title {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+    
+    .genetic-marker {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 8px;
+        padding: 3px 0 3px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .marker-label {
+        font-weight: 500;
+        opacity: 0.8;
+    }
+    
+    .marker-value {
+        font-weight: 600;
+    }
+    
+    /* Ensure expanded cards show full content */
+    .result-details {
+        max-height: none !important;
+        overflow: visible !important;
     }
 }
 
