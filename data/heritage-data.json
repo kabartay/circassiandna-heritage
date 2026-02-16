@@ -1299,24 +1299,24 @@
       "location": {
         "coordinates": {
           "main": {
-            "latitude": null,
-            "longitude": null
+            "latitude": 44.163584,
+            "longitude": 41.865741
           },
           "pre": {
-            "latitude": null,
-            "longitude": null
+            "latitude": 44.043204,
+            "longitude": 41.766657
           }
         },
         "village": {
           "main": {
             "native": "Ботэщей",
-            "russian": null,
-            "english": null
+            "russian": "Боташево",
+            "english": "Botashevo"
           },
           "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
+            "native": "Къэсейхьэблэ",
+            "russian": "Касаево",
+            "english": "Kasaevo"
           }
         },
         "region": {
@@ -1493,7 +1493,7 @@
       "familyName": {
         "main": {
           "native": null,
-          "english": null,
+          "english": "TBD",
           "russian": null
         },
         "pre": {
@@ -1607,7 +1607,7 @@
       "familyName": {
         "main": {
           "native": null,
-          "english": null,
+          "english": "TBD",
           "russian": null
         },
         "pre": {
@@ -1721,7 +1721,7 @@
       "familyName": {
         "main": {
           "native": null,
-          "english": null,
+          "english": "TBD",
           "russian": null
         },
         "pre": {
@@ -1835,7 +1835,7 @@
       "familyName": {
         "main": {
           "native": null,
-          "english": null,
+          "english": "TBD",
           "russian": null
         },
         "pre": {
@@ -1949,7 +1949,7 @@
       "familyName": {
         "main": {
           "native": null,
-          "english": null,
+          "english": "TBD",
           "russian": null
         },
         "pre": {
@@ -2063,7 +2063,7 @@
       "familyName": {
         "main": {
           "native": null,
-          "english": null,
+          "english": "TBD",
           "russian": null
         },
         "pre": {
@@ -2177,7 +2177,7 @@
       "familyName": {
         "main": {
           "native": null,
-          "english": null,
+          "english": "TBD",
           "russian": null
         },
         "pre": {
@@ -2291,7 +2291,7 @@
       "familyName": {
         "main": {
           "native": null,
-          "english": null,
+          "english": "TBD",
           "russian": null
         },
         "pre": {
@@ -2405,7 +2405,7 @@
       "familyName": {
         "main": {
           "native": null,
-          "english": null,
+          "english": "TBD",
           "russian": null
         },
         "pre": {
@@ -2519,7 +2519,7 @@
       "familyName": {
         "main": {
           "native": null,
-          "english": null,
+          "english": "TBD",
           "russian": null
         },
         "pre": {
@@ -2633,7 +2633,7 @@
       "familyName": {
         "main": {
           "native": null,
-          "english": null,
+          "english": "TBD",
           "russian": null
         },
         "pre": {
@@ -2742,9 +2742,9 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2026-02-13",
+    "lastUpdated": "2026-02-16",
     "totalFamilies": 12,
-    "dataVersion": "2.0.0",
+    "dataVersion": "3.0.0",
     "note": "Added individual URL fields for each family's genetic analysis tools"
   }
 }
