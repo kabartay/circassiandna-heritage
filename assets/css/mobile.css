@@ -1,0 +1,485 @@
+/* Mobile-only styles - does not affect desktop */
+
+/* Tablets and below (768px) */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        overflow-x: hidden;
+    }
+    
+    .feed-container {
+        overflow-x: hidden;
+    }
+    
+    .feed-header {
+        padding: 25px 15px;
+    }
+    
+    .feed-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .feed-header .flag-icon {
+        height: 24px;
+        max-width: 36px;
+    }
+    
+    .feed-header p {
+        font-size: 0.9rem;
+    }
+    
+    .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 8px;
+        padding: 12px 10px;
+    }
+    
+    /* Hide Villages stat on mobile */
+    .stat-item:nth-child(4) {
+        display: none;
+    }
+    
+    /* Reorder stats: Profiles, Ethnicities, Y-DNA, mtDNA */
+    .stat-item:nth-child(1) { order: 1; }
+    .stat-item:nth-child(5) { order: 2; }
+    .stat-item:nth-child(2) { order: 3; }
+    .stat-item:nth-child(3) { order: 4; }
+    
+    .stat-number {
+        font-size: 1.3rem;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+    }
+    
+    .tab-navigation {
+        gap: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .tab-btn {
+        padding: 14px 12px;
+        min-width: 60px;
+    }
+    
+    .tab-label {
+        display: none;
+    }
+    
+    .tab-icon {
+        font-size: 1.4rem;
+    }
+    
+    .filter-bar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px;
+    }
+    
+    .search-container {
+        max-width: none;
+        width: 100%;
+        order: 1;
+    }
+    
+    .search-input {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 10px 40px 10px 15px;
+    }
+    
+    .filter-dropdowns {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        order: 2;
+    }
+    
+    .filter-select {
+        min-width: auto;
+        width: 100%;
+        font-size: 0.9rem;
+    }
+    
+    .sort-section {
+        width: 100%;
+        order: 3;
+    }
+    
+    .map-view {
+        height: 400px;
+    }
+    
+    .map-tabs {
+        gap: 6px;
+        padding: 10px;
+        justify-content: center;
+    }
+    
+    .map-tab-btn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    
+    .stats-container,
+    .about-container {
+        padding: 20px 10px;
+        overflow-x: hidden;
+    }
+    
+    .charts-grid {
+        grid-template-columns: 1fr;
+        overflow: hidden;
+    }
+    
+    .chart-card {
+        padding: 12px;
+        overflow: hidden;
+    }
+    
+    .chart-container {
+        max-width: 100%;
+        width: 100%;
+        overflow: hidden;
+        transform: scale(0.90);
+        transform-origin: center top;
+        margin-bottom: -20px;
+    }
+    
+    .chart-container canvas {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* Mobile card improvements */
+    .heritage-result {
+        padding: 12px 15px;
+        margin-bottom: 8px;
+        grid-template-columns: 40px 1fr 30px;
+        min-height: 140px;
+    }
+    
+    .summary-avatar {
+        width: 36px;
+        height: 36px;
+        align-self: flex-start;
+        margin-top: 4px;
+    }
+    
+    .summary-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-start;
+    }
+    
+    .summary-name {
+        font-size: 0.95rem;
+        font-weight: 600;
+        width: 100%;
+        margin-bottom: 2px;
+    }
+    
+    .summary-info {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 4px;
+        width: 100%;
+        font-size: 0.8rem;
+    }
+    
+    /* Village and Ethnicity as full width */
+    .summary-item {
+        display: flex;
+        gap: 6px;
+    }
+    
+    /* Village and Ethnicity take full width */
+    .summary-item:nth-child(1),  /* Village */
+    .summary-item:nth-child(2) { /* Ethnicity */
+        width: 100%;
+        flex: 0 0 100%;
+    }
+    
+    /* Y-DNA and mtDNA on same line - use calc to account for gap */
+    .summary-item:nth-child(3),  /* Y-DNA */
+    .summary-item:nth-child(4) { /* mtDNA */
+        width: calc(50% - 2px);
+        flex: 0 0 calc(50% - 2px);
+    }
+    
+    /* Hide date on mobile */
+    .summary-item:nth-child(5) {
+        display: none !important;
+    }
+    
+    .summary-label {
+        font-size: 0.75rem;
+    }
+    
+    .summary-value {
+        font-size: 0.8rem;
+    }
+    
+    .expand-icon {
+        font-size: 1.1rem;
+        align-self: flex-start;
+        margin-top: 4px;
+    }
+    
+    /* Expanded card on mobile */
+    .heritage-result.expanded {
+        padding: 15px;
+        min-height: auto;
+        max-height: none;
+    }
+    
+    /* Reorganize expanded card layout for mobile */
+    .result-header {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    
+    .family-info {
+        display: grid;
+        grid-template-columns: 60px 1fr;
+        grid-template-rows: auto auto auto auto auto;
+        gap: 4px;
+        align-items: start;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+    
+    .family-avatar {
+        grid-row: 1;
+        grid-column: 1;
+        width: 50px;
+        height: 50px;
+        align-self: start;
+        justify-self: start;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .family-names {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding-top: 4px;
+        padding-left: 0;
+        max-width: 100%;
+    }
+    
+    .family-name-english {
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+    
+    .family-name-other {
+        font-size: 0.75rem;
+        opacity: 0.8;
+        line-height: 1.2;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .family-name-russian,
+    .family-name-native {
+        font-size: 0.75rem;
+    }
+    
+    .family-name-russian:not(:empty)::after {
+        content: " ";
+        margin: 0 2px;
+    }
+    
+    .basic-info {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        font-size: 0.9rem;
+        padding-left: 0;
+        margin-top: 18px;
+        margin-bottom: 0;
+        margin-left: 0;
+        align-items: flex-start;
+    }
+    
+    .info-item {
+        display: flex;
+        gap: 6px;
+        align-self: flex-start;
+        width: auto;
+        justify-content: flex-start;
+        margin-left: 0;
+        margin-right: auto;
+    }
+    
+    .info-label {
+        font-weight: 600;
+    }
+    
+    .test-id-date {
+        grid-column: 1 / 3;
+        grid-row: 3;
+        display: flex;
+        gap: 15px;
+        font-size: 0.85rem;
+        padding-top: 2px;
+        margin-top: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Compact genetic data sections */
+    .genetic-data {
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+    
+    .haplogroup-section {
+        padding: 8px 10px;
+    }
+    
+    .haplogroup-title {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+        font-weight: 600;
+    }
+    
+    .genetic-marker {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 8px;
+        padding: 3px 0 3px 8px;
+        font-size: 0.8rem;
+    }
+    
+    .marker-label {
+        font-weight: 500;
+        opacity: 0.8;
+    }
+    
+    .marker-value {
+        font-weight: 600;
+    }
+    
+    /* Ensure expanded cards show full content */
+    .result-details {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+}
+
+/* Small phones (480px and below) */
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+    }
+    
+    .feed-header {
+        padding: 20px 10px;
+    }
+    
+    .feed-header h1 {
+        font-size: 1.25rem;
+    }
+    
+    .feed-header .flag-icon {
+        height: 20px;
+        max-width: 30px;
+    }
+    
+    .stats-bar {
+        gap: 8px 5px;
+        padding: 10px 8px;
+    }
+    
+    .stat-number {
+        font-size: 1.1rem;
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    .tab-btn {
+        padding: 12px 8px;
+        min-width: 55px;
+    }
+    
+    .tab-icon {
+        font-size: 1.3rem;
+    }
+    
+    .filter-bar {
+        padding: 12px;
+    }
+    
+    .map-view {
+        height: 300px;
+    }
+    
+    .map-tab-btn {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+    }
+    
+    .heritage-result {
+        padding: 10px 12px;
+    }
+    
+    .summary-avatar {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .summary-name {
+        font-size: 0.9rem;
+    }
+    
+    .summary-info {
+        gap: 6px 10px;
+    }
+    
+    .summary-label {
+        font-size: 0.7rem;
+    }
+    
+    .summary-value {
+        font-size: 0.75rem;
+    }
+    
+    .result-actions {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .heritage-result.expanded {
+        padding: 12px;
+    }
+    
+    .chart-card {
+        padding: 12px;
+    }
+    
+    .stats-container,
+    .about-container {
+        padding: 15px 10px;
+    }
+}

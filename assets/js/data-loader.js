@@ -220,7 +220,7 @@ class DataLoader {
     getDefaultConfig() {
         return {
             app: {
-                title: "Circassian DNA Heritage Feed",
+                title: "Circassian DNA",
                 subtitle: "Genetic lineage and ancestral connections",
                 version: "2.0.0"
             },

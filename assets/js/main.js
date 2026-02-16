@@ -136,7 +136,7 @@ class HeritageApp {
                 this.setSafeText(headerSubtitle, this.config.app.subtitle);
             }
             
-            document.title = this.config.app.title || 'Circassian DNA Heritage Feed';
+            document.title = this.config.app.title || 'Circassian DNA';
         }
     }
 
@@ -1175,8 +1175,10 @@ class HeritageApp {
                             </div>
                             <div class="family-names">
                                 <div class="family-name-english">${safe.familyNameEnglish}</div>
-                                <div class="family-name-russian">${safe.familyNameRussian}</div>
-                                <div class="family-name-native">${safe.familyNameNative}</div>
+                                <div class="family-name-other">
+                                    <span class="family-name-russian">${safe.familyNameRussian}</span>
+                                    <span class="family-name-native">${safe.familyNameNative}</span>
+                                </div>
                             </div>
                             <div class="basic-info">
                                 <div class="info-item">
