@@ -15,7 +15,26 @@ class HeritageApp {
         this.config = null;
         this.isLoading = false;
         
+        // Mobile location name mappings
+        this.mobileLocationNames = {
+            'Кабардино-Балкария': 'КБР',
+            'Карачаево-Черкесия': 'КЧР',
+            'Северная Осетия': 'РСО',
+            'Южная Осетия': 'РЮО'
+        };
+        
         console.log('🎯 HeritageApp instance created');
+    }
+    
+    /**
+     * Get display name for location (shortened on mobile)
+     */
+    getLocationDisplayName(locationName) {
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile && this.mobileLocationNames[locationName]) {
+            return this.mobileLocationNames[locationName];
+        }
+        return locationName;
     }
 
     /**
@@ -563,9 +582,10 @@ class HeritageApp {
         optionsHTML += '<div class="location-column-header">State</div>';
         states.forEach(state => {
             const isChecked = this.selectedStates?.includes(state) ? 'checked' : '';
+            const displayName = this.getLocationDisplayName(state);
             optionsHTML += `<div class="location-option" data-value="state:${state}" data-type="state">
                 <input type="checkbox" class="location-checkbox" data-location="${state}" data-type="state" ${isChecked}>
-                <span>${state}</span>
+                <span>${displayName}</span>
             </div>`;
         });
         optionsHTML += '</div>';
