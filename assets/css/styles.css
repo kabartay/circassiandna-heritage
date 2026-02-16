@@ -127,6 +127,344 @@ body {
     }
 }
 
+/* Tab Navigation */
+.tab-navigation {
+    background: var(--bg-white);
+    display: flex;
+    gap: 0;
+    padding: 0;
+    border-bottom: 2px solid var(--border-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 16px 20px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: transparent;
+    transition: background 0.2s ease;
+}
+
+.tab-btn:hover {
+    background: var(--bg-light);
+    color: var(--text-primary);
+}
+
+.tab-btn.active {
+    color: var(--male-color);
+    font-weight: 600;
+}
+
+.tab-btn.active::after {
+    background: var(--male-color);
+}
+
+.tab-icon {
+    font-size: 1.1rem;
+}
+
+.tab-label {
+    display: inline;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Map Sub-Navigation */
+.map-tabs {
+    background: var(--bg-light);
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-light);
+    flex-wrap: wrap;
+}
+
+.map-tab-btn {
+    background: var(--bg-white);
+    border: 2px solid var(--border-medium);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+.map-tab-btn:hover {
+    background: var(--bg-medium);
+    border-color: var(--male-color);
+}
+
+.map-tab-btn.active {
+    background: var(--male-color);
+    color: white;
+    border-color: var(--male-color);
+}
+
+/* Map Containers */
+.map-container {
+    display: none;
+    position: relative;
+}
+
+.map-container.active {
+    display: block;
+}
+
+.map-view {
+    height: 600px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map-legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 0.85rem;
+    max-width: 200px;
+}
+
+.map-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    gap: 12px;
+}
+
+.map-controls label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+/* Statistics and About Content */
+.stats-container,
+.about-container {
+    background: var(--bg-white);
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.stats-container h2,
+.about-container h2 {
+    color: var(--male-color);
+    margin-bottom: 20px;
+}
+
+.about-container p {
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Support Section */
+.support-section {
+    margin-top: 40px;
+    padding: 30px;
+    background: var(--bg-light);
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+}
+
+.support-section h3 {
+    color: var(--male-color);
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.support-section p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.support-options {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.support-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    background: var(--bg-white);
+    border: 2px solid var(--border-light);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.support-link:hover {
+    border-color: var(--male-color);
+    box-shadow: 0 2px 8px rgba(71, 117, 113, 0.2);
+    transform: translateY(-2px);
+}
+
+.support-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.support-link span {
+    font-weight: 500;
+    font-size: 1.05em;
+}
+
+/* FamilyTreeDNA styled text logo */
+.ftdna-logo {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ftdna-text {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95em;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.ftdna-link:hover .ftdna-logo {
+    background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+}
+
+/* Charts Grid */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.chart-card {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.chart-card.full-width {
+    grid-column: 1 / -1;
+}
+
+.chart-card h3 {
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.chart-card canvas {
+    max-height: 300px;
+}
+
+.chart-stats {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Responsive tabs */
+@media (max-width: 768px) {
+    .tab-label {
+        display: none;
+    }
+    
+    .tab-icon {
+        font-size: 1.3rem;
+    }
+    
+    .map-tabs {
+        justify-content: center;
+    }
+    
+    .map-view {
+        height: 400px;
+    }
+    
+    .map-legend {
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.75rem;
+    }
+    
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart-card.full-width {
+        grid-column: 1;
+    }
+    
+    .support-section {
+        padding: 20px;
+    }
+    
+    .support-logo {
+        height: 32px;
+    }
+    
+    .support-link {
+        padding: 12px 16px;
+    }
+}
+
 /* Filter bar - white background for contrast */
 .filter-bar {
     background: var(--bg-white);

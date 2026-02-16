@@ -42,6 +42,16 @@ class HeritageApp {
             // Load initial results
             await this.loadResults();
             
+            // Initialize maps module if available
+            if (window.heritageMaps) {
+                await window.heritageMaps.init(this.dataLoader.heritageData);
+            }
+            
+            // Initialize statistics module if available
+            if (window.heritageStatistics) {
+                await window.heritageStatistics.init(this.dataLoader.heritageData);
+            }
+            
             console.log('✅ Application initialized successfully');
             
         } catch (error) {
@@ -910,6 +920,16 @@ class HeritageApp {
                 processedData = processedData.filter(family => 
                     searchResults.some(sr => sr.id === family.id)
                 );
+            }
+
+            // Update maps with filtered data
+            if (window.heritageMaps && window.heritageMaps.initialized) {
+                window.heritageMaps.updateWithFilteredData(processedData);
+            }
+
+            // Update statistics with filtered data
+            if (window.heritageStatistics && window.heritageStatistics.initialized) {
+                window.heritageStatistics.updateWithFilteredData(processedData);
             }
 
             // Check if we have any data
