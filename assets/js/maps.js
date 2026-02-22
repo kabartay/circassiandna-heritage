@@ -591,12 +591,113 @@ class HeritageMaps {
     updateDNADistribution(dnaType) {
         console.log(`Updating DNA distribution for ${dnaType}`);
         
+        // Clear existing markers
+        this.maps.dna.eachLayer(layer => {
+            if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
+                this.maps.dna.removeLayer(layer);
+            }
+        });
+
+        // Color mapping for haplogroup roots
+        const colorMap = {
+            'R': '#e74c3c',
+            'J': '#3498db',
+            'G': '#2ecc71',
+            'I': '#9b59b6',
+            'E': '#f39c12',
+            'Q': '#1abc9c',
+            'N': '#e67e22',
+            'T': '#95a5a6',
+            'H': '#e91e63',
+            'U': '#00bcd4',
+            'K': '#4caf50',
+            'W': '#ff9800',
+            'X': '#795548',
+            'D': '#607d8b',
+            'C': '#9c27b0',
+            'default': '#34495e'
+        };
+
+        // Group families by haplogroup
+        const haplogroups = {};
+        const fieldName = dnaType === 'ydna' ? 'yDnaHaplogroup' : 'mtDnaHaplogroup';
+
+        this.allData.forEach(family => {
+            const haplogroup = family[fieldName];
+            if (!haplogroup || !haplogroup.root) return;
+
+            const coords = family.location?.coordinates?.main;
+            if (!coords || !coords.latitude || !coords.longitude) return;
+
+            const root = haplogroup.root;
+            const subclade = haplogroup.subclade || haplogroup.clade || root;
+
+            if (!haplogroups[root]) {
+                haplogroups[root] = {
+                    count: 0,
+                    color: colorMap[root] || colorMap.default,
+                    families: []
+                };
+            }
+
+            haplogroups[root].count++;
+            haplogroups[root].families.push({
+                family,
+                coords,
+                subclade
+            });
+        });
+
+        // Add markers for each family
+        Object.entries(haplogroups).forEach(([root, data]) => {
+            data.families.forEach(({ family, coords, subclade }) => {
+                const marker = L.circleMarker([coords.latitude, coords.longitude], {
+                    radius: 8,
+                    fillColor: data.color,
+                    color: '#fff',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.7
+                }).addTo(this.maps.dna);
+
+                // Create popup content
+                const familyName = family.familyName.main.english || family.familyName.main.russian || family.familyName.main.native;
+                const location = family.location.village?.main?.english || 
+                                family.location.region?.main?.english || 
+                                family.location.state?.main?.english || 'Unknown';
+                
+                marker.bindPopup(`
+                    <div style="min-width: 200px;">
+                        <strong>${familyName}</strong><br>
+                        <span style="color: ${data.color}; font-weight: bold;">${subclade}</span><br>
+                        <small>${location}</small><br>
+                        <small style="color: var(--text-secondary);">${family.gender === 'male' ? '♂' : '♀'} ${family.date}</small>
+                    </div>
+                `);
+            });
+        });
+
+        // Update legend
         const legend = document.getElementById('dnaLegend');
         if (legend) {
-            legend.innerHTML = `
-                <strong>${dnaType === 'ydna' ? 'Y-DNA' : 'mtDNA'} Distribution</strong><br>
-                <span style="font-size: 0.85rem; color: var(--text-secondary);">Heat maps coming soon...</span>
-            `;
+            const totalFamilies = Object.values(haplogroups).reduce((sum, g) => sum + g.count, 0);
+            
+            let legendHTML = `<strong>${dnaType === 'ydna' ? 'Y-DNA' : 'mtDNA'} Distribution</strong><br>`;
+            legendHTML += `<div style="font-size: 0.85rem; color: var(--text-secondary); margin: 8px 0;">${totalFamilies} ${totalFamilies === 1 ? 'family' : 'families'}</div>`;
+            
+            // Sort by count descending
+            const sorted = Object.entries(haplogroups).sort((a, b) => b[1].count - a[1].count);
+            
+            sorted.forEach(([root, data]) => {
+                legendHTML += `
+                    <div style="margin-top: 6px; display: flex; align-items: center; font-size: 0.9rem;">
+                        <span style="display: inline-block; width: 12px; height: 12px; background: ${data.color}; border-radius: 50%; margin-right: 8px; border: 2px solid #fff;"></span>
+                        <span><strong>${root}</strong> (${data.count})</span>
+                    </div>
+                `;
+            });
+
+            legend.innerHTML = legendHTML;
         }
     }
 
