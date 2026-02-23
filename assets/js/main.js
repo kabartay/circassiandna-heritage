@@ -544,9 +544,9 @@ class HeritageApp {
             const village = family.location?.village?.main?.native || 
                           family.location?.village?.main?.russian || 
                           family.location?.village?.main?.english;
-            const state = family.location?.state?.main?.native || 
+            const state = family.location?.state?.main?.english || 
                         family.location?.state?.main?.russian || 
-                        family.location?.state?.main?.english;
+                        family.location?.state?.main?.native;
             if (village && state) {
                 this.villageToStateMap[village] = state;
             }
