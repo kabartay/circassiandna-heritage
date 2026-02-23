@@ -162,7 +162,8 @@
             <nav class="map-tabs" aria-label="Map Types">
                 <button class="map-tab-btn active" data-map="village">Village Map</button>
                 <button class="map-tab-btn" data-map="migration">Migration Paths</button>
-                <button class="map-tab-btn" data-map="dna">DNA Distribution</button>
+                <button class="map-tab-btn" data-map="ydna">Y-DNA Distribution</button>
+                <button class="map-tab-btn" data-map="mtdna">mtDNA Distribution</button>
                 <button class="map-tab-btn" data-map="territories">Historical Territories</button>
             </nav>
 
@@ -177,17 +178,14 @@
                 <div class="map-legend" id="migrationLegend"></div>
             </div>
 
-            <div class="map-container" data-map-content="dna">
-                <div id="dnaMap" class="map-view"></div>
-                <div class="map-controls">
-                    <label>
-                        <input type="radio" name="dnaType" value="ydna" checked> Y-DNA
-                    </label>
-                    <label>
-                        <input type="radio" name="dnaType" value="mtdna"> mtDNA
-                    </label>
-                </div>
-                <div class="map-legend" id="dnaLegend"></div>
+            <div class="map-container" data-map-content="ydna">
+                <div id="ydnaMap" class="map-view"></div>
+                <div class="map-legend" id="ydnaLegend"></div>
+            </div>
+
+            <div class="map-container" data-map-content="mtdna">
+                <div id="mtdnaMap" class="map-view"></div>
+                <div class="map-legend" id="mtdnaLegend"></div>
             </div>
 
             <div class="map-container" data-map-content="territories">
@@ -284,6 +282,7 @@
     <script>
         // Cache busting for JS files
         const jsVersion = Date.now();
+        document.write(`<script src="./assets/js/config.js?v=${jsVersion}"><\/script>`);
         document.write(`<script src="./assets/js/data-loader.js?v=${jsVersion}"><\/script>`);
         document.write(`<script src="./assets/js/main.js?v=${jsVersion}"><\/script>`);
         document.write(`<script src="./assets/js/maps.js?v=${jsVersion}"><\/script>`);
