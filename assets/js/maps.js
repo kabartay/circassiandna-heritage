@@ -160,8 +160,11 @@ class HeritageMaps {
             case 'migration':
                 if (!this.maps.migration) this.initializeMigrationMap();
                 break;
-            case 'dna':
-                if (!this.maps.dna) this.initializeDNAMap();
+            case 'ydna':
+                if (!this.maps.ydna) this.initializeYDNAMap();
+                break;
+            case 'mtdna':
+                if (!this.maps.mtdna) this.initializeMtDNAMap();
                 break;
             case 'territories':
                 if (!this.maps.territories) this.initializeTerritoriesMap();
@@ -560,67 +563,65 @@ class HeritageMaps {
     }
 
     /**
-     * Initialize DNA Distribution Map
+     * Initialize Y-DNA Distribution Map
      */
-    initializeDNAMap() {
-        console.log('🧬 Initializing DNA Distribution Map...');
+    initializeYDNAMap() {
+        console.log('🧬 Initializing Y-DNA Distribution Map...');
 
-        this.maps.dna = L.map('dnaMap').setView([43.5, 43.0], 6);
+        this.maps.ydna = L.map('ydnaMap').setView([43.5, 43.0], 6);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             maxZoom: 19
-        }).addTo(this.maps.dna);
+        }).addTo(this.maps.ydna);
 
-        // Setup DNA type switching
-        const dnaTypeRadios = document.querySelectorAll('input[name="dnaType"]');
-        dnaTypeRadios.forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                this.updateDNADistribution(e.target.value);
-            });
-        });
+        // Display Y-DNA data
+        this.updateDNADistribution('ydna', this.maps.ydna, 'ydnaLegend');
+    }
 
-        // Initial display
-        this.updateDNADistribution('ydna');
+    /**
+     * Initialize mtDNA Distribution Map
+     */
+    initializeMtDNAMap() {
+        console.log('🧬 Initializing mtDNA Distribution Map...');
+
+        this.maps.mtdna = L.map('mtdnaMap').setView([43.5, 43.0], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 19
+        }).addTo(this.maps.mtdna);
+
+        // mtDNA data will be incorporated later
+        const legend = document.getElementById('mtdnaLegend');
+        if (legend) {
+            legend.innerHTML = `
+                <strong>mtDNA Distribution</strong><br>
+                <span style="font-size: 0.85rem; color: var(--text-secondary);">Data coming soon...</span>
+            `;
+        }
     }
 
     /**
      * Update DNA distribution display
      * @param {string} dnaType - 'ydna' or 'mtdna'
+     * @param {Object} map - Leaflet map instance
+     * @param {string} legendId - Legend element ID
      */
-    updateDNADistribution(dnaType) {
+    updateDNADistribution(dnaType, map, legendId) {
         console.log(`Updating DNA distribution for ${dnaType}`);
         
         // Clear existing markers
-        this.maps.dna.eachLayer(layer => {
-            if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
-                this.maps.dna.removeLayer(layer);
+        map.eachLayer(layer => {
+            if (layer instanceof L.Marker) {
+                map.removeLayer(layer);
             }
         });
 
-        // Color mapping for haplogroup roots
-        const colorMap = {
-            'R': '#e74c3c',
-            'J': '#3498db',
-            'G': '#2ecc71',
-            'I': '#9b59b6',
-            'E': '#f39c12',
-            'Q': '#1abc9c',
-            'N': '#e67e22',
-            'T': '#95a5a6',
-            'H': '#e91e63',
-            'U': '#00bcd4',
-            'K': '#4caf50',
-            'W': '#ff9800',
-            'X': '#795548',
-            'D': '#607d8b',
-            'C': '#9c27b0',
-            'default': '#34495e'
-        };
-
-        // Group families by haplogroup
-        const haplogroups = {};
+        // Group families by subclade
+        const subclades = {};
         const fieldName = dnaType === 'ydna' ? 'yDnaHaplogroup' : 'mtDnaHaplogroup';
+        let familyIndex = 0;
 
         this.allData.forEach(family => {
             const haplogroup = family[fieldName];
@@ -629,42 +630,66 @@ class HeritageMaps {
             const coords = family.location?.coordinates?.main;
             if (!coords || !coords.latitude || !coords.longitude) return;
 
-            const root = haplogroup.root;
-            const subclade = haplogroup.subclade || haplogroup.clade || root;
+            const subclade = haplogroup.subclade || haplogroup.clade || haplogroup.root;
 
-            if (!haplogroups[root]) {
-                haplogroups[root] = {
+            if (!subclades[subclade]) {
+                subclades[subclade] = {
                     count: 0,
-                    color: colorMap[root] || colorMap.default,
+                    color: HaplotypeConfig.getYSubcladeColor(subclade, familyIndex),
                     families: []
                 };
+                familyIndex++;
             }
 
-            haplogroups[root].count++;
-            haplogroups[root].families.push({
+            subclades[subclade].count++;
+            subclades[subclade].families.push({
                 family,
                 coords,
                 subclade
             });
         });
 
-        // Add markers for each family
-        Object.entries(haplogroups).forEach(([root, data]) => {
-            data.families.forEach(({ family, coords, subclade }) => {
+        // Calculate dynamic circle radius based on number of families
+        // Base radius of 8, scales down as more families are added
+        const totalFamilies = Object.values(subclades).reduce((sum, g) => sum + g.count, 0);
+        const baseRadius = 8;
+        const radius = totalFamilies < 50 ? baseRadius : 
+                      totalFamilies < 200 ? baseRadius * 0.8 : 
+                      totalFamilies < 500 ? baseRadius * 0.6 : 
+                      baseRadius * 0.5;
+
+        // Add circle markers for each family
+        Object.entries(subclades).forEach(([subclade, data]) => {
+            data.families.forEach(({ family, coords }) => {
+                // Create circle marker with subclade color
                 const marker = L.circleMarker([coords.latitude, coords.longitude], {
-                    radius: 8,
+                    radius: radius,
                     fillColor: data.color,
                     color: '#fff',
                     weight: 2,
                     opacity: 1,
-                    fillOpacity: 0.7
-                }).addTo(this.maps.dna);
+                    fillOpacity: 0.8
+                }).addTo(map);
 
                 // Create popup content
                 const familyName = family.familyName.main.english || family.familyName.main.russian || family.familyName.main.native;
-                const location = family.location.village?.main?.english || 
-                                family.location.region?.main?.english || 
-                                family.location.state?.main?.english || 'Unknown';
+                
+                // Build location string with Native | Russian | English
+                const locationParts = [];
+                const village = family.location.village?.main;
+                const region = family.location.region?.main;
+                const state = family.location.state?.main;
+                
+                // Get the best available location (village > region > state)
+                const locationObj = village || region || state;
+                
+                if (locationObj) {
+                    if (locationObj.native) locationParts.push(locationObj.native);
+                    if (locationObj.russian) locationParts.push(locationObj.russian);
+                    if (locationObj.english) locationParts.push(locationObj.english);
+                }
+                
+                const location = locationParts.length > 0 ? locationParts.join(' | ') : 'Unknown';
                 
                 marker.bindPopup(`
                     <div style="min-width: 200px;">
@@ -678,21 +703,21 @@ class HeritageMaps {
         });
 
         // Update legend
-        const legend = document.getElementById('dnaLegend');
+        const legend = document.getElementById(legendId);
         if (legend) {
-            const totalFamilies = Object.values(haplogroups).reduce((sum, g) => sum + g.count, 0);
+            const totalFamilies = Object.values(subclades).reduce((sum, g) => sum + g.count, 0);
             
             let legendHTML = `<strong>${dnaType === 'ydna' ? 'Y-DNA' : 'mtDNA'} Distribution</strong><br>`;
             legendHTML += `<div style="font-size: 0.85rem; color: var(--text-secondary); margin: 8px 0;">${totalFamilies} ${totalFamilies === 1 ? 'family' : 'families'}</div>`;
             
             // Sort by count descending
-            const sorted = Object.entries(haplogroups).sort((a, b) => b[1].count - a[1].count);
+            const sorted = Object.entries(subclades).sort((a, b) => b[1].count - a[1].count);
             
-            sorted.forEach(([root, data]) => {
+            sorted.forEach(([subclade, data]) => {
                 legendHTML += `
                     <div style="margin-top: 6px; display: flex; align-items: center; font-size: 0.9rem;">
                         <span style="display: inline-block; width: 12px; height: 12px; background: ${data.color}; border-radius: 50%; margin-right: 8px; border: 2px solid #fff;"></span>
-                        <span><strong>${root}</strong> (${data.count})</span>
+                        <span><strong>${subclade}</strong> (${data.count})</span>
                     </div>
                 `;
             });
