@@ -39,6 +39,12 @@ class HeritageMaps {
         if (this.maps.migration) {
             this.refreshMigrationMap();
         }
+        if (this.maps.ydna) {
+            this.updateDNADistribution('ydna', this.maps.ydna, 'ydnaLegend');
+        }
+        if (this.maps.mtdna) {
+            this.updateDNADistribution('mtdna', this.maps.mtdna, 'mtdnaLegend');
+        }
     }
 
     /**
@@ -611,9 +617,9 @@ class HeritageMaps {
     updateDNADistribution(dnaType, map, legendId) {
         console.log(`Updating DNA distribution for ${dnaType}`);
         
-        // Clear existing markers
+        // Clear existing markers (both regular markers and circle markers)
         map.eachLayer(layer => {
-            if (layer instanceof L.Marker) {
+            if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
                 map.removeLayer(layer);
             }
         });
@@ -623,7 +629,7 @@ class HeritageMaps {
         const fieldName = dnaType === 'ydna' ? 'yDnaHaplogroup' : 'mtDnaHaplogroup';
         let familyIndex = 0;
 
-        this.allData.forEach(family => {
+        this.data.forEach(family => {
             const haplogroup = family[fieldName];
             if (!haplogroup || !haplogroup.root) return;
 

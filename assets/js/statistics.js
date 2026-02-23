@@ -82,8 +82,8 @@ class HeritageStatistics {
                 // Delay chart creation to ensure DOM is ready
                 setTimeout(() => {
                     if (!this.charts.yDna) {
-                        // Always start with global data when first opening statistics
-                        this.data = this.allData;
+                        // Create charts with current data (filtered or all)
+                        // Don't reset this.data - it should already be set by filters if applied
                         this.createAllCharts();
                     }
                 }, 100);
@@ -98,14 +98,10 @@ class HeritageStatistics {
     updateWithFilteredData(filteredData) {
         console.log(`📊 Updating statistics with ${filteredData.length} filtered families`);
         
-        // If no filters applied (full dataset), use all data
-        if (filteredData.length === this.allData.length) {
-            this.data = this.allData;
-        } else {
-            this.data = filteredData;
-        }
+        // Always use the provided filtered data
+        this.data = filteredData;
         
-        // Refresh all charts if they exist
+        // Refresh all charts if they exist, otherwise they'll be created with correct data when tab is clicked
         if (this.charts.yDna) {
             this.updateAllCharts();
         }

@@ -602,10 +602,10 @@ class DataLoader {
                           family.location?.village?.main?.english;
             if (village) villages.add(village);
             
-            // State (prefer native, fallback to russian, then english)
-            const state = family.location?.state?.main?.native || 
+            // State (prefer english, fallback to russian, then native)
+            const state = family.location?.state?.main?.english || 
                         family.location?.state?.main?.russian || 
-                        family.location?.state?.main?.english;
+                        family.location?.state?.main?.native;
             if (state) states.add(state);
             
             // Y-DNA Clade
