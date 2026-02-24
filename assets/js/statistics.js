@@ -3,53 +3,6 @@
  * Handles all data visualization using Chart.js
  */
 
-/** FamilyTreeDNA color scheme
-'r1c01': #795548;
-'r1c02': #D50A12;
-'r1c03': #FF631D;
-'r1c04': #FFD22C;
-'r1c05': #4DD92E;
-'r1c06': #808000;
-'r1c07': #1E8E00;
-'r1c08': #2DBE60;
-'r1c09': #33A6B8;
-'r1c10': #1F63B5;
-'r1c11': #8E24AA;
-'r1c12': #C2185B;
-'r1c13': #757575;
-
-
-
-'r2c01': #A1887f;
-'r2c02': #FF1744;
-'r2c03': #FB8C00;
-'r2c04': #FFEA00;
-'r2c05': #64DD17;
-'r2c06': #C0CA33;
-'r2c07': #66BB6A;
-'r2c08': #2ECC71;
-'r2c09': #3DD5D8;
-'r2c10': #2962FF;
-'r2c11': #D500F9;
-'r2c12': #F50057;
-'r2c13': #CFCFCF;
-
-
-'r3c01': #EDE8E6;
-'r3c02': #E6A8AD;
-'r3c03': #F2D19C;
-'r3c04': #F6E7A8;
-'r3c05': #C8F29D;
-'r3c06': #D6E6A8;
-'r3c07': #A5D6A7;
-'r3c08': #B1C6B1;
-'r3c09': #B2EBF2;
-'r3c10': #BBDEFB;
-'r3c11': #E1BEE7;
-'r3c12': #F8BBD0;
-'r3c13': #EEEEEE;
- */
-
 class HeritageStatistics {
     constructor() {
         this.charts = {};

@@ -630,6 +630,7 @@ class DataLoader {
             'circassian': 'circassian-flag.png',
             'karachay': 'karachay-flag.jpg',
             'balkar': 'balkaria-flag.png',
+            'nogai': 'nogai-flag.png',
             'ossetian': 'ossetia-flag.png'
         };
         
