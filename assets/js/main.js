@@ -1087,12 +1087,13 @@ class HeritageApp {
         // Get ethnicity flag
         const ethnicityMain = (data.ethnicity?.main?.english || '').toLowerCase();
         const flagMap = {
-            'abazin': 'abazin-flag.png',
-            'abkhazian': 'abkhazian-flag.png',
-            'circassian': 'circassian-flag.png',
-            'karachay': 'karachay-flag.jpg',
-            'balkar': 'balkaria-flag.png',
-            'ossetian': 'ossetia-flag.png'
+            'abazin': 'abazin-flag-modified.png',
+            'abkhazian': 'abkhazian-flag-modified.png',
+            'circassian': 'circassian-flag-modified.png',
+            'karachay': 'karachay-flag-modified.png',
+            'balkar': 'balkaria-flag-modified.png',
+            'nogai': 'nogai-flag-modified.png',
+            'ossetian': 'ossetia-flag-modified.png'
         };
         const ethnicityFlag = flagMap[ethnicityMain] || null;
         
