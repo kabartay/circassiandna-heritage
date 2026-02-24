@@ -1,14 +1,15 @@
 {
   "metadata": {
     "version": "2.0.0",
-    "lastUpdated": "2026-02-22",
-    "totalFamilies": 29,
+    "lastUpdated": "2026-02-24",
+    "totalFamilies": 37,
     "ethnicities": {
       "Abazin": 2,
       "Abkhazian": 1,
       "Balkar": 5,
       "Circassian": 17,
       "Karachay": 1,
+      "Nogai": 8,
       "Ossetian": 3
     },
     "generatedFrom": [
@@ -17,6 +18,7 @@
       "heritage-data-balkar.json",
       "heritage-data-circassian.json",
       "heritage-data-karachay.json",
+      "heritage-data-nogai.json",
       "heritage-data-ossetian.json"
     ]
   },
@@ -746,8 +748,8 @@
       "location": {
         "coordinates": {
           "main": {
-            "latitude": null,
-            "longitude": null
+            "latitude": 43.382394,
+            "longitude": 40.081175
           },
           "pre": {
             "latitude": null,
@@ -757,8 +759,8 @@
         "village": {
           "main": {
             "native": "Цандрыԥшь",
-            "russian": null,
-            "english": null
+            "russian": "Цандрыпш",
+            "english": "Tsandrypsh"
           },
           "pre": {
             "native": null,
@@ -780,7 +782,7 @@
         },
         "state": {
           "main": {
-            "native": null,
+            "native": "Аԥсны",
             "russian": "Абхазия",
             "english": "Abkhazia"
           },
@@ -2148,7 +2150,7 @@
         },
         "state": {
           "main": {
-            "native": null,
+            "native": "Къарча-Черкес",
             "russian": "Карачаево-Черкесия",
             "english": "Karachay-Cherkessia"
           },
@@ -2262,7 +2264,7 @@
         },
         "state": {
           "main": {
-            "native": null,
+            "native": "Къарча-Черкес",
             "russian": "Карачаево-Черкесия",
             "english": "Karachay-Cherkessia"
           },
@@ -2961,6 +2963,918 @@
         "root": "G",
         "clade": "G2a1",
         "subclade": "G-Z31459",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00001",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "native": "Ноғай",
+          "english": "Nogai",
+          "russian": "Ногаец",
+          "sub": {
+            "native": "Кобан",
+            "english": "Kuban",
+            "russian": "Кубанский"
+          }
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null,
+          "sub": {
+            "native": null,
+            "english": null,
+            "russian": null
+          }
+        }
+      },
+      "location": {
+        "coordinates": {
+          "main": {
+            "latitude": null,
+            "longitude": null
+          },
+          "pre": {
+            "latitude": null,
+            "longitude": null
+          }
+        },
+        "village": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "region": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "state": {
+          "main": {
+            "native": "Карашай-Шеркеш",
+            "russian": "Карачаево-Черкесия",
+            "english": "Karachay-Cherkessia"
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "C",
+        "clade": "C2a1",
+        "subclade": "C-F3830",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00002",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "native": "Ноғай",
+          "english": "Nogai",
+          "russian": "Ногаец",
+          "sub": {
+            "native": "Караноғай",
+            "english": "Karanogai",
+            "russian": "Караногаец"
+          }
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null,
+          "sub": {
+            "native": null,
+            "english": null,
+            "russian": null
+          }
+        }
+      },
+      "location": {
+        "coordinates": {
+          "main": {
+            "latitude": null,
+            "longitude": null
+          },
+          "pre": {
+            "latitude": null,
+            "longitude": null
+          }
+        },
+        "village": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "region": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "state": {
+          "main": {
+            "native": "Дагестан",
+            "russian": "Дагестан",
+            "english": "Dagestan"
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "C",
+        "clade": "C2a1",
+        "subclade": "C-F1918",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00003",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "native": "Ноғай",
+          "english": "Nogai",
+          "russian": "Ногаец",
+          "sub": {
+            "native": "Къырым",
+            "english": "Crimean",
+            "russian": "Крымский"
+          }
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null,
+          "sub": {
+            "native": null,
+            "english": null,
+            "russian": null
+          }
+        }
+      },
+      "location": {
+        "coordinates": {
+          "main": {
+            "latitude": null,
+            "longitude": null
+          },
+          "pre": {
+            "latitude": null,
+            "longitude": null
+          }
+        },
+        "village": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "region": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "state": {
+          "main": {
+            "native": "Къырым",
+            "russian": "Крым",
+            "english": "Crimea"
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1b1",
+        "subclade": "R-M73",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00004",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "native": "Ноғай",
+          "english": "Nogai",
+          "russian": "Ногаец",
+          "sub": {
+            "native": "Ашыкъулак",
+            "english": "Achikulak",
+            "russian": "Ачикулакский"
+          }
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null,
+          "sub": {
+            "native": null,
+            "english": null,
+            "russian": null
+          }
+        }
+      },
+      "location": {
+        "coordinates": {
+          "main": {
+            "latitude": null,
+            "longitude": null
+          },
+          "pre": {
+            "latitude": null,
+            "longitude": null
+          }
+        },
+        "village": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "region": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "state": {
+          "main": {
+            "native": "Ставрополь крайы",
+            "russian": "Ставропольский край",
+            "english": "Stavropol Krai"
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "N",
+        "clade": "N1a1",
+        "subclade": "N-PH1896",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00005",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "native": "Ноғай",
+          "english": "Nogai",
+          "russian": "Ногаец",
+          "sub": {
+            "native": "Сулак",
+            "english": "Sulak",
+            "russian": "Сулакский"
+          }
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null,
+          "sub": {
+            "native": null,
+            "english": null,
+            "russian": null
+          }
+        }
+      },
+      "location": {
+        "coordinates": {
+          "main": {
+            "latitude": null,
+            "longitude": null
+          },
+          "pre": {
+            "latitude": null,
+            "longitude": null
+          }
+        },
+        "village": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "region": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "state": {
+          "main": {
+            "native": "Дагестан",
+            "russian": "Дагестан",
+            "english": "Dagestan"
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "C",
+        "clade": "C2a1",
+        "subclade": "C-F1918",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00006",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "native": "Ноғай",
+          "english": "Nogai",
+          "russian": "Ногаец",
+          "sub": {
+            "native": "Карагаш",
+            "english": "Karagash",
+            "russian": "Карагашский"
+          }
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null,
+          "sub": {
+            "native": null,
+            "english": null,
+            "russian": null
+          }
+        }
+      },
+      "location": {
+        "coordinates": {
+          "main": {
+            "latitude": null,
+            "longitude": null
+          },
+          "pre": {
+            "latitude": null,
+            "longitude": null
+          }
+        },
+        "village": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "region": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "state": {
+          "main": {
+            "native": "Астрахань облысы",
+            "russian": "Астраханская область",
+            "english": "Astrakhan Oblast"
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z283",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00007",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "native": "Ноғай",
+          "english": "Nogai",
+          "russian": "Ногаец",
+          "sub": {
+            "native": "Юрт",
+            "english": "Yurt",
+            "russian": "Юртовский"
+          }
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null,
+          "sub": {
+            "native": null,
+            "english": null,
+            "russian": null
+          }
+        }
+      },
+      "location": {
+        "coordinates": {
+          "main": {
+            "latitude": null,
+            "longitude": null
+          },
+          "pre": {
+            "latitude": null,
+            "longitude": null
+          }
+        },
+        "village": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "region": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "state": {
+          "main": {
+            "native": "Астрахань облысы",
+            "russian": "Астраханская область",
+            "english": "Astrakhan Oblast"
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "C",
+        "clade": "C2a1",
+        "subclade": "C-F1918",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00008",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "native": "Ноғай",
+          "english": "Nogai",
+          "russian": "Ногаец",
+          "sub": {
+            "native": "Кобан",
+            "english": "Kuban",
+            "russian": "Кубанский"
+          }
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null,
+          "sub": {
+            "native": null,
+            "english": null,
+            "russian": null
+          }
+        }
+      },
+      "location": {
+        "coordinates": {
+          "main": {
+            "latitude": null,
+            "longitude": null
+          },
+          "pre": {
+            "latitude": null,
+            "longitude": null
+          }
+        },
+        "village": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "region": {
+          "main": {
+            "native": null,
+            "russian": null,
+            "english": null
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        },
+        "state": {
+          "main": {
+            "native": "Карашай-Шеркеш",
+            "russian": "Карачаево-Черкесия",
+            "english": "Karachay-Cherkessia"
+          },
+          "pre": {
+            "native": null,
+            "russian": null,
+            "english": null
+          }
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a2",
+        "subclade": "G-L1264",
         "terminalSnp": null,
         "SnpList": null
       },
