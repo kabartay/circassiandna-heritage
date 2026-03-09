@@ -458,6 +458,7 @@ body {
     align-items: center;
     gap: 6px;
     width: 100%;
+    box-sizing: border-box;
     background: none;
     border: none;
     padding: 4px 6px;
@@ -484,6 +485,7 @@ body {
 
 .sub-ethnicity-legend .legend-chevron {
     margin-left: auto;
+    flex-shrink: 0;
     font-size: 0.65rem;
     transition: transform 0.2s;
     color: var(--text-secondary);
