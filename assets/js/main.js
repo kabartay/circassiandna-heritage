@@ -352,11 +352,15 @@ class HeritageApp {
             });
         });
         
-        // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
+        // Close dropdown when clicking outside — store reference to avoid duplicate listeners
+        if (this._dropdownClickHandler) {
+            document.removeEventListener('click', this._dropdownClickHandler);
+        }
+        this._dropdownClickHandler = () => {
             customSelect.classList.remove('active');
             customOptions.classList.remove('active');
-        });
+        };
+        document.addEventListener('click', this._dropdownClickHandler);
     }
     
     /**
