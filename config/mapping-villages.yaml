@@ -223,7 +223,7 @@ states:
           Белая речка:
       Чегемский район:
         villages:
-          Чегем Первый:
+          Чегем I:
             name:
               English: Chegem I
               Russian: Чегем I
@@ -239,7 +239,7 @@ states:
             coordinates:
               Latitude: 43.570380
               Longitude: 43.586725
-          Чегем Второй:
+          Чегем II:
             name:
               English: Chegem II
               Russian: Чегем II

@@ -337,8 +337,8 @@ class HeritageMaps {
         const mtDnaGroups = {};
         
         families.forEach(family => {
-            const yDna = family.dna?.yDnaHaplogroup;
-            const mtDna = family.dna?.mtDnaHaplogroup;
+            const yDna = family.yDnaHaplogroup;
+            const mtDna = family.mtDnaHaplogroup;
             
             if (yDna && yDna !== 'N/A') {
                 yDnaGroups[yDna] = (yDnaGroups[yDna] || 0) + 1;
@@ -427,6 +427,9 @@ class HeritageMaps {
 
         // Add migration paths
         this.addMigrationPaths();
+
+        // Leaflet needs a repaint frame after display:none→block to measure the container correctly
+        setTimeout(() => this.maps.migration?.invalidateSize(), 0);
 
         // Update legend
         const legend = document.getElementById('migrationLegend');
@@ -558,12 +561,14 @@ class HeritageMaps {
                 </div>
             `);
             
+            const baseOffsetDeg = 0.0002; // ~22m at equator; much smaller than 0.01deg (~1.1km)
+
             // Track and offset "from" markers
             const fromKey = `${group.from.lat.toFixed(4)},${group.from.lng.toFixed(4)}`;
             fromCoordsCount[fromKey] = (fromCoordsCount[fromKey] || 0) + 1;
             const fromOffset = fromCoordsCount[fromKey] - 1;
             const fromAngle = fromOffset * (Math.PI * 2 / 5);
-            const fromDistance = Math.ceil(fromOffset / 5) * 0.01;
+            const fromDistance = Math.ceil(fromOffset / 5) * baseOffsetDeg;
             const fromOffsetLat = fromOffset > 0 ? Math.sin(fromAngle) * fromDistance : 0;
             const fromOffsetLng = fromOffset > 0 ? Math.cos(fromAngle) * fromDistance : 0;
             
@@ -572,7 +577,7 @@ class HeritageMaps {
             toCoordsCount[toKey] = (toCoordsCount[toKey] || 0) + 1;
             const toOffset = toCoordsCount[toKey] - 1;
             const toAngle = toOffset * (Math.PI * 2 / 5);
-            const toDistance = Math.ceil(toOffset / 5) * 0.01;
+            const toDistance = Math.ceil(toOffset / 5) * baseOffsetDeg;
             const toOffsetLat = toOffset > 0 ? Math.sin(toAngle) * toDistance : 0;
             const toOffsetLng = toOffset > 0 ? Math.cos(toAngle) * toDistance : 0;
             
@@ -618,6 +623,9 @@ class HeritageMaps {
 
         // Display Y-DNA data
         this.updateDNADistribution('ydna', this.maps.ydna, 'ydnaLegend');
+
+        // Leaflet needs a repaint frame after display:none→block to measure the container correctly
+        setTimeout(() => this.maps.ydna?.invalidateSize(), 0);
     }
 
     /**
@@ -719,7 +727,8 @@ class HeritageMaps {
                 
                 // Apply small offset to prevent perfect overlap (spiral pattern)
                 const angle = offset * (Math.PI * 2 / 5); // 5 markers per circle
-                const distance = Math.ceil(offset / 5) * 0.01; // Increase radius every 5 markers
+                const baseOffsetDeg = 0.0002; // ~22m at equator; much smaller than 0.01deg (~1.1km)
+                const distance = Math.ceil(offset / 5) * baseOffsetDeg; // Increase radius every 5 markers
                 const offsetLat = offset > 0 ? Math.sin(angle) * distance : 0;
                 const offsetLng = offset > 0 ? Math.cos(angle) * distance : 0;
                 

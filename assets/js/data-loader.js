@@ -3,6 +3,9 @@
  * Only loads from JSON file - single source of truth
  */
 
+/** Single source of truth for the config/YAML cache version. Bump on every release. */
+const CONFIG_VERSION = '4.0.0';
+
 class DataLoader {
     constructor() {
         this.heritageData = null;
@@ -11,10 +14,10 @@ class DataLoader {
         this.villageMapping = null;
         this.locationMapping = null;
         this.villageIndex = null;   // flat: russianVillageName → {names, coordinates}
-        this.stateIndex   = null;   // flat: russianStateName   → {names}
-        this.regionIndex  = null;   // flat: russianRegionName  → {names}
+        this.stateIndex   = null;   // flat: russianStateName             → {names}
+        this.regionIndex  = null;   // composite: "state::region" (Russian) → {names}
         this.basePath = this.getBasePath();
-        this.configVersion = '4.0.0';  // Stable: bump with releases to invalidate YAML/config cache
+        this.configVersion = CONFIG_VERSION;  // Stable: bump CONFIG_VERSION with releases to invalidate YAML/config cache
         this.dataVersion   = Date.now(); // Dynamic: always fresh for heritage-data.json
 
         console.log('📁 DataLoader initialized with base path:', this.basePath);
@@ -229,8 +232,10 @@ class DataLoader {
 
     /**
      * Build flat state and region indexes from mapping-locations.yaml.
-     * stateIndex  key: Russian state name  → { names }
-     * regionIndex key: Russian region name → { names }
+     * stateIndex  key: Russian state name              → { names }
+     * regionIndex key: "state::region" (Russian names) → { names }
+     *   Composite key avoids collisions where two states share a region name
+     *   (e.g. 'Ногайский район' exists in both KCR and Dagestan).
      */
     buildLocationIndex() {
         this.stateIndex  = {};
@@ -241,7 +246,8 @@ class DataLoader {
         for (const [stateName, stateData] of Object.entries(states)) {
             this.stateIndex[stateName] = { names: stateData.name || {} };
             for (const [regionName, regionData] of Object.entries(stateData.regions || {})) {
-                this.regionIndex[regionName] = { names: regionData.name || {} };
+                const compositeKey = `${stateName}::${regionName}`;
+                this.regionIndex[compositeKey] = { names: regionData.name || {} };
             }
         }
         console.log(`🗺️ Location index built: ${Object.keys(this.stateIndex).length} states, ${Object.keys(this.regionIndex).length} regions`);
@@ -375,9 +381,14 @@ class DataLoader {
                 };
             };
 
-            const enrichRegion = (russianName) => {
+            const enrichRegion = (russianName, russianState) => {
                 if (!russianName) return { russian: null, native: null, english: null };
-                const entry = this.regionIndex?.[russianName];
+                // Look up by composite "state::region" key first to avoid collisions
+                // (e.g. 'Ногайский район' appears in both KCR and Dagestan).
+                const compositeKey = russianState ? `${russianState}::${russianName}` : null;
+                const entry = (compositeKey && this.regionIndex?.[compositeKey])
+                    || this.regionIndex?.[russianName]  // fallback for unscoped lookups
+                    || null;
                 if (!entry) return { russian: russianName, native: null, english: null };
                 return {
                     russian: entry.names.Russian || russianName,
@@ -403,8 +414,8 @@ class DataLoader {
             };
 
             family.location.region = {
-                main: enrichRegion(mainRegion),
-                pre:  enrichRegion(preRegion)
+                main: enrichRegion(mainRegion, mainState),
+                pre:  enrichRegion(preRegion,  preState)
             };
 
             family.location.state = {
@@ -548,7 +559,7 @@ class DataLoader {
             app: {
                 title: "Circassian DNA",
                 subtitle: "Genetic lineage and ancestral connections",
-                version: "4.0.0"
+                version: CONFIG_VERSION
             },
             filters: {
                 ethnicities: [
@@ -614,68 +625,7 @@ class DataLoader {
     }
     
     /**
-     * Multi-filter data by ethnicity, village, state, and clade
-     */
-    getMultiFilteredData(filters = {}) {
-        if (!this.heritageData) {
-            return [];
-        }
-        
-        return this.heritageData.filter(family => {
-            // Ethnicity filter
-            if (filters.ethnicity && filters.ethnicity !== 'all') {
-                const mainEthnicity = family.ethnicity?.main?.english;
-                const subEthnicity = family.ethnicity?.main?.sub?.english;
-                const filterEth = filters.ethnicity.toLowerCase();
-                
-                const ethMatch = 
-                    (mainEthnicity && mainEthnicity.toLowerCase() === filterEth) ||
-                    (subEthnicity && subEthnicity.toLowerCase() === filterEth);
-                
-                if (!ethMatch) return false;
-            }
-            
-            // Village filter
-            if (filters.village && filters.village !== 'all') {
-                const villageNative = family.location?.village?.main?.native;
-                const villageRussian = family.location?.village?.main?.russian;
-                const villageEnglish = family.location?.village?.main?.english;
-                
-                const villageMatch = 
-                    villageNative === filters.village ||
-                    villageRussian === filters.village ||
-                    villageEnglish === filters.village;
-                
-                if (!villageMatch) return false;
-            }
-            
-            // State filter
-            if (filters.state && filters.state !== 'all') {
-                const stateNative = family.location?.state?.main?.native;
-                const stateRussian = family.location?.state?.main?.russian;
-                const stateEnglish = family.location?.state?.main?.english;
-                
-                const stateMatch = 
-                    stateNative === filters.state ||
-                    stateRussian === filters.state ||
-                    stateEnglish === filters.state;
-                
-                if (!stateMatch) return false;
-            }
-            
-            // Clade filter (Y-DNA haplogroup)
-            if (filters.clade && filters.clade !== 'all') {
-                const hg = family.yDnaHaplogroup;
-                const clade = typeof hg === 'object' ? hg.clade : hg;
-                
-                if (clade !== filters.clade) return false;
-            }
-            
-            return true;
-        });
-    }    
-    /**
-     * Multi-filter data by ethnicity, village, state, and clade
+     * Multi-filter data by ethnicity, village, state, and clade (supports arrays + legacy single values)
      */
     getMultiFilteredData(filters = {}) {
         if (!this.heritageData) {
@@ -861,19 +811,10 @@ class DataLoader {
     }
 
     /**
-     * Get processed data with filtering and sorting
+     * Get processed (filtered + sorted) data
      * @param {Object|string} filters - Filter object {ethnicity, village, state, clade} or legacy ethnicity string
      * @param {string} sortType - Sort type
      */
-    getProcessedData(filters = 'all', sortType = 'date-desc') {
-        // Handle legacy single ethnicity filter
-        if (typeof filters === 'string') {
-            filters = { ethnicity: filters };
-        }
-        
-        const filtered = this.getMultiFilteredData(filters);
-        return this.sortData(filtered, sortType);
-    }
     getProcessedData(filters = 'all', sortType = 'date-desc') {
         // Handle legacy single ethnicity filter
         if (typeof filters === 'string') {
