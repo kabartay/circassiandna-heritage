@@ -308,7 +308,9 @@ class HeritageStatistics {
         const groups = {};
 
         this.data.forEach(family => {
-            const parent = family.ethnicity?.main?.english || 'Unknown';
+            const parent = family.ethnicity?.main?.english ||
+                           family.ethnicity?.main?.native ||
+                           'Unknown';
             const sub    = family.ethnicity?.main?.sub?.english ||
                            family.ethnicity?.main?.sub?.native ||
                            parent; // fall back to parent label if no sub-group
@@ -345,6 +347,7 @@ class HeritageStatistics {
         this.data.forEach(family => {
             const state = family.location?.state?.main?.english ||
                           family.location?.state?.main?.russian ||
+                          family.location?.state?.main?.native ||
                           'Unknown';
             distribution[state] = (distribution[state] || 0) + 1;
         });
@@ -794,27 +797,32 @@ class HeritageStatistics {
             seen[item.parent].push(item);
         });
 
-        container.innerHTML = groups.map(({ parent, subs }) => {
+        container.innerHTML = groups.map(({ parent, subs }, i) => {
             const color      = HaplotypeConfig.getEthnicityColor(parent);
             const safeParent = this.escapeHtml(parent);
+            const subsId     = `sub-legend-subs-${i}`;
             const subHTML    = subs.map(s =>
                 `<div class="legend-sub-row">${s.rank} &ndash; ${this.escapeHtml(s.label)}</div>`
             ).join('');
             return `
                 <div class="legend-group">
-                    <button class="legend-toggle" type="button">
+                    <button class="legend-toggle" type="button"
+                            aria-expanded="false"
+                            aria-controls="${subsId}">
                         <span class="legend-color" style="background:${color}"></span>
                         ${safeParent}
                         <span class="legend-count">(${subs.length})</span>
                         <span class="legend-chevron">&#9660;</span>
                     </button>
-                    <div class="legend-subs">${subHTML}</div>
+                    <div class="legend-subs" id="${subsId}">${subHTML}</div>
                 </div>`;
         }).join('');
 
         // Attach toggle listeners
         container.querySelectorAll('.legend-toggle').forEach(btn => {
             btn.addEventListener('click', () => {
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!expanded));
                 btn.closest('.legend-group').classList.toggle('open');
             });
         });
