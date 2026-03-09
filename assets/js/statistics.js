@@ -71,7 +71,9 @@ class HeritageStatistics {
         this.createYSubcladeChart();
         this.createMtSubcladeChart();
         this.createEthnicityChart();
+        this.createSubEthnicityChart();
         this.createVillageChart();
+        this.createStateChart();
     }
 
     /**
@@ -83,7 +85,9 @@ class HeritageStatistics {
         if (this.charts.ySubclade) this.updateYSubcladeChart();
         if (this.charts.mtSubclade) this.updateMtSubcladeChart();
         if (this.charts.ethnicity) this.updateEthnicityChart();
+        if (this.charts.subEthnicity) this.updateSubEthnicityChart();
         if (this.charts.village) this.updateVillageChart();
+        if (this.charts.state) this.updateStateChart();
     }
 
     /**
@@ -282,6 +286,44 @@ class HeritageStatistics {
         });
         
         return distribution;
+    }
+
+    /**
+     * Get sub-ethnicity distribution
+     */
+    getSubEthnicityDistribution() {
+        const distribution = {};
+
+        this.data.forEach(family => {
+            const sub = family.ethnicity?.main?.sub?.english ||
+                        family.ethnicity?.main?.sub?.native ||
+                        family.ethnicity?.main?.english ||
+                        'Unknown';
+            distribution[sub] = (distribution[sub] || 0) + 1;
+        });
+
+        return Object.entries(distribution)
+            .sort((a, b) => b[1] - a[1])
+            .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {});
+    }
+
+    /**
+     * Get state distribution (top 10)
+     */
+    getStateDistribution() {
+        const distribution = {};
+
+        this.data.forEach(family => {
+            const state = family.location?.state?.main?.english ||
+                          family.location?.state?.main?.russian ||
+                          'Unknown';
+            distribution[state] = (distribution[state] || 0) + 1;
+        });
+
+        return Object.entries(distribution)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 10)
+            .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {});
     }
 
     /**
@@ -615,6 +657,56 @@ class HeritageStatistics {
     }
 
     /**
+     * Create Sub-Ethnicity Doughnut Chart
+     */
+    createSubEthnicityChart() {
+        const ctx = document.getElementById('subEthnicityChart');
+        if (!ctx) return;
+
+        const distribution = this.getSubEthnicityDistribution();
+        const labels = Object.keys(distribution);
+        const data = Object.values(distribution);
+        const colors = this.generateColors(labels.length);
+
+        this.charts.subEthnicity = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: colors,
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            padding: 10,
+                            font: { size: 12 }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return `${label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    /**
      * Create Village Bar Chart (Top 10)
      */
     createVillageChart() {
@@ -653,6 +745,46 @@ class HeritageStatistics {
                     legend: {
                         display: false
                     }
+                }
+            }
+        });
+    }
+
+    /**
+     * Create State Bar Chart (Top 10)
+     */
+    createStateChart() {
+        const ctx = document.getElementById('stateChart');
+        if (!ctx) return;
+
+        const distribution = this.getStateDistribution();
+        const labels = Object.keys(distribution);
+        const data = Object.values(distribution);
+
+        this.charts.state = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Families',
+                    data: data,
+                    backgroundColor: '#24690a',
+                    borderColor: '#1a4f07',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
                 }
             }
         });
@@ -750,6 +882,20 @@ class HeritageStatistics {
     }
 
     /**
+     * Update sub-ethnicity chart with new data
+     */
+    updateSubEthnicityChart() {
+        const distribution = this.getSubEthnicityDistribution();
+        const labels = Object.keys(distribution);
+        const data = Object.values(distribution);
+
+        this.charts.subEthnicity.data.labels = labels;
+        this.charts.subEthnicity.data.datasets[0].data = data;
+        this.charts.subEthnicity.data.datasets[0].backgroundColor = this.generateColors(labels.length);
+        this.charts.subEthnicity.update();
+    }
+
+    /**
      * Update village chart with new data
      */
     updateVillageChart() {
@@ -760,6 +906,19 @@ class HeritageStatistics {
         this.charts.village.data.labels = labels;
         this.charts.village.data.datasets[0].data = data;
         this.charts.village.update();
+    }
+
+    /**
+     * Update state chart with new data
+     */
+    updateStateChart() {
+        const distribution = this.getStateDistribution();
+        const labels = Object.keys(distribution);
+        const data = Object.values(distribution);
+
+        this.charts.state.data.labels = labels;
+        this.charts.state.data.datasets[0].data = data;
+        this.charts.state.update();
     }
 }
 
