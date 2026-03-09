@@ -14,7 +14,8 @@ class DataLoader {
         this.stateIndex   = null;   // flat: russianStateName   → {names}
         this.regionIndex  = null;   // flat: russianRegionName  → {names}
         this.basePath = this.getBasePath();
-        this.cacheVersion = Date.now(); // Use timestamp for cache busting
+        this.configVersion = '4.0.0';  // Stable: bump with releases to invalidate YAML/config cache
+        this.dataVersion   = Date.now(); // Dynamic: always fresh for heritage-data.json
 
         console.log('📁 DataLoader initialized with base path:', this.basePath);
     }
@@ -55,7 +56,7 @@ class DataLoader {
             ]);
             
             // Use timestamp for cache busting
-            const response = await fetch(`${this.basePath}data/heritage-data.json?v=${this.cacheVersion}`);
+            const response = await fetch(`${this.basePath}data/heritage-data.json?v=${this.dataVersion}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -63,13 +64,13 @@ class DataLoader {
             
             const data = await response.json();
             
-            // Handle different JSON structures
-            let families = data.families || data || [];
-            
+            // Normalize to array regardless of JSON structure
+            const families = Array.isArray(data.families) ? data.families
+                           : Array.isArray(data)          ? data
+                           : [];
+
             // Enrich each family with ethnicity translations and location data
-            families = families.map(family => this.enrichFamilyData(family));
-            
-            this.heritageData = families;
+            this.heritageData = families.map(family => this.enrichFamilyData(family));
             
             console.log(`✅ Loaded ${this.heritageData.length} heritage records from JSON`);
             return this.heritageData;
@@ -94,7 +95,7 @@ class DataLoader {
         }
 
         try {
-            const url = `${this.basePath}config/app-config.json?v=${this.cacheVersion}`;
+            const url = `${this.basePath}config/app-config.json?v=${this.configVersion}`;
             console.log('🔄 Loading config from:', url);
 
             const response = await fetch(url);
@@ -122,7 +123,7 @@ class DataLoader {
         }
 
         try {
-            const url = `${this.basePath}config/mapping-ethnicities.yaml?v=${this.cacheVersion}`;
+            const url = `${this.basePath}config/mapping-ethnicities.yaml?v=${this.configVersion}`;
             console.log('🔄 Loading ethnicity mapping from:', url);
 
             const response = await fetch(url);
@@ -151,7 +152,7 @@ class DataLoader {
         }
 
         try {
-            const url = `${this.basePath}config/mapping-villages.yaml?v=${this.cacheVersion}`;
+            const url = `${this.basePath}config/mapping-villages.yaml?v=${this.configVersion}`;
             console.log('🔄 Loading village mapping from:', url);
 
             const response = await fetch(url);
@@ -181,7 +182,7 @@ class DataLoader {
         }
 
         try {
-            const url = `${this.basePath}config/mapping-locations.yaml?v=${this.cacheVersion}`;
+            const url = `${this.basePath}config/mapping-locations.yaml?v=${this.configVersion}`;
             console.log('🔄 Loading location mapping from:', url);
 
             const response = await fetch(url);
@@ -203,7 +204,7 @@ class DataLoader {
     }
 
     /**
-     * Build a flat village index from the hierarchical mapping-village.yaml.
+     * Build a flat village index from the hierarchical mapping-villages.yaml.
      * Key: Russian village name  →  { names: {English, Circassian, ...}, coordinates: {Latitude, Longitude} }
      */
     buildVillageIndex() {
