@@ -778,15 +778,13 @@ class HeritageStatistics {
             const subHTML = subs.map(s =>
                 `<div class="legend-sub-row">${s.rank} &ndash; ${s.label}</div>`
             ).join('');
-            // Single sub-ethnicity = no toggle needed, just show inline
-            const hasMultiple = subs.length > 1;
             return `
-                <div class="legend-group${hasMultiple ? '' : ' open'}">
+                <div class="legend-group">
                     <button class="legend-toggle" type="button">
                         <span class="legend-color" style="background:${color}"></span>
                         ${parent}
                         <span class="legend-count" style="font-weight:400;color:var(--text-secondary);margin-left:2px">(${subs.length})</span>
-                        ${hasMultiple ? '<span class="legend-chevron">&#9660;</span>' : ''}
+                        <span class="legend-chevron">&#9660;</span>
                     </button>
                     <div class="legend-subs">${subHTML}</div>
                 </div>`;

@@ -441,13 +441,13 @@ body {
 }
 
 .sub-ethnicity-chart-container {
-    flex: 0 0 55%;
+    flex: 1 1 auto;
     min-width: 0;
 }
 
 .sub-ethnicity-legend {
-    flex: 1;
-    min-width: 0;
+    flex: 0 0 130px;
+    width: 130px;
     padding-top: 4px;
     max-height: 300px;
     overflow-y: auto;
