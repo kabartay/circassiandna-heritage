@@ -718,13 +718,23 @@ class HeritageStatistics {
                 const ds   = chart.data.datasets[0];
 
                 meta.data.forEach((arc, index) => {
-                    if (arc.endAngle - arc.startAngle < 0.14) return;
-                    const midAngle  = (arc.startAngle + arc.endAngle) / 2;
-                    const midRadius = (arc.innerRadius + arc.outerRadius) / 2;
+                    const spanAngle   = arc.endAngle - arc.startAngle;
+                    const ringThick   = arc.outerRadius - arc.innerRadius;
+                    const midRadius   = (arc.innerRadius + arc.outerRadius) / 2;
+                    // Arc chord length at mid-radius — limits label in tangential direction
+                    const arcLen      = spanAngle * midRadius;
+                    // Font size: fill ~55% of whichever dimension is tighter, clamped 8–15px
+                    const fontSize    = Math.round(
+                        Math.min(Math.max(Math.min(ringThick, arcLen) * 0.55, 8), 15)
+                    );
+                    // Skip slice if arc chord is too narrow to fit even one character
+                    if (arcLen < fontSize * 0.9) return;
+
+                    const midAngle = (arc.startAngle + arc.endAngle) / 2;
                     const x = arc.x + midRadius * Math.cos(midAngle);
                     const y = arc.y + midRadius * Math.sin(midAngle);
                     c.save();
-                    c.font = 'bold 11px sans-serif';
+                    c.font = `bold ${fontSize}px sans-serif`;
                     c.fillStyle = '#ffffff';
                     c.textAlign = 'center';
                     c.textBaseline = 'middle';
