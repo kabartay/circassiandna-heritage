@@ -439,7 +439,7 @@ body {
 /* Sub-Ethnicity: donut left, collapsible legend right — mirrors Ethnicity layout */
 .sub-ethnicity-wrap {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 16px;
 }
 
