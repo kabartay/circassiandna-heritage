@@ -481,7 +481,9 @@ class HeritageMaps {
             
             // Get haplogroup color
             const haplogroup = family.yDnaHaplogroup;
-            const subclade = haplogroup?.subclade || haplogroup?.clade || haplogroup?.root || 'Unknown';
+            const subclade = typeof haplogroup === 'string'
+                ? haplogroup
+                : (haplogroup?.subclade || haplogroup?.clade || haplogroup?.root || 'Unknown');
             const color = haplogroup ? HaplotypeConfig.getYSubcladeColor(subclade) : '#999999';
             
             migrations.push({
@@ -664,12 +666,17 @@ class HeritageMaps {
 
         this.data.forEach(family => {
             const haplogroup = family[fieldName];
-            if (!haplogroup || !haplogroup.root) return;
+            if (!haplogroup) return;
+            // Support both object {root, clade, subclade} and plain string
+            const hapRoot = typeof haplogroup === 'string' ? haplogroup : haplogroup.root;
+            if (!hapRoot) return;
 
             const coords = family.location?.coordinates?.main;
             if (!coords || !coords.latitude || !coords.longitude) return;
 
-            const subclade = haplogroup.subclade || haplogroup.clade || haplogroup.root;
+            const subclade = typeof haplogroup === 'string'
+                ? haplogroup
+                : (haplogroup.subclade || haplogroup.clade || haplogroup.root);
 
             if (!subclades[subclade]) {
                 subclades[subclade] = {
