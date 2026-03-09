@@ -11,6 +11,17 @@ class HeritageStatistics {
     }
 
     /**
+     * HTML escape utility — prevents XSS when inserting data-derived strings into innerHTML
+     * @param {string} text
+     * @returns {string}
+     */
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text || '';
+        return div.innerHTML;
+    }
+
+    /**
      * Initialize statistics module
      * @param {Array} heritageData - The heritage data from main app
      */
@@ -774,15 +785,16 @@ class HeritageStatistics {
         });
 
         container.innerHTML = groups.map(({ parent, subs }) => {
-            const color   = HaplotypeConfig.getEthnicityColor(parent);
-            const subHTML = subs.map(s =>
-                `<div class="legend-sub-row">${s.rank} &ndash; ${s.label}</div>`
+            const color      = HaplotypeConfig.getEthnicityColor(parent);
+            const safeParent = this.escapeHtml(parent);
+            const subHTML    = subs.map(s =>
+                `<div class="legend-sub-row">${s.rank} &ndash; ${this.escapeHtml(s.label)}</div>`
             ).join('');
             return `
                 <div class="legend-group">
                     <button class="legend-toggle" type="button">
                         <span class="legend-color" style="background:${color}"></span>
-                        ${parent}
+                        ${safeParent}
                         <span class="legend-count">(${subs.length})</span>
                         <span class="legend-chevron">&#9660;</span>
                     </button>
