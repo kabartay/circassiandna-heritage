@@ -107,11 +107,15 @@ REQUIRED_SCHEMA = {
         'root': (str, type(None)),
         'clade': (str, type(None)),
         'terminalSnp': (str, type(None))
-    }
+    },
+    'metadata': {
+        'lab': (str, type(None))
+    },
+    'urls': dict
 }
 
 # Optional fields that may not exist in all records
-OPTIONAL_FIELDS = ['lab', 'urls']
+OPTIONAL_FIELDS = ['metadata', 'urls']
 
 def check_schema(data, schema, path='', optional_fields=None):
     """Recursively check if data matches schema."""
