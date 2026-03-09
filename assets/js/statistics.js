@@ -314,11 +314,14 @@ class HeritageStatistics {
             }))
             .sort((a, b) => b.total - a.total);
 
-        // Flatten to [{label, parent, count}]
+        // Flatten to [{label, parent, count, rank}]
+        // rank = position within the parent group (1 = largest sub-ethnicity)
         const result = [];
-        sorted.forEach(({ parent, subs }) =>
-            subs.forEach(([label, count]) => result.push({ label, parent, count }))
-        );
+        sorted.forEach(({ parent, subs }) => {
+            subs.forEach(([label, count], idx) =>
+                result.push({ label, parent, count, rank: idx + 1 })
+            );
+        });
         return result;
     }
 
@@ -342,69 +345,14 @@ class HeritageStatistics {
     }
 
     /**
-     * Convert a CSS hex colour to [h (0-360), s (0-100), l (0-100)].
-     * @param {string} hex - e.g. '#24690a'
-     * @returns {[number, number, number]}
-     */
-    _hexToHsl(hex) {
-        const r = parseInt(hex.slice(1, 3), 16) / 255;
-        const g = parseInt(hex.slice(3, 5), 16) / 255;
-        const b = parseInt(hex.slice(5, 7), 16) / 255;
-        const max = Math.max(r, g, b), min = Math.min(r, g, b);
-        let h = 0, s = 0;
-        const l = (max + min) / 2;
-        if (max !== min) {
-            const d = max - min;
-            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-            switch (max) {
-                case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
-                case g: h = ((b - r) / d + 2) / 6; break;
-                case b: h = ((r - g) / d + 4) / 6; break;
-            }
-        }
-        return [h * 360, s * 100, l * 100];
-    }
-
-    /**
-     * Build colors for sub-ethnicity slices using hue rotation within each
-     * parent ethnicity family.  Rotating hue (rather than just varying lightness)
-     * keeps slices in the same colour family while remaining visually distinct
-     * even on very small wedges.
-     *
-     * @param {Array<{label,parent,count}>} items - output of getSubEthnicityDistribution()
-     * @returns {Array<string>} CSS colour strings, one per item
+     * Get colors for sub-ethnicity slices — each slice uses the same flat color
+     * as its parent ethnicity. Rank numbers drawn inside the slices distinguish
+     * sub-groups within the same color family.
+     * @param {Array<{label,parent,count,rank}>} items
+     * @returns {Array<string>}
      */
     getSubEthnicityColors(items) {
-        // How many sub-ethnicities does each parent have?
-        const parentTotals = {};
-        items.forEach(({ parent }) => {
-            parentTotals[parent] = (parentTotals[parent] || 0) + 1;
-        });
-
-        const parentIdx = {};
-        return items.map(({ parent }) => {
-            const total = parentTotals[parent];
-            const idx   = parentIdx[parent] ?? 0;
-            parentIdx[parent] = idx + 1;
-
-            const baseHex = HaplotypeConfig.getEthnicityColor(parent);
-            if (total === 1) return baseHex; // only one sub — use exact base colour
-
-            const [h, s, l] = this._hexToHsl(baseHex);
-
-            // Spread hue symmetrically around the base; cap total arc at 60°
-            // so even 7 Nogai sub-groups stay clearly in the same family.
-            const spread   = Math.min((total - 1) * 22, 60);
-            const hueShift = -spread / 2 + idx * (spread / (total - 1));
-            const newH     = ((h + hueShift) % 360 + 360) % 360;
-
-            // Vary lightness from slightly darker to slightly lighter
-            const lMin = Math.max(l - 12, 22);
-            const lMax = Math.min(l + 18, 70);
-            const newL = lMin + idx * (lMax - lMin) / (total - 1);
-
-            return `hsl(${newH.toFixed(1)}, ${s.toFixed(1)}%, ${newL.toFixed(1)}%)`;
-        });
+        return items.map(({ parent }) => HaplotypeConfig.getEthnicityColor(parent));
     }
 
     /**
@@ -745,16 +693,52 @@ class HeritageStatistics {
         if (!ctx) return;
 
         const items  = this.getSubEthnicityDistribution();
-        const labels = items.map(i => i.label);
+        // Legend label: "1. Kabardian", "2. Shapsough" etc.
+        const labels = items.map(i => `${i.rank}. ${i.label}`);
         const data   = items.map(i => i.count);
         const colors = this.getSubEthnicityColors(items);
+        // Store ranks in dataset for the inline label plugin
+        const ranks  = items.map(i => i.rank);
+
+        // Inline plugin: draw rank number in the middle of each arc.
+        // No external dependency — uses the Chart.js afterDatasetsDraw hook.
+        const rankLabelPlugin = {
+            id: 'subEthnicityRankLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx: c, chartArea } = chart;
+                const meta = chart.getDatasetMeta(0);
+                const ds   = chart.data.datasets[0];
+                const total = ds.data.reduce((a, b) => a + b, 0);
+
+                meta.data.forEach((arc, index) => {
+                    // Skip slices narrower than ~8° — number won't fit
+                    const sliceAngle = arc.endAngle - arc.startAngle;
+                    if (sliceAngle < 0.14) return;
+
+                    const midAngle  = (arc.startAngle + arc.endAngle) / 2;
+                    const midRadius = (arc.innerRadius + arc.outerRadius) / 2;
+                    const x = arc.x + midRadius * Math.cos(midAngle);
+                    const y = arc.y + midRadius * Math.sin(midAngle);
+
+                    c.save();
+                    c.font        = 'bold 11px sans-serif';
+                    c.fillStyle   = '#ffffff';
+                    c.textAlign   = 'center';
+                    c.textBaseline = 'middle';
+                    c.fillText(ds.ranks[index], x, y);
+                    c.restore();
+                });
+            }
+        };
 
         this.charts.subEthnicity = new Chart(ctx, {
             type: 'doughnut',
+            plugins: [rankLabelPlugin],
             data: {
                 labels,
                 datasets: [{
                     data,
+                    ranks,   // consumed by rankLabelPlugin
                     backgroundColor: colors,
                     borderWidth: 2,
                     borderColor: '#fff'
@@ -771,7 +755,9 @@ class HeritageStatistics {
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                const label = context.label || '';
+                                // Strip the rank prefix from the display label in tooltip
+                                const raw   = context.label || '';
+                                const label = raw.replace(/^\d+\.\s*/, '');
                                 const value = context.parsed || 0;
                                 const total = context.dataset.data.reduce((a, b) => a + b, 0);
                                 const pct   = ((value / total) * 100).toFixed(1);
@@ -964,9 +950,10 @@ class HeritageStatistics {
      */
     updateSubEthnicityChart() {
         const items = this.getSubEthnicityDistribution();
-        this.charts.subEthnicity.data.labels                          = items.map(i => i.label);
-        this.charts.subEthnicity.data.datasets[0].data                = items.map(i => i.count);
-        this.charts.subEthnicity.data.datasets[0].backgroundColor     = this.getSubEthnicityColors(items);
+        this.charts.subEthnicity.data.labels                      = items.map(i => `${i.rank}. ${i.label}`);
+        this.charts.subEthnicity.data.datasets[0].data             = items.map(i => i.count);
+        this.charts.subEthnicity.data.datasets[0].ranks            = items.map(i => i.rank);
+        this.charts.subEthnicity.data.datasets[0].backgroundColor  = this.getSubEthnicityColors(items);
         this.charts.subEthnicity.update();
     }
 
