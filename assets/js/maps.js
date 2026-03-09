@@ -680,7 +680,13 @@ class HeritageMaps {
             if (!hapRoot) return;
 
             const coords = family.location?.coordinates?.main;
-            if (!coords || !coords.latitude || !coords.longitude) return;
+            if (
+                !coords ||
+                !Number.isFinite(coords.latitude) ||
+                !Number.isFinite(coords.longitude)
+            ) {
+                return;
+            }
 
             const subclade = typeof haplogroup === 'string'
                 ? haplogroup

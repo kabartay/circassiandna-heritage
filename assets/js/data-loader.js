@@ -313,8 +313,8 @@ class DataLoader {
 
     /**
      * Enrich family data with ethnicity and location translations
-     * @param {object} family - Family object with English-only ethnicity and native-only locations
-     * @returns {object} - Family object with all translations and coordinates
+     * @param {object} family - Family object with English-only ethnicity and Russian-only location strings (expanded at runtime)
+     * @returns {object} - Family object with enriched translations (including locations) and coordinates
      */
     enrichFamilyData(family) {
         // Enrich ethnicity
@@ -383,12 +383,10 @@ class DataLoader {
 
             const enrichRegion = (russianName, russianState) => {
                 if (!russianName) return { russian: null, native: null, english: null };
-                // Look up by composite "state::region" key first to avoid collisions
+                // Look up by composite "state::region" key to avoid collisions
                 // (e.g. 'Ногайский район' appears in both KCR and Dagestan).
                 const compositeKey = russianState ? `${russianState}::${russianName}` : null;
-                const entry = (compositeKey && this.regionIndex?.[compositeKey])
-                    || this.regionIndex?.[russianName]  // fallback for unscoped lookups
-                    || null;
+                const entry = compositeKey ? this.regionIndex?.[compositeKey] : null;
                 if (!entry) return { russian: russianName, native: null, english: null };
                 return {
                     russian: entry.names.Russian || russianName,
