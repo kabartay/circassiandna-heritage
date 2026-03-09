@@ -429,52 +429,73 @@ body {
     color: var(--text-secondary);
 }
 
-/* Sub-Ethnicity chart: donut left, grouped legend right */
-.sub-ethnicity-wrap {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-}
-
-.sub-ethnicity-wrap canvas {
-    flex: 0 0 auto;
-    max-width: 240px;
-    max-height: 240px !important;
-}
-
+/* Sub-Ethnicity collapsible legend */
 .sub-ethnicity-legend {
-    flex: 1;
-    overflow-y: auto;
-    max-height: 260px;
+    margin-top: 12px;
+    border-top: 1px solid var(--border-light);
+    padding-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
 }
 
 .sub-ethnicity-legend .legend-group {
-    margin-bottom: 10px;
+    width: 100%;
 }
 
-.sub-ethnicity-legend .legend-parent {
+.sub-ethnicity-legend .legend-toggle {
     display: flex;
     align-items: center;
     gap: 6px;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.82rem;
     font-weight: 600;
-    font-size: 0.85rem;
     color: var(--text-primary);
-    margin-bottom: 3px;
+    text-align: left;
+    transition: background 0.15s;
+}
+
+.sub-ethnicity-legend .legend-toggle:hover {
+    background: var(--bg-light);
 }
 
 .sub-ethnicity-legend .legend-color {
     display: inline-block;
-    width: 12px;
-    height: 12px;
+    width: 11px;
+    height: 11px;
     border-radius: 2px;
     flex-shrink: 0;
 }
 
-.sub-ethnicity-legend .legend-sub {
-    padding-left: 18px;
+.sub-ethnicity-legend .legend-chevron {
+    margin-left: auto;
+    font-size: 0.65rem;
+    transition: transform 0.2s;
+    color: var(--text-secondary);
+}
+
+.sub-ethnicity-legend .legend-group.open .legend-chevron {
+    transform: rotate(180deg);
+}
+
+.sub-ethnicity-legend .legend-subs {
+    display: none;
+    padding: 2px 0 6px 24px;
+}
+
+.sub-ethnicity-legend .legend-group.open .legend-subs {
+    display: block;
+}
+
+.sub-ethnicity-legend .legend-sub-row {
     font-size: 0.75rem;
     color: var(--text-secondary);
-    line-height: 1.8;
+    line-height: 1.9;
 }
 
 /* Responsive tabs */
@@ -503,6 +524,10 @@ body {
     
     .charts-grid {
         grid-template-columns: 1fr;
+    }
+
+    .charts-grid .chart-card {
+        grid-column: 1 / -1;
     }
     
     .chart-card.full-width {
