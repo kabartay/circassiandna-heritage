@@ -648,14 +648,11 @@ class HeritageMaps {
             maxZoom: 19
         }).addTo(this.maps.mtdna);
 
-        // mtDNA data will be incorporated later
-        const legend = document.getElementById('mtdnaLegend');
-        if (legend) {
-            legend.innerHTML = `
-                <strong>mtDNA Distribution</strong><br>
-                <span style="font-size: 0.85rem; color: var(--text-secondary);">Data coming soon...</span>
-            `;
-        }
+        // Display mtDNA data
+        this.updateDNADistribution('mtdna', this.maps.mtdna, 'mtdnaLegend');
+
+        // Leaflet needs a repaint frame after display:none→block to measure the container correctly
+        setTimeout(() => this.maps.mtdna?.invalidateSize(), 0);
     }
 
     /**

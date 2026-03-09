@@ -11,6 +11,17 @@ class HeritageStatistics {
     }
 
     /**
+     * HTML escape utility — prevents XSS when inserting data-derived strings into innerHTML
+     * @param {string} text
+     * @returns {string}
+     */
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text || '';
+        return div.innerHTML;
+    }
+
+    /**
      * Initialize statistics module
      * @param {Array} heritageData - The heritage data from main app
      */
@@ -71,7 +82,9 @@ class HeritageStatistics {
         this.createYSubcladeChart();
         this.createMtSubcladeChart();
         this.createEthnicityChart();
+        this.createSubEthnicityChart();
         this.createVillageChart();
+        this.createStateChart();
     }
 
     /**
@@ -83,7 +96,9 @@ class HeritageStatistics {
         if (this.charts.ySubclade) this.updateYSubcladeChart();
         if (this.charts.mtSubclade) this.updateMtSubcladeChart();
         if (this.charts.ethnicity) this.updateEthnicityChart();
+        if (this.charts.subEthnicity) this.updateSubEthnicityChart();
         if (this.charts.village) this.updateVillageChart();
+        if (this.charts.state) this.updateStateChart();
     }
 
     /**
@@ -285,6 +300,84 @@ class HeritageStatistics {
     }
 
     /**
+     * Get sub-ethnicity distribution grouped by parent ethnicity.
+     * Returns an array of {label, parent, count, rank} sorted by parent total (desc)
+     * then by sub-ethnicity count (desc) within each group.
+     */
+    getSubEthnicityDistribution() {
+        const groups = {};
+
+        this.data.forEach(family => {
+            const parent = family.ethnicity?.main?.english ||
+                           family.ethnicity?.main?.native ||
+                           'Unknown';
+            const sub    = family.ethnicity?.main?.sub?.english ||
+                           family.ethnicity?.main?.sub?.native ||
+                           parent; // fall back to parent label if no sub-group
+            if (!groups[parent]) groups[parent] = {};
+            groups[parent][sub] = (groups[parent][sub] || 0) + 1;
+        });
+
+        // Sort parents by total count descending
+        const sorted = Object.entries(groups)
+            .map(([parent, subs]) => ({
+                parent,
+                total: Object.values(subs).reduce((a, b) => a + b, 0),
+                subs:  Object.entries(subs).sort((a, b) => b[1] - a[1])
+            }))
+            .sort((a, b) => b.total - a.total);
+
+        // Flatten to [{label, parent, count, rank}]
+        // rank = position within the parent group (1 = largest sub-ethnicity)
+        const result = [];
+        sorted.forEach(({ parent, subs }) => {
+            subs.forEach(([label, count], idx) =>
+                result.push({ label, parent, count, rank: idx + 1 })
+            );
+        });
+        return result;
+    }
+
+    /**
+     * Get state distribution (top 10)
+     */
+    getStateDistribution() {
+        const distribution = {};
+
+        this.data.forEach(family => {
+            const state = family.location?.state?.main?.english ||
+                          family.location?.state?.main?.russian ||
+                          family.location?.state?.main?.native ||
+                          'Unknown';
+            distribution[state] = (distribution[state] || 0) + 1;
+        });
+
+        return Object.entries(distribution)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 10)
+            .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {});
+    }
+
+    /**
+     * Get colors for sub-ethnicity slices — each slice uses the same flat color
+     * as its parent ethnicity. Rank numbers drawn inside the slices distinguish
+     * sub-groups within the same color family.
+     * @param {Array<{label,parent,count,rank}>} items
+     * @returns {Array<string>}
+     */
+    getSubEthnicityColors(items) {
+        // Build a unique-parent index so unknown parents each get a distinct generated colour
+        const parentIndex = {};
+        let nextIdx = 0;
+        items.forEach(({ parent }) => {
+            if (!(parent in parentIndex)) parentIndex[parent] = nextIdx++;
+        });
+        return items.map(({ parent }) =>
+            HaplotypeConfig.getEthnicityColor(parent, parentIndex[parent])
+        );
+    }
+
+    /**
      * Get colors for ethnicities using predefined schema
      * @param {Array} labels - Array of ethnicity labels
      * @returns {Array} Array of color hex codes
@@ -376,7 +469,7 @@ class HeritageStatistics {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'right',
@@ -436,7 +529,7 @@ class HeritageStatistics {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'right',
@@ -496,7 +589,7 @@ class HeritageStatistics {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'right',
@@ -548,7 +641,7 @@ class HeritageStatistics {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'right',
@@ -600,7 +693,7 @@ class HeritageStatistics {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'right',
@@ -611,6 +704,135 @@ class HeritageStatistics {
                     }
                 }
             }
+        });
+    }
+
+    /**
+     * Create Sub-Ethnicity Doughnut Chart
+     */
+    createSubEthnicityChart() {
+        const ctx = document.getElementById('subEthnicityChart');
+        if (!ctx) return;
+
+        const items  = this.getSubEthnicityDistribution();
+        const data   = items.map(i => i.count);
+        const colors = this.getSubEthnicityColors(items);
+        const ranks  = items.map(i => i.rank);
+        // Plain labels for tooltip (no rank prefix — we use the custom HTML legend)
+        const labels = items.map(i => i.label);
+
+        const rankLabelPlugin = {
+            id: 'subEthnicityRankLabels',
+            afterDatasetsDraw(chart) {
+                const { ctx: c } = chart;
+                const meta = chart.getDatasetMeta(0);
+                const ds   = chart.data.datasets[0];
+
+                meta.data.forEach((arc, index) => {
+                    const spanAngle   = arc.endAngle - arc.startAngle;
+                    const ringThick   = arc.outerRadius - arc.innerRadius;
+                    const midRadius   = (arc.innerRadius + arc.outerRadius) / 2;
+                    // Arc chord length at mid-radius — limits label in tangential direction
+                    const arcLen      = spanAngle * midRadius;
+                    // Font size: fill ~55% of whichever dimension is tighter, clamped 8–15px
+                    const fontSize    = Math.round(
+                        Math.min(Math.max(Math.min(ringThick, arcLen) * 0.55, 8), 15)
+                    );
+                    // Skip slice if arc chord is too narrow to fit even one character
+                    if (arcLen < fontSize * 0.9) return;
+
+                    const midAngle = (arc.startAngle + arc.endAngle) / 2;
+                    const x = arc.x + midRadius * Math.cos(midAngle);
+                    const y = arc.y + midRadius * Math.sin(midAngle);
+                    c.save();
+                    c.font = `bold ${fontSize}px sans-serif`;
+                    c.fillStyle = '#ffffff';
+                    c.textAlign = 'center';
+                    c.textBaseline = 'middle';
+                    c.fillText(ds.ranks[index], x, y);
+                    c.restore();
+                });
+            }
+        };
+
+        this.charts.subEthnicity = new Chart(ctx, {
+            type: 'doughnut',
+            plugins: [rankLabelPlugin],
+            data: {
+                labels,
+                datasets: [{ data, ranks, backgroundColor: colors, borderWidth: 2, borderColor: '#fff' }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.parsed || 0;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const pct   = ((value / total) * 100).toFixed(1);
+                                return `${label}: ${value} (${pct}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        this._renderSubEthnicityLegend(items);
+    }
+
+    /**
+     * Build the custom grouped HTML legend for the sub-ethnicity chart.
+     * Groups sub-ethnicities under their parent ethnicity heading.
+     * @param {Array<{label,parent,count,rank}>} items
+     */
+    _renderSubEthnicityLegend(items) {
+        const container = document.getElementById('subEthnicityLegend');
+        if (!container) return;
+
+        // Group items by parent preserving order
+        const groups = [];
+        const seen   = {};
+        items.forEach(item => {
+            if (!seen[item.parent]) {
+                seen[item.parent] = [];
+                groups.push({ parent: item.parent, subs: seen[item.parent] });
+            }
+            seen[item.parent].push(item);
+        });
+
+        container.innerHTML = groups.map(({ parent, subs }, i) => {
+            const color      = HaplotypeConfig.getEthnicityColor(parent);
+            const safeParent = this.escapeHtml(parent);
+            const subsId     = `sub-legend-subs-${i}`;
+            const subHTML    = subs.map(s =>
+                `<div class="legend-sub-row">${s.rank} &ndash; ${this.escapeHtml(s.label)}</div>`
+            ).join('');
+            return `
+                <div class="legend-group">
+                    <button class="legend-toggle" type="button"
+                            aria-expanded="false"
+                            aria-controls="${subsId}">
+                        <span class="legend-color" style="background:${color}"></span>
+                        ${safeParent}
+                        <span class="legend-count">(${subs.length})</span>
+                        <span class="legend-chevron">&#9660;</span>
+                    </button>
+                    <div class="legend-subs" id="${subsId}">${subHTML}</div>
+                </div>`;
+        }).join('');
+
+        // Attach toggle listeners
+        container.querySelectorAll('.legend-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!expanded));
+                btn.closest('.legend-group').classList.toggle('open');
+            });
         });
     }
 
@@ -632,15 +854,15 @@ class HeritageStatistics {
                 datasets: [{
                     label: 'Families',
                     data: data,
-                    backgroundColor: '#24690a',
-                    borderColor: '#1a4f07',
+                    backgroundColor: '#DCD3C3',
+                    borderColor: '#a8a097',
                     borderWidth: 1
                 }]
             },
             options: {
                 indexAxis: 'y', // Horizontal bar chart
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 scales: {
                     x: {
                         beginAtZero: true,
@@ -653,6 +875,46 @@ class HeritageStatistics {
                     legend: {
                         display: false
                     }
+                }
+            }
+        });
+    }
+
+    /**
+     * Create State Bar Chart (Top 10)
+     */
+    createStateChart() {
+        const ctx = document.getElementById('stateChart');
+        if (!ctx) return;
+
+        const distribution = this.getStateDistribution();
+        const labels = Object.keys(distribution);
+        const data = Object.values(distribution);
+
+        this.charts.state = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Families',
+                    data: data,
+                    backgroundColor: '#477571',
+                    borderColor: '#3b5f5b',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
                 }
             }
         });
@@ -750,6 +1012,19 @@ class HeritageStatistics {
     }
 
     /**
+     * Update sub-ethnicity chart with new data
+     */
+    updateSubEthnicityChart() {
+        const items = this.getSubEthnicityDistribution();
+        this.charts.subEthnicity.data.labels                      = items.map(i => i.label);
+        this.charts.subEthnicity.data.datasets[0].data             = items.map(i => i.count);
+        this.charts.subEthnicity.data.datasets[0].ranks            = items.map(i => i.rank);
+        this.charts.subEthnicity.data.datasets[0].backgroundColor  = this.getSubEthnicityColors(items);
+        this.charts.subEthnicity.update();
+        this._renderSubEthnicityLegend(items);
+    }
+
+    /**
      * Update village chart with new data
      */
     updateVillageChart() {
@@ -760,6 +1035,19 @@ class HeritageStatistics {
         this.charts.village.data.labels = labels;
         this.charts.village.data.datasets[0].data = data;
         this.charts.village.update();
+    }
+
+    /**
+     * Update state chart with new data
+     */
+    updateStateChart() {
+        const distribution = this.getStateDistribution();
+        const labels = Object.keys(distribution);
+        const data = Object.values(distribution);
+
+        this.charts.state.data.labels = labels;
+        this.charts.state.data.datasets[0].data = data;
+        this.charts.state.update();
     }
 }
 
