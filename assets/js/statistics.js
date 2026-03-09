@@ -289,22 +289,37 @@ class HeritageStatistics {
     }
 
     /**
-     * Get sub-ethnicity distribution
+     * Get sub-ethnicity distribution grouped by parent ethnicity.
+     * Returns an array of {label, parent, count} sorted by parent total (desc)
+     * then by sub-ethnicity count (desc) within each group.
      */
     getSubEthnicityDistribution() {
-        const distribution = {};
+        const groups = {};
 
         this.data.forEach(family => {
-            const sub = family.ethnicity?.main?.sub?.english ||
-                        family.ethnicity?.main?.sub?.native ||
-                        family.ethnicity?.main?.english ||
-                        'Unknown';
-            distribution[sub] = (distribution[sub] || 0) + 1;
+            const parent = family.ethnicity?.main?.english || 'Unknown';
+            const sub    = family.ethnicity?.main?.sub?.english ||
+                           family.ethnicity?.main?.sub?.native ||
+                           parent; // fall back to parent label if no sub-group
+            if (!groups[parent]) groups[parent] = {};
+            groups[parent][sub] = (groups[parent][sub] || 0) + 1;
         });
 
-        return Object.entries(distribution)
-            .sort((a, b) => b[1] - a[1])
-            .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {});
+        // Sort parents by total count descending
+        const sorted = Object.entries(groups)
+            .map(([parent, subs]) => ({
+                parent,
+                total: Object.values(subs).reduce((a, b) => a + b, 0),
+                subs:  Object.entries(subs).sort((a, b) => b[1] - a[1])
+            }))
+            .sort((a, b) => b.total - a.total);
+
+        // Flatten to [{label, parent, count}]
+        const result = [];
+        sorted.forEach(({ parent, subs }) =>
+            subs.forEach(([label, count]) => result.push({ label, parent, count }))
+        );
+        return result;
     }
 
     /**
@@ -324,6 +339,72 @@ class HeritageStatistics {
             .sort((a, b) => b[1] - a[1])
             .slice(0, 10)
             .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {});
+    }
+
+    /**
+     * Convert a CSS hex colour to [h (0-360), s (0-100), l (0-100)].
+     * @param {string} hex - e.g. '#24690a'
+     * @returns {[number, number, number]}
+     */
+    _hexToHsl(hex) {
+        const r = parseInt(hex.slice(1, 3), 16) / 255;
+        const g = parseInt(hex.slice(3, 5), 16) / 255;
+        const b = parseInt(hex.slice(5, 7), 16) / 255;
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
+        let h = 0, s = 0;
+        const l = (max + min) / 2;
+        if (max !== min) {
+            const d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+            switch (max) {
+                case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                case g: h = ((b - r) / d + 2) / 6; break;
+                case b: h = ((r - g) / d + 4) / 6; break;
+            }
+        }
+        return [h * 360, s * 100, l * 100];
+    }
+
+    /**
+     * Build colors for sub-ethnicity slices using hue rotation within each
+     * parent ethnicity family.  Rotating hue (rather than just varying lightness)
+     * keeps slices in the same colour family while remaining visually distinct
+     * even on very small wedges.
+     *
+     * @param {Array<{label,parent,count}>} items - output of getSubEthnicityDistribution()
+     * @returns {Array<string>} CSS colour strings, one per item
+     */
+    getSubEthnicityColors(items) {
+        // How many sub-ethnicities does each parent have?
+        const parentTotals = {};
+        items.forEach(({ parent }) => {
+            parentTotals[parent] = (parentTotals[parent] || 0) + 1;
+        });
+
+        const parentIdx = {};
+        return items.map(({ parent }) => {
+            const total = parentTotals[parent];
+            const idx   = parentIdx[parent] ?? 0;
+            parentIdx[parent] = idx + 1;
+
+            const baseHex = HaplotypeConfig.getEthnicityColor(parent);
+            if (total === 1) return baseHex; // only one sub — use exact base colour
+
+            const [h, s, l] = this._hexToHsl(baseHex);
+
+            // Spread hue symmetrically around the base; cap total arc at 60°
+            // so even 7 Nogai sub-groups stay clearly in the same family.
+            const spread   = Math.min((total - 1) * 22, 60);
+            const hueShift = -spread / 2 + idx * (spread / (total - 1));
+            const newH     = ((h + hueShift) % 360 + 360) % 360;
+
+            // Vary lightness from slightly darker to slightly lighter
+            const lMin = Math.max(l - 12, 22);
+            const lMax = Math.min(l + 18, 70);
+            const newL = lMin + idx * (lMax - lMin) / (total - 1);
+
+            return `hsl(${newH.toFixed(1)}, ${s.toFixed(1)}%, ${newL.toFixed(1)}%)`;
+        });
     }
 
     /**
@@ -663,17 +744,17 @@ class HeritageStatistics {
         const ctx = document.getElementById('subEthnicityChart');
         if (!ctx) return;
 
-        const distribution = this.getSubEthnicityDistribution();
-        const labels = Object.keys(distribution);
-        const data = Object.values(distribution);
-        const colors = this.generateColors(labels.length);
+        const items  = this.getSubEthnicityDistribution();
+        const labels = items.map(i => i.label);
+        const data   = items.map(i => i.count);
+        const colors = this.getSubEthnicityColors(items);
 
         this.charts.subEthnicity = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: labels,
+                labels,
                 datasets: [{
-                    data: data,
+                    data,
                     backgroundColor: colors,
                     borderWidth: 2,
                     borderColor: '#fff'
@@ -685,10 +766,7 @@ class HeritageStatistics {
                 plugins: {
                     legend: {
                         position: 'right',
-                        labels: {
-                            padding: 10,
-                            font: { size: 12 }
-                        }
+                        labels: { padding: 10, font: { size: 12 } }
                     },
                     tooltip: {
                         callbacks: {
@@ -696,8 +774,8 @@ class HeritageStatistics {
                                 const label = context.label || '';
                                 const value = context.parsed || 0;
                                 const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                const percentage = ((value / total) * 100).toFixed(1);
-                                return `${label}: ${value} (${percentage}%)`;
+                                const pct   = ((value / total) * 100).toFixed(1);
+                                return `${label}: ${value} (${pct}%)`;
                             }
                         }
                     }
@@ -885,13 +963,10 @@ class HeritageStatistics {
      * Update sub-ethnicity chart with new data
      */
     updateSubEthnicityChart() {
-        const distribution = this.getSubEthnicityDistribution();
-        const labels = Object.keys(distribution);
-        const data = Object.values(distribution);
-
-        this.charts.subEthnicity.data.labels = labels;
-        this.charts.subEthnicity.data.datasets[0].data = data;
-        this.charts.subEthnicity.data.datasets[0].backgroundColor = this.generateColors(labels.length);
+        const items = this.getSubEthnicityDistribution();
+        this.charts.subEthnicity.data.labels                          = items.map(i => i.label);
+        this.charts.subEthnicity.data.datasets[0].data                = items.map(i => i.count);
+        this.charts.subEthnicity.data.datasets[0].backgroundColor     = this.getSubEthnicityColors(items);
         this.charts.subEthnicity.update();
     }
 
