@@ -816,8 +816,8 @@ class HeritageStatistics {
                 datasets: [{
                     label: 'Families',
                     data: data,
-                    backgroundColor: '#24690a',
-                    borderColor: '#1a4f07',
+                    backgroundColor: '#477571',
+                    borderColor: '#3b5f5b',
                     borderWidth: 1
                 }]
             },
@@ -860,8 +860,8 @@ class HeritageStatistics {
                 datasets: [{
                     label: 'Families',
                     data: data,
-                    backgroundColor: '#24690a',
-                    borderColor: '#1a4f07',
+                    backgroundColor: '#154341',
+                    borderColor: '#0e2e2c',
                     borderWidth: 1
                 }]
             },
