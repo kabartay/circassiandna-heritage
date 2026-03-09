@@ -1,0 +1,383 @@
+# Village-level mapping of names across languages
+# Hierarchical structure: states → regions → villages
+# Use this for quick lookup and coordinate resolution
+
+states:
+
+  Абхазия:
+    regions:
+      Гагрский район:
+        villages:
+          Цандрыпш:
+            name:
+              English: Tsandrypsh
+              Russian: Цандрыпш
+              Abazin: null
+              Abkhazian: Цандрыԥшь
+              Balkar: null
+              Circassian: null
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.382394
+              Longitude: 40.081175
+
+  Адыгея:
+    regions:
+      Красногвардейский район:
+        villages:
+          Красногвардейское:
+            name:
+              English: Krasnogvardeyskое
+              Russian: Красногвардейское
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Красногвардейскэ къедзыгъо
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 45.143718
+              Longitude: 39.589635
+          Бжедугхабль:
+            name:
+              English: Bzhedugkhabl
+              Russian: Бжедугхабль
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Бжъэдыгъухьабл
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 44.966667
+              Longitude: 39.7
+      Кошехабльский район:
+        villages:
+          Кошехабль:
+            name:
+              English: Koshekhabl
+              Russian: Кошехабль
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Андзаурий
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 44.900124
+              Longitude: 40.502889
+      Шовгеновский район:
+        villages:
+          Хатажукай:
+            name:
+              English: Khatazhukay
+              Russian: Хатажукай
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Хьатыгъужъыкъуай
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 45.070575
+              Longitude: 40.185999
+          Хакуринохабль:
+            name:
+              English: Khakurinokhabl
+              Russian: Хакуринохабль
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Хьэкурынэхьабл
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 45.019271
+              Longitude: 40.23635
+  Кабардино-Балкария:
+    regions:
+      Баксанский район:
+        villages:
+          Исламей:
+            name:
+              English: Islamey
+              Russian: Исламей
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Ислъэмей
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.673209
+              Longitude: 43.457385
+          Нижний Куркужин:
+            name:
+              English: Nizhniy Kurkuzhin
+              Russian: Нижний Куркужин
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Къуэн хьэблэ
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.729825
+              Longitude: 43.339895
+      Зольский район:
+        villages:
+          Малка:
+            name:
+              English: Malka
+              Russian: Малка
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Хьэжы хьэблэ
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.799173
+              Longitude: 43.326716
+      Лексенский район:
+        villages:
+          Кугулыкъуей:
+            name:
+              English: Urukh
+              Russian: Урух
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Къугъулыкъуей
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.292826
+              Longitude: 44.027438
+          Анзорей:
+            name:
+              English: Anzorey
+              Russian: Анзорей
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Андзорей
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.354561
+              Longitude: 43.940041
+      Нальчик:
+        villages:
+          Кенже:
+            name:
+              English: Kenzhe
+              Russian: Кенже
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Къуэшрыкъуей
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.496874
+              Longitude: 43.553101
+          Хасанья:
+          Белая речка:
+      Чегемский район:
+        villages:
+          Чегем Первый:
+            name:
+              English: Chegem I
+              Russian: Чегем I
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Къундетей I
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.570380
+              Longitude: 43.586725
+          Чегем Второй:
+            name:
+              English: Chegem II
+              Russian: Чегем II
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Къундетей II
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.592575
+              Longitude: 43.596588
+      Черекский район:
+        villages:
+          Жемтала:
+            name:
+              English: Zhemtala
+              Russian: Жемтала
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Къуэжыкъуей
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.282963
+              Longitude: 43.656497
+      Прохладный район:
+        villages:
+          Карагач:
+            name:
+              English: Karagach
+              Russian: Карагач
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Инал хьэблэ
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.804488
+              Longitude: 43.774176
+  Карачаево-Черкесия:
+    regions:
+      Абазинский район:
+        villages:
+          Псыж:
+            name:
+              English: Psyzh
+              Russian: Псыж
+              Abazin: Псыжв
+              Abkhazian: null
+              Balkar: Псыж
+              Circassian: Псыжъ
+              Karachay: Псыж
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 44.235040
+              Longitude: 42.015787
+          Эльбурган:
+            name:
+              English: Elburgan
+              Russian: Эльбурган
+              Abazin: Бибаркт
+              Abkhazian: null
+              Balkar: null
+              Circassian: Елбыргъан
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 44.079395
+              Longitude: 41.798098
+      Хабезский район:
+        villages:
+          Малый Зеленчук:
+            name:
+              English: Maly Zelenchuk
+              Russian: Малый Зеленчук
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Ботэщей
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 44.163584
+              Longitude: 41.865741
+          Хабез:
+            name:
+              English: Khabez
+              Russian: Хабез
+              Abazin: null
+              Abkhazian: null             
+              Balkar: null
+              Circassian: Къэсейхьэблэ
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 44.043204
+              Longitude: 41.766657
+  Краснодарский край:
+    regions:
+      Адлерский район:
+        villages:
+          Аибга:
+            name:
+              English: Aibga
+              Russian: Аибга
+              Abazin: null
+              Abkhazian: А́ибӷа
+              Balkar: null
+              Circassian: null
+              Karachay: null
+              Kumyk: null
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.587784
+              Longitude: 40.19439

@@ -1,0 +1,25 @@
+{
+  "app": {
+    "title": "Circassian DNA",
+    "subtitle": "Genetic lineage and ancestral connections",
+    "version": "4.0.0"
+  },
+  "sorting": {
+    "options": [
+      { "value": "date-desc", "label": "Date (Newest First)", "default": true },
+      { "value": "date-asc",  "label": "Date (Oldest First)", "default": false },
+      { "value": "name-asc",  "label": "Family Name (A-Z)",   "default": false },
+      { "value": "name-desc", "label": "Family Name (Z-A)",   "default": false }
+    ]
+  },
+  "pagination": {
+    "resultsPerPage": 8,
+    "loadMoreOnScroll": true
+  },
+  "ui": {
+    "showStatistics": true,
+    "showFilters": true,
+    "showSorting": true,
+    "animateCards": true
+  }
+}

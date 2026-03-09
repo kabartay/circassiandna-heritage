@@ -1,13 +1,13 @@
 {
   "metadata": {
-    "version": "2.0.0",
-    "lastUpdated": "2026-02-24",
-    "totalFamilies": 37,
+    "version": "4.0.0",
+    "lastUpdated": "2026-03-09",
+    "totalFamilies": 38,
     "ethnicities": {
       "Abazin": 2,
       "Abkhazian": 1,
       "Balkar": 5,
-      "Circassian": 17,
+      "Circassian": 18,
       "Karachay": 1,
       "Nogai": 8,
       "Ossetian": 3
@@ -41,72 +41,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкешенка",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинка"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 43.673209,
-            "longitude": 43.457385
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Ислъэмей",
-            "russian": "Исламей",
-            "english": "Islamey"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Исламей",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": "Бэхъсэн къедзыгъуэ",
-            "russian": "Баксанский район",
-            "english": "Baksanskiy District"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Баксанский район",
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балъкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -155,72 +113,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 43.282963,
-            "longitude": 43.656497
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Къуэжыкъуей",
-            "russian": "Жемтала",
-            "english": "Zhemtala"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Жемтала",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": "Шэрэдж къедзыгъуэ",
-            "russian": "Черекский район",
-            "english": "Cherekskiy District"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Черекский район",
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -269,72 +185,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 43.496874,
-            "longitude": 43.553101
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Къуэшрыкъуей",
-            "russian": "Кенже",
-            "english": "Kenzhe"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кенже",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": "Налшык",
-            "russian": "Нальчик",
-            "english": "Nalchik"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Нальчик",
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -383,72 +257,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 43.804488,
-            "longitude": 43.774176
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Инал хьэблэ",
-            "russian": "Карагач",
-            "english": "Karagach"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Карагач",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": "Прохладнэ къедзыгъуэ",
-            "russian": "Прохладный район",
-            "english": "Prokhladnensky District"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Прохладный район",
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балъкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -497,72 +329,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкешенка",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинка"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": "Убых",
           "english": "Ubykh",
-          "russian": "Убых",
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балъкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -611,72 +401,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": "Убых",
           "english": "Ubykh",
-          "russian": "Убых",
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балъкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -725,72 +473,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Аԥсуаа",
           "english": "Abkhazian",
-          "russian": "Абхазец",
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 43.382394,
-            "longitude": 40.081175
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Цандрыԥшь",
-            "russian": "Цандрыпш",
-            "english": "Tsandrypsh"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Цандрыпш",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Аԥсны",
-            "russian": "Абхазия",
-            "english": "Abkhazia"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Абхазия",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -839,72 +545,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 43.799173,
-            "longitude": 43.326716
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Хьэжы хьэблэ",
-            "russian": "Малка",
-            "english": "Malka"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Малка",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": "Дзэлыкъуэ къедзыгъуэ",
-            "russian": "Зольский район",
-            "english": "Zolsky District"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Зольский район",
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балъкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -953,72 +617,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 44.163584,
-            "longitude": 41.865741
-          },
-          "pre": {
-            "latitude": 44.043204,
-            "longitude": 41.766657
-          }
-        },
         "village": {
-          "main": {
-            "native": "Ботэщей",
-            "russian": "Малый Зеленчук",
-            "english": "Maly Zelenchuk"
-          },
-          "pre": {
-            "native": "Къэсейхьэблэ",
-            "russian": "Хабез",
-            "english": "Khabez"
-          }
+          "main": "Малый Зеленчук",
+          "pre": "Хабез"
         },
         "region": {
-          "main": {
-            "native": "Хьэбэз къедзыгъуэ",
-            "russian": "Хабезский район",
-            "english": "Khabezsky District"
-          },
-          "pre": {
-            "native": "Хьэбэз къедзыгъуэ",
-            "russian": "Хабезский район",
-            "english": "Khabezsky District"
-          }
+          "main": "Хабезский район",
+          "pre": "Хабезский район"
         },
         "state": {
-          "main": {
-            "native": "Къэрэшей-Адыгэ",
-            "russian": "Карачаево-Черкесия",
-            "english": "Karachay-Cherkessia"
-          },
-          "pre": {
-            "native": "Къэрэшей-Адыгэ",
-            "russian": "Карачаево-Черкесия",
-            "english": "Karachay-Cherkessia"
-          }
+          "main": "Карачаево-Черкесия",
+          "pre": "Карачаево-Черкесия"
         }
       },
       "yDnaHaplogroup": {
@@ -1067,72 +689,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Шапсыгъ",
-            "english": "Shapsough",
-            "russian": "Шапсуг"
+            "english": "Shapsough"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 45.070575,
-            "longitude": 40.185999
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Хьатыгъужъыкъуай",
-            "russian": "Хатажукай",
-            "english": "Khatazhukay"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Хатажукай",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": "Красногвардейскэ къедзыгъо",
-            "russian": "Красногвардейский район",
-            "english": "Krasnogvardeysky District"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Красногвардейский район",
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Адыгей",
-            "russian": "Адыгея",
-            "english": "Adygea"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Адыгея",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -1181,72 +761,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 43.729825,
-            "longitude": 43.339895
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Къуэн хьэблэ",
-            "russian": "Нижний Куркужин",
-            "english": "Nizhniy Kurkuzhin"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Нижний Куркужин",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балъкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -1295,72 +833,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Абдзах",
-            "english": "Abdzakh",
-            "russian": "Абадзехи"
+            "english": "Abdzakh"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 45.019271,
-            "longitude": 40.23635
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Хьэкурынэхьабл",
-            "russian": "Хакуринохабль",
-            "english": "Khakurinokhabl"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Хакуринохабль",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": "Шэуджэн къедзыгъо",
-            "russian": "Шовгеновский район",
-            "english": "Shovgenovsky District"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Шовгеновский район",
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Адыгей",
-            "russian": "Адыгея",
-            "english": "Adygea"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Адыгея",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -1409,72 +905,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 43.592575,
-            "longitude": 43.596588
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Къундетей",
-            "russian": "Чегем",
-            "english": "Chegem"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Чегем II",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балъкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -1523,72 +977,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": "Абаза",
           "english": "Abazin",
-          "russian": "Абазин",
           "sub": {
-            "native": "Ашвыуа",
-            "english": "Tapanta",
-            "russian": "Тапанта"
+            "english": "Tapanta"
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 43.729825,
-            "longitude": 43.339895
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Къуэн хьэблэ",
-            "russian": "Нижний Куркужин",
-            "english": "Nizhniy Kurkuzhin"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Нижний Куркужин",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": "Бэхъсэн къедзыгъуэ",
-            "russian": "Баксанский район",
-            "english": "Baksanskiy District"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Баксанский район",
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балъкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": "Къэрэшей-Адыгэ",
-            "russian": "Кэрэшей-Адыгэ",
-            "english": "Kereshey-Adyge"
-          }
+          "main": "Кабардино-Балкария",
+          "pre": "Кэрэшей-Адыгэ"
         }
       },
       "yDnaHaplogroup": {
@@ -1620,6 +1032,150 @@
       }
     },
     {
+      "id": "SI11177",
+      "date": "2022-04-21",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "ХъсалргIа",
+          "english": "Ksalov",
+          "russian": "Ксалов"
+        },
+        "pre": {
+          "native": "Ахсалба",
+          "english": "Akhsalba",
+          "russian": "Ахсалба"
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Abazin",
+          "sub": {
+            "english": "Tapanta"
+          }
+        },
+        "pre": {
+          "english": "Abkhazian",
+          "sub": {
+            "english": "Pskhu"
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Эльбурган",
+          "pre": "Аибга"
+        },
+        "region": {
+          "main": "Абазинский район",
+          "pre": "Краснодарский край"
+        },
+        "state": {
+          "main": "Карачаево-Черкесия",
+          "pre": "Краснодарский край"
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": "R-FGC22480",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-FGC22480/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-FGC22480/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=166035,252846,252847,252848,252851,252852,272438,287861,310382,325739,333469,344505",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "IN60320",
+      "date": "2022-01-25",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "КIэщ",
+          "english": "Keshev",
+          "russian": "Кешев"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": "Abazin",
+          "sub": {
+            "english": "Tapanta"
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Кенже",
+          "pre": null
+        },
+        "region": {
+          "main": "Нальчик",
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": "Карачаево-Черкесия"
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": "R-FT95315",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-FT95315/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-FT95315/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=166035,252846,252847,252848,252851,252852,272438,287861,310382,325739,333469,344505",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
       "id": "SI11187",
       "date": "2021-07-22",
       "gender": "male",
@@ -1637,72 +1193,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 43.292826,
-            "longitude": 44.027438
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Къугъулыкъуей",
-            "russian": "Урух",
-            "english": "Urukh"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Урух",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": "Лэскэн къедзыгъуэ",
-            "russian": "Лескенский район",
-            "english": "Leskenskiy District"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Лескенский район",
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балъкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -1751,72 +1265,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 44.900124,
-            "longitude": 40.502889
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Андзаурий",
-            "russian": "Кошехабль",
-            "english": "Koshekhabl"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кошехабль",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": "Кощхьэблэ къедзыгъо",
-            "russian": "Кошехабльский район",
-            "english": "Koshekhabl District"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кошехабльский район",
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Адыгей",
-            "russian": "Адыгея",
-            "english": "Adygea"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Адыгея",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -1865,72 +1337,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Убых",
-            "english": "Ubykh",
-            "russian": "Убых"
+            "english": "Ubykh"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": 44.966667,
-            "longitude": 39.7
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": "Бжъэдыгъухьабл",
-            "russian": "Бжедугхабль",
-            "english": "Bzhedugkhabl"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Бжедугхабль",
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": "Красногвардейскэ къедзыгъо",
-            "russian": "Красногвардейский район",
-            "english": "Krasnogvardeysky District"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Красногвардейский район",
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Адыгей",
-            "russian": "Адыгея",
-            "english": "Adygea"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Адыгея",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -1979,72 +1409,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Адыгэ",
           "english": "Circassian",
-          "russian": "Черкес",
           "sub": {
-            "native": "Къэбардей",
-            "english": "Kabardian",
-            "russian": "Кабардинец"
+            "english": "Kabardian"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къэбэрдей-Балъкъэр",
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -2076,120 +1464,6 @@
       }
     },
     {
-      "id": "XX00001",
-      "date": "2000-01-01",
-      "gender": "male",
-      "familyName": {
-        "main": {
-          "native": null,
-          "english": "TBD",
-          "russian": null
-        },
-        "pre": {
-          "native": null,
-          "english": null,
-          "russian": null
-        }
-      },
-      "ethnicity": {
-        "main": {
-          "native": "Абаза",
-          "english": "Abazin",
-          "russian": "Абазин",
-          "sub": {
-            "native": "Ашвыуа",
-            "english": "Tapanta",
-            "russian": "Тапанта"
-          }
-        },
-        "pre": {
-          "native": null,
-          "english": null,
-          "russian": null,
-          "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
-          }
-        }
-      },
-      "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
-        "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
-        },
-        "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
-        },
-        "state": {
-          "main": {
-            "native": "Къарча-Черкес",
-            "russian": "Карачаево-Черкесия",
-            "english": "Karachay-Cherkessia"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
-        }
-      },
-      "yDnaHaplogroup": {
-        "root": "G",
-        "clade": "G2a2",
-        "subclade": "G-L1264",
-        "terminalSnp": null,
-        "SnpList": null
-      },
-      "mtDnaHaplogroup": {
-        "root": null,
-        "clade": null,
-        "subclade": null,
-        "terminalSnp": null,
-        "SnpList": null
-      },
-      "urls": {
-        "yDnaClassicTree": null,
-        "yDnaTimeTree": null,
-        "yDnaGroupTree": null,
-        "mtDnaClassicTree": null,
-        "mtDnaTimeTree": null,
-        "mtDnaGroupTree": null,
-        "fullReport": null,
-        "relations": null
-      },
-      "metadata": {
-        "lab": "FamilyTreeDNA"
-      }
-    },
-    {
       "id": "XX00002",
       "date": "2000-01-01",
       "gender": "male",
@@ -2207,72 +1481,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Абаза",
           "english": "Abazin",
-          "russian": "Абазин",
           "sub": {
-            "native": "Щхъарауа",
-            "english": "Ashkharaua",
-            "russian": "Ашхарауа"
+            "english": "Ashkharaua"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къарча-Черкес",
-            "russian": "Карачаево-Черкесия",
-            "english": "Karachay-Cherkessia"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Карачаево-Черкесия",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -2321,72 +1553,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Таулу",
           "english": "Balkar",
-          "russian": "Балкарец",
           "sub": {
-            "native": "Басханлы",
-            "english": "Baksan",
-            "russian": "Баксанец"
+            "english": "Baksan"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": null,
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -2435,72 +1625,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Таулу",
           "english": "Balkar",
-          "russian": "Балкарец",
           "sub": {
-            "native": "Чегемлы",
-            "english": "Chegem",
-            "russian": "Чегемец"
+            "english": "Chegem"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": null,
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -2549,72 +1697,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Таулу",
           "english": "Balkar",
-          "russian": "Балкарец",
           "sub": {
-            "native": "Холамлы",
-            "english": "Kholam",
-            "russian": "Холамец"
+            "english": "Kholam"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": null,
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -2663,72 +1769,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Таулу",
           "english": "Balkar",
-          "russian": "Балкарец",
           "sub": {
-            "native": "Бызынгылы",
-            "english": "Bezengi",
-            "russian": "Безенгиец"
+            "english": "Bezengi"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": null,
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -2777,72 +1841,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Таулу",
           "english": "Balkar",
-          "russian": "Балкарец",
           "sub": {
-            "native": "Малкъарлы",
-            "english": "Malkar",
-            "russian": "Малкарец"
+            "english": "Malkar"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": null,
-            "russian": "Кабардино-Балкария",
-            "english": "Kabardino-Balkaria"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Кабардино-Балкария",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -2891,72 +1913,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Къарачайлы",
           "english": "Karachay",
-          "russian": "Карачаевец",
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": null,
-            "russian": "Карачаево-Черкесия",
-            "english": "Karachay-Cherkessia"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Карачаево-Черкесия",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -3005,72 +1985,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Ноғай",
           "english": "Nogai",
-          "russian": "Ногаец",
           "sub": {
-            "native": "Кобан",
-            "english": "Kuban",
-            "russian": "Кубанский"
+            "english": "Kuban"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Карашай-Шеркеш",
-            "russian": "Карачаево-Черкесия",
-            "english": "Karachay-Cherkessia"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Карачаево-Черкесия",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -3119,72 +2057,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Ноғай",
           "english": "Nogai",
-          "russian": "Ногаец",
           "sub": {
-            "native": "Караноғай",
-            "english": "Karanogai",
-            "russian": "Караногаец"
+            "english": "Karanogai"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Дагестан",
-            "russian": "Дагестан",
-            "english": "Dagestan"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Дагестан",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -3233,72 +2129,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Ноғай",
           "english": "Nogai",
-          "russian": "Ногаец",
           "sub": {
-            "native": "Къырым",
-            "english": "Crimean",
-            "russian": "Крымский"
+            "english": "Crimean"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Къырым",
-            "russian": "Крым",
-            "english": "Crimea"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Крым",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -3347,72 +2201,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Ноғай",
           "english": "Nogai",
-          "russian": "Ногаец",
           "sub": {
-            "native": "Ашыкъулак",
-            "english": "Achikulak",
-            "russian": "Ачикулакский"
+            "english": "Achikulak"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Ставрополь крайы",
-            "russian": "Ставропольский край",
-            "english": "Stavropol Krai"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Ставропольский край",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -3461,72 +2273,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Ноғай",
           "english": "Nogai",
-          "russian": "Ногаец",
           "sub": {
-            "native": "Сулак",
-            "english": "Sulak",
-            "russian": "Сулакский"
+            "english": "Sulak"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Дагестан",
-            "russian": "Дагестан",
-            "english": "Dagestan"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Дагестан",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -3575,72 +2345,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Ноғай",
           "english": "Nogai",
-          "russian": "Ногаец",
           "sub": {
-            "native": "Карагаш",
-            "english": "Karagash",
-            "russian": "Карагашский"
+            "english": "Karagash"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Астрахань облысы",
-            "russian": "Астраханская область",
-            "english": "Astrakhan Oblast"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Астраханская область",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -3689,72 +2417,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Ноғай",
           "english": "Nogai",
-          "russian": "Ногаец",
           "sub": {
-            "native": "Юрт",
-            "english": "Yurt",
-            "russian": "Юртовский"
+            "english": "Yurt"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Астрахань облысы",
-            "russian": "Астраханская область",
-            "english": "Astrakhan Oblast"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Астраханская область",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -3803,72 +2489,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Ноғай",
           "english": "Nogai",
-          "russian": "Ногаец",
           "sub": {
-            "native": "Кобан",
-            "english": "Kuban",
-            "russian": "Кубанский"
+            "english": "Kuban"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": "Карашай-Шеркеш",
-            "russian": "Карачаево-Черкесия",
-            "english": "Karachay-Cherkessia"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Карачаево-Черкесия",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -3917,72 +2561,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Осетин",
           "english": "Ossetian",
-          "russian": "Осетин",
           "sub": {
-            "native": "Ирон",
-            "english": "Iron",
-            "russian": "Иронец"
+            "english": "Iron"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": null,
-            "russian": "Северная Осетия",
-            "english": "North Ossetia"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Северная Осетия",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -4031,72 +2633,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Осетин",
           "english": "Ossetian",
-          "russian": "Осетин",
           "sub": {
-            "native": "Дигорон",
-            "english": "Digor",
-            "russian": "Дигорец"
+            "english": "Digor"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": null,
-            "russian": "Северная Осетия",
-            "english": "North Ossetia"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Северная Осетия",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
@@ -4145,72 +2705,30 @@
       },
       "ethnicity": {
         "main": {
-          "native": "Осетин",
           "english": "Ossetian",
-          "russian": "Осетин",
           "sub": {
-            "native": "Къуыдар",
-            "english": "Kudar",
-            "russian": "Кударец"
+            "english": "Kudar"
           }
         },
         "pre": {
-          "native": null,
           "english": null,
-          "russian": null,
           "sub": {
-            "native": null,
-            "english": null,
-            "russian": null
+            "english": null
           }
         }
       },
       "location": {
-        "coordinates": {
-          "main": {
-            "latitude": null,
-            "longitude": null
-          },
-          "pre": {
-            "latitude": null,
-            "longitude": null
-          }
-        },
         "village": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "region": {
-          "main": {
-            "native": null,
-            "russian": null,
-            "english": null
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": null,
+          "pre": null
         },
         "state": {
-          "main": {
-            "native": null,
-            "russian": "Южная Осетия",
-            "english": "South Ossetia"
-          },
-          "pre": {
-            "native": null,
-            "russian": null,
-            "english": null
-          }
+          "main": "Южная Осетия",
+          "pre": null
         }
       },
       "yDnaHaplogroup": {
