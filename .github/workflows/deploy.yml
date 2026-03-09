@@ -32,10 +32,13 @@ jobs:
 
     - name: Fetch Heritage Data from GCP
       run: |
-        mkdir -p data
+        mkdir -p data config
         gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/heritage-data.json data/heritage-data.json
-        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/config.json data/config.json
-        echo "✅ Data files fetched from GCP bucket"
+        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/config/app-config.json config/app-config.json
+        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/config/mapping-ethnicities.yaml config/mapping-ethnicities.yaml
+        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/config/mapping-villages.yaml config/mapping-villages.yaml
+        gsutil cp gs://${{ secrets.GCP_BUCKET_NAME }}/config/mapping-locations.yaml config/mapping-locations.yaml
+        echo "✅ Data and config files fetched from GCP bucket"
 
     - name: Validate HTML
       run: |
@@ -53,8 +56,10 @@ jobs:
 
     - name: Verify Data Files
       run: |
-        echo "Checking if data files exist..."
+        echo "Checking data files..."
         ls -lh data/
+        echo "Checking config files..."
+        ls -lh config/
         echo "Preview of heritage-data.json:"
         head -5 data/heritage-data.json
         echo "✅ Data files verified"
@@ -63,18 +68,23 @@ jobs:
       run: |
         echo "Creating deployment directory..."
         mkdir -p _deploy
-        
+
         # Copy website files
         cp -r index.html assets _deploy/
-        
-        # Copy data files from GCP
+
+        # Copy data files
         mkdir -p _deploy/data
         cp data/heritage-data.json _deploy/data/
-        cp data/config.json _deploy/data/
-        
+
+        # Copy config files (YAML mappings + app config)
+        mkdir -p _deploy/config
+        cp config/app-config.json _deploy/config/
+        cp config/mapping-ethnicities.yaml _deploy/config/
+        cp config/mapping-villages.yaml _deploy/config/
+        cp config/mapping-locations.yaml _deploy/config/
+
         echo "Deployment directory prepared:"
         find _deploy -type f
-        ls -lh _deploy/data/
         echo "✅ Ready to deploy"
 
     - name: Deploy to GitHub Pages
