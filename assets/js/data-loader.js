@@ -94,7 +94,7 @@ class DataLoader {
         }
 
         try {
-            const url = `${this.basePath}data/config.json?v=${this.cacheVersion}`;
+            const url = `${this.basePath}config/app-config.json?v=${this.cacheVersion}`;
             console.log('🔄 Loading config from:', url);
 
             const response = await fetch(url);
@@ -547,7 +547,7 @@ class DataLoader {
             app: {
                 title: "Circassian DNA",
                 subtitle: "Genetic lineage and ancestral connections",
-                version: "2.0.0"
+                version: "4.0.0"
             },
             filters: {
                 ethnicities: [
