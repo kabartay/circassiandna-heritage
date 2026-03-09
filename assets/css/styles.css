@@ -429,16 +429,27 @@ body {
     color: var(--text-secondary);
 }
 
-/* Sub-Ethnicity collapsible legend */
+/* Sub-Ethnicity: donut left, collapsible legend right — mirrors Ethnicity layout */
 #subEthnicityChart {
-    max-height: 200px !important;
+    max-height: 300px;
+}
+
+.sub-ethnicity-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.sub-ethnicity-chart-container {
+    flex: 0 0 55%;
+    min-width: 0;
 }
 
 .sub-ethnicity-legend {
-    margin-top: 10px;
-    border-top: 1px solid var(--border-light);
-    padding-top: 6px;
-    max-height: 110px;
+    flex: 1;
+    min-width: 0;
+    padding-top: 4px;
+    max-height: 300px;
     overflow-y: auto;
 }
 
