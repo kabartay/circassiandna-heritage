@@ -693,37 +693,29 @@ class HeritageStatistics {
         if (!ctx) return;
 
         const items  = this.getSubEthnicityDistribution();
-        // Legend label: "1. Kabardian", "2. Shapsough" etc.
-        const labels = items.map(i => `${i.rank}. ${i.label}`);
         const data   = items.map(i => i.count);
         const colors = this.getSubEthnicityColors(items);
-        // Store ranks in dataset for the inline label plugin
         const ranks  = items.map(i => i.rank);
+        // Plain labels for tooltip (no rank prefix — we use the custom HTML legend)
+        const labels = items.map(i => i.label);
 
-        // Inline plugin: draw rank number in the middle of each arc.
-        // No external dependency — uses the Chart.js afterDatasetsDraw hook.
         const rankLabelPlugin = {
             id: 'subEthnicityRankLabels',
             afterDatasetsDraw(chart) {
-                const { ctx: c, chartArea } = chart;
+                const { ctx: c } = chart;
                 const meta = chart.getDatasetMeta(0);
                 const ds   = chart.data.datasets[0];
-                const total = ds.data.reduce((a, b) => a + b, 0);
 
                 meta.data.forEach((arc, index) => {
-                    // Skip slices narrower than ~8° — number won't fit
-                    const sliceAngle = arc.endAngle - arc.startAngle;
-                    if (sliceAngle < 0.14) return;
-
+                    if (arc.endAngle - arc.startAngle < 0.14) return;
                     const midAngle  = (arc.startAngle + arc.endAngle) / 2;
                     const midRadius = (arc.innerRadius + arc.outerRadius) / 2;
                     const x = arc.x + midRadius * Math.cos(midAngle);
                     const y = arc.y + midRadius * Math.sin(midAngle);
-
                     c.save();
-                    c.font        = 'bold 11px sans-serif';
-                    c.fillStyle   = '#ffffff';
-                    c.textAlign   = 'center';
+                    c.font = 'bold 11px sans-serif';
+                    c.fillStyle = '#ffffff';
+                    c.textAlign = 'center';
                     c.textBaseline = 'middle';
                     c.fillText(ds.ranks[index], x, y);
                     c.restore();
@@ -736,28 +728,17 @@ class HeritageStatistics {
             plugins: [rankLabelPlugin],
             data: {
                 labels,
-                datasets: [{
-                    data,
-                    ranks,   // consumed by rankLabelPlugin
-                    backgroundColor: colors,
-                    borderWidth: 2,
-                    borderColor: '#fff'
-                }]
+                datasets: [{ data, ranks, backgroundColor: colors, borderWidth: 2, borderColor: '#fff' }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
                 plugins: {
-                    legend: {
-                        position: 'right',
-                        labels: { padding: 10, font: { size: 12 } }
-                    },
+                    legend: { display: false },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                // Strip the rank prefix from the display label in tooltip
-                                const raw   = context.label || '';
-                                const label = raw.replace(/^\d+\.\s*/, '');
+                                const label = context.label || '';
                                 const value = context.parsed || 0;
                                 const total = context.dataset.data.reduce((a, b) => a + b, 0);
                                 const pct   = ((value / total) * 100).toFixed(1);
@@ -768,6 +749,44 @@ class HeritageStatistics {
                 }
             }
         });
+
+        this._renderSubEthnicityLegend(items);
+    }
+
+    /**
+     * Build the custom grouped HTML legend for the sub-ethnicity chart.
+     * Groups sub-ethnicities under their parent ethnicity heading.
+     * @param {Array<{label,parent,count,rank}>} items
+     */
+    _renderSubEthnicityLegend(items) {
+        const container = document.getElementById('subEthnicityLegend');
+        if (!container) return;
+
+        // Group items by parent in order they appear
+        const groups = [];
+        const seen   = {};
+        items.forEach(item => {
+            if (!seen[item.parent]) {
+                seen[item.parent] = [];
+                groups.push({ parent: item.parent, subs: seen[item.parent] });
+            }
+            seen[item.parent].push(item);
+        });
+
+        container.innerHTML = groups.map(({ parent, subs }) => {
+            const color = HaplotypeConfig.getEthnicityColor(parent);
+            const subRows = subs.map(s =>
+                `<div class="legend-sub">${s.rank} &ndash; ${s.label}</div>`
+            ).join('');
+            return `
+                <div class="legend-group">
+                    <div class="legend-parent">
+                        <span class="legend-color" style="background:${color}"></span>
+                        ${parent}
+                    </div>
+                    ${subRows}
+                </div>`;
+        }).join('');
     }
 
     /**
@@ -950,11 +969,12 @@ class HeritageStatistics {
      */
     updateSubEthnicityChart() {
         const items = this.getSubEthnicityDistribution();
-        this.charts.subEthnicity.data.labels                      = items.map(i => `${i.rank}. ${i.label}`);
+        this.charts.subEthnicity.data.labels                      = items.map(i => i.label);
         this.charts.subEthnicity.data.datasets[0].data             = items.map(i => i.count);
         this.charts.subEthnicity.data.datasets[0].ranks            = items.map(i => i.rank);
         this.charts.subEthnicity.data.datasets[0].backgroundColor  = this.getSubEthnicityColors(items);
         this.charts.subEthnicity.update();
+        this._renderSubEthnicityLegend(items);
     }
 
     /**

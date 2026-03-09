@@ -429,6 +429,54 @@ body {
     color: var(--text-secondary);
 }
 
+/* Sub-Ethnicity chart: donut left, grouped legend right */
+.sub-ethnicity-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.sub-ethnicity-wrap canvas {
+    flex: 0 0 auto;
+    max-width: 240px;
+    max-height: 240px !important;
+}
+
+.sub-ethnicity-legend {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 260px;
+}
+
+.sub-ethnicity-legend .legend-group {
+    margin-bottom: 10px;
+}
+
+.sub-ethnicity-legend .legend-parent {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    margin-bottom: 3px;
+}
+
+.sub-ethnicity-legend .legend-color {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.sub-ethnicity-legend .legend-sub {
+    padding-left: 18px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
 /* Responsive tabs */
 @media (max-width: 768px) {
     .tab-label {
