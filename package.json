@@ -1,6 +1,6 @@
 {
   "name": "circassiandna-heritage",
-  "version": "1.0.0",
+  "version": "4.0.0",
   "description": "Circassian DNA Heritage Feed",
   "scripts": {
     "start": "python3 -m http.server 8000",

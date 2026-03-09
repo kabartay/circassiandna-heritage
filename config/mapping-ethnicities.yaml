@@ -1,0 +1,181 @@
+# Ethnicity Translation Mapping
+# Maps English names to Russian and Native language equivalents
+# Used to centralize translations instead of repeating them in each family record
+
+main_ethnicities:
+  Abazin:
+    russian: Абазин
+    russian_female: Абазинка
+    native: Абаза
+    native_female: null
+    
+  Abkhazian:
+    russian: Абхаз
+    russian_female: Абхазка
+    native: Аԥсуаа
+    native_female: null
+    
+  Balkar:
+    russian: Балкарец
+    russian_female: Балкарка
+    native: Таулу
+    native_female: null
+    
+  Circassian:
+    russian: Черкес
+    russian_female: Черкешенка
+    native: Адыгэ
+    native_female: null
+    
+  Karachay:
+    russian: Карачаевец
+    russian_female: Карачаевка
+    native: Къарачайлы
+    native_female: null
+
+  Kumyk:
+    russian: Кумык
+    russian_female: Кумычка
+    native: Къумукъ
+    native_female: null
+
+  Lak:
+    russian: Лакец
+    russian_female: Лачка
+    native: Лаккучу
+    native_female: Лаккудуш
+    
+  Nogai:
+    russian: Ногаец
+    russian_female: Ногайка
+    native: Ноғай
+    native_female: null
+    
+  Ossetian:
+    russian: Осетин
+    russian_female: Осетинка
+    native: Осетин
+    native_female: null
+    
+  Ubykh:
+    russian: Убых
+    russian_female: Убышка
+    native: Убых
+    native_female: null
+
+sub_ethnicities:
+  Abazin:
+    Ashkharaua:
+      russian: Ашхарауа
+      russian_female: Ашхарауа
+      native: Щхъарауа
+      native_female: null
+    Tapanta:
+      russian: Тапанта
+      russian_female: Тапанта
+      native: Ашвыуа
+      native_female: null
+      
+  Abkhazian:
+    Pskhu:
+      russian: Псху
+      russian_female: Псху
+      native: Ԥсҳәы
+      native_female: null
+      
+  Balkar:
+    Baksan:
+      russian: Баксан
+      russian_female: Баксан
+      native: Басханлы
+      native_female: null
+    Bezengi:
+      russian: Безенги
+      russian_female: Безенги
+      native: Бызынгылы
+      native_female: null
+    Chegem:
+      russian: Чегем
+      russian_female: Чегем
+      native: Чегемлы
+      native_female: null
+    Kholam:
+      russian: Холам
+      russian_female: Холам
+      native: Холамлы
+      native_female: null
+    Malkar:
+      russian: Малкар
+      russian_female: Малкар
+      native: Малкъарлы
+      native_female: null
+      
+  Circassian:
+    Abdzakh:
+      russian: Абадзех
+      russian_female: Абадзешка
+      native: Абдзах
+      native_female: null
+    Kabardian:
+      russian: Кабардинец
+      russian_female: Кабардинка
+      native: Къэбардей
+      native_female: null
+    Shapsough:
+      russian: Шапсуг
+      russian_female: Шапсуженка
+      native: Шапсыгъ
+      native_female: null
+    Ubykh:
+      russian: Убых
+      russian_female: Убышка
+      native: Убых
+      native_female: null
+      
+  Nogai:
+    Achikulak:
+      russian: Ачикулакский
+      russian_female: Ачикулакская
+      native: Ашыкъулак
+    Karanogai:
+      russian: Караногаец
+      russian_female: Караногайка
+      native: Караноғай
+    Karagash:
+      russian: Карагашский
+      russian_female: Карагашская
+      native: Карагаш
+    Kuban:
+      russian: Кубанский
+      russian_female: Кубанская
+      native: Кобан
+    Crimean:
+      russian: Крымский
+      russian_female: Крымская
+      native: Къырым
+    Sulak:
+      russian: Сулакский
+      russian_female: Сулакская
+      native: Сулак
+    Yurt:
+      russian: Юртовский
+      russian_female: Юртовская
+      native: Юрт
+      native_female: null
+      
+  Ossetian:
+    Digor:
+      russian: Дигорец
+      russian_female: Дигорка
+      native: Дигорон
+      native_female: null
+    Iron:
+      russian: Иронец
+      russian_female: Иронка
+      native: Ирон
+      native_female: null
+    Kudar:
+      russian: Кударец
+      russian_female: Кударка
+      native: Къуыдар
+      native_female: null

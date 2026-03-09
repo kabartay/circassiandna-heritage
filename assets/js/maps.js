@@ -281,7 +281,7 @@ class HeritageMaps {
         if (!family.location?.village?.main) return null;
         
         const village = family.location.village.main;
-        return village.english || village.native || village.russian || 'Unknown';
+        return village.native || village.russian || village.english || 'Unknown';
     }
 
     /**
@@ -337,13 +337,20 @@ class HeritageMaps {
         const mtDnaGroups = {};
         
         families.forEach(family => {
-            const yDna = family.dna?.yDnaHaplogroup;
-            const mtDna = family.dna?.mtDnaHaplogroup;
-            
-            if (yDna && yDna !== 'N/A') {
+            const yDnaObj = family.yDnaHaplogroup;
+            const mtDnaObj = family.mtDnaHaplogroup;
+
+            const yDna = typeof yDnaObj === 'string'
+                ? yDnaObj
+                : (yDnaObj?.clade || yDnaObj?.root || null);
+            const mtDna = typeof mtDnaObj === 'string'
+                ? mtDnaObj
+                : (mtDnaObj?.clade || mtDnaObj?.root || null);
+
+            if (yDna && yDna !== 'N/A' && yDna !== '—') {
                 yDnaGroups[yDna] = (yDnaGroups[yDna] || 0) + 1;
             }
-            if (mtDna && mtDna !== 'N/A') {
+            if (mtDna && mtDna !== 'N/A' && mtDna !== '—') {
                 mtDnaGroups[mtDna] = (mtDnaGroups[mtDna] || 0) + 1;
             }
         });
@@ -428,6 +435,9 @@ class HeritageMaps {
         // Add migration paths
         this.addMigrationPaths();
 
+        // Leaflet needs a repaint frame after display:none→block to measure the container correctly
+        setTimeout(() => this.maps.migration?.invalidateSize(), 0);
+
         // Update legend
         const legend = document.getElementById('migrationLegend');
         if (legend) {
@@ -479,10 +489,19 @@ class HeritageMaps {
                 return;
             }
             
+            // Get haplogroup color
+            const haplogroup = family.yDnaHaplogroup;
+            const subclade = typeof haplogroup === 'string'
+                ? haplogroup
+                : (haplogroup?.subclade || haplogroup?.clade || haplogroup?.root || 'Unknown');
+            const color = haplogroup ? HaplotypeConfig.getYSubcladeColor(subclade) : '#999999';
+            
             migrations.push({
                 family: family,
                 from: preCoords,
                 to: mainCoords,
+                color: color,
+                subclade: subclade,
                 preVillage: family.location?.village?.pre?.english || 
                            family.location?.village?.pre?.native || 
                            family.location?.village?.pre?.russian || 'Unknown',
@@ -492,14 +511,16 @@ class HeritageMaps {
 
         console.log(`Found ${migrations.length} migration paths`);
 
-        // Group migrations by path for better visualization
+        // Group migrations by path AND haplogroup for better visualization
         const pathGroups = {};
         migrations.forEach(mig => {
-            const key = `${mig.from.lat},${mig.from.lng}-${mig.to.lat},${mig.to.lng}`;
+            const key = `${mig.from.lat},${mig.from.lng}-${mig.to.lat},${mig.to.lng}-${mig.subclade}`;
             if (!pathGroups[key]) {
                 pathGroups[key] = {
                     from: mig.from,
                     to: mig.to,
+                    color: mig.color,
+                    subclade: mig.subclade,
                     preVillage: mig.preVillage,
                     mainVillage: mig.mainVillage,
                     families: []
@@ -508,7 +529,10 @@ class HeritageMaps {
             pathGroups[key].families.push(mig.family);
         });
 
-        // Draw migration paths
+        // Draw migration paths with offset tracking
+        const fromCoordsCount = {};
+        const toCoordsCount = {};
+        
         Object.values(pathGroups).forEach(group => {
             const familyCount = group.families.length;
             
@@ -519,7 +543,7 @@ class HeritageMaps {
             ];
             
             const line = L.polyline(latlngs, {
-                color: 'var(--male-color)',
+                color: group.color,
                 weight: Math.min(2 + familyCount, 8),
                 opacity: 0.6,
                 dashArray: '10, 5'
@@ -538,31 +562,54 @@ class HeritageMaps {
                     <span style="font-size: 0.85rem;">
                         From: ${group.preVillage}<br>
                         To: ${group.mainVillage}<br>
+                        Haplogroup: ${group.subclade}<br>
                         Families: ${familyCount}
                     </span>
                 </div>
             `);
             
-            // Add markers at start and end
-            L.circleMarker([group.from.lat, group.from.lng], {
-                radius: 5,
-                fillColor: '#ffc107',
-                color: 'white',
-                weight: 2,
-                opacity: 1,
-                fillOpacity: 0.8
-            }).addTo(this.maps.migration)
-              .bindPopup(`<strong>${group.preVillage}</strong><br>Origin`);
+            const baseOffsetDeg = 0.0002; // ~22m at equator; much smaller than 0.01deg (~1.1km)
+
+            // Track and offset "from" markers
+            const fromKey = `${group.from.lat.toFixed(4)},${group.from.lng.toFixed(4)}`;
+            fromCoordsCount[fromKey] = (fromCoordsCount[fromKey] || 0) + 1;
+            const fromOffset = fromCoordsCount[fromKey] - 1;
+            const fromAngle = fromOffset * (Math.PI * 2 / 5);
+            const fromDistance = Math.ceil(fromOffset / 5) * baseOffsetDeg;
+            const fromOffsetLat = fromOffset > 0 ? Math.sin(fromAngle) * fromDistance : 0;
+            const fromOffsetLng = fromOffset > 0 ? Math.cos(fromAngle) * fromDistance : 0;
             
-            L.circleMarker([group.to.lat, group.to.lng], {
+            // Track and offset "to" markers
+            const toKey = `${group.to.lat.toFixed(4)},${group.to.lng.toFixed(4)}`;
+            toCoordsCount[toKey] = (toCoordsCount[toKey] || 0) + 1;
+            const toOffset = toCoordsCount[toKey] - 1;
+            const toAngle = toOffset * (Math.PI * 2 / 5);
+            const toDistance = Math.ceil(toOffset / 5) * baseOffsetDeg;
+            const toOffsetLat = toOffset > 0 ? Math.sin(toAngle) * toDistance : 0;
+            const toOffsetLng = toOffset > 0 ? Math.cos(toAngle) * toDistance : 0;
+            
+            // Add markers at start and end with offsets and haplogroup colors
+            // "From" marker: hollow circle (open circle)
+            L.circleMarker([group.from.lat + fromOffsetLat, group.from.lng + fromOffsetLng], {
                 radius: 6,
-                fillColor: 'var(--male-color)',
-                color: 'white',
+                fillColor: group.color,
+                color: group.color,
                 weight: 2,
                 opacity: 1,
-                fillOpacity: 0.9
+                fillOpacity: 0  // Hollow/open circle
             }).addTo(this.maps.migration)
-              .bindPopup(`<strong>${group.mainVillage}</strong><br>Current location`);
+              .bindPopup(`<strong>${group.preVillage}</strong><br>Origin<br>${group.subclade}`);
+            
+            // "To" marker: filled circle
+            L.circleMarker([group.to.lat + toOffsetLat, group.to.lng + toOffsetLng], {
+                radius: 6,
+                fillColor: group.color,
+                color: '#fff',
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.9  // Filled circle
+            }).addTo(this.maps.migration)
+              .bindPopup(`<strong>${group.mainVillage}</strong><br>Current location<br>${group.subclade}`);
         });
 
         console.log(`✅ Added ${Object.keys(pathGroups).length} migration path groups`);
@@ -583,6 +630,9 @@ class HeritageMaps {
 
         // Display Y-DNA data
         this.updateDNADistribution('ydna', this.maps.ydna, 'ydnaLegend');
+
+        // Leaflet needs a repaint frame after display:none→block to measure the container correctly
+        setTimeout(() => this.maps.ydna?.invalidateSize(), 0);
     }
 
     /**
@@ -631,12 +681,23 @@ class HeritageMaps {
 
         this.data.forEach(family => {
             const haplogroup = family[fieldName];
-            if (!haplogroup || !haplogroup.root) return;
+            if (!haplogroup) return;
+            // Support both object {root, clade, subclade} and plain string
+            const hapRoot = typeof haplogroup === 'string' ? haplogroup : haplogroup.root;
+            if (!hapRoot) return;
 
             const coords = family.location?.coordinates?.main;
-            if (!coords || !coords.latitude || !coords.longitude) return;
+            if (
+                !coords ||
+                !Number.isFinite(coords.latitude) ||
+                !Number.isFinite(coords.longitude)
+            ) {
+                return;
+            }
 
-            const subclade = haplogroup.subclade || haplogroup.clade || haplogroup.root;
+            const subclade = typeof haplogroup === 'string'
+                ? haplogroup
+                : (haplogroup.subclade || haplogroup.clade || haplogroup.root);
 
             if (!subclades[subclade]) {
                 subclades[subclade] = {
@@ -664,11 +725,28 @@ class HeritageMaps {
                       totalFamilies < 500 ? baseRadius * 0.6 : 
                       baseRadius * 0.5;
 
+        // Track coordinates to add offset for overlapping markers
+        const coordsCount = {};
+        
         // Add circle markers for each family
         Object.entries(subclades).forEach(([subclade, data]) => {
             data.families.forEach(({ family, coords }) => {
+                // Create unique key for this coordinate
+                const coordKey = `${coords.latitude.toFixed(4)},${coords.longitude.toFixed(4)}`;
+                
+                // Get offset count for this coordinate
+                coordsCount[coordKey] = (coordsCount[coordKey] || 0) + 1;
+                const offset = coordsCount[coordKey] - 1;
+                
+                // Apply small offset to prevent perfect overlap (spiral pattern)
+                const angle = offset * (Math.PI * 2 / 5); // 5 markers per circle
+                const baseOffsetDeg = 0.0002; // ~22m at equator; much smaller than 0.01deg (~1.1km)
+                const distance = Math.ceil(offset / 5) * baseOffsetDeg; // Increase radius every 5 markers
+                const offsetLat = offset > 0 ? Math.sin(angle) * distance : 0;
+                const offsetLng = offset > 0 ? Math.cos(angle) * distance : 0;
+                
                 // Create circle marker with subclade color
-                const marker = L.circleMarker([coords.latitude, coords.longitude], {
+                const marker = L.circleMarker([coords.latitude + offsetLat, coords.longitude + offsetLng], {
                     radius: radius,
                     fillColor: data.color,
                     color: '#fff',

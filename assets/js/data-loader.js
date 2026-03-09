@@ -3,12 +3,22 @@
  * Only loads from JSON file - single source of truth
  */
 
+/** Single source of truth for the config/YAML cache version. Bump on every release. */
+const CONFIG_VERSION = '4.0.0';
+
 class DataLoader {
     constructor() {
         this.heritageData = null;
         this.config = null;
+        this.ethnicityMapping = null;
+        this.villageMapping = null;
+        this.locationMapping = null;
+        this.villageIndex = null;   // flat: russianVillageName → {names, coordinates}
+        this.stateIndex   = null;   // flat: russianStateName             → {names}
+        this.regionIndex  = null;   // composite: "state::region" (Russian) → {names}
         this.basePath = this.getBasePath();
-        this.cacheVersion = Date.now(); // Use timestamp for cache busting
+        this.configVersion = CONFIG_VERSION;  // Stable: bump CONFIG_VERSION with releases to invalidate YAML/config cache
+        this.dataVersion   = Date.now(); // Dynamic: always fresh for heritage-data.json
 
         console.log('📁 DataLoader initialized with base path:', this.basePath);
     }
@@ -41,8 +51,15 @@ class DataLoader {
         try {
             console.log('🔄 Loading data from:', `${this.basePath}data/heritage-data.json`);
             
+            // Load all mappings first
+            await Promise.all([
+                this.loadEthnicityMapping(),
+                this.loadVillageMapping(),
+                this.loadLocationMapping()
+            ]);
+            
             // Use timestamp for cache busting
-            const response = await fetch(`${this.basePath}data/heritage-data.json?v=${this.cacheVersion}`);
+            const response = await fetch(`${this.basePath}data/heritage-data.json?v=${this.dataVersion}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -50,8 +67,13 @@ class DataLoader {
             
             const data = await response.json();
             
-            // Handle different JSON structures
-            this.heritageData = data.families || data || [];
+            // Normalize to array regardless of JSON structure
+            const families = Array.isArray(data.families) ? data.families
+                           : Array.isArray(data)          ? data
+                           : [];
+
+            // Enrich each family with ethnicity translations and location data
+            this.heritageData = families.map(family => this.enrichFamilyData(family));
             
             console.log(`✅ Loaded ${this.heritageData.length} heritage records from JSON`);
             return this.heritageData;
@@ -76,7 +98,7 @@ class DataLoader {
         }
 
         try {
-            const url = `${this.basePath}data/config.json?v=${this.cacheVersion}`;
+            const url = `${this.basePath}config/app-config.json?v=${this.configVersion}`;
             console.log('🔄 Loading config from:', url);
 
             const response = await fetch(url);
@@ -93,6 +115,319 @@ class DataLoader {
             this.config = this.getDefaultConfig();
             return this.config;
         }
+    }
+
+    /**
+     * Load ethnicity mapping from YAML
+     */
+    async loadEthnicityMapping() {
+        if (this.ethnicityMapping) {
+            return this.ethnicityMapping;
+        }
+
+        try {
+            const url = `${this.basePath}config/mapping-ethnicities.yaml?v=${this.configVersion}`;
+            console.log('🔄 Loading ethnicity mapping from:', url);
+
+            const response = await fetch(url);
+
+            if (response.ok) {
+                const yamlText = await response.text();
+                this.ethnicityMapping = jsyaml.load(yamlText);
+                console.log('✅ Ethnicity mapping loaded');
+                return this.ethnicityMapping;
+            } else {
+                throw new Error(`HTTP ${response.status}`);
+            }
+        } catch (error) {
+            console.error('❌ Failed to load ethnicity mapping:', error);
+            this.ethnicityMapping = { main_ethnicities: {}, sub_ethnicities: {} };
+            return this.ethnicityMapping;
+        }
+    }
+
+    /**
+     * Load village mapping from YAML
+     */
+    async loadVillageMapping() {
+        if (this.villageMapping) {
+            return this.villageMapping;
+        }
+
+        try {
+            const url = `${this.basePath}config/mapping-villages.yaml?v=${this.configVersion}`;
+            console.log('🔄 Loading village mapping from:', url);
+
+            const response = await fetch(url);
+
+            if (response.ok) {
+                const yamlText = await response.text();
+                this.villageMapping = jsyaml.load(yamlText);
+                this.buildVillageIndex();
+                console.log('✅ Village mapping loaded');
+                return this.villageMapping;
+            } else {
+                throw new Error(`HTTP ${response.status}`);
+            }
+        } catch (error) {
+            console.error('❌ Failed to load village mapping:', error);
+            this.villageMapping = { states: {} };
+            return this.villageMapping;
+        }
+    }
+
+    /**
+     * Load location mapping from YAML (states → regions with per-ethnicity names)
+     */
+    async loadLocationMapping() {
+        if (this.locationMapping) {
+            return this.locationMapping;
+        }
+
+        try {
+            const url = `${this.basePath}config/mapping-locations.yaml?v=${this.configVersion}`;
+            console.log('🔄 Loading location mapping from:', url);
+
+            const response = await fetch(url);
+
+            if (response.ok) {
+                const yamlText = await response.text();
+                this.locationMapping = jsyaml.load(yamlText);
+                this.buildLocationIndex();
+                console.log('✅ Location mapping loaded');
+                return this.locationMapping;
+            } else {
+                throw new Error(`HTTP ${response.status}`);
+            }
+        } catch (error) {
+            console.error('❌ Failed to load location mapping:', error);
+            this.locationMapping = { states: {} };
+            return this.locationMapping;
+        }
+    }
+
+    /**
+     * Build a flat village index from the hierarchical mapping-villages.yaml.
+     * Key: Russian village name  →  { names: {English, Circassian, ...}, coordinates: {Latitude, Longitude} }
+     */
+    buildVillageIndex() {
+        this.villageIndex = {};
+        const states = this.villageMapping?.states;
+        if (!states) return;
+
+        for (const stateData of Object.values(states)) {
+            for (const regionData of Object.values(stateData.regions || {})) {
+                for (const [villageName, villageData] of Object.entries(regionData.villages || {})) {
+                    if (!villageData) continue; // skip incomplete YAML entries
+                    // villageName is the Russian key
+                    this.villageIndex[villageName] = {
+                        names:       villageData.name        || {},
+                        coordinates: villageData.coordinates || {}
+                    };
+                }
+            }
+        }
+        console.log(`📍 Village index built: ${Object.keys(this.villageIndex).length} entries`);
+    }
+
+    /**
+     * Build flat state and region indexes from mapping-locations.yaml.
+     * stateIndex  key: Russian state name              → { names }
+     * regionIndex key: "state::region" (Russian names) → { names }
+     *   Composite key avoids collisions where two states share a region name
+     *   (e.g. 'Ногайский район' exists in both KCR and Dagestan).
+     */
+    buildLocationIndex() {
+        this.stateIndex  = {};
+        this.regionIndex = {};
+        const states = this.locationMapping?.states;
+        if (!states) return;
+
+        for (const [stateName, stateData] of Object.entries(states)) {
+            this.stateIndex[stateName] = { names: stateData.name || {} };
+            for (const [regionName, regionData] of Object.entries(stateData.regions || {})) {
+                const compositeKey = `${stateName}::${regionName}`;
+                this.regionIndex[compositeKey] = { names: regionData.name || {} };
+            }
+        }
+        console.log(`🗺️ Location index built: ${Object.keys(this.stateIndex).length} states, ${Object.keys(this.regionIndex).length} regions`);
+    }
+
+    /**
+     * Get village information from the flat villageIndex.
+     * @param {string} russianVillageName - Russian village name (JSON key)
+     * @param {string} ethnicity - Main English ethnicity (e.g. 'Circassian') for native name
+     * @returns {{ russian, native, english, latitude, longitude }}
+     */
+    getVillageInfo(russianVillageName, ethnicity = null) {
+        const empty = { russian: null, native: null, english: null, latitude: null, longitude: null };
+        if (!russianVillageName) return empty;
+
+        const entry = this.villageIndex?.[russianVillageName];
+        if (!entry) return { ...empty, russian: russianVillageName };
+
+        return {
+            russian:   entry.names.Russian   || russianVillageName,
+            native:    ethnicity ? (entry.names[ethnicity] || null) : null,
+            english:   entry.names.English   || null,
+            latitude:  entry.coordinates.Latitude  ?? null,
+            longitude: entry.coordinates.Longitude ?? null
+        };
+    }
+
+    /**
+     * Get ethnicity translations from mapping
+     * @param {string} mainEthnicity - Main ethnicity English name
+     * @param {string} subGroup - Sub-group English name (optional)
+     * @param {string} gender - 'male' or 'female' (for gender-specific Russian)
+     * @returns {object} - Object with russian and native translations
+     */
+    getEthnicityTranslation(mainEthnicity, subGroup = null, gender = 'male') {
+        if (!this.ethnicityMapping) {
+            return { russian: null, native: null };
+        }
+
+        if (subGroup) {
+            // Get sub-group translation
+            const subGroups = this.ethnicityMapping.sub_ethnicities?.[mainEthnicity];
+            if (subGroups && subGroups[subGroup]) {
+                const translation = subGroups[subGroup];
+                return {
+                    russian: gender === 'female' && translation.russian_female ? translation.russian_female : translation.russian,
+                    native: translation.native
+                };
+            }
+        } else {
+            // Get main ethnicity translation
+            const mainEth = this.ethnicityMapping.main_ethnicities?.[mainEthnicity];
+            if (mainEth) {
+                return {
+                    russian: gender === 'female' && mainEth.russian_female ? mainEth.russian_female : mainEth.russian,
+                    native: mainEth.native
+                };
+            }
+        }
+
+        return { russian: null, native: null };
+    }
+
+    /**
+     * Enrich family data with ethnicity and location translations
+     * @param {object} family - Family object with English-only ethnicity and Russian-only location strings (expanded at runtime)
+     * @returns {object} - Family object with enriched translations (including locations) and coordinates
+     */
+    enrichFamilyData(family) {
+        // Enrich ethnicity
+        if (family.ethnicity) {
+            // Enrich main ethnicity
+            if (family.ethnicity.main) {
+                const mainEng = family.ethnicity.main.english;
+                if (mainEng) {
+                    const translation = this.getEthnicityTranslation(mainEng, null, family.gender);
+                    family.ethnicity.main.russian = translation.russian;
+                    family.ethnicity.main.native = translation.native;
+
+                    // Enrich main sub-group
+                    if (family.ethnicity.main.sub && family.ethnicity.main.sub.english) {
+                        const subEng = family.ethnicity.main.sub.english;
+                        const subTranslation = this.getEthnicityTranslation(mainEng, subEng, family.gender);
+                        family.ethnicity.main.sub.russian = subTranslation.russian;
+                        family.ethnicity.main.sub.native = subTranslation.native;
+                    }
+                }
+            }
+
+            // Enrich pre ethnicity
+            if (family.ethnicity.pre) {
+                const preEng = family.ethnicity.pre.english;
+                if (preEng) {
+                    const translation = this.getEthnicityTranslation(preEng, null, family.gender);
+                    family.ethnicity.pre.russian = translation.russian;
+                    family.ethnicity.pre.native = translation.native;
+
+                    // Enrich pre sub-group
+                    if (family.ethnicity.pre.sub && family.ethnicity.pre.sub.english) {
+                        const subEng = family.ethnicity.pre.sub.english;
+                        const subTranslation = this.getEthnicityTranslation(preEng, subEng, family.gender);
+                        family.ethnicity.pre.sub.russian = subTranslation.russian;
+                        family.ethnicity.pre.sub.native = subTranslation.native;
+                    }
+                }
+            }
+        }
+
+        // Enrich location from YAML indexes.
+        // JSON now stores plain Russian strings; we expand them into {russian, native, english} objects
+        // and add a coordinates block derived from the village mapping.
+        if (family.location) {
+            const ethnicity = family.ethnicity?.main?.english || null;
+
+            // Helper: extract plain Russian string from a simple-format or already-enriched field
+            const toRussian = (val) => {
+                if (!val) return null;
+                if (typeof val === 'string') return val || null;
+                return val.russian || null;
+            };
+
+            // Helper: look up state/region names by Russian key
+            const enrichState = (russianName) => {
+                if (!russianName) return { russian: null, native: null, english: null };
+                const entry = this.stateIndex?.[russianName];
+                if (!entry) return { russian: russianName, native: null, english: null };
+                return {
+                    russian: entry.names.Russian || russianName,
+                    native:  ethnicity ? (entry.names[ethnicity] || null) : null,
+                    english: entry.names.English  || null
+                };
+            };
+
+            const enrichRegion = (russianName, russianState) => {
+                if (!russianName) return { russian: null, native: null, english: null };
+                // Look up by composite "state::region" key to avoid collisions
+                // (e.g. 'Ногайский район' appears in both KCR and Dagestan).
+                const compositeKey = russianState ? `${russianState}::${russianName}` : null;
+                const entry = compositeKey ? this.regionIndex?.[compositeKey] : null;
+                if (!entry) return { russian: russianName, native: null, english: null };
+                return {
+                    russian: entry.names.Russian || russianName,
+                    native:  ethnicity ? (entry.names[ethnicity] || null) : null,
+                    english: entry.names.English  || null
+                };
+            };
+
+            const mainVillage = toRussian(family.location.village?.main);
+            const preVillage  = toRussian(family.location.village?.pre);
+            const mainRegion  = toRussian(family.location.region?.main);
+            const preRegion   = toRussian(family.location.region?.pre);
+            const mainState   = toRussian(family.location.state?.main);
+            const preState    = toRussian(family.location.state?.pre);
+
+            // Expand villages (get native/english/coords from index)
+            const mainVillageInfo = this.getVillageInfo(mainVillage, ethnicity);
+            const preVillageInfo  = this.getVillageInfo(preVillage,  ethnicity);
+
+            family.location.village = {
+                main: { russian: mainVillageInfo.russian, native: mainVillageInfo.native, english: mainVillageInfo.english },
+                pre:  { russian: preVillageInfo.russian,  native: preVillageInfo.native,  english: preVillageInfo.english  }
+            };
+
+            family.location.region = {
+                main: enrichRegion(mainRegion, mainState),
+                pre:  enrichRegion(preRegion,  preState)
+            };
+
+            family.location.state = {
+                main: enrichState(mainState),
+                pre:  enrichState(preState)
+            };
+
+            family.location.coordinates = {
+                main: { latitude: mainVillageInfo.latitude, longitude: mainVillageInfo.longitude },
+                pre:  { latitude: preVillageInfo.latitude,  longitude: preVillageInfo.longitude  }
+            };
+        }
+
+        return family;
     }
 
     /**
@@ -222,7 +557,7 @@ class DataLoader {
             app: {
                 title: "Circassian DNA",
                 subtitle: "Genetic lineage and ancestral connections",
-                version: "2.0.0"
+                version: CONFIG_VERSION
             },
             filters: {
                 ethnicities: [
@@ -288,68 +623,7 @@ class DataLoader {
     }
     
     /**
-     * Multi-filter data by ethnicity, village, state, and clade
-     */
-    getMultiFilteredData(filters = {}) {
-        if (!this.heritageData) {
-            return [];
-        }
-        
-        return this.heritageData.filter(family => {
-            // Ethnicity filter
-            if (filters.ethnicity && filters.ethnicity !== 'all') {
-                const mainEthnicity = family.ethnicity?.main?.english;
-                const subEthnicity = family.ethnicity?.main?.sub?.english;
-                const filterEth = filters.ethnicity.toLowerCase();
-                
-                const ethMatch = 
-                    (mainEthnicity && mainEthnicity.toLowerCase() === filterEth) ||
-                    (subEthnicity && subEthnicity.toLowerCase() === filterEth);
-                
-                if (!ethMatch) return false;
-            }
-            
-            // Village filter
-            if (filters.village && filters.village !== 'all') {
-                const villageNative = family.location?.village?.main?.native;
-                const villageRussian = family.location?.village?.main?.russian;
-                const villageEnglish = family.location?.village?.main?.english;
-                
-                const villageMatch = 
-                    villageNative === filters.village ||
-                    villageRussian === filters.village ||
-                    villageEnglish === filters.village;
-                
-                if (!villageMatch) return false;
-            }
-            
-            // State filter
-            if (filters.state && filters.state !== 'all') {
-                const stateNative = family.location?.state?.main?.native;
-                const stateRussian = family.location?.state?.main?.russian;
-                const stateEnglish = family.location?.state?.main?.english;
-                
-                const stateMatch = 
-                    stateNative === filters.state ||
-                    stateRussian === filters.state ||
-                    stateEnglish === filters.state;
-                
-                if (!stateMatch) return false;
-            }
-            
-            // Clade filter (Y-DNA haplogroup)
-            if (filters.clade && filters.clade !== 'all') {
-                const hg = family.yDnaHaplogroup;
-                const clade = typeof hg === 'object' ? hg.clade : hg;
-                
-                if (clade !== filters.clade) return false;
-            }
-            
-            return true;
-        });
-    }    
-    /**
-     * Multi-filter data by ethnicity, village, state, and clade
+     * Multi-filter data by ethnicity, village, state, and clade (supports arrays + legacy single values)
      */
     getMultiFilteredData(filters = {}) {
         if (!this.heritageData) {
@@ -535,19 +809,10 @@ class DataLoader {
     }
 
     /**
-     * Get processed data with filtering and sorting
+     * Get processed (filtered + sorted) data
      * @param {Object|string} filters - Filter object {ethnicity, village, state, clade} or legacy ethnicity string
      * @param {string} sortType - Sort type
      */
-    getProcessedData(filters = 'all', sortType = 'date-desc') {
-        // Handle legacy single ethnicity filter
-        if (typeof filters === 'string') {
-            filters = { ethnicity: filters };
-        }
-        
-        const filtered = this.getMultiFilteredData(filters);
-        return this.sortData(filtered, sortType);
-    }
     getProcessedData(filters = 'all', sortType = 'date-desc') {
         // Handle legacy single ethnicity filter
         if (typeof filters === 'string') {
