@@ -465,6 +465,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.82rem;
+    line-height: 1;
     font-weight: 600;
     color: var(--text-primary);
     text-align: left;
@@ -486,13 +487,21 @@ body {
 .sub-ethnicity-legend .legend-chevron {
     margin-left: auto;
     flex-shrink: 0;
-    font-size: 0.65rem;
+    align-self: center;
+    line-height: 1;
+    font-size: 0.6rem;
     transition: transform 0.2s;
     color: var(--text-secondary);
 }
 
 .sub-ethnicity-legend .legend-group.open .legend-chevron {
     transform: rotate(180deg);
+}
+
+.sub-ethnicity-legend .legend-count {
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1;
 }
 
 .sub-ethnicity-legend .legend-subs {

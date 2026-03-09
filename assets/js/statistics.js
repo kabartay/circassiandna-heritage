@@ -783,7 +783,7 @@ class HeritageStatistics {
                     <button class="legend-toggle" type="button">
                         <span class="legend-color" style="background:${color}"></span>
                         ${parent}
-                        <span class="legend-count" style="font-weight:400;color:var(--text-secondary);margin-left:2px">(${subs.length})</span>
+                        <span class="legend-count">(${subs.length})</span>
                         <span class="legend-chevron">&#9660;</span>
                     </button>
                     <div class="legend-subs">${subHTML}</div>
