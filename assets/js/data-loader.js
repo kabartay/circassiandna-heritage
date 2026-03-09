@@ -137,7 +137,7 @@ class DataLoader {
             }
         } catch (error) {
             console.error('❌ Failed to load ethnicity mapping:', error);
-            this.ethnicityMapping = { main_ethnicities: {}, sub_groups: {} };
+            this.ethnicityMapping = { main_ethnicities: {}, sub_ethnicities: {} };
             return this.ethnicityMapping;
         }
     }
@@ -282,7 +282,7 @@ class DataLoader {
 
         if (subGroup) {
             // Get sub-group translation
-            const subGroups = this.ethnicityMapping.sub_groups?.[mainEthnicity];
+            const subGroups = this.ethnicityMapping.sub_ethnicities?.[mainEthnicity];
             if (subGroups && subGroups[subGroup]) {
                 const translation = subGroups[subGroup];
                 return {
