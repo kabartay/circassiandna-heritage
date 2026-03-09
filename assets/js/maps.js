@@ -337,13 +337,20 @@ class HeritageMaps {
         const mtDnaGroups = {};
         
         families.forEach(family => {
-            const yDna = family.yDnaHaplogroup;
-            const mtDna = family.mtDnaHaplogroup;
-            
-            if (yDna && yDna !== 'N/A') {
+            const yDnaObj = family.yDnaHaplogroup;
+            const mtDnaObj = family.mtDnaHaplogroup;
+
+            const yDna = typeof yDnaObj === 'string'
+                ? yDnaObj
+                : (yDnaObj?.clade || yDnaObj?.root || null);
+            const mtDna = typeof mtDnaObj === 'string'
+                ? mtDnaObj
+                : (mtDnaObj?.clade || mtDnaObj?.root || null);
+
+            if (yDna && yDna !== 'N/A' && yDna !== '—') {
                 yDnaGroups[yDna] = (yDnaGroups[yDna] || 0) + 1;
             }
-            if (mtDna && mtDna !== 'N/A') {
+            if (mtDna && mtDna !== 'N/A' && mtDna !== '—') {
                 mtDnaGroups[mtDna] = (mtDnaGroups[mtDna] || 0) + 1;
             }
         });
