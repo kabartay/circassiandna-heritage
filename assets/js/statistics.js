@@ -301,7 +301,7 @@ class HeritageStatistics {
 
     /**
      * Get sub-ethnicity distribution grouped by parent ethnicity.
-     * Returns an array of {label, parent, count} sorted by parent total (desc)
+     * Returns an array of {label, parent, count, rank} sorted by parent total (desc)
      * then by sub-ethnicity count (desc) within each group.
      */
     getSubEthnicityDistribution() {
@@ -366,7 +366,15 @@ class HeritageStatistics {
      * @returns {Array<string>}
      */
     getSubEthnicityColors(items) {
-        return items.map(({ parent }) => HaplotypeConfig.getEthnicityColor(parent));
+        // Build a unique-parent index so unknown parents each get a distinct generated colour
+        const parentIndex = {};
+        let nextIdx = 0;
+        items.forEach(({ parent }) => {
+            if (!(parent in parentIndex)) parentIndex[parent] = nextIdx++;
+        });
+        return items.map(({ parent }) =>
+            HaplotypeConfig.getEthnicityColor(parent, parentIndex[parent])
+        );
     }
 
     /**
