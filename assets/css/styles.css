@@ -418,7 +418,14 @@ body {
 }
 
 .chart-card canvas {
-    max-height: 300px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.chart-canvas-wrap {
+    position: relative;
+    height: 300px;
 }
 
 .chart-stats {
@@ -430,10 +437,6 @@ body {
 }
 
 /* Sub-Ethnicity: donut left, collapsible legend right — mirrors Ethnicity layout */
-#subEthnicityChart {
-    max-height: 300px;
-}
-
 .sub-ethnicity-wrap {
     display: flex;
     align-items: flex-start;
@@ -443,6 +446,7 @@ body {
 .sub-ethnicity-chart-container {
     flex: 1 1 auto;
     min-width: 0;
+    height: 300px;
 }
 
 .sub-ethnicity-legend {
@@ -549,6 +553,17 @@ body {
 
     .charts-grid .chart-card {
         grid-column: 1 / -1;
+    }
+
+    /* Stack sub-ethnicity chart above legend on mobile */
+    .sub-ethnicity-wrap {
+        flex-direction: column;
+    }
+
+    .sub-ethnicity-legend {
+        flex: none;
+        width: 100%;
+        max-height: 160px;
     }
     
     .chart-card.full-width {
