@@ -452,19 +452,15 @@
         overflow: hidden;
     }
     
-    .chart-container {
+    .chart-canvas-wrap {
         max-width: 100%;
         width: 100%;
         overflow: hidden;
-        transform: scale(0.90);
-        transform-origin: center top;
-        margin-bottom: -20px;
     }
     
-    .chart-container canvas {
+    .chart-canvas-wrap canvas {
         max-width: 100% !important;
         width: 100% !important;
-        height: auto !important;
     }
     
     /* Mobile card improvements */
