@@ -1,0 +1,881 @@
+
+
+
+states:
+
+  Абхазия:
+    name:
+      English: Abkhazia
+      Russian: Абхазия
+      Abazin: Апсны
+      Abkhazian: Аԥсны
+      Balkar: Хачыпсы
+      Circassian: Азгъей
+      Karachay: Хачыпсы
+      Kumyk: null
+      Lak: null
+      Nogai: null
+      Ossetian: null
+    regions:
+      Гагрский район:
+        name:
+          English: Gagra District
+          Russian: Гагрийский район
+          Abazin: null
+          Abkhazian: Гагра араион
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+
+  Адыгея:
+    name:
+      English: Adygea
+      Russian: Адыгея
+      Abazin: null
+      Abkhazian: null
+      Balkar: Адыгея
+      Circassian: Адыгей
+      Karachay: Адыгея
+      Kumyk: null
+      Lak: null
+      Nogai: null
+      Ossetian: Адыгей
+    regions:
+      Кошехабльский район:
+        name:
+          English: Koshekhablsky District
+          Russian: Кошехабльский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: Кощхьэблэ къедзыгъо
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+      Красногвардейский район:
+        name:
+          English: Krasnogvardeysky District
+          Russian: Красногвардейский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: Красногвардейскэ къедзыгъо
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null  
+      Шовгеновский район:
+        name:
+          English: Shovgenovsky District
+          Russian: Шовгеновский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: Шэуджэн къедзыгъо
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+
+  Астраханская область:
+    name:
+      English: Astrakhan Oblast
+      Russian: Астраханская область
+      Abazin: null
+      Abkhazian: null
+      Balkar: null
+      Circassian: Ащтэрхъан област
+      Karachay: null
+      Kumyk: null
+      Lak: null
+      Nogai: Астрахань облысы
+      Ossetian: Астраханы облæст
+    regions:
+      Астрахань:
+        name:
+          English: Astrakhan
+          Russian: Астрахань
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: Ащтэрхъан
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: Астрахань
+          Ossetian: Астрахан
+      Ахтубинский район:
+        name:
+          English: Akhtubinsky District
+          Russian: Ахтубинский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Ахтубинсчы район
+      Володарский район:
+        name:
+          English: Volodarsky District
+          Russian: Володарский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+      Енотаевский район:
+        name:
+          English: Yenotayevsky District
+          Russian: Енотаевский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+      Знаменск:
+        name:
+          English: Znamensk
+          Russian: Знаменск
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Знаменск
+      Икрянинский район:
+        name:
+          English: Ikryaninsky District
+          Russian: Икрянинский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null    
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+      Камызякский район:
+        name:
+          English: Kamyzyaksky District
+          Russian: Камызякский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+      Красноярский район:
+        name:
+          English: Krasnoyarsky District
+          Russian: Красноярский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+      Лиманский район:
+        name:
+          English: Limansky District
+          Russian: Лиманский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+      Наримановский район:
+        name:
+          English: Narimanovsky District
+          Russian: Наримановский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+      Приволжский район:
+        name:
+          English: Privolzhsky District
+          Russian: Приволжский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+      Харабалинский район:
+        name:
+          English: Kharabalinsky District
+          Russian: Харабалинский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+      Черноярский район:
+        name:
+          English: Chernoyarsky District
+          Russian: Черноярский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+
+  Дагестан:
+    name:
+      English: Dagestan
+      Russian: Дагестан
+      Abazin: null
+      Abkhazian: null
+      Balkar: Дагъыстан
+      Circassian: Дагъыстэн
+      Karachay: Дагъыстан
+      Kumyk: Дагъыстан
+      Lak: Дагъусттан
+      Nogai: Дагестан
+      Ossetian: Дагъистан
+    regions:
+      Бабаюртовский район:
+        name:
+          English: Babayurtovsky District
+          Russian: Бабаюртовский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: Баба-юртлу якъ
+          Lak: null
+          Nogai: null
+          Ossetian: Бабаюрты район
+      Буйнакск:
+        name:
+          English: Buynaksk
+          Russian: Буйнакск
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: Бойнакъ
+          Lak: null
+          Nogai: null
+          Ossetian: Буйнаксч
+      Буйнакский район:
+        name:
+          English: Buynaksky District
+          Russian: Буйнакский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: Бойнакъ якъ
+          Lak: null
+          Nogai: null
+          Ossetian: Буйнаксчы район
+      Кизляр:
+        name:
+          English: Kizlyar
+          Russian: Кизляр
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: Къызлар
+          Nogai: Къызлар
+          Ossetian: Хъызлар
+      Кизлярский район:
+        name:
+          English: Kizlyarsky District
+          Russian: Кизлярский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: Къызлар якъ
+          Nogai: Къызлар район
+          Ossetian: Хъызлары район
+      Кизилюрт:
+        name:
+          English: Kizilyurt
+          Russian: Кизилюрт
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: Къызыл-юрт
+          Nogai: Кизилюрт
+          Ossetian: Кизилюрт
+      Кизилюртовский район:
+        name:
+          English: Kizilyurtovsky District
+          Russian: Кизилюртовский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: Къызыл-юртлу якъ
+          Lak: null
+          Nogai: null
+          Ossetian: null
+      Кулинский район:
+        name:
+          English: Kulinsky District
+          Russian: Кулинский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: Ккуллал кӏану
+          Nogai: null
+          Ossetian: Кулийы район
+      Лакский район:
+        name:
+          English: Lakskiy District
+          Russian: Лакский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: Лакку билаят
+          Nogai: null
+          Ossetian: Лакаг район
+      Махачкала:
+        name:
+          English: Makhachkala
+          Russian: Махачкала
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: Махачкъалэ
+          Karachay: null
+          Kumyk: Махачкъала
+          Lak: МахӀачкъала
+          Nogai: null
+          Ossetian: Махачкала
+      Новолакский район:
+        name:
+          English: Novolaksky District
+          Russian: Новолакский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Новолакскоейы район
+      Ногайский район:
+        name:
+          English: Nogaysky District
+          Russian: Ногайский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: Ногъай эл
+          Ossetian: Ногъайы район
+      Табасаранский район:
+        name:
+          English: Tabasaransky District
+          Russian: Табасаранский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Табасараны район
+      Тарумовский район:
+        name:
+          English: Tarumovsky District
+          Russian: Тарумовский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Тарумовкæйы район
+      Хасавюрт:
+        name:
+          English: Khasavyurt
+          Russian: Хасавюрт
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: Хасав-юрт
+          Lak: null
+          Nogai: null
+          Ossetian: Хасавюрт
+      Хасавюртовский район:
+        name:
+          English: Khasavyurtovsky District
+          Russian: Хасавюртовский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: Хасав-юртлу якъ
+          Lak: null
+          Nogai: null
+          Ossetian: Хасавюрты район
+  Кабардино-Балкария:
+    name:
+      English: Kabardino-Balkaria
+      Russian: Кабардино-Балкария
+      Abazin: null
+      Abkhazian: null
+      Balkar: Къабарты-Малкъар
+      Circassian: Къэбэрдей-Балъкъэр
+      Karachay: Къабарты-Малкъар
+      Kumyk: null
+      Lak: null
+      Nogai: null
+      Ossetian: Кæсæг-Балхъар
+    regions:
+      Баксан:
+        name:
+          English: Baksan
+          Russian: Баксан
+          Abazin: null
+          Abkhazian: null
+          Balkar: Басхан
+          Circassian: Бэхъсэн
+          Karachay: Басхан
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Пахсæн
+      Баксанский район:
+        name:
+          English: Baksansky District
+          Russian: Баксанский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: Басхан район
+          Circassian: Бэхъсэн къедзыгъуэ
+          Karachay: Басхан район
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Пахсæны район
+      Зольский район:
+        name:
+          English: Zolsky District
+          Russian: Дзэлыкъуэ къедзыгъуэ
+          Abazin: null
+          Abkhazian: null
+          Balkar: Зольск район
+          Circassian: Дзэлыкъуэ къедзыгъуэ
+          Karachay: Зольск район
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Золкæйы район
+      Лескенский район:
+        name:
+          English: Leskensky District
+          Russian: Лескенский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: Лескен район[
+          Circassian: Лэскэн къедзыгъуэ
+          Karachay: Лескен район
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Лескены район
+      Майский район:
+        name:
+          English: Maysky District
+          Russian: Майский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: Май район
+          Circassian: Майскэ къедзыгъуэ
+          Karachay: Май район
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Майскийы район
+      Нальчик:
+        name:
+          English: Nalchik
+          Russian: Нальчик
+          Abazin: null
+          Abkhazian: null
+          Balkar: Налчыкъ
+          Circassian: Налшык
+          Karachay: Налчыкъ
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Налцыкк
+      Прохладный:
+        name:
+          English: Prokhladny
+          Russian: Прохладный
+          Abazin: null
+          Abkhazian: null
+          Balkar: Прохладна
+          Circassian: Прохладнэ
+          Karachay: Прохладна
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Прохладнæ
+      Прохладный район:
+        name:
+          English: Prokhladnensky District
+          Russian: Прохладненский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: Прохладна район
+          Circassian: Прохладнэ къедзыгъуэ
+          Karachay: Прохладна район
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Прохладнæйы район
+      Терский район:
+        name:
+          English: Tersky District
+          Russian: Терский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: Терк район
+          Circassian: Тэрч къедзыгъуэ
+          Karachay: Терк район
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Терчы район
+      Урванский район:
+        name:
+          English: Urvansky District
+          Russian: Урванский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: Урван район
+          Circassian: Аруан къедзыгъуэ
+          Karachay: Урван район
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Æруаны район
+      Чегемский район:
+        name:
+          English: Chegemsky District
+          Russian: Чегемский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: Чегем район
+          Circassian: Шэджэм къедзыгъуэ
+          Karachay: Чегем район
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Чегемы район
+      Черекский район:
+        name:
+          English: Chereksky District
+          Russian: Черекский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: Черек район
+          Circassian: Шэрэдж къедзыгъуэ
+          Karachay: Черек район
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Цæрæчы район
+      Эльбрусский район:
+        name:
+          English: Elbrussky District
+          Russian: Эльбрусский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: Эльбрус район
+          Circassian: Ӏуащхьэмахуэ къедзыгъуэ
+          Karachay: Эльбрус район
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Эльбрусы район
+
+  Карачаево-Черкесия:
+    name:
+      English: Karachay-Cherkessia
+      Russian: Карачаево-Черкесия
+      Abazin: Къарча-Черкес
+      Abkhazian: null
+      Balkar: null
+      Circassian: Къэрэшей-Адыгэ
+      Karachay: null
+      Kumyk: null
+      Lak: null
+      Nogai: null
+      Ossetian: null
+    regions:
+      Абазинский район:
+        name:
+          English: Abazinsky District
+          Russian: Абазинский район
+          Abazin: Абаза район
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null   
+      Хабезский район:
+        name:
+          English: Khabez District
+          Russian: Хабезский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: Хьэбэз къедзыгъуэ
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+
+  Краснодарский край:
+    name:
+      English: Krasnodar Krai
+      Russian: Краснодарский край
+      Abazin: Краснодар шта
+      Abkhazian: null
+      Balkar: null
+      Circassian: null
+      Karachay: null
+      Kumyk: null
+      Lak: null
+      Nogai: null
+      Ossetian: null
+    regions:
+      Адлерский район:
+        name:
+          English: Adler District
+          Russian: Адлерский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: null
+
+  Крым:
+    name:
+      English: Crimea
+      Russian: Крым
+      Abazin: Крым
+      Abkhazian: Ҟрым
+      Balkar: Кърым
+      Circassian: Кърым
+      Karachay: Кърым
+      Kumyk: null
+      Lak: null
+      Nogai: Къырым
+      Ossetian: Хъырым
+    regions:
+      Симферополь:
+        name:
+          English: Simferopol
+          Russian: Симферополь
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Симферополь
+
+  Северная Осетия:
+    name:
+      English: North Ossetia
+      Russian: Северная Осетия
+      Abazin: null
+      Abkhazian: null
+      Balkar: Шимал Тегей
+      Circassian: Ищхъэрэ Ӏэсетиэ
+      Karachay: Шимал Тегей
+      Kumyk: null
+      Lak: null
+      Nogai: null
+      Ossetian: Цӕгат Ирыстон
+    regions:
+      Владикавказ:
+        name:
+          English: Vladikavkaz
+          Russian: Владикавказ
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Дзӕуджыхъӕу
+      Моздокский район:
+        name:
+          English: Mozdoksky District
+          Russian: Моздокский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: Мэздэгу къедзыгъуэ
+          Karachay: null
+          Kumyk: Моздок район
+          Lak: null
+          Nogai: null
+          Ossetian: Мӕздӕджы район
+
+  Ставропольский край:
+    name:
+      English: Stavropol Krai
+      Russian: Ставропольский край
+      Abazin: Ставрополь край
+      Abkhazian: Ставрополь край
+      Balkar: Ставрополь край
+      Circassian: Ставропол край
+      Karachay: Ставрополь край
+      Kumyk: null
+      Lak: null
+      Nogai: Ставрополь крайы
+      Ossetian: Стъараполы край
+    regions:
+      Ставрополь:
+        name:
+          English: Stavropol
+          Russian: Ставрополь
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: Шъэт-Къалэ
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: Ставрополь
+          Ossetian: Стъарапол
+
+  Южная Осетия:
+    name:
+      English: South Ossetia
+      Russian: Южная Осетия
+      Abazin: null
+      Abkhazian: Аахыҵ Уаԥстәыла
+      Balkar: Къыбыла Тегей
+      Circassian: Ипшэ Ӏэсетиэ
+      Karachay: Къыбыла Тегей
+      Kumyk: null
+      Lak: Кьилвалул Осетия
+      Nogai: null
+      Ossetian: Хуссар Ирыстон
+    regions:
+      Цхинвал:
+        name:
+          English: Tskhinval
+          Russian: Цхинвал
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Цхинвал
+      Цхинвальский район:
+        name:
+          English: Tskhinval District
+          Russian: Цхинвальский район
+          Abazin: null
+          Abkhazian: null
+          Balkar: null
+          Circassian: null
+          Karachay: null
+          Kumyk: null
+          Lak: null
+          Nogai: null
+          Ossetian: Цхинвалы район
+          
