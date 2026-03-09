@@ -352,11 +352,15 @@ class HeritageApp {
             });
         });
         
-        // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
+        // Close dropdown when clicking outside — store reference to avoid duplicate listeners
+        if (this._dropdownClickHandler) {
+            document.removeEventListener('click', this._dropdownClickHandler);
+        }
+        this._dropdownClickHandler = () => {
             customSelect.classList.remove('active');
             customOptions.classList.remove('active');
-        });
+        };
+        document.addEventListener('click', this._dropdownClickHandler);
     }
     
     /**
@@ -583,9 +587,11 @@ class HeritageApp {
         states.forEach(state => {
             const isChecked = this.selectedStates?.includes(state) ? 'checked' : '';
             const displayName = this.getLocationDisplayName(state);
-            optionsHTML += `<div class="location-option" data-value="state:${state}" data-type="state">
-                <input type="checkbox" class="location-checkbox" data-location="${state}" data-type="state" ${isChecked}>
-                <span>${displayName}</span>
+            const safeState       = this.escapeHtml(state);
+            const safeDisplayName = this.escapeHtml(displayName);
+            optionsHTML += `<div class="location-option" data-value="state:${safeState}" data-type="state">
+                <input type="checkbox" class="location-checkbox" data-location="${safeState}" data-type="state" ${isChecked}>
+                <span>${safeDisplayName}</span>
             </div>`;
         });
         optionsHTML += '</div>';
@@ -595,9 +601,10 @@ class HeritageApp {
         optionsHTML += '<div class="location-column-header">Village</div>';
         villages.forEach(village => {
             const isChecked = this.selectedVillages?.includes(village) ? 'checked' : '';
-            optionsHTML += `<div class="location-option" data-value="village:${village}" data-type="village">
-                <input type="checkbox" class="location-checkbox" data-location="${village}" data-type="village" ${isChecked}>
-                <span>${village}</span>
+            const safeVillage = this.escapeHtml(village);
+            optionsHTML += `<div class="location-option" data-value="village:${safeVillage}" data-type="village">
+                <input type="checkbox" class="location-checkbox" data-location="${safeVillage}" data-type="village" ${isChecked}>
+                <span>${safeVillage}</span>
             </div>`;
         });
         optionsHTML += '</div>';
@@ -695,7 +702,7 @@ class HeritageApp {
         
         const parts = [];
         if (this.selectedStates.length > 0) {
-            parts.push(...this.selectedStates);
+            parts.push(...this.selectedStates.map(s => this.getLocationDisplayName(s)));
         }
         if (this.selectedVillages.length > 0) {
             parts.push(...this.selectedVillages);

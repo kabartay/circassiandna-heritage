@@ -418,7 +418,14 @@ body {
 }
 
 .chart-card canvas {
-    max-height: 300px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.chart-canvas-wrap {
+    position: relative;
+    height: 300px;
 }
 
 .chart-stats {
@@ -427,6 +434,94 @@ body {
     border-top: 1px solid var(--border-light);
     font-size: 0.85rem;
     color: var(--text-secondary);
+}
+
+/* Sub-Ethnicity: donut left, collapsible legend right — mirrors Ethnicity layout */
+.sub-ethnicity-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.sub-ethnicity-chart-container {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 300px;
+}
+
+.sub-ethnicity-legend {
+    flex: 0 0 130px;
+    width: 130px;
+    padding-top: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.sub-ethnicity-legend .legend-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    background: none;
+    border: none;
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: left;
+    transition: background 0.15s;
+}
+
+.sub-ethnicity-legend .legend-toggle:hover {
+    background: var(--bg-light);
+}
+
+.sub-ethnicity-legend .legend-color {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.sub-ethnicity-legend .legend-chevron {
+    margin-left: auto;
+    flex-shrink: 0;
+    align-self: center;
+    line-height: 1;
+    font-size: 0.6rem;
+    transition: transform 0.2s;
+    color: var(--text-secondary);
+}
+
+.sub-ethnicity-legend .legend-group.open .legend-chevron {
+    transform: rotate(180deg);
+}
+
+.sub-ethnicity-legend .legend-count {
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1;
+}
+
+.sub-ethnicity-legend .legend-subs {
+    display: none;
+    padding: 2px 0 6px 24px;
+}
+
+.sub-ethnicity-legend .legend-group.open .legend-subs {
+    display: block;
+}
+
+.sub-ethnicity-legend .legend-sub-row {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
 }
 
 /* Responsive tabs */
@@ -455,6 +550,21 @@ body {
     
     .charts-grid {
         grid-template-columns: 1fr;
+    }
+
+    .charts-grid .chart-card {
+        grid-column: 1 / -1;
+    }
+
+    /* Stack sub-ethnicity chart above legend on mobile */
+    .sub-ethnicity-wrap {
+        flex-direction: column;
+    }
+
+    .sub-ethnicity-legend {
+        flex: none;
+        width: 100%;
+        max-height: 160px;
     }
     
     .chart-card.full-width {
@@ -1178,8 +1288,8 @@ body {
 }
 
 .action-btn.y-dna-btn.tree-group {
-    background: #90EE90 !important;  /* Light green */
-    color: #2c3e50 !important;  /* Darker text for contrast */
+    background: #90EE90 !important;  /* Light green — contrast vs #2c3e50: ~7.1:1 (WCAG AA ✓) */
+    color: #2c3e50 !important;
 }
 
 /* Tree button color variations for mtDNA (females) */
@@ -1192,8 +1302,8 @@ body {
 }
 
 .action-btn.mt-dna-btn.tree-group {
-    background: #ADD8E6 !important;  /* Light blue */
-    color: #2c3e50 !important;  /* Darker text for contrast */
+    background: #ADD8E6 !important;  /* Light blue — contrast vs #2c3e50: ~6.8:1 (WCAG AA ✓) */
+    color: #2c3e50 !important;
 }
 
 .action-btn.secondary {

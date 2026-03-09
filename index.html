@@ -39,14 +39,14 @@
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Circassian DNA Heritage Feed">
+    <meta property="og:title" content="Circassian DNA">
     <meta property="og:description" content="Explore genetic lineage and ancestral connections of Circassian families">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kabartay.github.io/circassiandna-heritage/">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Circassian DNA Heritage Feed">
+    <meta name="twitter:title" content="Circassian DNA">
     <meta name="twitter:description" content="Explore genetic lineage and ancestral connections of Circassian families">
 </head>
 <body>
@@ -88,19 +88,19 @@
 
         <!-- Tab Navigation -->
         <nav class="tab-navigation" aria-label="Main Navigation">
-            <button class="tab-btn active" data-tab="feed">
+            <button class="tab-btn active" data-tab="feed" aria-label="Feed">
                 <span class="tab-icon">🔎</span>
                 <span class="tab-label">Feed</span>
             </button>
-            <button class="tab-btn" data-tab="maps">
+            <button class="tab-btn" data-tab="maps" aria-label="Maps">
                 <span class="tab-icon">🌍</span>
                 <span class="tab-label">Maps</span>
             </button>
-            <button class="tab-btn" data-tab="statistics">
+            <button class="tab-btn" data-tab="statistics" aria-label="Statistics">
                 <span class="tab-icon">📊</span>
                 <span class="tab-label">Statistics</span>
             </button>
-            <button class="tab-btn" data-tab="about">
+            <button class="tab-btn" data-tab="about" aria-label="About">
                 <span class="tab-icon">ℹ️</span>
                 <span class="tab-label">About</span>
             </button>
@@ -211,39 +211,56 @@
                     <!-- Y-DNA Pie Chart -->
                     <div class="chart-card">
                         <h3>Y-DNA Haplogroups</h3>
-                        <canvas id="yDnaChart"></canvas>
+                        <div class="chart-canvas-wrap"><canvas id="yDnaChart"></canvas></div>
                         <div id="yDnaStats" class="chart-stats"></div>
                     </div>
                     
                     <!-- mtDNA Pie Chart -->
                     <div class="chart-card">
                         <h3>mtDNA Haplogroups</h3>
-                        <canvas id="mtDnaChart"></canvas>
+                        <div class="chart-canvas-wrap"><canvas id="mtDnaChart"></canvas></div>
                         <div id="mtDnaStats" class="chart-stats"></div>
                     </div>
                     
                     <!-- Y-DNA Subclade Pie Chart -->
                     <div class="chart-card">
                         <h3>Y-DNA Subclade Distribution</h3>
-                        <canvas id="ySubcladeChart"></canvas>
+                        <div class="chart-canvas-wrap"><canvas id="ySubcladeChart"></canvas></div>
                     </div>
                     
                     <!-- mtDNA Subclade Pie Chart -->
                     <div class="chart-card">
                         <h3>mtDNA Subclade Distribution</h3>
-                        <canvas id="mtSubcladeChart"></canvas>
+                        <div class="chart-canvas-wrap"><canvas id="mtSubcladeChart"></canvas></div>
                     </div>
                     
                     <!-- Ethnicity Distribution -->
                     <div class="chart-card">
                         <h3>Ethnicity Distribution</h3>
-                        <canvas id="ethnicityChart"></canvas>
+                        <div class="chart-canvas-wrap"><canvas id="ethnicityChart"></canvas></div>
                     </div>
-                    
+
+                    <!-- Sub-Ethnicity Distribution -->
+                    <div class="chart-card">
+                        <h3>Sub-Ethnicity Distribution</h3>
+                        <div class="sub-ethnicity-wrap">
+                            <div class="sub-ethnicity-chart-container">
+                                <canvas id="subEthnicityChart"></canvas>
+                            </div>
+                            <div id="subEthnicityLegend" class="sub-ethnicity-legend"></div>
+                        </div>
+                    </div>
+
+                    <!-- State Distribution -->
+                    <div class="chart-card">
+                        <h3>Top 10 States</h3>
+                        <div class="chart-canvas-wrap"><canvas id="stateChart"></canvas></div>
+                    </div>
+
                     <!-- Village Distribution -->
                     <div class="chart-card">
                         <h3>Top 10 Villages</h3>
-                        <canvas id="villageChart"></canvas>
+                        <div class="chart-canvas-wrap"><canvas id="villageChart"></canvas></div>
                     </div>
                 </div>
             </div>

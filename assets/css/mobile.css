@@ -189,8 +189,7 @@
     }
     
     /* Dropdown menu improvements for mobile */
-    .dropdown-menu,
-    .ethnicity-options {
+    .custom-options {
         max-height: 450px !important;
         width: 100% !important;
         max-width: 100% !important;
@@ -270,14 +269,14 @@
         text-align: center !important;
     }
     
-    /* Ethnicity options */
-    .ethnicity-options {
+    /* Ethnicity options — actual rendered classes from main.js */
+    .custom-options {
         display: flex !important;
         flex-direction: column !important;
         gap: 4px !important;
     }
     
-    .ethnicity-option {
+    .custom-option {
         display: flex !important;
         align-items: center !important;
         gap: 12px !important;
@@ -287,12 +286,12 @@
         transition: all 0.2s ease !important;
     }
     
-    .ethnicity-option:hover,
-    .ethnicity-option:active {
+    .custom-option:hover,
+    .custom-option:active {
         background: var(--bg-light) !important;
     }
     
-    .ethnicity-flag {
+    .option-flag {
         width: 32px !important;
         height: 32px !important;
         min-width: 32px !important;
@@ -300,7 +299,7 @@
         border-radius: 6px !important;
     }
     
-    .ethnicity-name {
+    .option-text {
         flex: 1 !important;
         font-size: 1rem !important;
         font-weight: 500 !important;
@@ -452,19 +451,15 @@
         overflow: hidden;
     }
     
-    .chart-container {
+    .chart-canvas-wrap {
         max-width: 100%;
         width: 100%;
         overflow: hidden;
-        transform: scale(0.90);
-        transform-origin: center top;
-        margin-bottom: -20px;
     }
     
-    .chart-container canvas {
+    .chart-canvas-wrap canvas {
         max-width: 100% !important;
         width: 100% !important;
-        height: auto !important;
     }
     
     /* Mobile card improvements */
