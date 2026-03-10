@@ -1,0 +1,2837 @@
+{
+  "metadata": {
+    "version": "2.0.0",
+    "lastUpdated": "2026-03-10",
+    "totalFamilies": 39,
+    "ethnicities": {
+      "Abazin": 2,
+      "Abkhazian": 1,
+      "Balkar": 5,
+      "Circassian": 18,
+      "Karachay": 1,
+      "Kumyk": 1,
+      "Nogai": 8,
+      "Ossetian": 3
+    },
+    "generatedFrom": [
+      "heritage-data-abazin.json",
+      "heritage-data-abkhazian.json",
+      "heritage-data-balkar.json",
+      "heritage-data-circassian.json",
+      "heritage-data-karachay.json",
+      "heritage-data-kumyk.json",
+      "heritage-data-nogai.json",
+      "heritage-data-ossetian.json"
+    ]
+  },
+  "families": [
+    {
+      "id": "MK88888",
+      "date": "2026-01-01",
+      "gender": "female",
+      "familyName": {
+        "main": {
+          "native": "Къэбардэ",
+          "english": "Kabardova",
+          "russian": "Кабардова"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Исламей",
+          "pre": null
+        },
+        "region": {
+          "main": "Баксанский район",
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": "U",
+        "clade": "U1a",
+        "subclade": "U1a1a12",
+        "terminalSnp": "U1a1a12a1",
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": "https://discover.familytreedna.com/mtdna/U1a1a12a1/classic",
+        "mtDnaTimeTree": "https://discover.familytreedna.com/mtdna/U1a1a12a1/tree",
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "BP69853",
+      "date": "2025-06-25",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Жылэ",
+          "english": "Zhilov",
+          "russian": "Жилов"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Жемтала",
+          "pre": null
+        },
+        "region": {
+          "main": "Черекский район",
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": "R-FT198355",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-FT198355/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-FT198355/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=215850",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": "https://circassiandna.com/r1a1-fgc4547/",
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "BP69892",
+      "date": "2025-05-22",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Къэзанш",
+          "english": "Kazanchev",
+          "russian": "Казанчев"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Кенже",
+          "pre": null
+        },
+        "region": {
+          "main": "Нальчик",
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": "R-FT198880",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-FT198880/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-FT198880/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=215850",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": "https://circassiandna.com/r1a1-fgc4547/",
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "BP67434",
+      "date": "2025-03-21",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Уэтэр",
+          "english": "Otarov",
+          "russian": "Отаров"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Карагач",
+          "pre": null
+        },
+        "region": {
+          "main": "Прохладный район",
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "E",
+        "clade": "E1b1",
+        "subclade": "E-V22",
+        "terminalSnp": "E-FT256507",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/E-FT256507/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/E-FT256507/tree",
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": "https://circassiandna.com/by178253/",
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "MK87565",
+      "date": "2025-03-19",
+      "gender": "female",
+      "familyName": {
+        "main": {
+          "native": "Бэрзэдж",
+          "english": "Berzekova",
+          "russian": "Берзекова"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": "Ubykh",
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": "W",
+        "clade": "W6m",
+        "subclade": "W6m2",
+        "terminalSnp": "W6m2",
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": "https://discover.familytreedna.com/mtdna/W6m2/classic",
+        "mtDnaTimeTree": "https://discover.familytreedna.com/mtdna/W6m2/tree",
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "BP67433",
+      "date": "2025-03-18",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Бэрзэдж",
+          "english": "Berzekov",
+          "russian": "Берзеков"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": "Ubykh",
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "J",
+        "clade": "J2a1",
+        "subclade": "J-P81",
+        "terminalSnp": "J-P81",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": "W",
+        "clade": "W6m",
+        "subclade": "W6m2",
+        "terminalSnp": "W6m2",
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/J-P81/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/J-P81/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=325715",
+        "mtDnaClassicTree": "https://discover.familytreedna.com/mtdna/W6m2/classic",
+        "mtDnaTimeTree": "https://discover.familytreedna.com/mtdna/W6m2/tree",
+        "mtDnaGroupTree": null,
+        "fullReport": "https://circassiandna.com/j2a1-p81/",
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "1020006",
+      "date": "2025-03-13",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Умалат",
+          "english": "Umalatov",
+          "russian": "Умалатов"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Kumyk",
+          "sub": {
+            "english": null
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Баммат-юрт",
+          "pre": "Тарки"
+        },
+        "region": {
+          "main": "Хасавюртовский район",
+          "pre": "Махачкала"
+        },
+        "state": {
+          "main": "Дагестан",
+          "pre": "Дагестан"
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": "R-Y216378",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-Y216378/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-Y216378/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=166035,252846,252847,252848,252851,252852,272438,287861,310382,325739,333469,344505",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "BP67444",
+      "date": "2025-01-30",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Цанба",
+          "english": "Tsanba",
+          "russian": "Цанба"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Abkhazian",
+          "sub": {
+            "english": null
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Цандрыпш",
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Абхазия",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": "R-FTA50500",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-FTA50500/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-FTA50500/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=215850",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": "https://circassiandna.com/r1a1-fgc4547/",
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "BP67530",
+      "date": "2025-01-14",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Хьэжы",
+          "english": "Adjiev",
+          "russian": "Аджиев"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Малка",
+          "pre": null
+        },
+        "region": {
+          "main": "Зольский район",
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a2",
+        "subclade": "G-L1264",
+        "terminalSnp": "G-FTG49090",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/G-FTG49090/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/G-FTG49090/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=326493,342861,354823",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": "https://circassiandna.com/ftf43295/",
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "MI21079",
+      "date": "2025-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Сидакъ",
+          "english": "Sidakov",
+          "russian": "Сидаков"
+        },
+        "pre": {
+          "native": "Къэжэр",
+          "english": "Kazharov",
+          "russian": "Кажаров"
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Малый Зеленчук",
+          "pre": "Хабез"
+        },
+        "region": {
+          "main": "Хабезский район",
+          "pre": "Хабезский район"
+        },
+        "state": {
+          "main": "Карачаево-Черкесия",
+          "pre": "Карачаево-Черкесия"
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "J",
+        "clade": "J1a2",
+        "subclade": "J-P58",
+        "terminalSnp": "J-ZS2138",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/J-ZS2138/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/J-ZS2138/tree",
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "BP67546",
+      "date": "2024-11-28",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Абрэдж",
+          "english": "Abregov",
+          "russian": "Абрегов"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Shapsough"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Хатажукай",
+          "pre": null
+        },
+        "region": {
+          "main": "Красногвардейский район",
+          "pre": null
+        },
+        "state": {
+          "main": "Адыгея",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a2",
+        "subclade": "G-L1264",
+        "terminalSnp": "G-FTG49090",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/G-FTG49090/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/G-FTG49090/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=326493,342861,354823",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "BP76044",
+      "date": "2024-10-06",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Зеушэ",
+          "english": "Zeushev",
+          "russian": "Зеушев"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Нижний Куркужин",
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "J",
+        "clade": "J2a1",
+        "subclade": "J-P81",
+        "terminalSnp": "J-FTA53550",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/J-FTA53550/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/J-FTA53550/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=325715",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": "https://circassiandna.com/j2a1-p81/",
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "BP67510",
+      "date": "2024-05-12",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Джэрым",
+          "english": "Djarimov",
+          "russian": "Джаримов"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Abdzakh"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Хакуринохабль",
+          "pre": null
+        },
+        "region": {
+          "main": "Шовгеновский район",
+          "pre": null
+        },
+        "state": {
+          "main": "Адыгея",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": "R-YP5233",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-YP5233/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-YP5233/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=215850",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": "https://circassiandna.com/r1a1-fgc4547/",
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "MI70431",
+      "date": "2024-03-28",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Шыбзыхъуэ",
+          "english": "Shebzukhov",
+          "russian": "Шебзухов"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Чегем II",
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "J",
+        "clade": "J2a1",
+        "subclade": "J-P81",
+        "terminalSnp": "J-FTA52766",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/J-FTA52766/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/J-FTA52766/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=325715",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": "https://circassiandna.com/j2a1-p81/",
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "IN40752",
+      "date": "2022-12-22",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Уэрджынокъуэ",
+          "english": "Organokov",
+          "russian": "Органоков"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": "Abazin",
+          "sub": {
+            "english": "Tapanta"
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Нижний Куркужин",
+          "pre": null
+        },
+        "region": {
+          "main": "Баксанский район",
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": "Кэрэшей-Адыгэ"
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": "U",
+        "clade": "U1a",
+        "subclade": "U1a1a12",
+        "terminalSnp": "U1a1a12a1",
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-BY60213/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-BY60213/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=253888,257764,257765,288017,364826,371262",
+        "mtDnaClassicTree": "https://discover.familytreedna.com/mtdna/U1a1a12a1/classic",
+        "mtDnaTimeTree": "https://discover.familytreedna.com/mtdna/U1a1a12a1/tree",
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "SI11177",
+      "date": "2022-04-21",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "ХъсалргIа",
+          "english": "Ksalov",
+          "russian": "Ксалов"
+        },
+        "pre": {
+          "native": "Ахсалба",
+          "english": "Akhsalba",
+          "russian": "Ахсалба"
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Abazin",
+          "sub": {
+            "english": "Tapanta"
+          }
+        },
+        "pre": {
+          "english": "Abkhazian",
+          "sub": {
+            "english": "Pskhu"
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Эльбурган",
+          "pre": "Аибга"
+        },
+        "region": {
+          "main": "Абазинский район",
+          "pre": "Краснодарский край"
+        },
+        "state": {
+          "main": "Карачаево-Черкесия",
+          "pre": "Краснодарский край"
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": "R-FGC22480",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-FGC22480/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-FGC22480/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=166035,252846,252847,252848,252851,252852,272438,287861,310382,325739,333469,344505",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "IN60320",
+      "date": "2022-01-25",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "КIэщ",
+          "english": "Keshev",
+          "russian": "Кешев"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": "Abazin",
+          "sub": {
+            "english": "Tapanta"
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Кенже",
+          "pre": null
+        },
+        "region": {
+          "main": "Нальчик",
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": "Карачаево-Черкесия"
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": "R-FT95315",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-FT95315/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-FT95315/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=166035,252846,252847,252848,252851,252852,272438,287861,310382,325739,333469,344505",
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "SI11187",
+      "date": "2021-07-22",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Терчыкъуэ",
+          "english": "Torchokov",
+          "russian": "Торчоков"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Урух",
+          "pre": null
+        },
+        "region": {
+          "main": "Лескенский район",
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "E",
+        "clade": "E1b1",
+        "subclade": "E-M34",
+        "terminalSnp": "E-FTA78974",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/E-FTA78974/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/E-FTA78974/tree",
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "IN76169",
+      "date": "2021-06-15",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Iумар",
+          "english": "Umarov",
+          "russian": "Умаров"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Кошехабль",
+          "pre": null
+        },
+        "region": {
+          "main": "Кошехабльский район",
+          "pre": null
+        },
+        "state": {
+          "main": "Адыгея",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "E",
+        "clade": "E1b1",
+        "subclade": "E-M34",
+        "terminalSnp": "E-FTA78974",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/E-FTA78974/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/E-FTA78974/tree",
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "510582",
+      "date": "2020-05-16",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Бэрзэдж",
+          "english": "Berzegov",
+          "russian": "Берзегов"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Ubykh"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": "Бжедугхабль",
+          "pre": null
+        },
+        "region": {
+          "main": "Красногвардейский район",
+          "pre": null
+        },
+        "state": {
+          "main": "Адыгея",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": "R-BY63726",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": "D",
+        "clade": "D4j",
+        "subclade": "D4j22",
+        "terminalSnp": "D4j22",
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-BY63726/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-BY63726/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=166035,252846,252847,252848,252851,252852,272438,287861,310382,325739,333469,344505",
+        "mtDnaClassicTree": "https://discover.familytreedna.com/mtdna/D4j22/classic",
+        "mtDnaTimeTree": "https://discover.familytreedna.com/mtdna/D4j22/tree",
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "239748",
+      "date": "2019-03-20",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": "Къэдыкъуей",
+          "english": "Kadkoy",
+          "russian": "Кадыкоев"
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Circassian",
+          "sub": {
+            "english": "Kabardian"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z93",
+        "terminalSnp": "R-BY63726",
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a",
+        "subclade": "R1a1e",
+        "terminalSnp": "R1a1e",
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": "https://discover.familytreedna.com/y-dna/R-BY63726/classic",
+        "yDnaTimeTree": "https://discover.familytreedna.com/y-dna/R-BY63726/tree",
+        "yDnaGroupTree": "https://discover.familytreedna.com/groups/circassian/tree?subgroups=166035,252846,252847,252848,252851,252852,272438,287861,310382,325739,333469,344505",
+        "mtDnaClassicTree": "https://discover.familytreedna.com/mtdna/R1a1e/classic",
+        "mtDnaTimeTree": "https://discover.familytreedna.com/mtdna/R1a1e/tree",
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "XX00002",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Abazin",
+          "sub": {
+            "english": "Ashkharaua"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Карачаево-Черкесия",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a1",
+        "subclade": "G-FGC719",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "ZZ00002",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Balkar",
+          "sub": {
+            "english": "Baksan"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a1",
+        "subclade": "G-Z7940",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "ZZ00003",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Balkar",
+          "sub": {
+            "english": "Chegem"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a1",
+        "subclade": "G-Z7940",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "ZZ00004",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Balkar",
+          "sub": {
+            "english": "Kholam"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a1",
+        "subclade": "G-Z7940",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "ZZ00005",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Balkar",
+          "sub": {
+            "english": "Bezengi"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a1",
+        "subclade": "G-Z7940",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "ZZ00006",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Balkar",
+          "sub": {
+            "english": "Malkar"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Кабардино-Балкария",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a1",
+        "subclade": "G-Z7940",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "ZZ00001",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Karachay",
+          "sub": {
+            "english": null
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Карачаево-Черкесия",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a1",
+        "subclade": "G-Z31459",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00001",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Nogai",
+          "sub": {
+            "english": "Kuban"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Карачаево-Черкесия",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "C",
+        "clade": "C2a1",
+        "subclade": "C-F3830",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00002",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Nogai",
+          "sub": {
+            "english": "Karanogai"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Дагестан",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "C",
+        "clade": "C2a1",
+        "subclade": "C-F1918",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00003",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Nogai",
+          "sub": {
+            "english": "Crimean"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Крым",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1b1",
+        "subclade": "R-M73",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00004",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Nogai",
+          "sub": {
+            "english": "Achikulak"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Ставропольский край",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "N",
+        "clade": "N1a1",
+        "subclade": "N-PH1896",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00005",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Nogai",
+          "sub": {
+            "english": "Sulak"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Дагестан",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "C",
+        "clade": "C2a1",
+        "subclade": "C-F1918",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00006",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Nogai",
+          "sub": {
+            "english": "Karagash"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Астраханская область",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1a1",
+        "subclade": "R-Z283",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00007",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Nogai",
+          "sub": {
+            "english": "Yurt"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Астраханская область",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "C",
+        "clade": "C2a1",
+        "subclade": "C-F1918",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "NN00008",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Nogai",
+          "sub": {
+            "english": "Kuban"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Карачаево-Черкесия",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a2",
+        "subclade": "G-L1264",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "TT00001",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Ossetian",
+          "sub": {
+            "english": "Iron"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Северная Осетия",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "G",
+        "clade": "G2a1",
+        "subclade": "G-FGC719",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "TT00002",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Ossetian",
+          "sub": {
+            "english": "Digor"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Северная Осетия",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "R",
+        "clade": "R1b1",
+        "subclade": "R-Z2103",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    },
+    {
+      "id": "TT00003",
+      "date": "2000-01-01",
+      "gender": "male",
+      "familyName": {
+        "main": {
+          "native": null,
+          "english": "TBD",
+          "russian": null
+        },
+        "pre": {
+          "native": null,
+          "english": null,
+          "russian": null
+        }
+      },
+      "ethnicity": {
+        "main": {
+          "english": "Ossetian",
+          "sub": {
+            "english": "Kudar"
+          }
+        },
+        "pre": {
+          "english": null,
+          "sub": {
+            "english": null
+          }
+        }
+      },
+      "location": {
+        "village": {
+          "main": null,
+          "pre": null
+        },
+        "region": {
+          "main": null,
+          "pre": null
+        },
+        "state": {
+          "main": "Южная Осетия",
+          "pre": null
+        }
+      },
+      "yDnaHaplogroup": {
+        "root": "J",
+        "clade": "J2a1",
+        "subclade": "J-SK1313",
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "mtDnaHaplogroup": {
+        "root": null,
+        "clade": null,
+        "subclade": null,
+        "terminalSnp": null,
+        "SnpList": null
+      },
+      "urls": {
+        "yDnaClassicTree": null,
+        "yDnaTimeTree": null,
+        "yDnaGroupTree": null,
+        "mtDnaClassicTree": null,
+        "mtDnaTimeTree": null,
+        "mtDnaGroupTree": null,
+        "fullReport": null,
+        "relations": null
+      },
+      "metadata": {
+        "lab": "FamilyTreeDNA"
+      }
+    }
+  ]
+}
