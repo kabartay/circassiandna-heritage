@@ -120,6 +120,12 @@
         width: 100% !important;
         min-width: 100% !important;
         max-width: 100% !important;
+        position: relative;
+    }
+
+    /* Boost open panel above sibling dropdowns below it */
+    .custom-options.active {
+        z-index: 200;
     }
     
     .custom-select,
@@ -271,12 +277,17 @@
     
     /* Ethnicity options — actual rendered classes from main.js */
     .custom-options {
-        display: flex !important;
         flex-direction: column !important;
         gap: 4px !important;
     }
+
+    /* Only switch to flex when the panel is actually open */
+    .custom-options.active {
+        display: flex !important;
+    }
     
-    .custom-option {
+    .custom-option:not(.sub-option),
+    .custom-option.sub-option.visible {
         display: flex !important;
         align-items: center !important;
         gap: 12px !important;
@@ -284,6 +295,16 @@
         min-height: 52px !important;
         border-radius: 12px !important;
         transition: all 0.2s ease !important;
+    }
+
+    /* Indent sub-options to visually sit under their parent */
+    .custom-option.sub-option.visible {
+        padding-left: 44px !important;
+    }
+
+    /* Keep hidden sub-options hidden on mobile */
+    .custom-option.sub-option:not(.visible) {
+        display: none !important;
     }
     
     .custom-option:hover,
