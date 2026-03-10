@@ -206,14 +206,10 @@ class HeritageApp {
      * Close all custom filter dropdowns
      */
     closeAllDropdowns() {
-        ['ethnicitySelect', 'locationSelect', 'cladeSelect'].forEach(id => {
-            const sel = document.getElementById(id);
-            if (sel) sel.classList.remove('active');
-        });
-        ['ethnicityOptions', 'locationOptions', 'cladeOptions'].forEach(id => {
-            const opts = document.getElementById(id);
-            if (opts) opts.classList.remove('active');
-        });
+        const container = document.querySelector('.filter-dropdowns');
+        if (!container) return;
+        container.querySelectorAll('.custom-select').forEach(el => el.classList.remove('active'));
+        container.querySelectorAll('.custom-options').forEach(el => el.classList.remove('active'));
     }
 
     /**

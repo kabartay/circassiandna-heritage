@@ -123,8 +123,8 @@
         position: relative;
     }
 
-    /* Keep open panel on top of sibling dropdowns below it */
-    .custom-dropdown:has(.custom-options.active) {
+    /* Boost open panel above sibling dropdowns below it */
+    .custom-options.active {
         z-index: 200;
     }
     
