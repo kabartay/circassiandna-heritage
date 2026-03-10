@@ -286,7 +286,8 @@
         display: flex !important;
     }
     
-    .custom-option {
+    .custom-option:not(.sub-option),
+    .custom-option.sub-option.visible {
         display: flex !important;
         align-items: center !important;
         gap: 12px !important;
@@ -294,6 +295,11 @@
         min-height: 52px !important;
         border-radius: 12px !important;
         transition: all 0.2s ease !important;
+    }
+
+    /* Keep hidden sub-options hidden on mobile */
+    .custom-option.sub-option:not(.visible) {
+        display: none !important;
     }
     
     .custom-option:hover,

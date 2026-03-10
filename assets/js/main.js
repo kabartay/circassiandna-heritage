@@ -306,18 +306,51 @@ class HeritageApp {
             checkbox.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const ethnicity = checkbox.dataset.ethnicity;
-                
+                const isMain = checkbox.dataset.type === 'main';
+
                 if (checkbox.checked) {
                     if (!this.selectedEthnicities.includes(ethnicity)) {
                         this.selectedEthnicities.push(ethnicity);
                     }
+                    // Cascade: check + show all sub-options for this main ethnicity
+                    if (isMain) {
+                        const mainOption = customOptions.querySelector(`.main-option[data-value="${ethnicity}"]`);
+                        if (mainOption && !mainOption.classList.contains('expanded')) {
+                            mainOption.classList.add('expanded');
+                        }
+                        customOptions.querySelectorAll(`.sub-option[data-parent="${ethnicity}"]`).forEach(sub => {
+                            sub.classList.add('visible');
+                            const subCb = sub.querySelector('.ethnicity-checkbox');
+                            if (subCb && !subCb.checked) {
+                                subCb.checked = true;
+                                const subVal = subCb.dataset.ethnicity;
+                                if (!this.selectedEthnicities.includes(subVal)) {
+                                    this.selectedEthnicities.push(subVal);
+                                }
+                            }
+                        });
+                    }
                 } else {
                     this.selectedEthnicities = this.selectedEthnicities.filter(e => e !== ethnicity);
+                    // Cascade: uncheck + collapse all sub-options for this main ethnicity
+                    if (isMain) {
+                        const mainOption = customOptions.querySelector(`.main-option[data-value="${ethnicity}"]`);
+                        if (mainOption) mainOption.classList.remove('expanded');
+                        customOptions.querySelectorAll(`.sub-option[data-parent="${ethnicity}"]`).forEach(sub => {
+                            sub.classList.remove('visible');
+                            const subCb = sub.querySelector('.ethnicity-checkbox');
+                            if (subCb && subCb.checked) {
+                                subCb.checked = false;
+                                const subVal = subCb.dataset.ethnicity;
+                                this.selectedEthnicities = this.selectedEthnicities.filter(e => e !== subVal);
+                            }
+                        });
+                    }
                 }
-                
+
                 // Update display text
                 this.updateEthnicityDisplayText();
-                
+
                 // Apply filters
                 this.applyFilters();
             });
