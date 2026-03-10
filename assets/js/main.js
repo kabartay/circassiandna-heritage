@@ -198,7 +198,12 @@ class HeritageApp {
         if (this._globalDropdownHandler) {
             document.removeEventListener('click', this._globalDropdownHandler);
         }
-        this._globalDropdownHandler = () => this.closeAllDropdowns();
+        this._globalDropdownHandler = (e) => {
+            // Only close dropdowns if the click is outside any .custom-dropdown element
+            if (!e.target.closest('.custom-dropdown')) {
+                this.closeAllDropdowns();
+            }
+        };
         document.addEventListener('click', this._globalDropdownHandler);
     }
 
