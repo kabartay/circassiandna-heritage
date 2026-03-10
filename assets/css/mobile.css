@@ -297,6 +297,11 @@
         transition: all 0.2s ease !important;
     }
 
+    /* Indent sub-options to visually sit under their parent */
+    .custom-option.sub-option.visible {
+        padding-left: 44px !important;
+    }
+
     /* Keep hidden sub-options hidden on mobile */
     .custom-option.sub-option:not(.visible) {
         display: none !important;
