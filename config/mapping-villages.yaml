@@ -113,6 +113,62 @@ states:
             coordinates:
               Latitude: 45.019271
               Longitude: 40.23635
+
+  Дагестан:
+    regions:
+      Махачкала:
+        villages:
+          Махачкала:
+            name:
+              English: Makhachkala
+              Russian: Махачкала
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: Махачкъалэ
+              Karachay: null
+              Kumyk: Махачкъала
+              Lak: МахӀачкъала
+              Nogai: null
+              Ossetian: Махачкала
+            coordinates:
+              Latitude: 42.983100
+              Longitude: 47.504745
+          Тарки:
+            name:
+              English: Tarki
+              Russian: Тарки
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: null
+              Karachay: null
+              Kumyk: Таргъу
+              Lak: null
+              Nogai: null
+              Ossetian: Тарки
+            coordinates:
+              Latitude: 42.944524
+              Longitude: 47.495789
+      Хасавюртовский район:
+        villages:
+          Баммат-юрт:
+            name:
+              English: Bammat-Yurt
+              Russian: Баммат-юрт
+              Abazin: null
+              Abkhazian: null
+              Balkar: null
+              Circassian: null
+              Karachay: null
+              Kumyk: Баммат-юрт
+              Lak: null
+              Nogai: null
+              Ossetian: null
+            coordinates:
+              Latitude: 43.343062
+              Longitude: 46.606672
+
   Кабардино-Балкария:
     regions:
       Баксанский район:
