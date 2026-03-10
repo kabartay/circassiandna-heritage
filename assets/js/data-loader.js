@@ -892,9 +892,10 @@ class DataLoader {
         const flagMap = {
             'abazin': 'abazin-flag.png',
             'abkhazian': 'abkhazian-flag.png',
+            'balkar': 'balkaria-flag.png',
             'circassian': 'circassian-flag.png',
             'karachay': 'karachay-flag.jpg',
-            'balkar': 'balkaria-flag.png',
+            'kumyk': 'kumyk-flag.png',
             'nogai': 'nogai-flag.png',
             'ossetian': 'ossetia-flag.png'
         };

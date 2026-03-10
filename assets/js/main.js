@@ -1096,9 +1096,10 @@ class HeritageApp {
         const flagMap = {
             'abazin': 'abazin-flag-modified.png',
             'abkhazian': 'abkhazian-flag-modified.png',
+            'balkar': 'balkaria-flag-modified.png',
             'circassian': 'circassian-flag-modified.png',
             'karachay': 'karachay-flag-modified.png',
-            'balkar': 'balkaria-flag-modified.png',
+            'kumyk': 'kumyk-flag-modified.png',
             'nogai': 'nogai-flag-modified.png',
             'ossetian': 'ossetia-flag-modified.png'
         };
