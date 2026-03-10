@@ -193,8 +193,29 @@ class HeritageApp {
         this.initializeCladeDropdown(filterData.yClades, filterData.mtClades);
         
         console.log('✅ Filter dropdowns initialized');
+
+        // Single shared handler: close all dropdowns when clicking outside any of them
+        if (this._globalDropdownHandler) {
+            document.removeEventListener('click', this._globalDropdownHandler);
+        }
+        this._globalDropdownHandler = () => this.closeAllDropdowns();
+        document.addEventListener('click', this._globalDropdownHandler);
     }
-    
+
+    /**
+     * Close all custom filter dropdowns
+     */
+    closeAllDropdowns() {
+        ['ethnicitySelect', 'locationSelect', 'cladeSelect'].forEach(id => {
+            const sel = document.getElementById(id);
+            if (sel) sel.classList.remove('active');
+        });
+        ['ethnicityOptions', 'locationOptions', 'cladeOptions'].forEach(id => {
+            const opts = document.getElementById(id);
+            if (opts) opts.classList.remove('active');
+        });
+    }
+
     /**
      * Initialize custom ethnicity dropdown with flag images
      */
@@ -246,13 +267,17 @@ class HeritageApp {
         
         customOptions.innerHTML = optionsHTML;
         
-        // Toggle dropdown
+        // Toggle dropdown — close all others first
         customSelect.addEventListener('click', (e) => {
             e.stopPropagation();
-            customSelect.classList.toggle('active');
-            customOptions.classList.toggle('active');
+            const isOpen = customSelect.classList.contains('active');
+            this.closeAllDropdowns();
+            if (!isOpen) {
+                customSelect.classList.add('active');
+                customOptions.classList.add('active');
+            }
         });
-        
+
         // Handle reset option
         const resetOption = customOptions.querySelector('.reset-option');
         if (resetOption) {
@@ -352,17 +377,8 @@ class HeritageApp {
             });
         });
         
-        // Close dropdown when clicking outside — store reference to avoid duplicate listeners
-        if (this._dropdownClickHandler) {
-            document.removeEventListener('click', this._dropdownClickHandler);
-        }
-        this._dropdownClickHandler = () => {
-            customSelect.classList.remove('active');
-            customOptions.classList.remove('active');
-        };
-        document.addEventListener('click', this._dropdownClickHandler);
     }
-    
+
     /**
      * Update ethnicity display text based on selections
      */
@@ -430,13 +446,17 @@ class HeritageApp {
         optionsHTML += '</div>';
         customOptions.innerHTML = optionsHTML;
         
-        // Toggle dropdown
+        // Toggle dropdown — close all others first
         customSelect.addEventListener('click', (e) => {
             e.stopPropagation();
-            customSelect.classList.toggle('active');
-            customOptions.classList.toggle('active');
+            const isOpen = customSelect.classList.contains('active');
+            this.closeAllDropdowns();
+            if (!isOpen) {
+                customSelect.classList.add('active');
+                customOptions.classList.add('active');
+            }
         });
-        
+
         // Handle reset option
         const resetOption = customOptions.querySelector('.reset-option');
         if (resetOption) {
@@ -497,13 +517,8 @@ class HeritageApp {
             });
         });
         
-        // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
-            customSelect.classList.remove('active');
-            customOptions.classList.remove('active');
-        });
     }
-    
+
     /**
      * Update clade display text based on selections
      */
@@ -559,20 +574,18 @@ class HeritageApp {
         // Initial render with all villages
         this.renderLocationOptions(customOptions, states, allVillages);
         
-        // Toggle dropdown
+        // Toggle dropdown — close all others first
         customSelect.addEventListener('click', (e) => {
             e.stopPropagation();
-            customSelect.classList.toggle('active');
-            customOptions.classList.toggle('active');
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
-            customSelect.classList.remove('active');
-            customOptions.classList.remove('active');
+            const isOpen = customSelect.classList.contains('active');
+            this.closeAllDropdowns();
+            if (!isOpen) {
+                customSelect.classList.add('active');
+                customOptions.classList.add('active');
+            }
         });
     }
-    
+
     /**
      * Render location dropdown options with checkboxes
      */
