@@ -277,9 +277,13 @@
     
     /* Ethnicity options — actual rendered classes from main.js */
     .custom-options {
-        display: flex !important;
         flex-direction: column !important;
         gap: 4px !important;
+    }
+
+    /* Only switch to flex when the panel is actually open */
+    .custom-options.active {
+        display: flex !important;
     }
     
     .custom-option {
